@@ -1,0 +1,2 @@
+Summing all numbers in the 7nth column of a text file (this is probably 3X faster and 3X less code than equivalent Python):
+awk '{ x += $7 } END { print x }' precomp_proof.dat
