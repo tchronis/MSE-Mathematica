@@ -1,0 +1,1504 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     60784,       1495]
+NotebookOptionsPosition[     59309,       1440]
+NotebookOutlinePosition[     59647,       1455]
+CellTagsIndexPosition[     59604,       1452]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+THIS NOTEBOOK HAS THE PURPOSE TO TEST AND COMPARE OPTIMIZATION METHODS FOR \
+VARIOUS DATAFILES\
+\>", "Text",
+ CellChangeTimes->{{3.633346101198949*^9, 3.633346133755584*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["init", "Section",
+ CellChangeTimes->{{3.6303386092666483`*^9, 3.6303386103447733`*^9}}],
+
+Cell["Set the library\[CloseCurlyQuote]s directory first!", "Text",
+ CellChangeTimes->{{3.630560391811116*^9, 3.630560404154866*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"directory", "=", 
+  RowBox[{"NotebookDirectory", "[", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6303089759316874`*^9, 3.6303089890254374`*^9}, {
+  3.630592958654889*^9, 3.630592959686139*^9}, {3.656682026328939*^9, 
+  3.656682032032714*^9}}],
+
+Cell[BoxData["\<\"/home/tchr/Projects/Mathematica-MSE/library/\"\>"], "Output",
+ CellChangeTimes->{3.656682033065749*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Get", "[", 
+  RowBox[{"\"\<mse.m\>\"", ",", 
+   RowBox[{"Path", "\[Rule]", "directory"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6303091438379374`*^9, 3.6303091800723124`*^9}, 
+   3.6303092721035624`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"72036664", ",", "55343296", ",", "1"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.6305770055258126`*^9, 3.6305772673468037`*^9, 3.630582335665759*^9, 
+   3.6305834061494207`*^9, 3.630583906116443*^9, 3.6305843465826235`*^9, 
+   3.6305845633013735`*^9, 3.6305848948013735`*^9, 3.630586651074811*^9, 
+   3.630586784777936*^9, 3.630590320467389*^9, 3.630590471654889*^9, 
+   3.630591358451764*^9, 3.630592818764264*^9, {3.630592936670514*^9, 
+   3.630592964217389*^9}, 3.630595132545514*^9, 3.630595243936139*^9, 
+   3.630595628295514*^9, 3.6305978411558657`*^9, 3.630599442272568*^9, 
+   3.630612258359473*^9, 3.630671763991976*^9, 3.6306744008009043`*^9, 
+   3.630725069310239*^9, 3.6307276209078417`*^9, 3.6307277743368106`*^9, 
+   3.6307278183917274`*^9, 3.6307434152694626`*^9, 3.6307444819866962`*^9, 
+   3.630744556708056*^9, {3.6307473665954723`*^9, 3.630747374724143*^9}, 
+   3.6307511730713773`*^9, 3.6307542944695225`*^9, 3.630754835660693*^9, 
+   3.6307556841551332`*^9, 3.6307650704149313`*^9, 3.6307651156649313`*^9, 
+   3.6307656563680563`*^9, 3.6307677783993063`*^9, 3.63076889099656*^9, 
+   3.630770585848946*^9, 3.6307745487334375`*^9, 3.6309364193399267`*^9, 
+   3.6309394034268007`*^9, 3.630940866111972*^9, 3.630941899304834*^9, 
+   3.6309420995623007`*^9, 3.630948869497966*^9, 3.630956482109168*^9, 
+   3.6309567939625196`*^9, 3.6311699615566916`*^9, 3.6311705482754416`*^9, 
+   3.6311707685566916`*^9, 3.631174956777395*^9, 3.6311803584805193`*^9, 
+   3.631187095421926*^9, 3.6311926649540997`*^9, 3.6311946574795623`*^9, 
+   3.6311949322450075`*^9, 3.6311951020984774`*^9, 3.631195706189581*^9, 
+   3.632931685388751*^9, 3.633327677066601*^9, 3.6333390515069337`*^9, 
+   3.6333458075874877`*^9, 3.6333564725411377`*^9, 3.633359587926588*^9, 
+   3.6333603504029245`*^9, 3.63336080161034*^9, 3.6333617355409603`*^9, 
+   3.6333619340923767`*^9, 3.633362606187908*^9, 3.6333628546176434`*^9, 
+   3.6342344194669695`*^9, 3.6342350105459394`*^9, 3.634235382439234*^9, 
+   3.634297539396837*^9, 3.6361826346912427`*^9, 3.656682039964034*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MSEresources", "=", "\"\<Memory\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.633360790157215*^9, 3.6333608108505745`*^9}, {
+  3.633361015595672*^9, 3.6333610349640293`*^9}, {3.634235000051484*^9, 
+  3.634235002636009*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Use", " ", "Memory", " ", "graph", " ", "is", " ", "problematic", " ", 
+    "when", " ", "using", " ", "the", " ", "\"\<Memory\>\"", " ", 
+    RowBox[{"model", ".", " ", "The"}], " ", "reason", " ", "is", " ", "the", 
+    " ", "Compress", " ", "function", " ", "behaves", " ", "strangely", " ", 
+    "for", " ", "large", " ", "datasets"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"MSEresources", "\[Equal]", "\"\<Speed\>\""}], ",", 
+    "memoryGraph"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.630309842729539*^9, 3.630309844995164*^9}, {
+  3.630605281152452*^9, 3.630605288254016*^9}, {3.6306123049882746`*^9, 
+  3.6306123083808527`*^9}, {3.6311743834492693`*^9, 3.631174469121145*^9}}],
+
+Cell[BoxData["clearMemory"], "Input",
+ CellChangeTimes->{{3.6303355550478983`*^9, 3.6303355561103983`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Workspace", "Section",
+ CellChangeTimes->{{3.630312113309617*^9, 3.630312115762742*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "testmaximize", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"testmaximize", "[", 
+   RowBox[{"filename_", ",", "permuteinvariant_", ",", "pflag_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "sol1", ",", "sol2", ",", "sol3", ",", "sol4", ",", "sol5", ",", "cnt1", 
+      ",", "cnt2", ",", "cnt3", ",", "cnt4", ",", "cnt5", ",", "method", ",", 
+      "noineqs"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "header", ",", "noM", ",", "noU", ",", "noD", ",", "noAttr", ",", 
+        "distanceMatrices", ",", "matchMatrix", ",", "mate"}], "}"}], "=", 
+      RowBox[{"import", "[", 
+       RowBox[{"filename", ",", "\"\<precomp\>\""}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"payoffMatrix", "=", 
+      RowBox[{"CpayoffMatrix", "[", 
+       RowBox[{"payoffDM", ",", "noM", ",", "noU", ",", "noD"}], "]"}]}], ";",
+      "\[IndentingNewLine]", 
+     StyleBox[
+      RowBox[{"ineqmembers", "=", 
+       RowBox[{"Cineqmembers", "[", "mate", 
+        RowBox[{"(*", 
+         RowBox[{",", "\"\<2\>\""}], "*)"}], "]"}]}],
+      Background->RGBColor[1, 1, 0]], 
+     StyleBox[";",
+      Background->RGBColor[1, 1, 0]], "\[IndentingNewLine]", 
+     RowBox[{"dataArray", "=", 
+      RowBox[{"CdataArray", "[", 
+       RowBox[{"payoffMatrix", ",", 
+        RowBox[{"Cx", "[", 
+         RowBox[{"noAttr", "-", "1"}], "]"}], ",", "False"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"pflag", ",", 
+       RowBox[{
+       "Print", "[", 
+        "\"\<----------------------------------------------------------\>\"", 
+        "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", 
+      RowBox[{"\"\< \>\"", "<>", "filename"}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"pflag", ",", 
+       RowBox[{
+       "Print", "[", 
+        "\"\<----------------------------------------------------------\>\"", 
+        "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"method", "=", 
+      RowBox[{"{", 
+       RowBox[{"\"\<DifferentialEvolution\>\"", ",", 
+        RowBox[{"\"\<CrossProbability\>\"", "\[Rule]", "0.5"}], ",", 
+        RowBox[{"\"\<InitialPoints\>\"", "\[Rule]", "Automatic"}], ",", 
+        RowBox[{"\"\<PenaltyFunction\>\"", "\[Rule]", "Automatic"}], ",", 
+        RowBox[{"\"\<PostProcess\>\"", "\[Rule]", "Automatic"}], ",", 
+        RowBox[{"\"\<RandomSeed\>\"", "\[Rule]", "0"}], ",", 
+        RowBox[{"\"\<ScalingFactor\>\"", "\[Rule]", "0.6"}], ",", 
+        RowBox[{"\"\<SearchPoints\>\"", "\[Rule]", "Automatic"}], ",", 
+        RowBox[{"\"\<Tolerance\>\"", "\[Rule]", "0.001"}]}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"sol1", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"method", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{"AbsoluteTiming", "@", 
+         RowBox[{"maximize", "[", 
+          RowBox[{
+          "dataArray", ",", "noAttr", ",", "method", ",", "permuteinvariant", 
+           ",", "pflag"}], "]"}]}], ",", "objectivecounter"}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"pflag", ",", 
+       RowBox[{
+       "Print", "[", 
+        "\"\<----------------------------------------------------------\>\"", 
+        "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"method", "=", 
+      RowBox[{"{", "\"\<SimulatedAnnealing\>\"", "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"sol2", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"method", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{"AbsoluteTiming", "@", 
+         RowBox[{"maximize", "[", 
+          RowBox[{
+          "dataArray", ",", "noAttr", ",", "method", ",", "permuteinvariant", 
+           ",", "pflag"}], "]"}]}], ",", "objectivecounter"}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"pflag", ",", 
+       RowBox[{
+       "Print", "[", 
+        "\"\<----------------------------------------------------------\>\"", 
+        "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"method", "=", 
+      RowBox[{"{", "\"\<NelderMead\>\"", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"sol3", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"method", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{"AbsoluteTiming", "@", 
+         RowBox[{"maximize", "[", 
+          RowBox[{
+          "dataArray", ",", "noAttr", ",", "method", ",", "permuteinvariant", 
+           ",", "pflag"}], "]"}]}], ",", "objectivecounter"}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"pflag", ",", 
+       RowBox[{
+       "Print", "[", 
+        "\"\<----------------------------------------------------------\>\"", 
+        "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"method", "=", 
+      RowBox[{"{", "\"\<RandomSearch\>\"", "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"sol4", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"method", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{"AbsoluteTiming", "@", 
+         RowBox[{"maximize", "[", 
+          RowBox[{
+          "dataArray", ",", "noAttr", ",", "method", ",", "permuteinvariant", 
+           ",", "pflag"}], "]"}]}], ",", "objectivecounter"}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"pflag", ",", 
+       RowBox[{
+       "Print", "[", 
+        "\"\<----------------------------------------------------------\>\"", 
+        "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"method", "=", 
+      RowBox[{"{", 
+       RowBox[{"\"\<ParticleSwarmOptimization\>\"", ",", 
+        RowBox[{"\"\<nparts\>\"", "\[Rule]", "32"}], ",", 
+        RowBox[{"\"\<bndLo\>\"", "\[Rule]", 
+         RowBox[{"-", "10"}]}], ",", 
+        RowBox[{"\"\<bndUp\>\"", "\[Rule]", "10"}], ",", 
+        RowBox[{"\"\<niter\>\"", "\[Rule]", "200"}], ",", 
+        RowBox[{"\"\<r\>\"", "\[Rule]", "1"}], ",", 
+        RowBox[{"\"\<RandomSeed\>\"", "\[Rule]", "0"}]}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"sol5", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"method", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{"AbsoluteTiming", "@", 
+         RowBox[{"maximize", "[", 
+          RowBox[{
+          "dataArray", ",", "noAttr", ",", "method", ",", "permuteinvariant", 
+           ",", "pflag"}], "]"}]}], ",", "objectivecounter"}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"noineqs", "=", 
+      RowBox[{"Length", "@", "dataArray"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ClearAll", "[", 
+      RowBox[{
+      "header", ",", "noM", ",", "noU", ",", "noD", ",", "noAttr", ",", 
+       "distanceMatrices", ",", "matchMatrix", ",", "mate", ",", 
+       "payoffMatrix", ",", "ineqmembers", ",", "dataArray"}], "]"}], ";", 
+     "clearMemory", ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<No of inequalities = \>\"", "<>", 
+        RowBox[{"ToString", "[", "noineqs", "]"}]}], ",", "sol1", ",", "sol2",
+        ",", "sol3", ",", "sol4", ",", "sol5"}], "}"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.6333311433155627`*^9, 3.633331256248595*^9}, {
+   3.633331333829791*^9, 3.633331356719983*^9}, 3.633331401070299*^9, {
+   3.6333334840887184`*^9, 3.6333336200044775`*^9}, {3.6333337673925877`*^9, 
+   3.6333337957933545`*^9}, {3.633336978925073*^9, 3.633337073904979*^9}, {
+   3.633337416018114*^9, 3.6333375089452868`*^9}, {3.633338735712759*^9, 
+   3.633338799141263*^9}, 3.6333389379394655`*^9, {3.633341286739631*^9, 
+   3.6333413332239604`*^9}, {3.633343479091837*^9, 3.6333435167102394`*^9}, {
+   3.6333436216079464`*^9, 3.633343743814913*^9}, {3.6333444419481297`*^9, 
+   3.6333444424553976`*^9}, {3.633344500711754*^9, 3.6333445041438336`*^9}, 
+   3.6333445344446945`*^9, {3.6333452199721766`*^9, 3.633345312251795*^9}, {
+   3.6333453553777714`*^9, 3.633345404664691*^9}, {3.6333454440627565`*^9, 
+   3.6333454461447883`*^9}, {3.6333454770289865`*^9, 3.633345525926959*^9}, {
+   3.6333456515388527`*^9, 3.63334565618878*^9}, {3.6333564948255816`*^9, 
+   3.6333565128677597`*^9}, {3.6333568779194*^9, 3.633356898224521*^9}, {
+   3.6333572373761683`*^9, 3.6333572473039026`*^9}, {3.6333579044843907`*^9, 
+   3.6333579054209146`*^9}, 3.6333584321429825`*^9, {3.633358612083292*^9, 
+   3.6333587177760897`*^9}, {3.6333589098233094`*^9, 
+   3.6333589173064194`*^9}, {3.6333589645411425`*^9, 
+   3.6333589873956347`*^9}, {3.633362421972807*^9, 3.6333624676315355`*^9}, {
+   3.63336253988546*^9, 3.633362575298998*^9}, {3.634234437996091*^9, 
+   3.6342344404006624`*^9}, {3.6361835288297415`*^9, 3.636183532229022*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"filename", "=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\</import/\>\"", "<>", 
+     "\"\<round1m1-1.xls.pre.dat\>\""}], ")"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "header", ",", "noM", ",", "noU", ",", "noD", ",", "noAttr", ",", 
+     "distanceMatrices", ",", "matchMatrix", ",", "mate"}], "}"}], "=", 
+   RowBox[{"import", "[", 
+    RowBox[{"filename", ",", "\"\<precomp\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"payoffMatrix", "=", 
+   RowBox[{"CpayoffMatrix", "[", 
+    RowBox[{"payoffDM", ",", "noM", ",", "noU", ",", "noD"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"ineqmembers", "=", 
+    RowBox[{"Cineqmembers", "[", "mate", 
+     RowBox[{"(*", 
+      RowBox[{",", "\"\<2\>\""}], "*)"}], "]"}]}], ";"}],
+  Background->RGBColor[1, 1, 0]], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dataArray", "=", 
+   RowBox[{"CdataArray", "[", 
+    RowBox[{"payoffMatrix", ",", 
+     RowBox[{"Cx", "[", 
+      RowBox[{"noAttr", "-", "1"}], "]"}], ",", "False"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.636183572763342*^9, 3.6361836107130346`*^9}},
+ Background->RGBColor[1, 0.925, 0.925]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"permuteinvariant", "=", "True"}], ";", 
+  RowBox[{"pflag", "=", "False"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"method", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<ParticleSwarmOptimization\>\"", ",", 
+     RowBox[{"\"\<nparts\>\"", "\[Rule]", "256"}], ",", 
+     RowBox[{"\"\<bndLo\>\"", "\[Rule]", "3"}], ",", 
+     RowBox[{"\"\<bndUp\>\"", "\[Rule]", "7"}], ",", 
+     RowBox[{"\"\<niter\>\"", "\[Rule]", "2000"}], ",", 
+     RowBox[{"\"\<r\>\"", "\[Rule]", "2"}], ",", 
+     RowBox[{"\"\<RandomSeed\>\"", "\[Rule]", "0"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"{", 
+  RowBox[{"method", ",", 
+   RowBox[{"AbsoluteTiming", "@", 
+    RowBox[{"maximize", "[", 
+     RowBox[{
+     "dataArray", ",", "noAttr", ",", "method", ",", "permuteinvariant", ",", 
+      "pflag"}], "]"}]}], ",", "objectivecounter"}], "}"}]}], "Input",
+ CellChangeTimes->{{3.636183669479252*^9, 3.6361836806055965`*^9}, {
+   3.636183742221885*^9, 3.636183761438033*^9}, {3.6361837972416673`*^9, 
+   3.6361838509527893`*^9}, {3.6361843895775595`*^9, 3.636184397600021*^9}, {
+   3.636184559691497*^9, 3.636184575297942*^9}, 3.6361854212352057`*^9},
+ Background->RGBColor[1, 0.925, 0.925]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"ParticleSwarmOptimization\"\>", ",", 
+     RowBox[{"\<\"nparts\"\>", "\[Rule]", "256"}], ",", 
+     RowBox[{"\<\"bndLo\"\>", "\[Rule]", "3"}], ",", 
+     RowBox[{"\<\"bndUp\"\>", "\[Rule]", "7"}], ",", 
+     RowBox[{"\<\"niter\"\>", "\[Rule]", "2000"}], ",", 
+     RowBox[{"\<\"r\"\>", "\[Rule]", "2"}], ",", 
+     RowBox[{"\<\"RandomSeed\"\>", "\[Rule]", "0"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"325.916784`", ",", 
+     RowBox[{"{", 
+      RowBox[{"29965", ",", 
+       RowBox[{"{", 
+        RowBox[{"3.9397343484390954`", ",", "3.015516928743067`"}], "}"}]}], 
+      "}"}]}], "}"}], ",", "1535489"}], "}"}]], "Output",
+ CellChangeTimes->{{3.6361837714969482`*^9, 3.6361838625416746`*^9}, 
+   3.636183915978232*^9, 3.6361845447880244`*^9, 3.636185122602355*^9, 
+   3.636186006094611*^9, 3.656682401423051*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"results", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"#", ",", 
+       RowBox[{"testmaximize", "[", 
+        RowBox[{"#", ",", "True", ",", "False"}], "]"}]}], "}"}], "&"}], "/@", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\</import/\>\"", "<>",
+          "#"}], ")"}], "&"}], "/@", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<round1m1-1.xls.pre.dat\>\"", ",", 
+        "\"\<round1m2-1.xls.pre.dat\>\"", ",", 
+        "\"\<round1m5-1.xls.pre.dat\>\"", ",", 
+        "\"\<round1m10-1.xls.pre.dat\>\"", ",", 
+        "\"\<round1m10-10.xls.pre.dat\>\""}], "}"}]}], ")"}]}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6333313624809046`*^9, 3.6333313688222523`*^9}, {
+   3.633341348051635*^9, 3.6333414474396296`*^9}, {3.6333439336467533`*^9, 
+   3.633343940585227*^9}, {3.633344491373711*^9, 3.6333444939075193`*^9}, {
+   3.6333452969734745`*^9, 3.633345304396326*^9}, 3.633345752517584*^9, {
+   3.633359341668909*^9, 3.633359393714622*^9}, {3.633359572966395*^9, 
+   3.633359576858973*^9}, {3.6333603155834293`*^9, 3.633360318902768*^9}, {
+   3.6333617214324846`*^9, 3.633361721654625*^9}, {3.6333628174522552`*^9, 
+   3.633362835191482*^9}, {3.6342353648311343`*^9, 3.6342353695804243`*^9}, {
+   3.656682002632646*^9, 3.656682008032539*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\" \
+/home/tchr/Projects/Mathematica-MSE/library//import/round1m1-1.xls.pre.dat\"\>\
+"], "Print",
+ CellChangeTimes->{3.6342347280251474`*^9, 3.6342350360958157`*^9, 
+  3.6342354029075456`*^9, 3.634298296928087*^9, 3.63618265158999*^9, 
+  3.6361836237798686`*^9, 3.656682842313191*^9}],
+
+Cell[BoxData["\<\" \
+/home/tchr/Projects/Mathematica-MSE/library//import/round1m2-1.xls.pre.dat\"\>\
+"], "Print",
+ CellChangeTimes->{3.6342347280251474`*^9, 3.6342350360958157`*^9, 
+  3.6342354029075456`*^9, 3.634298296928087*^9, 3.63618265158999*^9, 
+  3.6361836237798686`*^9, 3.656682873753819*^9}],
+
+Cell[BoxData["\<\" \
+/home/tchr/Projects/Mathematica-MSE/library//import/round1m5-1.xls.pre.dat\"\>\
+"], "Print",
+ CellChangeTimes->{3.6342347280251474`*^9, 3.6342350360958157`*^9, 
+  3.6342354029075456`*^9, 3.634298296928087*^9, 3.63618265158999*^9, 
+  3.6361836237798686`*^9, 3.656682898252886*^9}],
+
+Cell[BoxData["\<\" \
+/home/tchr/Projects/Mathematica-MSE/library//import/round1m10-1.xls.pre.dat\"\
+\>"], "Print",
+ CellChangeTimes->{3.6342347280251474`*^9, 3.6342350360958157`*^9, 
+  3.6342354029075456`*^9, 3.634298296928087*^9, 3.63618265158999*^9, 
+  3.6361836237798686`*^9, 3.656682922676148*^9}],
+
+Cell[BoxData["\<\" \
+/home/tchr/Projects/Mathematica-MSE/library//import/round1m10-10.xls.pre.dat\"\
+\>"], "Print",
+ CellChangeTimes->{3.6342347280251474`*^9, 3.6342350360958157`*^9, 
+  3.6342354029075456`*^9, 3.634298296928087*^9, 3.63618265158999*^9, 
+  3.6361836237798686`*^9, 3.656682966220731*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"Prepend", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", 
+         RowBox[{"TableForm", "[", 
+          RowBox[{"#", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "}"}], "&"}], "/@", 
+      "results"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\"\<FILENAME\>\"", ",", "\"\<RESULTS\>\""}], "}"}]}], "]"}], 
+   ",", 
+   RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.633344627230769*^9, 3.633344657541952*^9}, {
+  3.6333447831546717`*^9, 3.6333447966908045`*^9}, {3.63334494854798*^9, 
+  3.633345121415121*^9}, {3.6333451563786635`*^9, 3.6333451632875805`*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"FILENAME\"\>", "\<\"RESULTS\"\>"},
+    {"\<\"/home/tchr/Projects/Mathematica-MSE/library//import/round1m1-1.xls.\
+pre.dat\"\>", 
+     InterpretationBox[GridBox[{
+        {"\<\"No of inequalities = 30625\"\>", "\<\"\"\>", "\<\"\"\>"},
+        {"\<\"DifferentialEvolution\"\>", GridBox[{
+           {"8.577311`", "\<\"\"\>"},
+           {"29961.`", GridBox[{
+              {"3.188029873560225`"},
+              {"2.2237682582145535`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "1254"},
+        {"\<\"SimulatedAnnealing\"\>", GridBox[{
+           {"3.057856`", "\<\"\"\>"},
+           {"29963.`", GridBox[{
+              {"3.6968591949209753`"},
+              {"2.6949792183358516`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "337"},
+        {"\<\"NelderMead\"\>", GridBox[{
+           {"2.091375`", "\<\"\"\>"},
+           {"29962.`", GridBox[{
+              {"3.7726716045549953`"},
+              {"2.7084054184635336`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "120"},
+        {"\<\"RandomSearch\"\>", GridBox[{
+           {"2.998392`", "\<\"\"\>"},
+           {"29457.`", GridBox[{
+              {"0.7673406197846462`"},
+              {"0.8659151619584017`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "193"},
+        {"\<\"ParticleSwarmOptimization\"\>", GridBox[{
+           {"3.925561`", "\<\"\"\>"},
+           {"29965", GridBox[{
+              {"3.646907071978631`"},
+              {"2.683389373695026`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "19137"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      TableForm[{
+       "No of inequalities = 30625", {
+        "DifferentialEvolution", {
+         8.577311, {29961., {3.188029873560225, 2.2237682582145535`}}}, 
+         1254}, {"SimulatedAnnealing", {
+         3.057856, {29963., {3.6968591949209753`, 2.6949792183358516`}}}, 
+         337}, {"NelderMead", {
+         2.091375, {29962., {3.7726716045549953`, 2.7084054184635336`}}}, 
+         120}, {"RandomSearch", {
+         2.998392, {29457., {0.7673406197846462, 0.8659151619584017}}}, 
+         193}, {"ParticleSwarmOptimization", {
+         3.925561, {29965, {3.646907071978631, 2.683389373695026}}}, 
+         19137}}]]},
+    {"\<\"/home/tchr/Projects/Mathematica-MSE/library//import/round1m2-1.xls.\
+pre.dat\"\>", 
+     InterpretationBox[GridBox[{
+        {"\<\"No of inequalities = 30625\"\>", "\<\"\"\>", "\<\"\"\>"},
+        {"\<\"DifferentialEvolution\"\>", GridBox[{
+           {"4.979954`", "\<\"\"\>"},
+           {"30550.`", GridBox[{
+              {"4.390863395061582`"},
+              {"2.46761138981219`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "1054"},
+        {"\<\"SimulatedAnnealing\"\>", GridBox[{
+           {"2.220617`", "\<\"\"\>"},
+           {"30551.`", GridBox[{
+              {"5.054884194553177`"},
+              {"3.0698025463449734`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "247"},
+        {"\<\"NelderMead\"\>", GridBox[{
+           {"2.342661`", "\<\"\"\>"},
+           {"30552.`", GridBox[{
+              {"5.136796925644352`"},
+              {"2.8807645865616327`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "245"},
+        {"\<\"RandomSearch\"\>", GridBox[{
+           {"2.992104`", "\<\"\"\>"},
+           {"28981.`", GridBox[{
+              {"0.7673406197846462`"},
+              {"0.8659151619584017`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "193"},
+        {"\<\"ParticleSwarmOptimization\"\>", GridBox[{
+           {"4.046746`", "\<\"\"\>"},
+           {"30552", GridBox[{
+              {"5.618454514935576`"},
+              {"3.1115695005909707`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "19137"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      TableForm[{
+       "No of inequalities = 30625", {
+        "DifferentialEvolution", {
+         4.979954, {30550., {4.390863395061582, 2.46761138981219}}}, 1054}, {
+        "SimulatedAnnealing", {
+         2.220617, {30551., {5.054884194553177, 3.0698025463449734`}}}, 
+         247}, {"NelderMead", {
+         2.342661, {30552., {5.136796925644352, 2.8807645865616327`}}}, 
+         245}, {"RandomSearch", {
+         2.992104, {28981., {0.7673406197846462, 0.8659151619584017}}}, 
+         193}, {"ParticleSwarmOptimization", {
+         4.046746, {30552, {5.618454514935576, 3.1115695005909707`}}}, 
+         19137}}]]},
+    {"\<\"/home/tchr/Projects/Mathematica-MSE/library//import/round1m5-1.xls.\
+pre.dat\"\>", 
+     InterpretationBox[GridBox[{
+        {"\<\"No of inequalities = 30625\"\>", "\<\"\"\>", "\<\"\"\>"},
+        {"\<\"DifferentialEvolution\"\>", GridBox[{
+           {"6.923374`", "\<\"\"\>"},
+           {"30621.`", GridBox[{
+              {"6.942935997700074`"},
+              {"3.799730074013799`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "2054"},
+        {"\<\"SimulatedAnnealing\"\>", GridBox[{
+           {"2.060442`", "\<\"\"\>"},
+           {"30619.`", GridBox[{
+              {"4.833851510111398`"},
+              {"2.5254407755717536`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "277"},
+        {"\<\"NelderMead\"\>", GridBox[{
+           {"1.866688`", "\<\"\"\>"},
+           {"30621.`", GridBox[{
+              {"6.721742672246899`"},
+              {"3.7970362583713193`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "237"},
+        {"\<\"RandomSearch\"\>", GridBox[{
+           {"2.456144`", "\<\"\"\>"},
+           {"29651.`", GridBox[{
+              {"0.7673406197846462`"},
+              {"0.8659151619584017`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "193"},
+        {"\<\"ParticleSwarmOptimization\"\>", GridBox[{
+           {"3.669492`", "\<\"\"\>"},
+           {"30621", GridBox[{
+              {"5.782164922248786`"},
+              {"3.1403437961038794`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "19137"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      TableForm[{
+       "No of inequalities = 30625", {
+        "DifferentialEvolution", {
+         6.923374, {30621., {6.942935997700074, 3.799730074013799}}}, 2054}, {
+        "SimulatedAnnealing", {
+         2.060442, {30619., {4.833851510111398, 2.5254407755717536`}}}, 
+         277}, {"NelderMead", {
+         1.866688, {30621., {6.721742672246899, 3.7970362583713193`}}}, 
+         237}, {"RandomSearch", {
+         2.456144, {29651., {0.7673406197846462, 0.8659151619584017}}}, 
+         193}, {"ParticleSwarmOptimization", {
+         3.669492, {30621, {5.782164922248786, 3.1403437961038794`}}}, 
+         19137}}]]},
+    {"\<\"/home/tchr/Projects/Mathematica-MSE/library//import/round1m10-1.xls.\
+pre.dat\"\>", 
+     InterpretationBox[GridBox[{
+        {"\<\"No of inequalities = 30625\"\>", "\<\"\"\>", "\<\"\"\>"},
+        {"\<\"DifferentialEvolution\"\>", GridBox[{
+           {"6.352831`", "\<\"\"\>"},
+           {"30624.`", GridBox[{
+              {"4.7879963711999745`"},
+              {"2.6744143339133535`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "2054"},
+        {"\<\"SimulatedAnnealing\"\>", GridBox[{
+           {"1.657514`", "\<\"\"\>"},
+           {"30623.`", GridBox[{
+              {"4.143411343860247`"},
+              {"2.2865661452657022`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "207"},
+        {"\<\"NelderMead\"\>", GridBox[{
+           {"2.209908`", "\<\"\"\>"},
+           {"30624.`", GridBox[{
+              {"5.048246261957587`"},
+              {"3.1539196212272778`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "240"},
+        {"\<\"RandomSearch\"\>", GridBox[{
+           {"2.853638`", "\<\"\"\>"},
+           {"30161.`", GridBox[{
+              {"0.7673406197846462`"},
+              {"0.8659151619584017`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "193"},
+        {"\<\"ParticleSwarmOptimization\"\>", GridBox[{
+           {"3.853676`", "\<\"\"\>"},
+           {"30624", GridBox[{
+              {"4.838713582687417`"},
+              {"2.3697672327079555`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "19137"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      TableForm[{
+       "No of inequalities = 30625", {
+        "DifferentialEvolution", {
+         6.352831, {30624., {4.7879963711999745`, 2.6744143339133535`}}}, 
+         2054}, {"SimulatedAnnealing", {
+         1.657514, {30623., {4.143411343860247, 2.2865661452657022`}}}, 
+         207}, {"NelderMead", {
+         2.209908, {30624., {5.048246261957587, 3.1539196212272778`}}}, 
+         240}, {"RandomSearch", {
+         2.853638, {30161., {0.7673406197846462, 0.8659151619584017}}}, 
+         193}, {"ParticleSwarmOptimization", {
+         3.853676, {30624, {4.838713582687417, 2.3697672327079555`}}}, 
+         19137}}]]},
+    {"\<\"/home/tchr/Projects/Mathematica-MSE/library//import/round1m10-10.\
+xls.pre.dat\"\>", 
+     InterpretationBox[GridBox[{
+        {"\<\"No of inequalities = 30625\"\>", "\<\"\"\>", "\<\"\"\>"},
+        {"\<\"DifferentialEvolution\"\>", GridBox[{
+           {"6.143448`", "\<\"\"\>"},
+           {"30551.`", GridBox[{
+              {"3.804961529705183`"},
+              {"2.671235905088204`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "1054"},
+        {"\<\"SimulatedAnnealing\"\>", GridBox[{
+           {"2.138835`", "\<\"\"\>"},
+           {"30549.`", GridBox[{
+              {"3.4793716848855523`"},
+              {"2.523796897752092`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "187"},
+        {"\<\"NelderMead\"\>", GridBox[{
+           {"1.557824`", "\<\"\"\>"},
+           {"30550.`", GridBox[{
+              {"3.7635590949919866`"},
+              {"2.6221676624042485`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "75"},
+        {"\<\"RandomSearch\"\>", GridBox[{
+           {"3.592537`", "\<\"\"\>"},
+           {"30451.`", GridBox[{
+              {"0.7673406197846462`"},
+              {"0.8659151619584017`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "193"},
+        {"\<\"ParticleSwarmOptimization\"\>", GridBox[{
+           {"4.140939`", "\<\"\"\>"},
+           {"30550", GridBox[{
+              {"3.867216554749098`"},
+              {"2.4333226752019397`"}
+             },
+             
+             GridBoxAlignment->{
+              "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+             GridBoxSpacings->{"Columns" -> {
+                 Offset[0.27999999999999997`], {
+                  Offset[0.7]}, 
+                 Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+               "Rows" -> {
+                 Offset[0.2], {
+                  Offset[0.1]}, 
+                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+          },
+          
+          GridBoxAlignment->{
+           "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+            "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+          GridBoxSpacings->{"Columns" -> {
+              Offset[0.27999999999999997`], {
+               Offset[0.7]}, 
+              Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+              Offset[0.2], {
+               Offset[0.1]}, 
+              Offset[0.2]}, "RowsIndexed" -> {}}], "19137"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}],
+      TableForm[{
+       "No of inequalities = 30625", {
+        "DifferentialEvolution", {
+         6.143448, {30551., {3.804961529705183, 2.671235905088204}}}, 1054}, {
+        "SimulatedAnnealing", {
+         2.138835, {30549., {3.4793716848855523`, 2.523796897752092}}}, 
+         187}, {"NelderMead", {
+         1.557824, {30550., {3.7635590949919866`, 2.6221676624042485`}}}, 
+         75}, {"RandomSearch", {
+         3.592537, {30451., {0.7673406197846462, 0.8659151619584017}}}, 
+         193}, {"ParticleSwarmOptimization", {
+         4.140939, {30550, {3.867216554749098, 2.4333226752019397`}}}, 
+         19137}}]]}
+   },
+   AutoDelete->False,
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{
+  3.634235605125127*^9, 3.634298545115587*^9, 3.6361830783367662`*^9, {
+   3.636183660020574*^9, 3.6361836869454765`*^9}, 3.656683097072567*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"MemoryInUse", "[", "]"}], ",", 
+   RowBox[{"MaxMemoryUsed", "[", "]"}]}], "}"}]], "Input",
+ CellChangeTimes->{{3.6311806435117693`*^9, 3.631180657746145*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"58402808", ",", "146296264"}], "}"}]], "Output",
+ CellChangeTimes->{3.633328326397873*^9, 3.6333389977544656`*^9, 
+  3.633339081186084*^9, 3.6333392311192446`*^9, 3.6333409276244287`*^9, 
+  3.6333409671909037`*^9, 3.6333451994526453`*^9, 3.6333457585074425`*^9, 
+  3.6333459045955896`*^9, 3.633346146853894*^9, 3.633357008712515*^9, 
+  3.633359813979054*^9, 3.6333618452285504`*^9, 3.633362714537108*^9, 
+  3.633363008507098*^9, 3.656683103355048*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1087, 1133},
+WindowMargins->{{-9, Automatic}, {Automatic, -8}},
+FrontEndVersion->"10.3 for Linux x86 (64-bit) (October 9, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 184, 4, 33, "Text"],
+Cell[CellGroupData[{
+Cell[767, 28, 93, 1, 67, "Section"],
+Cell[863, 31, 133, 1, 33, "Text"],
+Cell[CellGroupData[{
+Cell[1021, 36, 264, 5, 32, "Input"],
+Cell[1288, 43, 121, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1446, 49, 230, 5, 32, "Input"],
+Cell[1679, 56, 2096, 30, 32, "Output"]
+}, Open  ]],
+Cell[3790, 89, 259, 5, 32, "Input"],
+Cell[4052, 96, 783, 15, 77, "Input"],
+Cell[4838, 113, 107, 1, 32, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4982, 119, 94, 1, 67, "Section"],
+Cell[5079, 122, 8931, 200, 825, "Input"],
+Cell[14013, 324, 1299, 37, 137, "Input"],
+Cell[CellGroupData[{
+Cell[15337, 365, 1223, 26, 137, "Input"],
+Cell[16563, 393, 896, 20, 55, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17496, 418, 1403, 32, 99, "Input"],
+Cell[CellGroupData[{
+Cell[18924, 454, 300, 5, 23, "Print"],
+Cell[19227, 461, 300, 5, 23, "Print"],
+Cell[19530, 468, 300, 5, 23, "Print"],
+Cell[19833, 475, 301, 5, 23, "Print"],
+Cell[20137, 482, 302, 5, 23, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20488, 493, 775, 21, 32, "Input"],
+Cell[21266, 516, 37274, 900, 1132, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58577, 1421, 210, 5, 32, "Input"],
+Cell[58790, 1428, 491, 8, 32, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
