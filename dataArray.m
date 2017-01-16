@@ -19,11 +19,11 @@
 
 
 
-(* ::Input::Initialization:: *)
+(* ::Input:: *)
 ClearAll[CdataArray];
 CdataArray::usage="CdataArray[payoffMatrix,xlist,printflag] creates the dataArray. It works either using the \"Speed\" model or the \"Memory\" model. It uses ineqmembers and Cinequalities internally and for the memory model it erases ineqmembers after use.";
 CdataArray[payoffMatrix_,xlist_,printflag_:False]:=Module[{dataarray,head},
-dataArray=Cinequalities[payoffMatrix[[##]]&,ineqmembers];If[printflag,Print[1,"  ",{ByteCount@dataarray,MemoryInUse[],MaxMemoryUsed[]}]];
+dataarray=Cinequalities[payoffMatrix[[##]]&,ineqmembers];If[printflag,Print[1,"  ",{ByteCount@dataarray,MemoryInUse[],MaxMemoryUsed[]}]];
 
 Switch[MSEresources,
 "Memory",head=Uncompress;ClearAll[ineqmembers],
