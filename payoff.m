@@ -27,8 +27,8 @@ Cx[n_]:=Table[Symbol["x"<>ToString[i]],{i,n}];
 
 (* ::Input::Initialization:: *)
 ClearAll[payoff];
-payoff::usage="payoff[m,i,j] returns the payoff of i-upstream and j-upstream in the m-market.\r
-It is used in the case of importing streams (not precomputed). It is assumed that u , d , and noAttr have been already assigned.";
+payoff::usage="payoff[m,i,j] returns the payoff of i-upstream and j-upstream in the m-market. 
+It is used when the streams of u and d agents are imported separately (i.e. not in the precomputed format). It is assumed that u , d , and noAttr have been already assigned.";
 payoff[m_,i_,j_]:=(Prepend[Cx[noAttr-1],1]u[[m,i]]).d[[m,j]];
 
 
@@ -43,7 +43,8 @@ payoffDM[m_,i_,j_]:=Prepend[Cx[noAttr-1],1].distanceMatrices[[m,i,j]];
 (*C in front of the name means create*)
 ClearAll[CpayoffMatrix];
 CpayoffMatrix::usage="CpayoffMatrix[payoff(or payoffDM),noM_,noU_:noU,noD_:noD,parallel_:False] calculates and assigns the payoffMatrix.\r 
-In case of separated streams payoff is used and in the case of precomputed data payoffDM is used.\r
+payoff is used when input data consist of separate u and d streams.\r
+payoffDM is used for precomputed data.\r
 
 CpayoffMatrix[solution_] substitutes the solution to all payoffMatrix's entries.
 ";
@@ -67,9 +68,8 @@ Print["There is some problem with your input. Couldn't calculate anything meanin
 (* ::Input::Initialization:: *)
 (*C in front of the name means create*)
 ClearAll[Ctotalpayoff];
-Ctotalpayoff::usage="Ctotalpayoff[payoffobject,mates] calculates the total payoff that a specific match defined by mates returns.
-If the payoffobject is the payoff function then the head equals Symbol and the corresponding routine is used.
-If the payoffobject is the payoffMatrix then the head equals List and the corresponding routine is used.";
+Ctotalpayoff::usage="
+Ctotalpayoff[payoffobject,mates] calculates the total payoff (i.e. the sum of payoffs) across all markets for the specific mates arrangement. This function accepts as a first argument the \[OpenCurlyDoubleQuote]payffobject\[CloseCurlyDoubleQuote], which can either be the name of the payoff function or the payoffMatrix (in case we have already calculated all pair payoffs).";
 Ctotalpayoff[payoffobject_,mates_]:=
 totalpayoff=
 Switch[Head@payoffobject,

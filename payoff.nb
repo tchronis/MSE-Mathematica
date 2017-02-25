@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     21343,        581]
-NotebookOptionsPosition[     19351,        507]
-NotebookOutlinePosition[     20010,        533]
-CellTagsIndexPosition[     19923,        528]
+NotebookDataLength[     17160,        461]
+NotebookOptionsPosition[     15676,        404]
+NotebookOutlinePosition[     16092,        422]
+CellTagsIndexPosition[     16049,        419]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -107,9 +107,9 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{"payoff", "::", "usage"}], "=", 
    "\"\<payoff[m,i,j] returns the payoff of i-upstream and j-upstream in the \
-m-market.\\r\nIt is used in the case of importing streams (not precomputed). \
-It is assumed that u , d , and noAttr have been already assigned.\>\""}], 
-  ";"}], "\[IndentingNewLine]", 
+m-market. \nIt is used when the streams of u and d agents are imported \
+separately (i.e. not in the precomputed format). It is assumed that u , d , \
+and noAttr have been already assigned.\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"payoff", "[", 
@@ -141,7 +141,8 @@ It is assumed that u , d , and noAttr have been already assigned.\>\""}],
    3.6261105568706055`*^9, {3.6261692802920585`*^9, 3.6261692900482745`*^9}, {
    3.6261696027442513`*^9, 3.62616962853998*^9}, {3.6263456135001373`*^9, 
    3.6263457717657623`*^9}, {3.6263458174220123`*^9, 
-   3.6263458350470123`*^9}, {3.632739732008258*^9, 3.6327397398325505`*^9}},
+   3.6263458350470123`*^9}, {3.632739732008258*^9, 3.6327397398325505`*^9}, {
+   3.697047429993506*^9, 3.6970474433085537`*^9}},
  Background->RGBColor[0.88, 1, 0.88]],
 
 Cell[BoxData[{
@@ -208,9 +209,10 @@ Cell[BoxData[
      RowBox[{"CpayoffMatrix", "::", "usage"}], "=", 
      "\"\<CpayoffMatrix[payoff(or \
 payoffDM),noM_,noU_:noU,noD_:noD,parallel_:False] calculates and assigns the \
-payoffMatrix.\\r \nIn case of separated streams payoff is used and in the \
-case of precomputed data payoffDM is used.\\r\n\nCpayoffMatrix[solution_] \
-substitutes the solution to all payoffMatrix's entries.\n\>\""}], ";"}], "\n", 
+payoffMatrix.\\r \npayoff is used when input data consist of separate u and d \
+streams.\\r\npayoffDM is used for precomputed data.\\r\n\n\
+CpayoffMatrix[solution_] substitutes the solution to all payoffMatrix's \
+entries.\n\>\""}], ";"}], "\n", 
    RowBox[{
     RowBox[{"CpayoffMatrix", "[", 
      RowBox[{"payoff_", ",", "noM_", ",", 
@@ -303,116 +305,9 @@ anything meaningful.\>\"", "]"}]}], "\[IndentingNewLine]",
    3.687934716553021*^9}, {3.687934752124819*^9, 3.6879347640129547`*^9}, {
    3.687934893456819*^9, 3.687934899864044*^9}, {3.68793495933742*^9, 
    3.687934978122425*^9}, {3.687935586245936*^9, 3.6879356137188*^9}, {
-   3.687935651303357*^9, 3.687935655860488*^9}},
- Background->RGBColor[0.88, 1, 0.88]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"??", "CpayoffMatrix"}]], "Input",
- CellChangeTimes->{{3.6879335080693808`*^9, 3.687933510173505*^9}, 
-   3.6879347219860697`*^9}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- StyleBox["\<\"CpayoffMatrix[payoff(or \
-payoffDM),noM_,noU_:noU,noD_:noD,parallel_:False] calculates and assigns the \
-payoffMatrix.
- \\nIn case of separated streams payoff is used and in the case of \
-precomputed data payoffDM is used.
-\\n\\nCpayoffMatrix[solution_] substitutes the solution to all payoffMatrix's \
-entries.\\n\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.687935639002528*^9},
- CellTags->"Info603687942838-5422406"],
-
-Cell[BoxData[
- InterpretationBox[GridBox[{
-    {GridBox[{
-       {
-        RowBox[{
-         RowBox[{"CpayoffMatrix", "[", 
-          RowBox[{"payoff_", ",", "noM_", ",", 
-           RowBox[{"noU_", ":", "noU"}], ",", 
-           RowBox[{"noD_", ":", "noD"}], ",", 
-           RowBox[{"p_", ":", "False"}]}], "]"}], ":=", 
-         RowBox[{"payoffMatrix", "=", 
-          RowBox[{"If", "[", 
-           RowBox[{
-            RowBox[{"p", "\[Equal]", "False"}], ",", 
-            RowBox[{"Table", "[", 
-             RowBox[{
-              RowBox[{"payoff", "[", 
-               RowBox[{"m", ",", "i", ",", "j"}], "]"}], ",", 
-              RowBox[{"{", 
-               RowBox[{"m", ",", "1", ",", "noM"}], "}"}], ",", 
-              RowBox[{"{", 
-               RowBox[{"i", ",", 
-                RowBox[{
-                "noU", "\[LeftDoubleBracket]", "m", 
-                 "\[RightDoubleBracket]"}]}], "}"}], ",", 
-              RowBox[{"{", 
-               RowBox[{"j", ",", 
-                RowBox[{
-                "noD", "\[LeftDoubleBracket]", "m", 
-                 "\[RightDoubleBracket]"}]}], "}"}]}], "]"}], ",", 
-            RowBox[{"ParallelTable", "[", 
-             RowBox[{
-              RowBox[{"payoff", "[", 
-               RowBox[{"m", ",", "i", ",", "j"}], "]"}], ",", 
-              RowBox[{"{", 
-               RowBox[{"m", ",", "1", ",", "noM"}], "}"}], ",", 
-              RowBox[{"{", 
-               RowBox[{"i", ",", 
-                RowBox[{
-                "noU", "\[LeftDoubleBracket]", "m", 
-                 "\[RightDoubleBracket]"}]}], "}"}], ",", 
-              RowBox[{"{", 
-               RowBox[{"j", ",", 
-                RowBox[{
-                "noD", "\[LeftDoubleBracket]", "m", 
-                 "\[RightDoubleBracket]"}]}], "}"}]}], "]"}]}], "]"}]}]}]},
-       {" "},
-       {
-        RowBox[{
-         RowBox[{"CpayoffMatrix", "[", "solution_", "]"}], ":=", 
-         RowBox[{"If", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"ListQ", "[", "solution", "]"}], "&&", 
-            RowBox[{
-             RowBox[{"Length", "[", "solution", "]"}], "===", 
-             RowBox[{"noAttr", "-", "1"}]}]}], ",", 
-           RowBox[{"payoffMatrix", "=", 
-            RowBox[{"payoffMatrix", "/.", "\[VeryThinSpace]", 
-             RowBox[{"Thread", "[", 
-              RowBox[{
-               RowBox[{"Cx", "[", 
-                RowBox[{"noAttr", "-", "1"}], "]"}], "\[Rule]", "p"}], 
-              "]"}]}]}], ",", 
-           RowBox[{
-           "Print", 
-            "[", "\<\"There is some problem with your input. Couldn't \
-calculate anything meaningful.\"\>", "]"}]}], "]"}]}]}
-      },
-      BaselinePosition->{Baseline, {1, 1}},
-      GridBoxAlignment->{
-       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
-        "RowsIndexed" -> {}},
-      GridBoxItemSize->{"Columns" -> {{
-           Scaled[0.999]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
-        "RowsIndexed" -> {}}]}
-   },
-   BaselinePosition->{Baseline, {1, 1}},
-   GridBoxAlignment->{
-    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
-     "RowsIndexed" -> {}}],
-  Definition[$CellContext`CpayoffMatrix],
-  Editable->False]], "Print",
- CellChangeTimes->{3.687935639039999*^9},
- CellTags->"Info603687942838-5422406"]
-}, Open  ]]
-}, Open  ]]
+   3.687935651303357*^9, 3.687935655860488*^9}, {3.697047509456362*^9, 
+   3.6970475347792053`*^9}},
+ Background->RGBColor[0.88, 1, 0.88]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -447,11 +342,12 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      RowBox[{"Ctotalpayoff", "::", "usage"}], "=", 
-     "\"\<Ctotalpayoff[payoffobject,mates] calculates the total payoff that a \
-specific match defined by mates returns.\nIf the payoffobject is the payoff \
-function then the head equals Symbol and the corresponding routine is used.\n\
-If the payoffobject is the payoffMatrix then the head equals List and the \
-corresponding routine is used.\>\""}], ";"}], "\[IndentingNewLine]", 
+     "\"\<\nCtotalpayoff[payoffobject,mates] calculates the total payoff \
+(i.e. the sum of payoffs) across all markets for the specific mates \
+arrangement. This function accepts as a first argument the \
+\[OpenCurlyDoubleQuote]payffobject\[CloseCurlyDoubleQuote], which can either \
+be the name of the payoff function or the payoffMatrix (in case we have \
+already calculated all pair payoffs).\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Ctotalpayoff", "[", 
      RowBox[{"payoffobject_", ",", "mates_"}], "]"}], ":=", 
@@ -492,7 +388,8 @@ corresponding routine is used.\>\""}], ";"}], "\[IndentingNewLine]",
    3.6263346539740915`*^9}, {3.6263368089897165`*^9, 
    3.6263368493334665`*^9}, {3.6327453509548144`*^9, 
    3.6327454266618457`*^9}, {3.6327454824266925`*^9, 3.632745499274597*^9}, {
-   3.6880084344367313`*^9, 3.688008439923318*^9}},
+   3.6880084344367313`*^9, 3.688008439923318*^9}, {3.6970475837469788`*^9, 
+   3.697047585930585*^9}, {3.697047648304394*^9, 3.697047649017954*^9}},
  Background->RGBColor[0.88, 1, 0.88],
  CellID->1747771955],
 
@@ -506,8 +403,8 @@ are not the same...\
 }, Open  ]]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{1234, 1007},
-WindowMargins->{{Automatic, 3}, {1, Automatic}},
+WindowSize->{1182, 1007},
+WindowMargins->{{Automatic, 68}, {Automatic, 42}},
 ShowSelection->True,
 Magnification->1.25,
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
@@ -517,18 +414,10 @@ StyleDefinitions->"Default.nb"
 
 (* Internal cache information *)
 (*CellTagsOutline
-CellTagsIndex->{
- "Info603687942838-5422406"->{
-  Cell[11816, 317, 462, 9, 140, "Print",
-   CellTags->"Info603687942838-5422406"],
-  Cell[12281, 328, 3295, 84, 175, "Print",
-   CellTags->"Info603687942838-5422406"]}
- }
+CellTagsIndex->{}
 *)
 (*CellTagsIndex
-CellTagsIndex->{
- {"Info603687942838-5422406", 19731, 520}
- }
+CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
@@ -536,10 +425,10 @@ Cell[CellGroupData[{
 Cell[579, 22, 197, 3, 81, "Section"],
 Cell[CellGroupData[{
 Cell[801, 29, 110, 1, 44, "Subsubsection"],
-Cell[914, 32, 272, 5, 77, "Text"],
-Cell[1189, 39, 179, 4, 72, "Input"],
-Cell[1371, 45, 148, 3, 72, "Input"],
-Cell[1522, 50, 132, 2, 72, "Input"]
+Cell[914, 32, 272, 5, 67, "Text"],
+Cell[1189, 39, 179, 4, 40, "Input"],
+Cell[1371, 45, 148, 3, 40, "Input"],
+Cell[1522, 50, 132, 2, 40, "Input"]
 }, Closed]],
 Cell[CellGroupData[{
 Cell[1691, 57, 134, 2, 35, "Subsubsection"],
@@ -552,34 +441,25 @@ Cell[2166, 72, 811, 22, 118, "Input",
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[3014, 99, 95, 1, 56, "Subsection"],
-Cell[3112, 102, 1689, 42, 202, "Input",
+Cell[3112, 102, 1783, 43, 230, "Input",
  InitializationCell->True],
-Cell[4804, 146, 1430, 37, 202, "Input",
+Cell[4898, 147, 1430, 37, 202, "Input",
  InitializationCell->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6271, 188, 348, 5, 56, "Subsection"],
-Cell[6622, 195, 4991, 111, 737, "Input",
- InitializationCell->True],
-Cell[CellGroupData[{
-Cell[11638, 310, 153, 3, 40, "Input"],
-Cell[CellGroupData[{
-Cell[11816, 317, 462, 9, 140, "Print",
- CellTags->"Info603687942838-5422406"],
-Cell[12281, 328, 3295, 84, 175, "Print",
- CellTags->"Info603687942838-5422406"]
-}, Open  ]]
-}, Open  ]]
+Cell[6365, 189, 348, 5, 56, "Subsection"],
+Cell[6716, 196, 5058, 113, 737, "Input",
+ InitializationCell->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15637, 419, 341, 6, 56, "Subsection",
+Cell[11811, 314, 341, 6, 56, "Subsection",
  CellID->925377420],
-Cell[15981, 427, 333, 7, 67, "Text",
+Cell[12155, 322, 333, 7, 67, "Text",
  CellID->1964608544],
-Cell[16317, 436, 2792, 60, 454, "Input",
+Cell[12491, 331, 2943, 62, 426, "Input",
  InitializationCell->True,
  CellID->1747771955],
-Cell[19112, 498, 211, 5, 40, "Text",
+Cell[15437, 395, 211, 5, 40, "Text",
  CellID->1688422668]
 }, Open  ]]
 }, Open  ]]
