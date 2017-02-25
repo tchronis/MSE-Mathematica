@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     13841,        335]
-NotebookOptionsPosition[     12960,        299]
-NotebookOutlinePosition[     13392,        318]
-CellTagsIndexPosition[     13349,        315]
+NotebookDataLength[     13895,        336]
+NotebookOptionsPosition[     13012,        300]
+NotebookOutlinePosition[     13446,        319]
+CellTagsIndexPosition[     13403,        316]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -104,7 +104,7 @@ erases ineqmembers after use.\>\""}], ";"}], "\[IndentingNewLine]",
     RowBox[{"{", 
      RowBox[{"dataarray", ",", "head"}], "}"}], ",", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"dataArray", "=", 
+     RowBox[{"dataarray", "=", 
       RowBox[{"Cinequalities", "[", 
        RowBox[{
         RowBox[{
@@ -292,7 +292,8 @@ erases ineqmembers after use.\>\""}], ";"}], "\[IndentingNewLine]",
    3.631177882808645*^9}, {3.6311787513867693`*^9, 3.631178769558645*^9}, 
    3.631179107839895*^9, {3.6327415528869247`*^9, 3.6327416879085827`*^9}, {
    3.633071953300086*^9, 3.6330719548346944`*^9}, {3.688008021786849*^9, 
-   3.688008024784863*^9}, {3.688008067050331*^9, 3.6880081312422132`*^9}},
+   3.688008024784863*^9}, {3.688008067050331*^9, 3.6880081312422132`*^9}, {
+   3.6935549892852364`*^9, 3.693554989996978*^9}},
  Background->RGBColor[0.88, 1, 0.88]]
 }, Open  ]]
 }, Open  ]]
@@ -303,7 +304,7 @@ WindowMargins->{{339, -339}, {-234, Automatic}},
 ShowSelection->True,
 AutoIndent->True,
 Magnification->1.25,
-FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -318,22 +319,22 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[579, 22, 406, 5, 81, "Section"],
+Cell[579, 22, 406, 5, 86, "Section"],
 Cell[CellGroupData[{
-Cell[1010, 31, 110, 1, 44, "Subsubsection"],
-Cell[1123, 34, 272, 5, 40, "Text"],
-Cell[1398, 41, 296, 6, 40, "Input"],
-Cell[1697, 49, 148, 3, 40, "Input"],
-Cell[1848, 54, 132, 2, 40, "Input"]
+Cell[1010, 31, 110, 1, 49, "Subsubsection"],
+Cell[1123, 34, 272, 5, 38, "Text"],
+Cell[1398, 41, 296, 6, 36, "Input"],
+Cell[1697, 49, 148, 3, 36, "Input"],
+Cell[1848, 54, 132, 2, 36, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2017, 61, 107, 1, 44, "Subsubsection"],
-Cell[2127, 64, 168, 2, 40, "Text"]
+Cell[2017, 61, 107, 1, 49, "Subsubsection"],
+Cell[2127, 64, 168, 2, 38, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2332, 71, 609, 8, 56, "Subsection"],
-Cell[2944, 81, 156, 4, 40, "Text"],
-Cell[3103, 87, 9829, 208, 874, "Input",
+Cell[2332, 71, 609, 8, 59, "Subsection"],
+Cell[2944, 81, 156, 4, 38, "Text"],
+Cell[3103, 87, 9881, 209, 701, "Input",
  InitializationCell->True]
 }, Open  ]]
 }, Open  ]]
