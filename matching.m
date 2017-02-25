@@ -22,7 +22,9 @@
 (* ::Input::Initialization:: *)
 ClearAll[generateAssignmentMatrix];
 Options[generateAssignmentMatrix]={linearProgrammingOptions->Null,rationalizeResult->True,domain->Integers};
-generateAssignmentMatrix::usage="generateAssignmentMatrix[payoffs_,quotaU_:1,quotaD_:1,options___?OptionQ] generates the optimal assignment of matches from the given matrix of payoffs for each match. In an assignment matrix, each entry (i,j) is 1 if i and j are matched and 0 otherwise. The quota can be a number (the same for all streams) or a list that sets a specific quota per stream.";
+generateAssignmentMatrix::usage="
+Generates the optimal assignment of matches from the given matrix of payoffs for each match. The optimal assignment is the one that maximizes the total payoff (i.e. the sum of all payoffs) in a market. In an assignment matrix, each entry (i,j) is 1 if i and j are matched and 0 otherwise. The quota can be a number (the same for all streams) or a list that sets a specific quota per agent.
+Notice that the quota is max number of matches per agent ( so in the data the real number of matches could be lower than the max).";
 generateAssignmentMatrix[payoffs_,quotaU_:1,quotaD_:1,options___?OptionQ]:=
 Block[{realorint,rationalize,lpOptions,numU,numD,m1,m2,m3,m,b,matchMatrix,result},{realorint,rationalize,lpOptions}={domain,rationalizeResult,linearProgrammingOptions}/.Flatten[{options,Options[generateAssignmentMatrix]}];
 {numU,numD}=Dimensions[payoffs];
@@ -58,10 +60,11 @@ If[rationalize,Map[Rationalize[#,.01]&,result,{2}],result]
 
 (* ::Input::Initialization:: *)
 ClearAll[CmatchMatrix];
-CmatchMatrix::usage="CmatchMatrix[payoffMatrix_,quotaU_:1,quotaD_:1,p_:False] calculates and creates/updates the global variable 'matchMatrix'.
-if p is set to 'False' creates the matchMatrix by running generateAssignmentMatrix routine for all markets.
-if p is set to 'True' does the same only in parallel! NOT WORKING WITH VARIABLE QUOTAS - yet.
-if p is set to an integer from 1 to 'number of Markets' then the p'th element of the matchMatrix is calculated.";
+CmatchMatrix::usage="CmatchMatrix[payoffMatrix_,quotaU_:1,quotaD_:1,p_:False]  
+Calculates and creates/updates the global variable 'matchMatrix'.
+If p is set to 'False', it creates the matchMatrix by running the generateAssignmentMatrix routine for all markets.
+If p is set to 'True' , it does the same, only in parallel! ATTN: IT DOES NOT WORK WITH VARIABLE QUOTAS YET.
+If p is set to an integer from 1 to the 'number of Markets' then the p'th element of the matchMatrix is calculated."
 CmatchMatrix[payoffMatrix_,quotaU_:1,quotaD_:1,p_:False]:=
 If[IntegerQ@p,
 If[1<= p<=Length@payoffMatrix,
@@ -89,7 +92,7 @@ ParallelMap[generateAssignmentMatrix[#,quotaU,quotaD]&,payoffMatrix](*NOT WORKIN
 
 (* ::Input::Initialization:: *)
 ClearAll[quotas];
-quotas::usage="quotas[matchMatrix] returns the list {quotaU,quotaD}. Each quota is defined for each stream.";
+quotas::usage="quotas[matchMatrix] returns the list {quotaU,quotaD}. Quota is defined for each stream u and d.";
 quotas[matchMatrix_]:={
 (Total/@#)&/@matchMatrix,
 (Total/@(Transpose@#))&/@matchMatrix
@@ -99,14 +102,19 @@ quotas[matchMatrix_]:={
 (* ::Input::Initialization:: *)
 (*C in front of the name means create*)
 ClearAll[Cmates];
-Cmates::usage="Cmates[matchMatrix] simplifies matchMatrix to a list of triples that define matches across all markets. Example : {{{1,1,3},{1,3,1},{1,3,2}},{{2,1,1},{2,2,1},{2,2,3},{2,3,2}}}.\r This is mainly used for the calculation of the total payoff - see Ctotalpayoff routine.";
+Cmates::usage="
+Cmates[matchMatrix] simplifies the matchMatrix to a list of triples that define matches across all markets. It provides another way to express all the matching information that is, which upstream is matched with which downstream and in which market. The output consists of a list of lists of triples each of which has the following structure: {market_index,upstream_index,downstream_index}.
+Output example:{{{1,1,3},{1,3,1},{1,3,2}},{{2,1,1},{2,2,1},{2,2,3},{2,3,2}}}. In this example we have 2 lists, one per market and each inner list contains the triples. Note that in market 1, upstream agent 2 is not contributing which is fine. 
+This function is mainly used for the calculation of the total payoff - see Ctotalpayoff routine.";
 Cmates[matchMatrix_]:=mates=GatherBy[Position[matchMatrix,1,{3}],First];
 
 
 (* ::Input::Initialization:: *)
 (*C in front of the name means create*)
 ClearAll[Cmate];
-Cmate::usage="Cmate[matchMatrix] simplifies matchMatrix to pairs of lists, one pair per market. The first part is the normal numbering and the second is the corespondance. Example : {{{{1},{2},{3}},{{3},{},{1,2}}},{{{1},{2},{3}},{{1},{1,3},{2}}}}.\r This is the prevailing way to express mates. This is feeded to the Cineqmembers routine.";
+Cmate::usage="Cmate[matchMatrix] simplifies the matchMatrix from the original code by Santiago & Fox, to a matrix format which consists of lists of pairs, one pair per market. Here, each pair has the following structure: {{{1},{2},...,{noU within this market}},{{downstreams that are matched with upstream1},{downstreams that are matched with upstream2},...,{downstreams that are matched with upstream noU}}.
+Example : {{{{1},{2},{3}},{{3},{},{1,2}}},{{{1},{2},{3}},{{1},{1,3},{2}}}}.  In this example, there are three upstream and three downstream agents in each market, indexed 1, 2, 3. In the first market, upstream 1 is matched with downstream 3, upstream 2 is not matched, and upstream 3 is matched with downstream 1 and  2. In the second market, upstream 1 is matched with downstream 1, upstream 2 with downstream 1 and 3, and upstream 3 with downstream 2.  
+The mate=Cmate[matchMatrix] is later fed into the Cineqmembers routine.";
 Cmate[matchMatrix_]:=mate=((Transpose@MapIndexed[{{First@#2},Flatten@Position[#1,1]}&,#])&/@matchMatrix)
 
 

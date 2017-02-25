@@ -28,16 +28,21 @@ $HistoryLength=10;
 
 
 (* ::Input::Initialization:: *)
-(*Used in import.nb , import function for precomputed*)
-MSEresources="Speed";(*"Memory"*)
+(*It used in import.nb ,inequalities.nb and dataarray.nb routines that are the most memory consuming ones*)
+ClearAll[MSEresources];
+MSEresources::usage="Set this global variable to \"Memory\" when working with big data. The default value is set to \"Speed\""; 
+MSEresources="Speed";
 
 
 (* ::Input::Initialization:: *)
-(*Increases everytime the objective function is called*)
+ClearAll[objectivecounter];
+objectivecounter::usage="Increments everytime the objective function is called";
 objectivecounter=0;
 
 
 (* ::Input::Initialization:: *)
+ClearAll[notebookslist];
+notebookslist::usage="List of files that are loaded when mse.m is loaded";
 notebookslist={"import.nb","export.nb","payoff.nb","modifydata.nb","matching.nb","inequalities.nb","dataArray.nb","objective.nb","PSO.nb","maximize.nb","confidence.nb"};
 
 

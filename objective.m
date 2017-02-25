@@ -19,25 +19,25 @@
 
 
 
-(* ::Input:: *)
+(* ::Input::Initialization:: *)
 ClearAll[coefficient1];
-coefficient1::usage="Set coefficient1=1 (default) or coefficient=-1";
+coefficient1::usage="To normalize the payoff function, we set the first coefficient to either 1 or -1 coefficient1=1 (default) or coefficient=-1";
 coefficient1=1;
 
 
-(* ::Input:: *)
+(* ::Input::Initialization:: *)
 (*********************************************************************************)
 (*                             Objective function                                *)
 (*********************************************************************************)
 ClearAll[objective];
-objective::usage="objective[dataArray,x1,x2,...,xn] defines the objective function to maximize, as the number of satisfied inequalities. For a specific x-vector value we get a list of numbers. The number of positives is the outcome.";
+objective::usage="objective[dataArray,x1,x2,...,xn] defines the objective function to maximize the number of satisfied inequalities. An inequality is satisfied when the left side is weakly greater than the right side (>=).";
 objective[dataArray_,b__?NumericQ]:=(*Defining as a pure function may speed this up*)
 (++objectivecounter;Total@UnitStep@(*http://mathematica.stackexchange.com/a/9673/7966*)
 (dataArray.Prepend[{b},N[coefficient1]]));
 
 
 
-(* ::Input:: *)
+(* ::Input::Initialization:: *)
 (*********************************************************************************)
 (*                           Verbose Objective function                          *)(*         to calculate number of satisfied inequalities per market              *)
 (*********************************************************************************)

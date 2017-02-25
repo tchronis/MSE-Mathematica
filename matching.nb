@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    104097,       2707]
-NotebookOptionsPosition[     98345,       2511]
-NotebookOutlinePosition[     99064,       2539]
-CellTagsIndexPosition[     98933,       2533]
+NotebookDataLength[    105576,       2724]
+NotebookOptionsPosition[     99818,       2528]
+NotebookOutlinePosition[    100548,       2556]
+CellTagsIndexPosition[    100415,       2550]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -97,12 +97,14 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"generateAssignmentMatrix", "::", "usage"}], "=", 
-   "\"\<generateAssignmentMatrix[payoffs_,quotaU_:1,quotaD_:1,options___?\
-OptionQ] generates the optimal assignment of matches from the given matrix of \
-payoffs for each match. In an assignment matrix, each entry (i,j) is 1 if i \
-and j are matched and 0 otherwise. The quota can be a number (the same for \
-all streams) or a list that sets a specific quota per stream.\>\""}], 
-  ";"}], "\[IndentingNewLine]", 
+   "\"\<\nGenerates the optimal assignment of matches from the given matrix \
+of payoffs for each match. The optimal assignment is the one that maximizes \
+the total payoff (i.e. the sum of all payoffs) in a market. In an assignment \
+matrix, each entry (i,j) is 1 if i and j are matched and 0 otherwise. The \
+quota can be a number (the same for all streams) or a list that sets a \
+specific quota per agent.\nNotice that the quota is max number of matches per \
+agent ( so in the data the real number of matches could be lower than the \
+max).\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"generateAssignmentMatrix", "[", 
@@ -319,7 +321,7 @@ all streams) or a list that sets a specific quota per stream.\>\""}],
   3.6327387424390244`*^9, 3.632738769770079*^9}, {3.632738816189351*^9, 
   3.6327388352926674`*^9}, {3.642292975360422*^9, 3.642293080458453*^9}, {
   3.642293386011127*^9, 3.642293449637931*^9}, {3.642310160774971*^9, 
-  3.642310175623087*^9}},
+  3.642310175623087*^9}, {3.6970478390739317`*^9, 3.697047864768412*^9}},
  Background->RGBColor[0.88, 1, 0.88]],
 
 Cell[CellGroupData[{
@@ -855,15 +857,14 @@ Cell[BoxData[{
   RowBox[{"ClearAll", "[", "CmatchMatrix", "]"}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{
-   RowBox[{"CmatchMatrix", "::", "usage"}], "=", 
-   "\"\<CmatchMatrix[payoffMatrix_,quotaU_:1,quotaD_:1,p_:False] calculates \
-and creates/updates the global variable 'matchMatrix'.\nif p is set to \
-'False' creates the matchMatrix by running generateAssignmentMatrix routine \
-for all markets.\nif p is set to 'True' does the same only in parallel! NOT \
-WORKING WITH VARIABLE QUOTAS - yet.\nif p is set to an integer from 1 to \
-'number of Markets' then the p'th element of the matchMatrix is calculated.\>\
-\""}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"CmatchMatrix", "::", "usage"}], "=", 
+  "\"\<CmatchMatrix[payoffMatrix_,quotaU_:1,quotaD_:1,p_:False]  \nCalculates \
+and creates/updates the global variable 'matchMatrix'.\nIf p is set to \
+'False', it creates the matchMatrix by running the generateAssignmentMatrix \
+routine for all markets.\nIf p is set to 'True' , it does the same, only in \
+parallel! ATTN: IT DOES NOT WORK WITH VARIABLE QUOTAS YET.\nIf p is set to an \
+integer from 1 to the 'number of Markets' then the p'th element of the \
+matchMatrix is calculated.\>\""}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"CmatchMatrix", "[", 
    RowBox[{"payoffMatrix_", ",", 
@@ -957,7 +958,7 @@ WORKING WITH VARIABLE QUOTAS - yet.\nif p is set to an integer from 1 to \
    "\[IndentingNewLine]", "]"}]}]}], "Input",
  InitializationCell->True,
  CellChangeTimes->CompressedData["
-1:eJxTTMoPSmViYGBQBmIQfWi1zpk1LK8dD2lfuwGmV995BqFF3kHE5c3Wgul7
+1:eJxTTMoPSmViYGBQAWIQfWi1zpk1LK8dD2lfuwGmV995BqFF3kHE5c3Wgul7
 5hB6oQOYXj3FCUQXdbmzPxN47bhBVEEORMdVVtqB6AXbjoHpx9v5PEC0DVOh
 P4ju5mQPlFd+7Siu9S4IRDNumuWsBqSL3nq4gmj7sDlrQPS1nTfWguieiru7
 QbRFQ8I+EN2UK75LoOq148k1S/aAaCMpvq8g+uveZf9BdNxUVw5BIP2rIRhM
@@ -966,7 +967,7 @@ G1Ve5QHR32RdpEB0/Xk3eRDN97JeGUQvKn5rBaLfZFRFgekvH+JB9Nc0uUwQ
 9KyvHXtA9MeJ+w6AaLlZrUfA5vT+Pgqikx/8OgmihRbMPQWiuc27L4HoY+L8
 N0B0QErVfRCt0Kj9EUSLnZkeKwSkzzmeAdN7LLcngWguHYYUEO2zKWIiiN70
 kn8aiA5yE5YUBfHZssG0h8oCDRBdfqpdF0QfbZphDqJfLTO1ANGeE3esVQXS
-/9b8XAeiFZ/r/1YD0gKKyX9ANACTbQYF
+/9b8XAeiFZ/r/1YD0gKKyX9AtAHrJYv+bqD9AhesQTQAMrINug==
   "],
  Background->RGBColor[0.88, 1, 0.88]],
 
@@ -1721,8 +1722,8 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"quotas", "::", "usage"}], "=", 
-   "\"\<quotas[matchMatrix] returns the list {quotaU,quotaD}. Each quota is \
-defined for each stream.\>\""}], ";"}], "\[IndentingNewLine]", 
+   "\"\<quotas[matchMatrix] returns the list {quotaU,quotaD}. Quota is \
+defined for each stream u and d.\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"quotas", "[", "matchMatrix_", "]"}], ":=", 
   RowBox[{"{", "\[IndentingNewLine]", 
@@ -1742,7 +1743,7 @@ defined for each stream.\>\""}], ";"}], "\[IndentingNewLine]",
  InitializationCell->True,
  CellChangeTimes->{{3.642303740898554*^9, 3.642303781931591*^9}, {
   3.6423093502911158`*^9, 3.642309374194827*^9}, {3.642309714805132*^9, 
-  3.642309777526725*^9}},
+  3.642309777526725*^9}, {3.697048434297811*^9, 3.6970484358083277`*^9}},
  Background->RGBColor[0.88, 1, 0.88]],
 
 Cell[CellGroupData[{
@@ -2101,11 +2102,17 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      RowBox[{"Cmates", "::", "usage"}], "=", 
-     "\"\<Cmates[matchMatrix] simplifies matchMatrix to a list of triples \
-that define matches across all markets. Example : \
-{{{1,1,3},{1,3,1},{1,3,2}},{{2,1,1},{2,2,1},{2,2,3},{2,3,2}}}.\\r This is \
-mainly used for the calculation of the total payoff - see Ctotalpayoff \
-routine.\>\""}], ";"}], "\[IndentingNewLine]", 
+     "\"\<\nCmates[matchMatrix] simplifies the matchMatrix to a list of \
+triples that define matches across all markets. It provides another way to \
+express all the matching information that is, which upstream is matched with \
+which downstream and in which market. The output consists of a list of lists \
+of triples each of which has the following structure: \
+{market_index,upstream_index,downstream_index}.\nOutput \
+example:{{{1,1,3},{1,3,1},{1,3,2}},{{2,1,1},{2,2,1},{2,2,3},{2,3,2}}}. In \
+this example we have 2 lists, one per market and each inner list contains the \
+triples. Note that in market 1, upstream agent 2 is not contributing which is \
+fine. \nThis function is mainly used for the calculation of the total payoff \
+- see Ctotalpayoff routine.\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"Cmates", "[", "matchMatrix_", "]"}], ":=", 
@@ -2127,7 +2134,8 @@ routine.\>\""}], ";"}], "\[IndentingNewLine]",
    3.6119193339679804`*^9}, {3.611919688618336*^9, 3.61191969788384*^9}, {
    3.6327390860990343`*^9, 3.6327391054730577`*^9}, {3.63273915881715*^9, 
    3.632739288309473*^9}, {3.632739324336192*^9, 3.6327393442238874`*^9}, 
-   3.6327393877179394`*^9, {3.6880082323252983`*^9, 3.6880082365448513`*^9}},
+   3.6327393877179394`*^9, {3.6880082323252983`*^9, 3.6880082365448513`*^9}, {
+   3.697048184780802*^9, 3.69704819864695*^9}},
  Background->RGBColor[0.88, 1, 0.88]],
 
 Cell[CellGroupData[{
@@ -2299,12 +2307,20 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      RowBox[{"Cmate", "::", "usage"}], "=", 
-     "\"\<Cmate[matchMatrix] simplifies matchMatrix to pairs of lists, one \
-pair per market. The first part is the normal numbering and the second is the \
-corespondance. Example : \
-{{{{1},{2},{3}},{{3},{},{1,2}}},{{{1},{2},{3}},{{1},{1,3},{2}}}}.\\r This is \
-the prevailing way to express mates. This is feeded to the Cineqmembers \
-routine.\>\""}], ";"}], "\[IndentingNewLine]", 
+     "\"\<Cmate[matchMatrix] simplifies the matchMatrix from the original \
+code by Santiago & Fox, to a matrix format which consists of lists of pairs, \
+one pair per market. Here, each pair has the following structure: \
+{{{1},{2},...,{noU within this market}},{{downstreams that are matched with \
+upstream1},{downstreams that are matched with upstream2},...,{downstreams \
+that are matched with upstream noU}}.\nExample : \
+{{{{1},{2},{3}},{{3},{},{1,2}}},{{{1},{2},{3}},{{1},{1,3},{2}}}}.  In this \
+example, there are three upstream and three downstream agents in each market, \
+indexed 1, 2, 3. In the first market, upstream 1 is matched with downstream \
+3, upstream 2 is not matched, and upstream 3 is matched with downstream 1 and \
+ 2. In the second market, upstream 1 is matched with downstream 1, upstream 2 \
+with downstream 1 and 3, and upstream 3 with downstream 2.  \nThe \
+mate=Cmate[matchMatrix] is later fed into the Cineqmembers routine.\>\""}], 
+    ";"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"Cmate", "[", "matchMatrix_", "]"}], ":=", 
     RowBox[{"mate", "=", 
@@ -2336,7 +2352,8 @@ routine.\>\""}], ";"}], "\[IndentingNewLine]",
    3.6119193339679804`*^9}, {3.611919688618336*^9, 3.61191969788384*^9}, {
    3.611920445930352*^9, 3.611920485267894*^9}, {3.611920539213221*^9, 
    3.6119205651999493`*^9}, {3.6327393936307545`*^9, 
-   3.6327395532618265`*^9}, {3.688008247756948*^9, 3.6880082620889273`*^9}},
+   3.6327395532618265`*^9}, {3.688008247756948*^9, 3.6880082620889273`*^9}, 
+   3.697048280934793*^9},
  Background->RGBColor[0.88, 1, 0.88]],
 
 Cell[CellGroupData[{
@@ -2510,8 +2527,8 @@ Cell[BoxData[
 }, Open  ]]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{1920, 1014},
-WindowMargins->{{1, -1}, {0, 39}},
+WindowSize->{1198, 1061},
+WindowMargins->{{Automatic, 11}, {25, 39}},
 ShowSelection->True,
 Magnification->1.25,
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
@@ -2523,17 +2540,17 @@ StyleDefinitions->"Default.nb"
 (*CellTagsOutline
 CellTagsIndex->{
  "Info43687938403-3708083"->{
-  Cell[40498, 978, 601, 9, 117, "Print",
+  Cell[40747, 979, 601, 9, 117, "Print",
    CellTags->"Info43687938403-3708083"]},
  "Info723687930261-4066488"->{
-  Cell[41260, 996, 1308, 23, 104, "Print",
+  Cell[41509, 997, 1308, 23, 104, "Print",
    CellTags->"Info723687930261-4066488"]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Info43687938403-3708083", 98710, 2524},
- {"Info723687930261-4066488", 98824, 2527}
+ {"Info43687938403-3708083", 100192, 2541},
+ {"Info723687930261-4066488", 100306, 2544}
  }
 *)
 (*NotebookFileOutline
@@ -2542,7 +2559,7 @@ Cell[CellGroupData[{
 Cell[579, 22, 249, 3, 81, "Section"],
 Cell[CellGroupData[{
 Cell[853, 29, 110, 1, 44, "Subsubsection"],
-Cell[966, 32, 272, 5, 40, "Text"],
+Cell[966, 32, 272, 5, 67, "Text"],
 Cell[1241, 39, 179, 4, 40, "Input"],
 Cell[1423, 45, 148, 3, 40, "Input"],
 Cell[1574, 50, 132, 2, 40, "Input"]
@@ -2550,161 +2567,161 @@ Cell[1574, 50, 132, 2, 40, "Input"]
 Cell[CellGroupData[{
 Cell[1743, 57, 186, 2, 56, "Subsection"],
 Cell[1932, 61, 897, 20, 301, "Text"],
-Cell[2832, 83, 10115, 239, 1158, "Input",
+Cell[2832, 83, 10334, 241, 1689, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[12972, 326, 203, 3, 44, "Subsubsection"],
-Cell[13178, 331, 281, 4, 90, "Input"],
-Cell[13462, 337, 251, 5, 90, "Input"],
-Cell[13716, 344, 670, 12, 156, "Input"],
-Cell[14389, 358, 3004, 82, 460, "Input"],
-Cell[17396, 442, 984, 28, 156, "Input"],
-Cell[18383, 472, 888, 22, 156, "Input"],
+Cell[13191, 328, 203, 3, 44, "Subsubsection"],
+Cell[13397, 333, 281, 4, 40, "Input"],
+Cell[13681, 339, 251, 5, 40, "Input"],
+Cell[13935, 346, 670, 12, 69, "Input"],
+Cell[14608, 360, 3004, 82, 209, "Input"],
+Cell[17615, 444, 984, 28, 98, "Input"],
+Cell[18602, 474, 888, 22, 69, "Input"],
 Cell[CellGroupData[{
-Cell[19296, 498, 191, 3, 90, "Input"],
-Cell[19490, 503, 707, 12, 90, "Output"]
+Cell[19515, 500, 191, 3, 40, "Input"],
+Cell[19709, 505, 707, 12, 40, "Output"]
 }, Open  ]],
-Cell[20212, 518, 1064, 22, 156, "Input"],
+Cell[20431, 520, 1064, 22, 69, "Input"],
 Cell[CellGroupData[{
-Cell[21301, 544, 297, 6, 90, "Input"],
-Cell[21601, 552, 1996, 39, 285, "Output"]
+Cell[21520, 546, 297, 6, 40, "Input"],
+Cell[21820, 554, 1996, 39, 133, "Output"]
 }, Open  ]],
-Cell[23612, 594, 1207, 25, 156, "Input"],
+Cell[23831, 596, 1207, 25, 69, "Input"],
 Cell[CellGroupData[{
-Cell[24844, 623, 297, 6, 90, "Input"],
-Cell[25144, 631, 2050, 40, 285, "Output"]
+Cell[25063, 625, 297, 6, 40, "Input"],
+Cell[25363, 633, 2050, 40, 133, "Output"]
 }, Open  ]],
-Cell[27209, 674, 1259, 26, 156, "Input"],
+Cell[27428, 676, 1259, 26, 69, "Input"],
 Cell[CellGroupData[{
-Cell[28493, 704, 299, 6, 90, "Input"],
-Cell[28795, 712, 2094, 40, 285, "Output"]
+Cell[28712, 706, 299, 6, 40, "Input"],
+Cell[29014, 714, 2094, 40, 133, "Output"]
 }, Open  ]],
-Cell[30904, 755, 1517, 31, 215, "Input"],
+Cell[31123, 757, 1517, 31, 97, "Input"],
 Cell[CellGroupData[{
-Cell[32446, 790, 299, 6, 90, "Input"],
-Cell[32748, 798, 2094, 40, 285, "Output"]
+Cell[32665, 792, 299, 6, 40, "Input"],
+Cell[32967, 800, 2094, 40, 133, "Output"]
 }, Open  ]]
 }, Closed]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[34903, 845, 144, 1, 56, "Subsection"],
-Cell[35050, 848, 165, 2, 40, "Text"],
-Cell[35218, 852, 5131, 118, 819, "Input",
+Cell[35122, 847, 144, 1, 56, "Subsection"],
+Cell[35269, 850, 165, 2, 40, "Text"],
+Cell[35437, 854, 5161, 117, 959, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[40374, 974, 121, 2, 40, "Input"],
-Cell[40498, 978, 601, 9, 117, "Print",
+Cell[40623, 975, 121, 2, 40, "Input"],
+Cell[40747, 979, 601, 9, 117, "Print",
  CellTags->"Info43687938403-3708083"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[41136, 992, 121, 2, 40, "Input"],
-Cell[41260, 996, 1308, 23, 104, "Print",
+Cell[41385, 993, 121, 2, 40, "Input"],
+Cell[41509, 997, 1308, 23, 104, "Print",
  CellTags->"Info723687930261-4066488"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[42605, 1024, 102, 1, 44, "Subsubsection"],
+Cell[42854, 1025, 102, 1, 44, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[42732, 1029, 337, 6, 40, "Input"],
-Cell[43072, 1037, 716, 11, 40, "Output"]
+Cell[42981, 1030, 337, 6, 40, "Input"],
+Cell[43321, 1038, 716, 11, 40, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[43825, 1053, 348, 6, 40, "Input"],
-Cell[44176, 1061, 2380, 34, 40, "Output"]
+Cell[44074, 1054, 348, 6, 40, "Input"],
+Cell[44425, 1062, 2380, 34, 40, "Output"]
 }, Open  ]],
-Cell[46571, 1098, 137, 2, 40, "Input"],
-Cell[46711, 1102, 776, 18, 42, "Input"],
-Cell[47490, 1122, 459, 10, 40, "Input"],
-Cell[47952, 1134, 275, 5, 67, "Text"],
-Cell[48230, 1141, 470, 12, 40, "Input"],
+Cell[46820, 1099, 137, 2, 40, "Input"],
+Cell[46960, 1103, 776, 18, 70, "Input"],
+Cell[47739, 1123, 459, 10, 40, "Input"],
+Cell[48201, 1135, 275, 5, 67, "Text"],
+Cell[48479, 1142, 470, 12, 40, "Input"],
 Cell[CellGroupData[{
-Cell[48725, 1157, 488, 9, 40, "Input"],
-Cell[49216, 1168, 5192, 133, 181, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[54445, 1306, 906, 23, 40, "Input"],
-Cell[55354, 1331, 5212, 133, 181, "Output"]
+Cell[48974, 1158, 488, 9, 40, "Input"],
+Cell[49465, 1169, 5192, 133, 349, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[60603, 1469, 196, 3, 40, "Input"],
-Cell[60802, 1474, 294, 5, 40, "Output"]
+Cell[54694, 1307, 906, 23, 69, "Input"],
+Cell[55603, 1332, 5212, 133, 349, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[61133, 1484, 1500, 37, 69, "Input"],
-Cell[62636, 1523, 5186, 132, 181, "Output"]
+Cell[60852, 1470, 196, 3, 40, "Input"],
+Cell[61051, 1475, 294, 5, 40, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[67859, 1660, 135, 2, 40, "Input"],
-Cell[67997, 1664, 1197, 32, 69, "Output"]
+Cell[61382, 1485, 1500, 37, 97, "Input"],
+Cell[62885, 1524, 5186, 132, 349, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[69231, 1701, 141, 2, 40, "Input"],
-Cell[69375, 1705, 144, 2, 40, "Output"]
+Cell[68108, 1661, 135, 2, 40, "Input"],
+Cell[68246, 1665, 1197, 32, 69, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[69480, 1702, 141, 2, 40, "Input"],
+Cell[69624, 1706, 144, 2, 40, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[69580, 1714, 119, 1, 56, "Subsection"],
-Cell[69702, 1717, 1047, 28, 202, "Input",
+Cell[69829, 1715, 119, 1, 56, "Subsection"],
+Cell[69951, 1718, 1098, 28, 258, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[70774, 1749, 103, 1, 44, "Subsubsection"],
-Cell[70880, 1752, 137, 2, 40, "Input"],
-Cell[71020, 1756, 5334, 132, 209, "Input"],
+Cell[71074, 1750, 103, 1, 44, "Subsubsection"],
+Cell[71180, 1753, 137, 2, 40, "Input"],
+Cell[71320, 1757, 5334, 132, 377, "Input"],
 Cell[CellGroupData[{
-Cell[76379, 1892, 191, 4, 40, "Input"],
-Cell[76573, 1898, 1185, 26, 253, "Output"]
+Cell[76679, 1893, 191, 4, 40, "Input"],
+Cell[76873, 1899, 1185, 26, 253, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[77795, 1929, 357, 7, 40, "Input"],
-Cell[78155, 1938, 347, 7, 40, "Output"]
+Cell[78095, 1930, 357, 7, 40, "Input"],
+Cell[78455, 1939, 347, 7, 40, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[78539, 1950, 376, 9, 40, "Input"],
-Cell[78918, 1961, 322, 7, 40, "Output"]
+Cell[78839, 1951, 376, 9, 40, "Input"],
+Cell[79218, 1962, 322, 7, 40, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[79277, 1973, 251, 7, 40, "Input"],
-Cell[79531, 1982, 616, 16, 40, "Output"]
+Cell[79577, 1974, 251, 7, 40, "Input"],
+Cell[79831, 1983, 616, 16, 40, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[80184, 2003, 314, 9, 40, "Input"],
-Cell[80501, 2014, 616, 16, 40, "Output"]
+Cell[80484, 2004, 314, 9, 40, "Input"],
+Cell[80801, 2015, 616, 16, 40, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[81154, 2035, 233, 5, 40, "Input"],
-Cell[81390, 2042, 1191, 32, 69, "Output"]
+Cell[81454, 2036, 233, 5, 40, "Input"],
+Cell[81690, 2043, 1191, 32, 69, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[82642, 2081, 561, 8, 56, "Subsection"],
-Cell[83206, 2091, 1912, 39, 230, "Input",
+Cell[82942, 2082, 561, 8, 56, "Subsection"],
+Cell[83506, 2092, 2441, 46, 483, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[85143, 2134, 100, 1, 44, "Subsubsection"],
+Cell[85972, 2142, 100, 1, 44, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[85268, 2139, 164, 3, 40, "Input"],
-Cell[85435, 2144, 2511, 71, 97, "Output"]
+Cell[86097, 2147, 164, 3, 40, "Input"],
+Cell[86264, 2152, 2511, 71, 153, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[87983, 2220, 1266, 28, 293, "Input"],
-Cell[89252, 2250, 686, 21, 40, "Output"]
+Cell[88812, 2228, 1266, 28, 293, "Input"],
+Cell[90081, 2258, 686, 21, 40, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[89999, 2278, 660, 9, 56, "Subsection"],
-Cell[90662, 2289, 2279, 50, 230, "Input",
+Cell[90828, 2286, 660, 9, 56, "Subsection"],
+Cell[91491, 2297, 2923, 59, 566, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[92966, 2343, 100, 1, 44, "Subsubsection"],
+Cell[94439, 2360, 100, 1, 44, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[93091, 2348, 162, 3, 40, "Input"],
-Cell[93256, 2353, 3204, 93, 97, "Output"]
+Cell[94564, 2365, 162, 3, 40, "Input"],
+Cell[94729, 2370, 3204, 93, 181, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[96497, 2451, 913, 23, 293, "Input"],
-Cell[97413, 2476, 880, 29, 40, "Output"]
+Cell[97970, 2468, 913, 23, 293, "Input"],
+Cell[98886, 2493, 880, 29, 40, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]

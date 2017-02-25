@@ -21,7 +21,7 @@
 
 (* ::Input::Initialization:: *)
 ClearAll[Cineqmembers];
-Cineqmembers::usage="Cineqmembers[mate] generates all the members required to form the inequalities for many to many relationships defined by the mate. The produced list of lists of triples define also the way inequalities are formed. At this time there is only one way we have to create inequalities. CAUTION: ineqmembers is the largest object so it consumes a lot of memory. This is why we use MSEresources=\"Memory\" when it is needed. Be carefull because then ineqmembers are erased after used for the dataArray calculation (only in the memory model).";
+Cineqmembers::usage="Cineqmembers[mate] generates all the members required to form the inequalities for many to many relationships defined by the mate. The produced list of lists of triples defines also the way inequalities are formed. At this time, inequalities are created to follow the theoretical proofs done by J Fox. CAUTION: ineqmembers is the largest object so it consumes a lot of memory. This is why we use MSEresources=\"Memory\" when it is needed. Be careful because in the \[OpenCurlyDoubleQuote]Memory model\[CloseCurlyDoubleQuote], ineqmembers are erased after being used for the dataArray calculation, in order to speed up the calculations. ";
 Cineqmembers[mate_]:=Block[{marketineqs,head},
 
 Switch[MSEresources,
