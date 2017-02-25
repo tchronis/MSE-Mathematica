@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     49649,       1348]
-NotebookOptionsPosition[     46377,       1236]
-NotebookOutlinePosition[     47581,       1275]
-CellTagsIndexPosition[     47320,       1266]
+NotebookDataLength[     38328,       1060]
+NotebookOptionsPosition[     37123,       1013]
+NotebookOutlinePosition[     37462,       1028]
+CellTagsIndexPosition[     37419,       1025]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,90 +26,23 @@ Cell["init", "Section",
 Cell["Set the library\[CloseCurlyQuote]s directory first!", "Text",
  CellChangeTimes->{{3.630560391811116*^9, 3.630560404154866*^9}}],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
- RowBox[{"directory", "=", 
-  RowBox[{"NotebookDirectory", "[", "]"}]}]], "Input",
- CellChangeTimes->{{3.6369625741502457`*^9, 3.636962600654554*^9}, 
-   3.636962650795623*^9, 3.6369626892682133`*^9, {3.684103480913209*^9, 
-   3.684103505419114*^9}, {3.684103543092651*^9, 3.684103545438919*^9}}],
-
-Cell[BoxData["\<\"/home/tchr/Projects/Mathematica-MSE/library/docs/\"\>"], \
-"Output",
- CellChangeTimes->{
-  3.636962651174423*^9, 3.636962691969932*^9, 3.6369639605988894`*^9, 
-   3.636970790974526*^9, 3.6369712290984173`*^9, 3.6385983830553455`*^9, 
-   3.6564858906138*^9, 3.671170082321885*^9, 3.6800008861155777`*^9, {
-   3.684103476580738*^9, 3.684103505871317*^9}, 3.684103545878962*^9, 
-   3.684103673752841*^9, 3.6841037552691183`*^9, 3.684105483053776*^9, 
-   3.684105899769079*^9, 3.6841065873753242`*^9}]
-}, Open  ]],
-
-Cell[BoxData[{
  RowBox[{
   RowBox[{
-   RowBox[{
-   "directory", "=", "\"\</home/tchr/Projects/Mathematica-MSE/library/\>\""}],
-    ";"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
-   RowBox[{
-   "For", " ", "windows", " ", "use", " ", "the", " ", "following", " ", 
-    "format", " ", "instead"}], "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"(*", 
-   RowBox[{
-    RowBox[{
-    "directory", "=", "\"\<E:\\\\BITBUCKET\\\\MSE\\\\library\\\\\>\""}], 
-    ";"}], "*)"}]}]}], "Input",
+  "directory", "=", 
+   "\"\</home/tchr/Projects/Mathematica/MSE-Mathematica/\>\""}], 
+  ";"}]], "Input",
  CellChangeTimes->{{3.6841035484035273`*^9, 3.684103570005033*^9}, {
-  3.684103694426355*^9, 3.684103745880095*^9}}],
-
-Cell[CellGroupData[{
+  3.684103694426355*^9, 3.684103745880095*^9}, {3.697029512961897*^9, 
+  3.6970296429959393`*^9}}],
 
 Cell[BoxData[
- RowBox[{"Get", "[", 
-  RowBox[{"\"\<mse.m\>\"", ",", 
-   RowBox[{"Path", "\[Rule]", "directory"}]}], "]"}]], "Input",
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{"\"\<mse.m\>\"", ",", 
+    RowBox[{"Path", "\[Rule]", "directory"}]}], "]"}], ";"}]], "Input",
  CellChangeTimes->{{3.6303091438379374`*^9, 3.6303091800723124`*^9}, 
-   3.6303092721035624`*^9}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"45132168", ",", "36709256", ",", "1"}], "}"}]], "Output",
- CellChangeTimes->{
-  3.6305770055258126`*^9, 3.6305772673468037`*^9, 3.630582335665759*^9, 
-   3.6305834061494207`*^9, 3.630583906116443*^9, 3.6305843465826235`*^9, 
-   3.6305845633013735`*^9, 3.6305848948013735`*^9, 3.630586651074811*^9, 
-   3.630586784777936*^9, 3.630590320467389*^9, 3.630590471654889*^9, 
-   3.630591358451764*^9, 3.630592818764264*^9, {3.630592936670514*^9, 
-   3.630592964217389*^9}, 3.630595132545514*^9, 3.630595243936139*^9, 
-   3.630595628295514*^9, 3.6305978411558657`*^9, 3.630599442272568*^9, 
-   3.630612258359473*^9, 3.630671763991976*^9, 3.6306744008009043`*^9, 
-   3.630725069310239*^9, 3.6307276209078417`*^9, 3.6307277743368106`*^9, 
-   3.6307278183917274`*^9, 3.6307434152694626`*^9, 3.6307444819866962`*^9, 
-   3.630744556708056*^9, {3.6307473665954723`*^9, 3.630747374724143*^9}, 
-   3.6307511730713773`*^9, 3.6307542944695225`*^9, 3.630754835660693*^9, 
-   3.6307556841551332`*^9, 3.6307650704149313`*^9, 3.6307651156649313`*^9, 
-   3.6307656563680563`*^9, 3.6307677783993063`*^9, 3.63076889099656*^9, 
-   3.630770585848946*^9, 3.6307745487334375`*^9, 3.6309364193399267`*^9, 
-   3.6309394034268007`*^9, 3.630940866111972*^9, 3.630941899304834*^9, 
-   3.6309420995623007`*^9, 3.630948869497966*^9, 3.630956482109168*^9, 
-   3.6309567939625196`*^9, 3.6311699615566916`*^9, 3.6311705482754416`*^9, 
-   3.6311707685566916`*^9, 3.631174956777395*^9, 3.6311803584805193`*^9, 
-   3.631187095421926*^9, 3.6311926649540997`*^9, 3.6311946574795623`*^9, 
-   3.6311949322450075`*^9, 3.6311951020984774`*^9, 3.631195706189581*^9, 
-   3.632931685388751*^9, 3.6337014794318237`*^9, 3.6337017737205887`*^9, 
-   3.6337022130852284`*^9, 3.636962552124161*^9, 3.6369626038675003`*^9, 
-   3.636962694419063*^9, 3.636963970806754*^9, 3.636970797636963*^9, 
-   3.636971239638914*^9, 3.6385983872584705`*^9, 3.656485892600212*^9, 
-   3.656485929011715*^9, 3.671170119343137*^9, 3.671170534535213*^9, {
-   3.6711705821251698`*^9, 3.671170595115509*^9}, 3.671170703962305*^9, 
-   3.671170747231001*^9, 3.671172578734248*^9, 3.680000887619828*^9, 
-   3.684103507421974*^9, {3.6841035723056192`*^9, 3.684103599536249*^9}, 
-   3.6841036768299294`*^9, 3.684103759653955*^9, 3.684105483539123*^9, 
-   3.684105900544935*^9, 3.684106587847074*^9}]
-}, Open  ]]
+   3.6303092721035624`*^9, 3.6970296644672318`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -125,63 +58,16 @@ Set the data\[CloseCurlyQuote]s directory preferably in the variable \
 \>", "Text",
  CellChangeTimes->{{3.6841039665594463`*^9, 3.684104053424923*^9}}],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
- RowBox[{"filename", "=", 
-  RowBox[{
-  "directory", "<>", "\"\<import/\>\"", "<>", 
-   "\"\<precomp_proof.dat\>\""}]}]], "Input",
- CellChangeTimes->{{3.6305828622641745`*^9, 3.630582878578158*^9}, {
-   3.630582913695622*^9, 3.630582948265746*^9}, 3.630725059726445*^9, {
-   3.6841038091622047`*^9, 3.68410383693114*^9}}],
-
-Cell[BoxData["\<\"/home/tchr/Projects/Mathematica-MSE/library/import/precomp_\
-proof.dat\"\>"], "Output",
- CellChangeTimes->{3.684104381474296*^9, 3.684105483623385*^9, 
-  3.6841059006652393`*^9, 3.6841065879504347`*^9}]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{"(*", 
+ RowBox[{
   RowBox[{"filename", "=", 
    RowBox[{
    "directory", "<>", "\"\<import/\>\"", "<>", 
-    "\"\<round1m2-1.xls.pre.dat\>\""}]}], "*)"}]], "Input",
+    "\"\<precomp_proof.dat\>\""}]}], ";"}]], "Input",
  CellChangeTimes->{{3.6305828622641745`*^9, 3.630582878578158*^9}, {
-   3.630582913695622*^9, 3.630582948265746*^9}, {3.684103867638998*^9, 
-   3.684103875513563*^9}, 3.684104232170189*^9}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"?", "import"}]], "Input",
- CellChangeTimes->{{3.684105228323004*^9, 3.684105230401134*^9}}],
-
-Cell[BoxData[
- StyleBox["\<\"{noM,no,u,noAttr}=import[filename,\\\"stream\\\"] to load an \
-upstream.
-\\n{noM,no,d,noAttr}=import[filename,\\\"stream\\\"] to load a downstream.
-\\nimports a file .xls or .xlsx or a tab delimited file .dat that includes \
-data corresponding to an upstream (u) or downstream (d).
-\\nDatafiles consist of rows in the form {noM,no,attr1,attr2,...,attrn,noAttr}.
-\\nIn the case of .xls or .xlsx files multiple sheets are joined - for \
-example if each market resides in its own excel sheet.
-\\n___________________________________________________________________________\
-_______________________
-\\n{header,noM,noU,noD,noAttr,distanceMatrices,matchMatrix,mate}=import[\
-filename_,\\\"precomp\\\",printflag_:False]
-\\nimports a file .xls or .xlsx or a tab delimited file .dat that includes \
-precomputed matched data (distances between same attributes are already \
-computed).
-\\nDatafiles consists of rows in the form \
-{m,u,d,u1,d1,u2,d2,...,un,dn,matched (0 or 1)}.
-\\nIn the case of .xls or .xlsx files multiple sheets are joined - for \
-example if each market resides in its own excel sheet.
-\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.684106588198065*^9},
- CellTags->"Info63684117388-1725166"]
-}, Open  ]],
+   3.630582913695622*^9, 3.630582948265746*^9}, 3.630725059726445*^9, {
+   3.6841038091622047`*^9, 3.68410383693114*^9}, 3.6841071456884003`*^9, {
+   3.697029676401342*^9, 3.697029677440222*^9}, 3.6970321722452517`*^9}],
 
 Cell["Load the data in variables with meaningful names", "Text",
  CellChangeTimes->{{3.6841042607207613`*^9, 3.684104266945219*^9}, {
@@ -202,7 +88,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.6841043508031883`*^9, 3.68410435725504*^9}, {
    3.684105070379953*^9, 3.684105078867283*^9}, {3.684105369180024*^9, 
    3.6841053791785192`*^9}, {3.684105434080481*^9, 3.684105443720702*^9}, {
-   3.6841056036782417`*^9, 3.6841056116706038`*^9}, 3.684105892774847*^9}],
+   3.6841056036782417`*^9, 3.6841056116706038`*^9}, 3.684105892774847*^9, 
+   3.684107165056787*^9, {3.697032195742282*^9, 3.69703219686806*^9}}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -603,8 +490,7 @@ $CellContext`d3443}}}},
    "\nmate = ", {{{{1}, {2}, {3}}, {{}, {2}, {1, 2}}}, {{{1}, {2}}, {{2}, {
     2}}}, {{{1}, {2}, {3}, {4}}, {{1, 2}, {1, 3, 4}, {1, 3}, {1, 2, 3, 4}}}}],
   Editable->False]], "Print",
- CellChangeTimes->{{3.68410560707058*^9, 3.684105612790784*^9}, 
-   3.684105901105659*^9, 3.6841065884071207`*^9}]
+ CellChangeTimes->{3.697032202184737*^9, 3.697036286747179*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -619,84 +505,11 @@ Routines (calculate payoff matrix, inequalities members, dataArray)\
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"?", "CpayoffMatrix"}]], "Input",
- CellChangeTimes->{{3.684105248713462*^9, 3.6841052520553427`*^9}, 
-   3.6841060385241632`*^9, 3.684106107211669*^9}],
-
-Cell[BoxData[
- StyleBox["\<\"payoffMatrix=CpayoffMatrix[payoff(or \
-payoffDM),noM_:noM,noU_:noU,noD_:noD,parallel_:True] calculates and assigns \
-the payoffMatrix.
- \\nIn case of separated streams payoff is used and in the case of \
-precomputed data payoffDM is used.\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.6841065886283092`*^9},
- CellTags->"Info83684117388-1725166"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"??", "payoffDM"}]], "Input",
- CellChangeTimes->{{3.684106112317013*^9, 3.684106123244961*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- StyleBox["\<\"payoffDM[m,i,j] returns the payoff of i-upstream and \
-j-upstream in the m-market.
-\\nIt is used in the case of precomputed data. It is assumed that noAttr and \
-distanceMatrices have been already assigned.\"\>", "MSG"]], "Print", \
-"PrintUsage",
- CellChangeTimes->{3.684106588781354*^9},
- CellTags->"Info93684117388-1725166"],
-
-Cell[BoxData[
- InterpretationBox[GridBox[{
-    {GridBox[{
-       {
-        RowBox[{
-         RowBox[{"payoffDM", "[", 
-          RowBox[{"m_", ",", "i_", ",", "j_"}], "]"}], ":=", 
-         RowBox[{
-          RowBox[{"Prepend", "[", 
-           RowBox[{
-            RowBox[{"Cx", "[", 
-             RowBox[{"noAttr", "-", "1"}], "]"}], ",", "1"}], "]"}], ".", 
-          RowBox[{"distanceMatrices", "\[LeftDoubleBracket]", 
-           RowBox[{"m", ",", "i", ",", "j"}], "\[RightDoubleBracket]"}]}]}]}
-      },
-      BaselinePosition->{Baseline, {1, 1}},
-      GridBoxAlignment->{
-       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
-        "RowsIndexed" -> {}},
-      GridBoxItemSize->{"Columns" -> {{
-           Scaled[0.999]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
-        "RowsIndexed" -> {}}]}
-   },
-   BaselinePosition->{Baseline, {1, 1}},
-   GridBoxAlignment->{
-    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
-     "RowsIndexed" -> {}}],
-  Definition[$CellContext`payoffDM],
-  Editable->False]], "Print",
- CellChangeTimes->{3.6841065888097553`*^9},
- CellTags->"Info93684117388-1725166"]
-}, Open  ]]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"payoffMatrix", "=", 
-   RowBox[{"CpayoffMatrix", "[", 
-    RowBox[{"payoffDM", ",", "noM", ",", "noU", ",", "noD"}], "]"}]}], 
-  ";"}]], "Input",
+ RowBox[{"payoffMatrix", "=", 
+  RowBox[{"CpayoffMatrix", "[", 
+   RowBox[{"payoffDM", ",", "noM", ",", "noU", ",", "noD"}], "]"}]}]], "Input",
  CellChangeTimes->{{3.684105012296954*^9, 3.68410501978755*^9}, {
-  3.684106015679117*^9, 3.684106032757155*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData["payoffMatrix"], "Input",
- CellChangeTimes->{{3.684104464689396*^9, 3.684104468260084*^9}}],
+   3.684106015679117*^9, 3.684106032757155*^9}, 3.697032226784875*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -809,29 +622,7 @@ Cell[BoxData[
        RowBox[{"d3441", "+", 
         RowBox[{"d3442", " ", "x1"}], "+", 
         RowBox[{"d3443", " ", "x2"}]}]}], "}"}]}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{3.684104468891646*^9, 3.684105022427945*^9, 
-  3.684105484459875*^9, 3.684105622672701*^9, 3.6841059014168386`*^9, 
-  3.6841065889417458`*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"?", "Cineqmembers"}]], "Input",
- CellChangeTimes->{{3.6841052620569897`*^9, 3.684105263337599*^9}}],
-
-Cell[BoxData[
- StyleBox["\<\"Cineqmembers[mate] generates all the members required to form \
-the inequalities for many to many relationships defined by the mate. The \
-produced list of lists of triples define also the way inequalities are \
-formed. At this time there is only one way we have to create inequalities. \
-CAUTION: ineqmembers is the largest object so it consumes a lot of memory. \
-This is why we use MSEresources=\\\"Memory\\\" when it is needed. Be carefull \
-because then ineqmembers are erased after used for the dataArray calculation \
-(only in the memory model).\\nCineqmembers[mate,\\\"2\\\"] applies the second \
-method....\\n\"\>", "MSG"]], "Print", "PrintUsage",
- CellChangeTimes->{3.684106589095047*^9},
- CellTags->"Info123684117389-1725166"]
+ CellChangeTimes->{3.697032227164391*^9, 3.6970362867635107`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -884,7 +675,8 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}]}], "}"}]}], 
     "}"}]}], "}"}]], "Output",
- CellChangeTimes->{3.684106370814212*^9, 3.6841065891781273`*^9}]
+ CellChangeTimes->{3.684106370814212*^9, 3.6841065891781273`*^9, 
+  3.697032239164237*^9, 3.697036286775043*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1118,23 +910,8 @@ Cell[BoxData[
           RowBox[{"3", ",", "4", ",", "3"}], "}"}]}], "}"}]}], "}"}]}], 
     "}"}]}], "}"}]], "Output",
  CellChangeTimes->{3.684105054043622*^9, 3.684105484703174*^9, 
-  3.684105625677446*^9, 3.684105901670561*^9, 3.684106589257557*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"?", "CdataArray"}]], "Input",
- CellChangeTimes->{{3.684105161281279*^9, 3.68410516356931*^9}}],
-
-Cell[BoxData[
- StyleBox["\<\"CdataArray[payoffMatrix,xlist,printflag] creates the \
-dataArray. It works either using the \\\"Speed\\\" model or the \
-\\\"Memory\\\" model. It uses ineqmembers and Cinequalities internally and \
-for the memory model it erases ineqmembers after use.\"\>", "MSG"]], "Print", \
-"PrintUsage",
- CellChangeTimes->{3.684106589399252*^9},
- CellTags->"Info153684117389-1725166"]
+  3.684105625677446*^9, 3.684105901670561*^9, 3.684106589257557*^9, 
+  3.697032246198412*^9, 3.697036286790206*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1230,124 +1007,59 @@ Cell[BoxData[
  CellChangeTimes->{
   3.684105209747716*^9, 3.684105484887897*^9, {3.68410564702446*^9, 
    3.6841056702131977`*^9}, 3.684105901929812*^9, 3.6841064083699913`*^9, 
-   3.6841065894802027`*^9}]
+   3.6841065894802027`*^9, 3.6970322517791433`*^9, 3.697036286806304*^9}]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1366, 702},
-WindowMargins->{{1, Automatic}, {0, Automatic}},
-FrontEndVersion->"11.0 for Linux x86 (64-bit) (July 28, 2016)",
+WindowSize->{903, 702},
+WindowMargins->{{Automatic, 65}, {Automatic, 90}},
+FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
 
 (* Internal cache information *)
 (*CellTagsOutline
-CellTagsIndex->{
- "Info63684117388-1725166"->{
-  Cell[6472, 160, 1241, 22, 203, "Print",
-   CellTags->"Info63684117388-1725166"]},
- "Info83684117388-1725166"->{
-  Cell[25343, 625, 387, 7, 60, "Print",
-   CellTags->"Info83684117388-1725166"]},
- "Info93684117388-1725166"->{
-  Cell[25910, 643, 355, 7, 60, "Print",
-   CellTags->"Info93684117388-1725166"],
-  Cell[26268, 652, 1153, 30, 24, "Print",
-   CellTags->"Info93684117388-1725166"]},
- "Info123684117389-1725166"->{
-  Cell[32116, 822, 766, 11, 113, "Print",
-   CellTags->"Info123684117389-1725166"]},
- "Info153684117389-1725166"->{
-  Cell[42738, 1129, 401, 7, 60, "Print",
-   CellTags->"Info153684117389-1725166"]}
- }
+CellTagsIndex->{}
 *)
 (*CellTagsIndex
-CellTagsIndex->{
- {"Info63684117388-1725166", 46675, 1246},
- {"Info83684117388-1725166", 46789, 1249},
- {"Info93684117388-1725166", 46901, 1252},
- {"Info123684117389-1725166", 47097, 1257},
- {"Info153684117389-1725166", 47213, 1260}
- }
+CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 93, 1, 65, "Section"],
 Cell[676, 25, 133, 1, 33, "Text"],
-Cell[CellGroupData[{
-Cell[834, 30, 310, 5, 32, "Input"],
-Cell[1147, 37, 515, 8, 32, "Output"]
+Cell[812, 28, 308, 8, 34, "Input"],
+Cell[1123, 38, 274, 6, 34, "Input"]
 }, Open  ]],
-Cell[1677, 48, 610, 17, 72, "Input"],
 Cell[CellGroupData[{
-Cell[2312, 69, 230, 5, 32, "Input"],
-Cell[2545, 76, 2355, 34, 32, "Output"]
+Cell[1434, 49, 205, 3, 65, "Section"],
+Cell[1642, 54, 207, 4, 33, "Text"],
+Cell[1852, 60, 454, 9, 34, "Input"],
+Cell[2309, 71, 181, 2, 33, "Text"],
+Cell[CellGroupData[{
+Cell[2515, 77, 689, 14, 57, "Input"],
+Cell[3207, 93, 16275, 399, 605, "Print"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4949, 116, 205, 3, 65, "Section"],
-Cell[5157, 121, 207, 4, 33, "Text"],
+Cell[19531, 498, 211, 4, 101, "Section"],
 Cell[CellGroupData[{
-Cell[5389, 129, 335, 7, 33, "Input"],
-Cell[5727, 138, 220, 3, 32, "Output"]
-}, Open  ]],
-Cell[5962, 144, 367, 8, 32, "Input"],
-Cell[CellGroupData[{
-Cell[6354, 156, 115, 2, 32, "Input"],
-Cell[6472, 160, 1241, 22, 203, "Print",
- CellTags->"Info63684117388-1725166"]
-}, Open  ]],
-Cell[7728, 185, 181, 2, 33, "Text"],
-Cell[CellGroupData[{
-Cell[7934, 191, 618, 13, 32, "Input"],
-Cell[8555, 206, 16326, 400, 383, "Print"]
-}, Open  ]]
+Cell[19767, 506, 294, 5, 34, "Input"],
+Cell[20064, 513, 3983, 111, 264, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[24930, 612, 211, 4, 65, "Section"],
-Cell[CellGroupData[{
-Cell[25166, 620, 174, 3, 32, "Input"],
-Cell[25343, 625, 387, 7, 60, "Print",
- CellTags->"Info83684117388-1725166"]
+Cell[24084, 629, 96, 1, 32, "Input"],
+Cell[24183, 632, 1400, 46, 57, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[25767, 637, 118, 2, 32, "Input"],
-Cell[CellGroupData[{
-Cell[25910, 643, 355, 7, 60, "Print",
- CellTags->"Info93684117388-1725166"],
-Cell[26268, 652, 1153, 30, 24, "Print",
- CellTags->"Info93684117388-1725166"]
-}, Open  ]]
-}, Open  ]],
-Cell[27448, 686, 294, 7, 32, "Input"],
-Cell[CellGroupData[{
-Cell[27767, 697, 104, 1, 32, "Input"],
-Cell[27874, 700, 4079, 113, 152, "Output"]
+Cell[25620, 683, 101, 2, 32, "Input"],
+Cell[25724, 687, 8115, 226, 287, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[31990, 818, 123, 2, 32, "Input"],
-Cell[32116, 822, 766, 11, 113, "Print",
- CellTags->"Info123684117389-1725166"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[32919, 838, 96, 1, 30, "Input"],
-Cell[33018, 841, 1353, 45, 32, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[34408, 891, 101, 2, 32, "Input"],
-Cell[34512, 895, 8068, 225, 152, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[42617, 1125, 118, 2, 32, "Input"],
-Cell[42738, 1129, 401, 7, 60, "Print",
- CellTags->"Info153684117389-1725166"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[43176, 1141, 359, 8, 32, "Input"],
-Cell[43538, 1151, 2811, 81, 189, "Output"]
+Cell[33876, 918, 359, 8, 34, "Input"],
+Cell[34238, 928, 2857, 81, 275, "Output"]
 }, Open  ]]
 }, Open  ]]
 }
