@@ -30,12 +30,12 @@ The code is broken down to several files that are all binded together through th
  | doc/          | Documentation Files |
  | import/       | Data files used in examples |
  | examples/     | Various flows examples |
+ | testing/      | Testing routines |
  | .gitignore    | Exclude certain files and directories in your working directory |
  | LICENSE       | A short and simple permissive license with conditions only requiring preservation of copyright and license notices. |
  | PSO.m,nb      | Particle Swarm Optimization Method |
  | README.md     | This file |
  | SimpleJavaReloader.m | A Java library necessary for some importing routines |
- | Unit_Testing.nb | Testing routines |
  | confidence.m,nb| Calculate confidence intervals - regions |
  | dataArray.m,nb | Storing inequalities data Matrices |
  | export.m,nb | Exporting data routines |
