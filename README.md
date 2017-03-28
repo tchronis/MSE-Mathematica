@@ -4,7 +4,7 @@ This code was designed by Theodore Chronis in collaboration with Denisa Mindruta
 
 The code builds upon Jeremy Fox’s theoretical work on the “pairwise maximum score estimator” (Fox 2010; Fox 2016) and the original Match Estimation toolkit (Santiago and Fox, 2009) which can be downloaded from http://fox.web.rice.edu/
 
-To understand the present code the user needs to be familiar with the maximum score estimator and formal matching games. To ease the exposition, this documentation and the code itself follow closely the terminology used by Jeremy Fox. Unless stated otherwise, please refer back to the original sources for definitions and technical details accessible by the links on the bottom of this document.  
+To understand the present code the user needs to be familiar with the maximum score estimator and formal matching games. To ease the exposition, this documentation and the code itself follow closely the terminology used by Jeremy Fox. Unless stated otherwise, please refer back to the original sources for definitions and technical details accessible via the links at the bottom of this document.  
 
 ## Installation Instructions
 
@@ -12,16 +12,29 @@ To understand the present code the user needs to be familiar with the maximum sc
 
 2. Extract the downloaded compressed file MSE-Mathematica-master.zip
 
-3. Goto examples/ and open any of the examples to experiment with some use cases
+3. Goto examples/ and open any of the examples to experiment with specific cases
 
 4. Make sure you have set the correct library path at the beginning of your notebooks
+
+
+## Documentation
+
+A full description of all upgrades can be found under doc/MSE-Mathematica.docx
+
+https://github.com/tchronis/MSE-Mathematica/blob/master/doc/MSE-Mathematica.docx
+
+The code is broken down to several files that are all tied together through the main library file **mse.m** , which must be loaded before calling any MSE function described in doc/functions-reference.docx
+
+https://github.com/tchronis/MSE-Mathematica/blob/master/doc/functions-reference.docx
+
+For a more complete
+
 
 ## Overview of the possible paths you can choose to follow to solve a particular problem
 
  ![Alt](doc/flow_diagram.png "Title")
 
-
-The code is broken down to several files that are all binded together through the main library file **mse.m** which must be loaded before calling any MSE function described in doc/functions-reference.docx
+## Files List
 
  ## Directory Structure
 
@@ -57,4 +70,4 @@ David Santiago and Fox, Jeremy. “A Toolkit for Matching Maximum Score Estimati
 
 Fox, Jeremy, “Estimating Matching Games with Transfers,” 2016. Last accessed from http://fox.web.rice.edu/working-papers/fox-matching-maximum-score.pdf
 
-Fox, Jeremy “Identification in Matching Games”. 2010. Quantitative Economics
+Fox J. 2010. Identification in matching games. Quantitative Economics 1: 203–254
