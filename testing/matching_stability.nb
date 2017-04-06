@@ -1,0 +1,642 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     25500,        634]
+NotebookOptionsPosition[     24993,        613]
+NotebookOutlinePosition[     25334,        628]
+CellTagsIndexPosition[     25291,        625]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Set the library\[CloseCurlyQuote]s directory first!", "Text",
+ CellChangeTimes->{{3.630560391811116*^9, 3.630560404154866*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "directory", "=", 
+   "\"\</home/tchr/Projects/Mathematica/MSE-Mathematica/\>\""}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6841035484035273`*^9, 3.684103570005033*^9}, {
+  3.684103694426355*^9, 3.684103745880095*^9}, {3.697029512961897*^9, 
+  3.6970296429959393`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{"\"\<mse.m\>\"", ",", 
+    RowBox[{"Path", "\[Rule]", "directory"}]}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6303091438379374`*^9, 3.6303091800723124`*^9}, 
+   3.6303092721035624`*^9, 3.6970296644672318`*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "matchingstability", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"matchingstability", "[", 
+    RowBox[{"filename_", ",", "method_", ",", "quotaU_", ",", "quotaD_", ",", 
+     RowBox[{"pflag_:", "False"}]}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "header", ",", "noM", ",", "noU", ",", "noD", ",", "noAttr", ",", 
+         "distanceMatrices", ",", "matchMatrix", ",", "mate"}], "}"}], "=", 
+       RowBox[{"import", "[", 
+        RowBox[{"filename", ",", "\"\<precomp\>\""}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"payoffMatrix", "=", 
+       RowBox[{"CpayoffMatrix", "[", 
+        RowBox[{"payoffDM", ",", "noM", ",", "noU", ",", "noD"}], "]"}]}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"ineqmembers", "=", 
+       RowBox[{"Cineqmembers", "[", "mate", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"dataArray", "=", 
+       RowBox[{"CdataArray", "[", 
+        RowBox[{"payoffMatrix", ",", 
+         RowBox[{"Cx", "[", 
+          RowBox[{"noAttr", "-", "1"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"permuteinvariant", "=", "True"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"sol", "=", 
+       RowBox[{"Switch", "[", 
+        RowBox[{
+        "method", ",", "\[IndentingNewLine]", "\"\<DE\>\"", ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"maximize", "[", 
+          RowBox[{"dataArray", ",", "noAttr", ",", 
+           RowBox[{"{", 
+            RowBox[{"\"\<DifferentialEvolution\>\"", ",", 
+             RowBox[{"\"\<CrossProbability\>\"", "\[Rule]", "0.5"}], ",", 
+             RowBox[{"\"\<InitialPoints\>\"", "\[Rule]", "Automatic"}], ",", 
+             RowBox[{"\"\<PenaltyFunction\>\"", "\[Rule]", "Automatic"}], ",", 
+             RowBox[{"\"\<PostProcess\>\"", "\[Rule]", "Automatic"}], ",", 
+             RowBox[{"\"\<RandomSeed\>\"", "\[Rule]", "0"}], ",", 
+             RowBox[{"\"\<ScalingFactor\>\"", "\[Rule]", "0.6"}], ",", 
+             RowBox[{"\"\<SearchPoints\>\"", "\[Rule]", "Automatic"}], ",", 
+             RowBox[{"\"\<Tolerance\>\"", "\[Rule]", "0.001"}]}], "}"}], ",", 
+           "permuteinvariant", ",", "pflag"}], "]"}], "\[IndentingNewLine]", 
+         ",", "\[IndentingNewLine]", "\"\<PSO\>\"", ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"maximize", "[", 
+          RowBox[{"dataArray", ",", "noAttr", ",", 
+           RowBox[{"{", 
+            RowBox[{"\"\<ParticleSwarmOptimization\>\"", ",", 
+             RowBox[{"\"\<nparts\>\"", "\[Rule]", "32"}], ",", 
+             RowBox[{"\"\<bndLo\>\"", "\[Rule]", 
+              RowBox[{"-", "10"}]}], ",", 
+             RowBox[{"\"\<bndUp\>\"", "\[Rule]", "10"}], ",", 
+             RowBox[{"\"\<niter\>\"", "\[Rule]", "200"}], ",", 
+             RowBox[{"\"\<r\>\"", "\[Rule]", "1"}], ",", 
+             RowBox[{"\"\<RandomSeed\>\"", "\[Rule]", "0"}]}], "}"}], ",", 
+           "permuteinvariant", ",", "pflag"}], "]"}]}], "\[IndentingNewLine]",
+         "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"matchMatrixOriginal", "=", "matchMatrix"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"RematchMatrix", "=", 
+       RowBox[{"CmatchMatrix", "[", 
+        RowBox[{
+         RowBox[{"payoffMatrix", "/.", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"x1", "\[Rule]", 
+             RowBox[{"sol", "[", 
+              RowBox[{"[", 
+               RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+            RowBox[{"x2", "\[Rule]", 
+             RowBox[{"sol", "[", 
+              RowBox[{"[", 
+               RowBox[{"2", ",", "2"}], "]"}], "]"}]}]}], "}"}]}], ",", 
+         "quotaU", ",", "quotaD"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"totalpayoffOriginal", "=", 
+       RowBox[{"Total", "/@", 
+        RowBox[{"Ctotalpayoff", "[", 
+         RowBox[{
+          RowBox[{"payoffMatrix", "/.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x1", "\[Rule]", 
+              RowBox[{"sol", "[", 
+               RowBox[{"[", 
+                RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+             RowBox[{"x2", "\[Rule]", 
+              RowBox[{"sol", "[", 
+               RowBox[{"[", 
+                RowBox[{"2", ",", "2"}], "]"}], "]"}]}]}], "}"}]}], ",", 
+          RowBox[{"Cmates", "[", "matchMatrixOriginal", "]"}]}], "]"}]}]}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"Rematchtotalpayoff", "=", 
+       RowBox[{"Total", "/@", 
+        RowBox[{"Ctotalpayoff", "[", 
+         RowBox[{
+          RowBox[{"payoffMatrix", "/.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x1", "\[Rule]", 
+              RowBox[{"sol", "[", 
+               RowBox[{"[", 
+                RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+             RowBox[{"x2", "\[Rule]", 
+              RowBox[{"sol", "[", 
+               RowBox[{"[", 
+                RowBox[{"2", ",", "2"}], "]"}], "]"}]}]}], "}"}]}], ",", 
+          RowBox[{"Cmates", "[", "RematchMatrix", "]"}]}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Length", "@", 
+             RowBox[{"Intersection", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Cmates", "[", "matchMatrixOriginal", "]"}], "[", 
+                RowBox[{"[", "#", "]"}], "]"}], ",", 
+               RowBox[{
+                RowBox[{"Cmates", "[", "RematchMatrix", "]"}], "[", 
+                RowBox[{"[", "#", "]"}], "]"}]}], "]"}]}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Cmates", "[", "matchMatrixOriginal", "]"}], "[", 
+              RowBox[{"[", "#", "]"}], "]"}], "//", "Length"}]}], "}"}], 
+          "&"}], "/@", 
+         RowBox[{"Range", "[", "noM", "]"}]}], "\[IndentingNewLine]", ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"100.", 
+         RowBox[{"(", 
+          RowBox[{"1", "-", 
+           RowBox[{"Rematchtotalpayoff", "/", "totalpayoffOriginal"}]}], 
+          ")"}]}]}], "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6841043508031883`*^9, 3.68410435725504*^9}, {
+   3.684105070379953*^9, 3.684105078867283*^9}, {3.684105369180024*^9, 
+   3.6841053791785192`*^9}, {3.684105434080481*^9, 3.684105443720702*^9}, {
+   3.6841056036782417`*^9, 3.6841056116706038`*^9}, 3.684105892774847*^9, 
+   3.684107165056787*^9, {3.7004947586229353`*^9, 3.700494998731675*^9}, {
+   3.700495272504293*^9, 3.7004955286414003`*^9}, 3.700495622275991*^9, {
+   3.7004957276274977`*^9, 3.7004957372961473`*^9}, {3.70049627901633*^9, 
+   3.700496294717507*^9}, {3.700496425692348*^9, 3.700496429010006*^9}, {
+   3.700496477828432*^9, 3.700496522646146*^9}, {3.700496570416374*^9, 
+   3.70049659381271*^9}, {3.700497417770789*^9, 3.700497456320903*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"filename", "=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+       "directory", "<>", "\"\<import/\>\"", "<>", 
+        "\"\<round1m1-1.xls.pre.dat\>\""}], ",", "1", ",", "1"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+       "directory", "<>", "\"\<import/\>\"", "<>", 
+        "\"\<round1m2-1.xls.pre.dat\>\""}], ",", "2", ",", "1"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+       "directory", "<>", "\"\<import/\>\"", "<>", 
+        "\"\<round1m5-1.xls.pre.dat\>\""}], ",", "5", ",", "1"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+       "directory", "<>", "\"\<import/\>\"", "<>", 
+        "\"\<round1m10-10.xls.pre.dat\>\""}], ",", "10", ",", "10"}], "}"}]}],
+     "\[IndentingNewLine]", "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6305828622641745`*^9, 3.630582878578158*^9}, {
+   3.630582913695622*^9, 3.630582948265746*^9}, 3.630725059726445*^9, {
+   3.6841038091622047`*^9, 3.68410383693114*^9}, 3.6841071456884003`*^9, {
+   3.697029676401342*^9, 3.697029677440222*^9}, 3.700391528639625*^9, {
+   3.7003923362388*^9, 3.700392338587853*^9}, {3.700496717103194*^9, 
+   3.700496765299453*^9}, {3.7004968960310297`*^9, 3.700496926980373*^9}, {
+   3.700497049915721*^9, 3.7004970610186853`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"#", ",", 
+     RowBox[{"matchingstability", "[", 
+      RowBox[{
+       RowBox[{"#", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<DE\>\"", ",", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], ",", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "3", "]"}], "]"}]}], "]"}]}], "}"}], "&"}], "/@", 
+  "filename"}]], "Input",
+ CellChangeTimes->{{3.700495541055748*^9, 3.7004955622787933`*^9}, {
+   3.700496156395434*^9, 3.7004961581626263`*^9}, {3.700496631119485*^9, 
+   3.700496631939631*^9}, {3.70049706626642*^9, 3.70049711474979*^9}, 
+   3.7004974659842167`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"/home/tchr/Projects/Mathematica/MSE-Mathematica/import/\
+round1m1-1.xls.pre.dat\"\>", ",", "1", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"10", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"12", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"11", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"19", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"20", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"20", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"18", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"20", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"20", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"12", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"18", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"12", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"11", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"21", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"17", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"22", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"18", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"19", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"16", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"18", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "50"}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.04376357469273451`"}], ",", 
+         RowBox[{"-", "0.05123681377592337`"}], ",", 
+         RowBox[{"-", "0.03091592707780144`"}], ",", 
+         RowBox[{"-", "0.04819945955008009`"}], ",", 
+         RowBox[{"-", "0.04587179338801928`"}], ",", 
+         RowBox[{"-", "0.03965141293771346`"}], ",", 
+         RowBox[{"-", "0.0259864107343466`"}], ",", 
+         RowBox[{"-", "0.04015914610016047`"}], ",", 
+         RowBox[{"-", "0.03385525076127216`"}], ",", 
+         RowBox[{"-", "0.0431871432015285`"}], ",", 
+         RowBox[{"-", "0.05527539261735992`"}], ",", 
+         RowBox[{"-", "0.05329641464892898`"}], ",", 
+         RowBox[{"-", "0.042654789468121734`"}], ",", 
+         RowBox[{"-", "0.04078710811699082`"}], ",", 
+         RowBox[{"-", "0.04031605686487527`"}], ",", 
+         RowBox[{"-", "0.03308481753043768`"}], ",", 
+         RowBox[{"-", "0.03713694819797997`"}], ",", 
+         RowBox[{"-", "0.0357447605904726`"}], ",", 
+         RowBox[{"-", "0.04781755801348542`"}], ",", 
+         RowBox[{"-", "0.04228549267544235`"}], ",", 
+         RowBox[{"-", "0.05205354114952154`"}], ",", 
+         RowBox[{"-", "0.03438676620122205`"}], ",", 
+         RowBox[{"-", "0.04230724377549677`"}], ",", 
+         RowBox[{"-", "0.040120541404142784`"}], ",", 
+         RowBox[{"-", "0.03540304450477816`"}]}], "}"}]}], "}"}]}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"/home/tchr/Projects/Mathematica/MSE-Mathematica/import/\
+round1m2-1.xls.pre.dat\"\>", ",", "2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"16", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"21", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"25", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"20", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"20", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"17", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"21", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"23", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"21", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"19", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"20", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"19", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"23", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"24", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"21", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"23", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"22", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"24", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"26", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"23", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"28", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"19", ",", "50"}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.049346776045045004`"}], ",", 
+         RowBox[{"-", "0.03703554595673175`"}], ",", 
+         RowBox[{"-", "0.025073000498654352`"}], ",", 
+         RowBox[{"-", "0.04032525673236531`"}], ",", 
+         RowBox[{"-", "0.030092928888758586`"}], ",", 
+         RowBox[{"-", "0.04013032115621762`"}], ",", 
+         RowBox[{"-", "0.036510166814229805`"}], ",", 
+         RowBox[{"-", "0.032909642511347315`"}], ",", 
+         RowBox[{"-", "0.030507595640716367`"}], ",", 
+         RowBox[{"-", "0.046923532567988424`"}], ",", 
+         RowBox[{"-", "0.05501177226563403`"}], ",", 
+         RowBox[{"-", "0.05097155603568382`"}], ",", 
+         RowBox[{"-", "0.05040611011062346`"}], ",", 
+         RowBox[{"-", "0.03330634159739443`"}], ",", 
+         RowBox[{"-", "0.03203604139607741`"}], ",", 
+         RowBox[{"-", "0.03632978756180627`"}], ",", 
+         RowBox[{"-", "0.026744435919345833`"}], ",", 
+         RowBox[{"-", "0.030629202665943822`"}], ",", 
+         RowBox[{"-", "0.038737525626908464`"}], ",", 
+         RowBox[{"-", "0.029771833823022398`"}], ",", 
+         RowBox[{"-", "0.033519991647601444`"}], ",", 
+         RowBox[{"-", "0.03798892132083065`"}], ",", 
+         RowBox[{"-", "0.021774101131932788`"}], ",", 
+         RowBox[{"-", "0.030484499311800306`"}], ",", 
+         RowBox[{"-", "0.045417791919155626`"}]}], "}"}]}], "}"}]}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"/home/tchr/Projects/Mathematica/MSE-Mathematica/import/\
+round1m5-1.xls.pre.dat\"\>", ",", "5", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"23", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"29", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"29", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"26", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"31", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"26", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"24", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"25", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"24", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"28", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"19", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"27", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"27", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"19", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"27", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"19", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"24", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"25", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"26", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"29", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"24", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"33", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"20", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"22", ",", "50"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"31", ",", "50"}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.03773998190619299`"}], ",", 
+         RowBox[{"-", "0.027260090495895284`"}], ",", 
+         RowBox[{"-", "0.018192316886955773`"}], ",", 
+         RowBox[{"-", "0.047751782973670664`"}], ",", 
+         RowBox[{"-", "0.028121396806768395`"}], ",", 
+         RowBox[{"-", "0.029429251282087066`"}], ",", 
+         RowBox[{"-", "0.022263793781163166`"}], ",", 
+         RowBox[{"-", "0.03346197781108895`"}], ",", 
+         RowBox[{"-", "0.032396340904439214`"}], ",", 
+         RowBox[{"-", "0.023480789044838524`"}], ",", 
+         RowBox[{"-", "0.04464016796226211`"}], ",", 
+         RowBox[{"-", "0.03536633571983305`"}], ",", 
+         RowBox[{"-", "0.04596733621891058`"}], ",", 
+         RowBox[{"-", "0.05527899490054278`"}], ",", 
+         RowBox[{"-", "0.02683910271916723`"}], ",", 
+         RowBox[{"-", "0.06725663319255837`"}], ",", 
+         RowBox[{"-", "0.033257967356226104`"}], ",", 
+         RowBox[{"-", "0.037247466948175934`"}], ",", 
+         RowBox[{"-", "0.03354175028176254`"}], ",", 
+         RowBox[{"-", "0.041872438909473786`"}], ",", 
+         RowBox[{"-", "0.04032900547255025`"}], ",", 
+         RowBox[{"-", "0.014804518004774003`"}], ",", 
+         RowBox[{"-", "0.034080915112588706`"}], ",", 
+         RowBox[{"-", "0.028985101830181215`"}], ",", 
+         RowBox[{"-", "0.018707848347632172`"}]}], "}"}]}], "}"}]}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"/home/tchr/Projects/Mathematica/MSE-Mathematica/import/\
+round1m10-10.xls.pre.dat\"\>", ",", "10", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"381", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"386", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"384", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"378", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"397", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"381", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"391", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"389", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"380", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"386", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"365", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"394", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"385", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"381", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"394", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"377", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"390", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"383", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"382", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"382", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"379", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"385", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"387", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "500"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"376", ",", "500"}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.03519219862471168`"}], ",", 
+         RowBox[{"-", "0.0273871672834769`"}], ",", 
+         RowBox[{"-", "0.02730107090198608`"}], ",", 
+         RowBox[{"-", "0.030003436211423207`"}], ",", 
+         RowBox[{"-", "0.028860682849085606`"}], ",", 
+         RowBox[{"-", "0.03040951717816487`"}], ",", 
+         RowBox[{"-", "0.025904326630921126`"}], ",", 
+         RowBox[{"-", "0.02596613158742933`"}], ",", 
+         RowBox[{"-", "0.02590053680577853`"}], ",", 
+         RowBox[{"-", "0.02650839932596405`"}], ",", 
+         RowBox[{"-", "0.03144968341552978`"}], ",", 
+         RowBox[{"-", "0.027877790230723676`"}], ",", 
+         RowBox[{"-", "0.025469318894355553`"}], ",", 
+         RowBox[{"-", "0.029392833688746123`"}], ",", 
+         RowBox[{"-", "0.02575204914685436`"}], ",", 
+         RowBox[{"-", "0.029476993481125646`"}], ",", 
+         RowBox[{"-", "0.0217722452317215`"}], ",", 
+         RowBox[{"-", "0.027951310761520354`"}], ",", 
+         RowBox[{"-", "0.028740521366099614`"}], ",", 
+         RowBox[{"-", "0.026209806248433942`"}], ",", 
+         RowBox[{"-", "0.031724700240132186`"}], ",", 
+         RowBox[{"-", "0.02834947726724213`"}], ",", 
+         RowBox[{"-", "0.027951269317894045`"}], ",", 
+         RowBox[{"-", "0.02392414877718796`"}], ",", 
+         RowBox[{"-", "0.0252326266977132`"}]}], "}"}]}], "}"}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.700495585489213*^9, 3.70049577219785*^9, 
+  3.700496214620359*^9, 3.700496344931774*^9, 3.700496459348946*^9, 
+  3.7004966607152863`*^9, 3.700497207801568*^9, 3.7004975416029587`*^9}]
+}, Open  ]]
+},
+WindowSize->{1054, 702},
+WindowMargins->{{Automatic, 341}, {64, Automatic}},
+FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 133, 1, 33, "Text"],
+Cell[694, 23, 308, 8, 34, "Input"],
+Cell[1005, 33, 274, 6, 34, "Input"],
+Cell[1282, 41, 7147, 156, 761, "Input"],
+Cell[8432, 199, 1454, 35, 148, "Input"],
+Cell[CellGroupData[{
+Cell[9911, 238, 658, 17, 34, "Input"],
+Cell[10572, 257, 14405, 353, 586, "Output"]
+}, Open  ]]
+}
+]
+*)
+
