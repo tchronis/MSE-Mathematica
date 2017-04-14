@@ -1,0 +1,999 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     37161,        991]
+NotebookOptionsPosition[     34284,        889]
+NotebookOutlinePosition[     34939,        914]
+CellTagsIndexPosition[     34810,        908]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["init", "Section",
+ CellChangeTimes->{{3.6303386092666483`*^9, 3.6303386103447733`*^9}}],
+
+Cell["Set the library\[CloseCurlyQuote]s directory first!", "Text",
+ CellChangeTimes->{{3.630560391811116*^9, 3.630560404154866*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "directory", "=", 
+   "\"\</home/tchr/Projects/Mathematica/MSE-Mathematica/\>\""}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6841035484035273`*^9, 3.684103570005033*^9}, {
+  3.684103694426355*^9, 3.684103745880095*^9}, {3.697029512961897*^9, 
+  3.6970296429959393`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{"\"\<mse.m\>\"", ",", 
+    RowBox[{"Path", "\[Rule]", "directory"}]}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6303091438379374`*^9, 3.6303091800723124`*^9}, 
+   3.6303092721035624`*^9, 3.6970296644672318`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Import precomputed data", "Section",
+ CellChangeTimes->{{3.630312113309617*^9, 3.630312115762742*^9}, {
+  3.684103937250903*^9, 3.684103945195757*^9}, {3.684106438963768*^9, 
+  3.68410644892039*^9}}],
+
+Cell["\<\
+Set the data\[CloseCurlyQuote]s directory preferably in the variable \
+\[OpenCurlyQuote]filename\[CloseCurlyQuote].\
+\>", "Text",
+ CellChangeTimes->{{3.6841039665594463`*^9, 3.684104053424923*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"filename", "=", 
+   RowBox[{
+   "directory", "<>", "\"\<import/\>\"", "<>", 
+    "\"\<round1m1-1.xls.pre.dat\>\""}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6305828622641745`*^9, 3.630582878578158*^9}, {
+   3.630582913695622*^9, 3.630582948265746*^9}, 3.630725059726445*^9, {
+   3.6841038091622047`*^9, 3.68410383693114*^9}, 3.6841071456884003`*^9, {
+   3.697029676401342*^9, 3.697029677440222*^9}}],
+
+Cell["Load the data in variables with meaningful names", "Text",
+ CellChangeTimes->{{3.6841042607207613`*^9, 3.684104266945219*^9}, {
+  3.684104320856389*^9, 3.684104345457032*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "header", ",", "noM", ",", "noU", ",", "noD", ",", "noAttr", ",", 
+     "distanceMatrices", ",", "matchMatrix", ",", "mate"}], "}"}], "=", 
+   RowBox[{"import", "[", 
+    RowBox[{"filename", ",", "\"\<precomp\>\""}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6841043508031883`*^9, 3.68410435725504*^9}, {
+   3.684105070379953*^9, 3.684105078867283*^9}, {3.684105369180024*^9, 
+   3.6841053791785192`*^9}, {3.684105434080481*^9, 3.684105443720702*^9}, {
+   3.6841056036782417`*^9, 3.6841056116706038`*^9}, 3.684105892774847*^9, 
+   3.684107165056787*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Routines (calculate payoff matrix, inequalities members, dataArray)\
+\>", "Section",
+ CellChangeTimes->{{3.6841044513858833`*^9, 3.684104453137322*^9}, {
+  3.684106468489313*^9, 3.684106506813888*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"payoffMatrix", "=", 
+   RowBox[{"CpayoffMatrix", "[", 
+    RowBox[{"payoffDM", ",", "noM", ",", "noU", ",", "noD"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.684105012296954*^9, 3.68410501978755*^9}, {
+   3.684106015679117*^9, 3.684106032757155*^9}, 3.684107226749753*^9, 
+   3.68410777616145*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ineqmembers", "=", 
+   RowBox[{"Cineqmembers", "[", "mate", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.6841071955756617`*^9, {3.684107242456472*^9, 3.684107248610227*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dataArray", "=", 
+   RowBox[{"CdataArray", "[", 
+    RowBox[{"payoffMatrix", ",", 
+     RowBox[{"Cx", "[", 
+      RowBox[{"noAttr", "-", "1"}], "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.684105202625043*^9, 3.6841052093160973`*^9}, {
+   3.684105642018467*^9, 3.684105669830946*^9}, {3.6841063953107767`*^9, 
+   3.684106404380844*^9}, 3.684107251197228*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Maximization", "Section",
+ CellChangeTimes->{{3.684107328012385*^9, 3.684107334518333*^9}, {
+  3.6970297677393293`*^9, 3.697029776828178*^9}}],
+
+Cell["\<\
+The global variable \[OpenCurlyDoubleQuote]permuteinvariant\
+\[CloseCurlyDoubleQuote] when set to true the order of the attributes is set \
+related to their statistics.\
+\>", "Text",
+ CellChangeTimes->{{3.684107402334448*^9, 3.684107418778235*^9}, {
+  3.697031898994895*^9, 3.697031976227542*^9}},
+ Background->RGBColor[1, 0.5, 0.5]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"permuteinvariant", "=", "True"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6303358377197733`*^9, 3.6303358461728983`*^9}, {
+  3.6303358938447733`*^9, 3.6303359166416483`*^9}, {3.631181755437551*^9, 
+  3.631181756281301*^9}, {3.6311926922514763`*^9, 3.6311926943306026`*^9}, {
+  3.6311947835229654`*^9, 3.6311947856698637`*^9}, {3.631195138306311*^9, 
+  3.6311951420680847`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Differential Evolution Method", "Subsection",
+ CellChangeTimes->{{3.69702978534949*^9, 3.697029795194523*^9}}],
+
+Cell["The default DifferentialEvolution parameters:", "Text",
+ CellChangeTimes->{{3.6304811339951696`*^9, 3.6304811513701696`*^9}, {
+  3.6304855977012243`*^9, 3.6304856109512243`*^9}}],
+
+Cell[BoxData[GridBox[{
+   {Cell["option name", "TableHeader"], Cell["default value", "TableHeader"], 
+    " "},
+   {"\"\<CrossProbability\>\"", "0.5", Cell[TextData[{
+     "probability that a gene is taken from ",
+     Cell[BoxData[
+      SubscriptBox[
+       StyleBox["x", "TI"], 
+       StyleBox["i", "TI"]]], "InlineFormula"]
+    }], "TableText"]},
+   {"\"\<InitialPoints\>\"", 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell[
+    "set of initial points ", "TableText"]},
+   {"\"\<PenaltyFunction\>\"", 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell[
+    "function applied to constraints to penalize invalid points", 
+     "TableText"]},
+   {"\"\<PostProcess\>\"", 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell[
+    "whether to post-process using local search methods ", "TableText"]},
+   {"\"\<RandomSeed\>\"", "0", Cell[
+    "starting value for the random number generator", "TableText"]},
+   {"\"\<ScalingFactor\>\"", "0.6", Cell[
+    "scale applied to the difference vector in creating a mate ", 
+     "TableText"]},
+   {"\"\<SearchPoints\>\"", 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell[
+    "size of the population used for evolution ", "TableText"]},
+   {"\"\<Tolerance\>\"", "0.001", Cell[
+    "tolerance for accepting constraint violations ", "TableText"]}
+  }]], "DefinitionBox3Col",
+ CellChangeTimes->{{3.6304856989824743`*^9, 3.6304856998105993`*^9}},
+ GridBoxOptions->{
+ GridBoxDividers->{
+  "Columns" -> {{False}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {False, True, {False}, False}, "RowsIndexed" -> {}}},
+ CellID->18427541],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "maximize"}]], "Input",
+ CellChangeTimes->{{3.684107546117594*^9, 3.684107548082258*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"maximize[dataArray_,noAttr_,method_:\\\"DifferentialEvolution\\\
+\", permuteinvariant_:False, printflag_:False] is MSE specific and uses the \
+optimize function. It uses the objective function (that counts the number of \
+satisfied inequalities). It returns a list {max,{x1->value1, x2->value2, \
+...}} where max is the maximum number of satisfied inequalities found and the \
+solution of the maximization method {value1,value2,...}\"\>", "MSG"]], "Print",\
+ "PrintUsage",
+ CellChangeTimes->{3.70039222998833*^9},
+ CellTags->"Info93700403029-6319418"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"method1", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<DifferentialEvolution\>\"", ",", 
+     RowBox[{"\"\<CrossProbability\>\"", "\[Rule]", "0.5"}], ",", 
+     RowBox[{"\"\<InitialPoints\>\"", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"\"\<PenaltyFunction\>\"", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"\"\<PostProcess\>\"", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"\"\<RandomSeed\>\"", "\[Rule]", "0"}], ",", 
+     RowBox[{"\"\<ScalingFactor\>\"", "\[Rule]", "0.6"}], ",", 
+     RowBox[{"\"\<SearchPoints\>\"", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"\"\<Tolerance\>\"", "\[Rule]", "0.001"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol1", "=", 
+   RowBox[{"maximize", "[", 
+    RowBox[{
+    "dataArray", ",", "noAttr", ",", "method1", ",", "permuteinvariant", ",", 
+     "True"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6304822228477087`*^9, 3.6304823703789587`*^9}, {
+   3.6304824780195837`*^9, 3.6304824869883337`*^9}, {3.6304825679258337`*^9, 
+   3.6304825738008337`*^9}, {3.6304855466699743`*^9, 3.6304855623418493`*^9}, 
+   3.6304857214199743`*^9, 3.6304858862480993`*^9, {3.630488085369193*^9, 
+   3.630488085775443*^9}, {3.6305596885382614`*^9, 3.6305597002970505`*^9}, {
+   3.6305597806851206`*^9, 3.6305598314048877`*^9}, {3.630587798517194*^9, 
+   3.630587829517194*^9}, 3.684107472522455*^9, 3.684107610829526*^9, {
+   3.684107690541943*^9, 3.684107693032625*^9}, {3.6841079213122168`*^9, 
+   3.684107930131075*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"order=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"  reverse order=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"3.188029873560225`", ",", "2.2237682582145535`"}], "}"}]}],
+  SequenceForm[
+  "order=", {2, 1}, "  reverse order=", {3.188029873560225, 
+   2.2237682582145535`}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.684107450350182*^9, 3.684107476529379*^9}, 
+   3.684107775289764*^9, 3.684107937148543*^9, 3.6841081806473217`*^9, 
+   3.69702975243976*^9, 3.7001535361426*^9, 3.700375765839882*^9, 
+   3.7003761635486603`*^9, 3.700377656446796*^9, 3.700383587691584*^9, 
+   3.700392236108243*^9}],
+
+Cell[BoxData["\<\"Method {DifferentialEvolution, CrossProbability -> 0.5, \
+InitialPoints -> Automatic, PenaltyFunction -> Automatic, PostProcess -> \
+Automatic, RandomSeed -> 0, ScalingFactor -> 0.6, SearchPoints -> Automatic, \
+Tolerance -> 0.001}\"\>"], "Print",
+ CellChangeTimes->{{3.684107450350182*^9, 3.684107476529379*^9}, 
+   3.684107775289764*^9, 3.684107937148543*^9, 3.6841081806473217`*^9, 
+   3.69702975243976*^9, 3.7001535361426*^9, 3.700375765839882*^9, 
+   3.7003761635486603`*^9, 3.700377656446796*^9, 3.700383587691584*^9, 
+   3.7003922361094513`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Completed : \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"29961.`", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\<\"Distance2\"\>", "\[Rule]", "3.188029873560225`"}], ",", 
+       RowBox[{"\<\"Distance3\"\>", "\[Rule]", "2.2237682582145535`"}]}], 
+      "}"}]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\nSatisfied Ineqs Analysis:\\n \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[GridBox[{
+      {"\<\"Market no\"\>", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", 
+       "22", "23", "24", "25"},
+      {"\<\"Satisfied\"\>", "1199", "1188", "1210", "1205", "1200", "1197", 
+       "1207", "1194", "1199", "1189", "1203", "1198", "1199", "1210", "1196",
+        "1204", "1198", "1194", "1189", "1197", "1188", "1206", "1195", 
+       "1203", "1193"},
+      {"\<\"Total\"\>", "1225", "1225", "1225", "1225", "1225", "1225", 
+       "1225", "1225", "1225", "1225", "1225", "1225", "1225", "1225", "1225",
+        "1225", "1225", "1225", "1225", "1225", "1225", "1225", "1225", 
+       "1225", "1225"},
+      {"\<\"Percentage %\"\>", "98", "97", "99", "98", "98", "98", "99", "97",
+        "98", "97", "98", "98", "98", "99", "98", "98", "98", "97", "97", 
+       "98", "97", "98", "98", "98", "97"}
+     },
+     AutoDelete->False,
+     GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Grid"]}],
+  SequenceForm[
+  "Completed : ", {
+   29961., {"Distance2" -> 3.188029873560225, "Distance3" -> 
+     2.2237682582145535`}}, "\nSatisfied Ineqs Analysis:\n ", 
+   Grid[{{
+     "Market no", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
+      18, 19, 20, 21, 22, 23, 24, 25}, {
+     "Satisfied", 1199, 1188, 1210, 1205, 1200, 1197, 1207, 1194, 1199, 1189, 
+      1203, 1198, 1199, 1210, 1196, 1204, 1198, 1194, 1189, 1197, 1188, 1206, 
+      1195, 1203, 1193}, {
+     "Total", 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 
+      1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 
+      1225, 1225, 1225}, {
+     "Percentage %", 98, 97, 99, 98, 98, 98, 99, 97, 98, 97, 98, 98, 98, 99, 
+      98, 98, 98, 97, 97, 98, 97, 98, 98, 98, 97}}, Frame -> All]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.684107450350182*^9, 3.684107476529379*^9}, 
+   3.684107775289764*^9, 3.684107937148543*^9, 3.6841081806473217`*^9, 
+   3.69702975243976*^9, 3.7001535361426*^9, 3.700375765839882*^9, 
+   3.7003761635486603`*^9, 3.700377656446796*^9, 3.700383587691584*^9, 
+   3.700392236163328*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Particle Swarm Optimization", "Subsection",
+ CellChangeTimes->{{3.697029806493244*^9, 3.697029813779241*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "pso"}]], "Input",
+ CellChangeTimes->{{3.6304825945820837`*^9, 3.6304825971133337`*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"pso[objFun_,nparts_Integer,bndLo_List,bndUp_List,niter_Integer:\
+100,r_Integer:1]\\nnparts: the number of particles\\nbndLo: a list of the \
+lower bounds, one for each dimension\\nbndUp: a list of the upper bounds, one \
+for each dimension\\nniter: Number of iterations\\nr: length of the toroidal \
+neighbour scheme e.g. r=1 gives (i-1 mod nparts, i, i+1 mod nparts) as the \
+neighbours of particle i\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.700392236473675*^9},
+ CellTags->"Info123700403036-6319418"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"method2", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<ParticleSwarmOptimization\>\"", ",", 
+     RowBox[{"\"\<nparts\>\"", "\[Rule]", "32"}], ",", 
+     RowBox[{"\"\<bndLo\>\"", "\[Rule]", 
+      RowBox[{"-", "10"}]}], ",", 
+     RowBox[{"\"\<bndUp\>\"", "\[Rule]", "10"}], ",", 
+     RowBox[{"\"\<niter\>\"", "\[Rule]", "200"}], ",", 
+     RowBox[{"\"\<r\>\"", "\[Rule]", "1"}], ",", 
+     RowBox[{"\"\<RandomSeed\>\"", "\[Rule]", "0"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol2", "=", 
+   RowBox[{"maximize", "[", 
+    RowBox[{
+    "dataArray", ",", "noAttr", ",", "method2", ",", "permuteinvariant", ",", 
+     "True"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.630311310700242*^9, 3.630311311606492*^9}, {
+   3.6303357721103983`*^9, 3.6303357979072733`*^9}, {3.6303359124853983`*^9, 
+   3.6303359134853983`*^9}, {3.6304823109570837`*^9, 
+   3.6304823120195837`*^9}, {3.6304823814258337`*^9, 
+   3.6304823826914587`*^9}, {3.6305634990982256`*^9, 
+   3.6305635131919756`*^9}, {3.6305733795044756`*^9, 
+   3.6305733875044756`*^9}, {3.630587794110944*^9, 3.630587801767194*^9}, {
+   3.633707377557605*^9, 3.63370738444823*^9}, {3.63370746835448*^9, 
+   3.633707475526355*^9}, 3.684107574158187*^9, 3.68410761724579*^9, {
+   3.684107703018519*^9, 3.68410770542661*^9}, {3.684108004412528*^9, 
+   3.6841080060690727`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"order=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"  reverse order=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"3.646907071978631`", ",", "2.683389373695026`"}], "}"}]}],
+  SequenceForm[
+  "order=", {2, 1}, "  reverse order=", {3.646907071978631, 
+   2.683389373695026}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.633703406557605*^9, 3.633706835963855*^9, 
+  3.63370692913573*^9, 3.63370734235448*^9, 3.63370743710448*^9, 
+  3.633707536057605*^9, 3.6369641307266293`*^9, 3.637030781246409*^9, 
+  3.684107578859161*^9, 3.684107781480967*^9, 3.6841080135689707`*^9, 
+  3.684108185181264*^9, 3.6970298225958443`*^9, 3.70037578410574*^9, 
+  3.7003761702110453`*^9, 3.700377660933413*^9, 3.700383593531348*^9, 
+  3.700392241431205*^9}],
+
+Cell[BoxData["\<\"Method {ParticleSwarmOptimization, nparts -> 32, bndLo -> \
+-10, bndUp -> 10, niter -> 200, r -> 1, RandomSeed -> 0}\"\>"], "Print",
+ CellChangeTimes->{3.633703406557605*^9, 3.633706835963855*^9, 
+  3.63370692913573*^9, 3.63370734235448*^9, 3.63370743710448*^9, 
+  3.633707536057605*^9, 3.6369641307266293`*^9, 3.637030781246409*^9, 
+  3.684107578859161*^9, 3.684107781480967*^9, 3.6841080135689707`*^9, 
+  3.684108185181264*^9, 3.6970298225958443`*^9, 3.70037578410574*^9, 
+  3.7003761702110453`*^9, 3.700377660933413*^9, 3.700383593531348*^9, 
+  3.7003922414335814`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Completed : \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"29965", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\<\"Distance2\"\>", "\[Rule]", "3.646907071978631`"}], ",", 
+       RowBox[{"\<\"Distance3\"\>", "\[Rule]", "2.683389373695026`"}]}], 
+      "}"}]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\nSatisfied Ineqs Analysis:\\n \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[GridBox[{
+      {"\<\"Market no\"\>", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", 
+       "22", "23", "24", "25"},
+      {"\<\"Satisfied\"\>", "1201", "1191", "1206", "1205", "1199", "1198", 
+       "1207", "1196", "1198", "1191", "1203", "1199", "1197", "1209", "1196",
+        "1205", "1194", "1195", "1190", "1199", "1186", "1205", "1198", 
+       "1204", "1193"},
+      {"\<\"Total\"\>", "1225", "1225", "1225", "1225", "1225", "1225", 
+       "1225", "1225", "1225", "1225", "1225", "1225", "1225", "1225", "1225",
+        "1225", "1225", "1225", "1225", "1225", "1225", "1225", "1225", 
+       "1225", "1225"},
+      {"\<\"Percentage %\"\>", "98", "97", "98", "98", "98", "98", "99", "98",
+        "98", "97", "98", "98", "98", "99", "98", "98", "97", "98", "97", 
+       "98", "97", "98", "98", "98", "97"}
+     },
+     AutoDelete->False,
+     GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Grid"]}],
+  SequenceForm[
+  "Completed : ", {
+   29965, {"Distance2" -> 3.646907071978631, "Distance3" -> 
+     2.683389373695026}}, "\nSatisfied Ineqs Analysis:\n ", 
+   Grid[{{
+     "Market no", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
+      18, 19, 20, 21, 22, 23, 24, 25}, {
+     "Satisfied", 1201, 1191, 1206, 1205, 1199, 1198, 1207, 1196, 1198, 1191, 
+      1203, 1199, 1197, 1209, 1196, 1205, 1194, 1195, 1190, 1199, 1186, 1205, 
+      1198, 1204, 1193}, {
+     "Total", 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 
+      1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 1225, 
+      1225, 1225, 1225}, {
+     "Percentage %", 98, 97, 98, 98, 98, 98, 99, 98, 98, 97, 98, 98, 98, 99, 
+      98, 98, 97, 98, 97, 98, 97, 98, 98, 98, 97}}, Frame -> All]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.633703406557605*^9, 3.633706835963855*^9, 
+  3.63370692913573*^9, 3.63370734235448*^9, 3.63370743710448*^9, 
+  3.633707536057605*^9, 3.6369641307266293`*^9, 3.637030781246409*^9, 
+  3.684107578859161*^9, 3.684107781480967*^9, 3.6841080135689707`*^9, 
+  3.684108185181264*^9, 3.6970298225958443`*^9, 3.70037578410574*^9, 
+  3.7003761702110453`*^9, 3.700377660933413*^9, 3.700383593531348*^9, 
+  3.700392241487195*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Re-Matching", "Subsection",
+ CellChangeTimes->{{3.700153573372013*^9, 3.700153577541436*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"matchMatrixOriginal", "=", "matchMatrix"}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Differential", " ", "Evolution"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol", "=", "sol1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"RematchMatrixDE", "=", 
+    RowBox[{"CmatchMatrix", "[", 
+     RowBox[{
+      RowBox[{"payoffMatrix", "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"x1", "\[Rule]", 
+          RowBox[{"sol", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+         RowBox[{"x2", "\[Rule]", 
+          RowBox[{"sol", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "2"}], "]"}], "]"}]}]}], "}"}]}], ",", "1", ",",
+       "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Particle", " ", "Swarm", " ", "Optimization"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol", "=", "sol2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RematchMatrixPSO", "=", 
+   RowBox[{"CmatchMatrix", "[", 
+    RowBox[{
+     RowBox[{"payoffMatrix", "/.", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"x1", "\[Rule]", 
+         RowBox[{"sol", "[", 
+          RowBox[{"[", 
+           RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+        RowBox[{"x2", "\[Rule]", 
+         RowBox[{"sol", "[", 
+          RowBox[{"[", 
+           RowBox[{"2", ",", "2"}], "]"}], "]"}]}]}], "}"}]}], ",", "1", ",", 
+     "1"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.700153616103406*^9, 3.7001536322442923`*^9}, 
+   3.7001537838984957`*^9, {3.700375803056884*^9, 3.700375848282996*^9}, {
+   3.7003760151481943`*^9, 3.7003760640908833`*^9}, {3.700376195413072*^9, 
+   3.700376222496748*^9}, {3.700377078747007*^9, 3.700377097320569*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"totalpayoffDE", "=", 
+   RowBox[{"Total", "/@", 
+    RowBox[{"Ctotalpayoff", "[", 
+     RowBox[{
+      RowBox[{"payoffMatrix", "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"x1", "\[Rule]", 
+          RowBox[{"sol1", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+         RowBox[{"x2", "\[Rule]", 
+          RowBox[{"sol1", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "2"}], "]"}], "]"}]}]}], "}"}]}], ",", 
+      RowBox[{"Cmates", "[", "matchMatrixOriginal", "]"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"totalpayoffPSO", "=", 
+   RowBox[{"Total", "/@", 
+    RowBox[{"Ctotalpayoff", "[", 
+     RowBox[{
+      RowBox[{"payoffMatrix", "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"x1", "\[Rule]", 
+          RowBox[{"sol2", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+         RowBox[{"x2", "\[Rule]", 
+          RowBox[{"sol2", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "2"}], "]"}], "]"}]}]}], "}"}]}], ",", 
+      RowBox[{"Cmates", "[", "matchMatrixOriginal", "]"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RematchtotalpayoffDE", "=", 
+   RowBox[{"Total", "/@", 
+    RowBox[{"Ctotalpayoff", "[", 
+     RowBox[{
+      RowBox[{"payoffMatrix", "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"x1", "\[Rule]", 
+          RowBox[{"sol1", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+         RowBox[{"x2", "\[Rule]", 
+          RowBox[{"sol1", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "2"}], "]"}], "]"}]}]}], "}"}]}], ",", 
+      RowBox[{"Cmates", "[", "RematchMatrixDE", "]"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RematchtotalpayoffPSO", "=", 
+   RowBox[{"Total", "/@", 
+    RowBox[{"Ctotalpayoff", "[", 
+     RowBox[{
+      RowBox[{"payoffMatrix", "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"x1", "\[Rule]", 
+          RowBox[{"sol2", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+         RowBox[{"x2", "\[Rule]", 
+          RowBox[{"sol2", "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "2"}], "]"}], "]"}]}]}], "}"}]}], ",", 
+      RowBox[{"Cmates", "[", "RematchMatrixPSO", "]"}]}], "]"}]}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.700153967998457*^9, 3.7001539862335777`*^9}, {
+  3.700154151684149*^9, 3.700154163332996*^9}, {3.700154210528922*^9, 
+  3.700154216241767*^9}, {3.7001542495308867`*^9, 3.700154271902748*^9}, {
+  3.7003760905051517`*^9, 3.700376095859844*^9}, {3.700376572595326*^9, 
+  3.700376605761444*^9}, {3.700376643263185*^9, 3.700376651044812*^9}, {
+  3.7003770108704844`*^9, 3.700377018443182*^9}, {3.7003770987674923`*^9, 
+  3.70037719128078*^9}, {3.700377432165166*^9, 3.700377453770665*^9}, {
+  3.7003834333213453`*^9, 3.70038346788026*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"100.", 
+  RowBox[{"(", 
+   RowBox[{"1", "-", 
+    RowBox[{"RematchtotalpayoffDE", "/", "totalpayoffDE"}]}], 
+   ")"}]}]], "Input",
+ CellChangeTimes->{{3.70037724293032*^9, 3.7003773186308117`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "0.04376357469273451`"}], ",", 
+   RowBox[{"-", "0.05123681377592337`"}], ",", 
+   RowBox[{"-", "0.03091592707780144`"}], ",", 
+   RowBox[{"-", "0.04819945955008009`"}], ",", 
+   RowBox[{"-", "0.04587179338801928`"}], ",", 
+   RowBox[{"-", "0.03965141293771346`"}], ",", 
+   RowBox[{"-", "0.0259864107343466`"}], ",", 
+   RowBox[{"-", "0.04015914610016047`"}], ",", 
+   RowBox[{"-", "0.03385525076127216`"}], ",", 
+   RowBox[{"-", "0.0431871432015285`"}], ",", 
+   RowBox[{"-", "0.05527539261735992`"}], ",", 
+   RowBox[{"-", "0.05329641464892898`"}], ",", 
+   RowBox[{"-", "0.042654789468121734`"}], ",", 
+   RowBox[{"-", "0.04078710811699082`"}], ",", 
+   RowBox[{"-", "0.04031605686487527`"}], ",", 
+   RowBox[{"-", "0.03308481753043768`"}], ",", 
+   RowBox[{"-", "0.03713694819797997`"}], ",", 
+   RowBox[{"-", "0.0357447605904726`"}], ",", 
+   RowBox[{"-", "0.04781755801348542`"}], ",", 
+   RowBox[{"-", "0.04228549267544235`"}], ",", 
+   RowBox[{"-", "0.05205354114952154`"}], ",", 
+   RowBox[{"-", "0.03438676620122205`"}], ",", 
+   RowBox[{"-", "0.04230724377549677`"}], ",", 
+   RowBox[{"-", "0.040120541404142784`"}], ",", 
+   RowBox[{"-", "0.03540304450477816`"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.700377247123362*^9, {3.700377278472558*^9, 3.700377319277618*^9}, 
+   3.700377465969131*^9, 3.700377665209859*^9, 3.7003831132126226`*^9, 
+   3.700383492815647*^9, 3.700383598058629*^9, 3.700392246372754*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"100.", 
+  RowBox[{"(", 
+   RowBox[{"1", "-", 
+    RowBox[{"RematchtotalpayoffPSO", "/", "totalpayoffPSO"}]}], 
+   ")"}]}]], "Input",
+ CellChangeTimes->{{3.700377335113056*^9, 3.700377339448669*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "0.04151543396704316`"}], ",", 
+   RowBox[{"-", "0.05069045761993962`"}], ",", 
+   RowBox[{"-", "0.03315535428738414`"}], ",", 
+   RowBox[{"-", "0.047742272737183455`"}], ",", 
+   RowBox[{"-", "0.041289130897603776`"}], ",", 
+   RowBox[{"-", "0.03834255539401088`"}], ",", 
+   RowBox[{"-", "0.025470203358324284`"}], ",", 
+   RowBox[{"-", "0.03923006211556945`"}], ",", 
+   RowBox[{"-", "0.03312792347953675`"}], ",", 
+   RowBox[{"-", "0.041798203257981115`"}], ",", 
+   RowBox[{"-", "0.05268666095730179`"}], ",", 
+   RowBox[{"-", "0.05117941521755043`"}], ",", 
+   RowBox[{"-", "0.039736002707346785`"}], ",", 
+   RowBox[{"-", "0.04054158407602593`"}], ",", 
+   RowBox[{"-", "0.03699745143184163`"}], ",", 
+   RowBox[{"-", "0.03141294224020541`"}], ",", 
+   RowBox[{"-", "0.03528153454925853`"}], ",", 
+   RowBox[{"-", "0.03481809794125823`"}], ",", 
+   RowBox[{"-", "0.04647551954162221`"}], ",", 
+   RowBox[{"-", "0.037994415213460364`"}], ",", 
+   RowBox[{"-", "0.04937910845668192`"}], ",", 
+   RowBox[{"-", "0.03396654217862061`"}], ",", 
+   RowBox[{"-", "0.03788341194082001`"}], ",", 
+   RowBox[{"-", "0.041163167333446715`"}], ",", 
+   RowBox[{"-", "0.036336396023695094`"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.7003773400329113`*^9, 3.7003774696137953`*^9, 
+  3.700377665241737*^9, 3.700383129289679*^9, 3.7003834980040503`*^9, 
+  3.7003835981476097`*^9, 3.7003922464551077`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Length", "@", 
+      RowBox[{"Intersection", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Cmates", "[", "matchMatrixOriginal", "]"}], "[", 
+         RowBox[{"[", "#", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Cmates", "[", "RematchMatrixDE", "]"}], "[", 
+         RowBox[{"[", "#", "]"}], "]"}]}], "]"}]}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Cmates", "[", "matchMatrixOriginal", "]"}], "[", 
+       RowBox[{"[", "#", "]"}], "]"}], "//", "Length"}]}], "}"}], "&"}], "/@", 
+  RowBox[{"Range", "[", "noM", "]"}]}]], "Input",
+ CellChangeTimes->{{3.700153862934703*^9, 3.70015391183428*^9}, {
+   3.700376228317993*^9, 3.70037640973409*^9}, {3.700377609408701*^9, 
+   3.700377617968729*^9}, 3.700383195787307*^9, {3.700383522544002*^9, 
+   3.700383529581411*^9}, 3.70039220640648*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"10", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"12", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"11", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"15", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"19", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"12", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"15", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"12", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"11", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"21", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"17", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"22", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"13", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"15", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"19", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"16", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"15", ",", "50"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.700376238226059*^9, 3.700376287260708*^9}, {
+   3.70037633738029*^9, 3.700376356177082*^9}, 3.70037641060725*^9, 
+   3.700377618921021*^9, 3.7003776653746033`*^9, 3.700383134700614*^9, {
+   3.700383504204515*^9, 3.700383530303503*^9}, 3.700383598329321*^9, 
+   3.700392246721571*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Length", "@", 
+      RowBox[{"Intersection", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Cmates", "[", "matchMatrixOriginal", "]"}], "[", 
+         RowBox[{"[", "#", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Cmates", "[", "RematchMatrixPSO", "]"}], "[", 
+         RowBox[{"[", "#", "]"}], "]"}]}], "]"}]}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Cmates", "[", "matchMatrixOriginal", "]"}], "[", 
+       RowBox[{"[", "#", "]"}], "]"}], "//", "Length"}]}], "}"}], "&"}], "/@", 
+  RowBox[{"Range", "[", "noM", "]"}]}]], "Input",
+ CellChangeTimes->{{3.70037643797521*^9, 3.700376438299089*^9}, {
+   3.700377625102544*^9, 3.700377625292308*^9}, {3.700383223003572*^9, 
+   3.700383223897148*^9}, {3.700383537602838*^9, 3.700383542757689*^9}, 
+   3.700392211508665*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"12", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"12", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"15", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"17", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"23", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"19", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"12", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"14", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"13", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"9", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"19", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"15", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"19", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"17", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"16", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"19", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "50"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"15", ",", "50"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.7003764391894073`*^9, 3.7003776267817497`*^9, 
+  3.700377665645197*^9, 3.7003831367699614`*^9, 3.700383543513713*^9, 
+  3.700383598597104*^9, 3.700392246982218*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1366, 702},
+WindowMargins->{{298, Automatic}, {175, Automatic}},
+FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Info93700403029-6319418"->{
+  Cell[7494, 213, 580, 9, 78, "Print",
+   CellTags->"Info93700403029-6319418"]},
+ "Info123700403036-6319418"->{
+  Cell[13953, 355, 549, 8, 130, "Print",
+   CellTags->"Info123700403036-6319418"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Info93700403029-6319418", 34591, 899},
+ {"Info123700403036-6319418", 34703, 902}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 93, 1, 65, "Section"],
+Cell[676, 25, 133, 1, 33, "Text"],
+Cell[812, 28, 308, 8, 34, "Input"],
+Cell[1123, 38, 274, 6, 34, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1434, 49, 205, 3, 65, "Section"],
+Cell[1642, 54, 207, 4, 33, "Text"],
+Cell[1852, 60, 435, 9, 34, "Input"],
+Cell[2290, 71, 181, 2, 33, "Text"],
+Cell[2474, 75, 628, 13, 34, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3139, 93, 211, 4, 65, "Section"],
+Cell[3353, 99, 342, 8, 34, "Input"],
+Cell[3698, 109, 213, 5, 34, "Input"],
+Cell[3914, 116, 405, 9, 34, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4356, 130, 148, 2, 65, "Section"],
+Cell[4507, 134, 343, 7, 49, "Text"],
+Cell[4853, 143, 411, 7, 34, "Input"],
+Cell[CellGroupData[{
+Cell[5289, 154, 116, 1, 44, "Subsection"],
+Cell[5408, 157, 184, 2, 33, "Text"],
+Cell[5595, 161, 1754, 44, 205, "DefinitionBox3Col",
+ CellID->18427541],
+Cell[CellGroupData[{
+Cell[7374, 209, 117, 2, 32, "Input"],
+Cell[7494, 213, 580, 9, 78, "Print",
+ CellTags->"Info93700403029-6319418"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8111, 227, 1516, 28, 80, "Input"],
+Cell[CellGroupData[{
+Cell[9652, 259, 737, 16, 24, "Print"],
+Cell[10392, 277, 570, 8, 45, "Print"],
+Cell[10965, 287, 2668, 52, 130, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13694, 346, 115, 1, 45, "Subsection"],
+Cell[CellGroupData[{
+Cell[13834, 351, 116, 2, 32, "Input"],
+Cell[13953, 355, 549, 8, 130, "Print",
+ CellTags->"Info123700403036-6319418"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14539, 368, 1390, 29, 57, "Input"],
+Cell[CellGroupData[{
+Cell[15954, 401, 869, 18, 24, "Print"],
+Cell[16826, 421, 590, 8, 24, "Print"],
+Cell[17419, 431, 2797, 54, 130, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20277, 492, 99, 1, 45, "Subsection"],
+Cell[20379, 495, 1896, 51, 214, "Input"],
+Cell[22278, 548, 3015, 80, 103, "Input"],
+Cell[CellGroupData[{
+Cell[25318, 632, 221, 6, 32, "Input"],
+Cell[25542, 640, 1485, 31, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27064, 676, 222, 6, 32, "Input"],
+Cell[27289, 684, 1451, 30, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28777, 719, 898, 22, 56, "Input"],
+Cell[29678, 743, 1884, 57, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31599, 805, 879, 22, 56, "Input"],
+Cell[32481, 829, 1763, 55, 114, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
