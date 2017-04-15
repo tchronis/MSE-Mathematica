@@ -22,8 +22,7 @@
 (* ::Input::Initialization:: *)
 ClearAll[generateAssignmentMatrix];
 Options[generateAssignmentMatrix]={linearProgrammingOptions->Null,rationalizeResult->True,domain->Integers};
-generateAssignmentMatrix::usage="
-Generates the optimal assignment of matches from the given matrix of payoffs for each match. The optimal assignment is the one that maximizes the total payoff (i.e. the sum of all payoffs) in a market. In an assignment matrix, each entry (i,j) is 1 if i and j are matched and 0 otherwise. The quota can be a number (the same for all streams) or a list that sets a specific quota per agent.
+generateAssignmentMatrix::usage="generateAssignmentMatrix[payoffs,quotaU,quotaD], generates the optimal assignment of matches from the given matrix of payoffs for each match. The optimal assignment is the one that maximizes the total payoff (i.e. the sum of all payoffs) in a market. In an assignment matrix, each entry (i,j) is 1 if i and j are matched and 0 otherwise. The quota can be a number (the same for all streams) or a list that sets a specific quota per agent.
 Notice that the quota is max number of matches per agent ( so in the data the real number of matches could be lower than the max).";
 generateAssignmentMatrix[payoffs_,quotaU_:1,quotaD_:1,options___?OptionQ]:=
 Block[{realorint,rationalize,lpOptions,numU,numD,m1,m2,m3,m,b,matchMatrix,result},{realorint,rationalize,lpOptions}={domain,rationalizeResult,linearProgrammingOptions}/.Flatten[{options,Options[generateAssignmentMatrix]}];
@@ -60,11 +59,10 @@ If[rationalize,Map[Rationalize[#,.01]&,result,{2}],result]
 
 (* ::Input::Initialization:: *)
 ClearAll[CmatchMatrix];
-CmatchMatrix::usage="CmatchMatrix[payoffMatrix_,quotaU_:1,quotaD_:1,p_:False]  
+CmatchMatrix::usage="CmatchMatrix[payoffMatrix_,quotaU_:1,quotaD_:1,p_:0]  
 Calculates and creates/updates the global variable 'matchMatrix'.
-If p is set to 'False', it creates the matchMatrix by running the generateAssignmentMatrix routine for all markets.
-If p is set to 'True' , it does the same, only in parallel! ATTN: IT DOES NOT WORK WITH VARIABLE QUOTAS YET.
-If p is set to an integer from 1 to the 'number of Markets' then the p'th element of the matchMatrix is calculated."
+If p is set to 0, it creates the matchMatrix by running the generateAssignmentMatrix routine for all markets.
+If p is set to an integer from 1 to the 'number of Markets' then the p'th element of the matchMatrix is calculated.";
 CmatchMatrix[payoffMatrix_,quotaU_:1,quotaD_:1,p_:False]:=
 If[IntegerQ@p,
 If[1<= p<=Length@payoffMatrix,
@@ -79,14 +77,10 @@ Print["Invalid market index!"]
 ]
 ,
 matchMatrix=
-If[p==False,
 MapIndexed[generateAssignmentMatrix[#1,
 If[ListQ@quotaU,quotaU[[First[#2]]],quotaU],
 If[ListQ@quotaD,quotaD[[First[#2]]],quotaD]
-]&,payoffMatrix],
-(*generateAssignmentMatrix[#,quotaU,quotaD]&/@payoffMatrix,*)
-ParallelMap[generateAssignmentMatrix[#,quotaU,quotaD]&,payoffMatrix](*NOT WORKING WITH VARIABLE QUOTAS - yet*)
-]
+]&,payoffMatrix]
 ]
 
 
