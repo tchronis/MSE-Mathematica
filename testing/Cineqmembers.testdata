@@ -1,11 +1,11 @@
 testDefault =
   <|
-   "function" -> Cineqmembers,
+   "function" -> "Cineqmembers",
    "parameters" -> {},
-   "evaluate" -> True,
+   "evaluate" -> "True",
    "TestID" -> "Not set a TestID yet",
-   "MemoryConstraint" -> Quantity[20, "Kilobytes"],
-   "TimeConstraint" -> Quantity[.1, "Seconds"]
+   "MemoryConstraint" -> "Quantity[20, \"Kilobytes\"]",
+   "TimeConstraint" -> "Quantity[.1, \"Seconds\"]"
    |>;
 
 tests =
@@ -123,6 +123,6 @@ tests =
           7, 9}, {1, 9, 7}}, {{1, 7, 10}, {1, 10, 7}}, {{1, 8, 9}, {1,
            9, 8}}, {{1, 8, 10}, {1, 10, 8}}, {{1, 9, 10}, {1, 10, 
           9}}}}},
-    "MemoryConstraint" -> Quantity[50, "Kilobytes"]
+    "MemoryConstraint" -> "Quantity[50, \"Kilobytes\"]"
     |>
    };

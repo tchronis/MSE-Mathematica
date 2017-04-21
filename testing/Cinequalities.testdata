@@ -1,11 +1,11 @@
 testDefault =
   <|
-   "function" -> Cinequalities,
+   "function" -> "Cinequalities",
    "parameters" -> {},
-   "evaluate" -> True,
+   "evaluate" -> "True",
    "TestID" -> "Not set a TestID yet",
-   "MemoryConstraint" -> Quantity[20, "Kilobytes"],
-   "TimeConstraint" -> Quantity[.1, "Seconds"]
+   "MemoryConstraint" -> "Quantity[20, \"Kilobytes\"]",
+   "TimeConstraint" -> "Quantity[.1, \"Seconds\"]"
    |>;
 
 tests =
@@ -34,7 +34,7 @@ tests =
       f[3, 4, 4], -f[3, 4, 3] + f[3, 4, 4]}}
   |>,
  <|"TestID" -> "various2",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    matchMatrix = {{{1, 0}, {0, 1}}, {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}};
    Cmate[matchMatrix];
@@ -46,7 +46,7 @@ tests =
   f[2, 2, 2] - f[2, 2, 3] - f[2, 3, 2] + f[2, 3, 3]}}
   |>,
  <|"TestID" -> "various3",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{1, 1}, {0, 0}, {0, 0}}}];
    {mate, Cineqmembers[mate], Cinequalities[f, ineqmembers]} },
@@ -57,7 +57,7 @@ tests =
     f[1, 1, 1] + f[1, 1, 2] - f[1, 3, 1] - f[1, 3, 2], 0}}}
   |>,
  <|"TestID" -> "various4",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{1, 1}, {1, 0}}}];
    {mate, Cineqmembers[mate], Cinequalities[f, ineqmembers]} },
@@ -66,7 +66,7 @@ tests =
       1}, {1, 2, 1}, {1, 2, 2}}}}}, {{f[1, 1, 2] - f[1, 2, 2]}}}
   |>,
  <|"TestID" -> "various5",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{1, 0}, {0, 1}}}];
    {mate, Cineqmembers[mate], Cinequalities[f, ineqmembers]} },
@@ -75,7 +75,7 @@ tests =
     f[1, 2, 2]}}}
   |>,
  <|"TestID" -> "various6",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{1, 1}, {1, 1}}}];
    {mate, Cineqmembers[mate], Cinequalities[f, ineqmembers]} },
@@ -84,7 +84,7 @@ tests =
        1}, {1, 1, 2}, {1, 2, 1}, {1, 2, 2}}}}}, {{0}}}
   |>,
  <|"TestID" -> "various7",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{1, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}}];
    {mate, Cineqmembers[mate], Cinequalities[f, ineqmembers]} },
@@ -98,7 +98,7 @@ tests =
     f[1, 3, 4], f[1, 2, 3] - f[1, 2, 4] - f[1, 3, 3] + f[1, 3, 4]}}}
   |>,
  <|"TestID" -> "pairwise inequalities (pdf case) 2 - the used one",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{1, 0, 0}, {1, 0, 0}, {0, 1, 0}, {0, 0, 1}}}];
    {mate, Cineqmembers[mate,"pairwise",{3}], Cinequalities[f, ineqmembers]} },
@@ -113,7 +113,7 @@ tests =
     f[1, 4, 3]}}}
   |>,
  <|"TestID" -> "Inequalities taken in triples (pairs generalization)(1)",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{1, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}}];
    {mate, Cineqmembers[mate,"triples"], Cinequalities[f, ineqmembers]} },
@@ -127,7 +127,7 @@ tests =
     f[1, 2, 3] - f[1, 3, 3] + f[1, 3, 4]}}}
   |>,
  <|"TestID" -> "Inequalities taken in triples (pairs generalization)(2)",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}}];
    {mate, Cineqmembers[mate,"triples"], Cinequalities[f, ineqmembers]} },
@@ -159,7 +159,7 @@ tests =
     f[1, 4, 4]}}}
   |>,
  <|"TestID" -> "Inequalities taken in triples (pairs generalization)(3)",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{1, 1, 0}, {0, 1, 0}, {0, 0, 1}}}];
    {mate, Cineqmembers[mate,"triples"], Cinequalities[f, ineqmembers]} },
@@ -173,7 +173,7 @@ tests =
     f[1, 3, 3]}}}
   |>,
  <|"TestID" -> "Inequalities taken in pairs - various markets (1)",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{0, 0}, {0, 1}, {1, 1}}, {{0, 1, 0}, {0, 1, 0}}, {{1, 1, 0, 0}, {1, 
    0, 1, 1}, {1, 0, 1, 0}, {1, 1, 1, 1}}}];
@@ -206,7 +206,7 @@ tests =
     f[3, 3, 4] + f[3, 4, 2] + f[3, 4, 4]}}}
   |>,
  <|"TestID" -> "Inequalities taken in pairs - various markets (2)",
-  "function" -> Identity,
+  "function" -> "Identity",
   "Input" -> {
    Cmate[{{{1, 0}, {0, 1}, {0, 1}}, {{1, 0, 0}, {0, 1, 0}}, {{1, 0, 0, 
      0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}}];
