@@ -1,0 +1,3350 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    158772,       3342]
+NotebookOptionsPosition[    158029,       3317]
+NotebookOutlinePosition[    158422,       3334]
+CellTagsIndexPosition[    158379,       3331]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"DynamicModule", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"maxm", "=", "20"}], ",", 
+     RowBox[{"m", "=", "2"}], ",", 
+     RowBox[{"maxnoattr", "=", "10"}], ",", 
+     RowBox[{"noattr", "=", "3"}], ",", 
+     RowBox[{"noU", "=", 
+      RowBox[{"{", 
+       RowBox[{"12", ",", "15"}], "}"}]}], ",", 
+     RowBox[{"noD", "=", 
+      RowBox[{"{", 
+       RowBox[{"35", ",", "45"}], "}"}]}], ",", "distributions", ",", "xu", 
+     ",", "xd", ",", "\[IndentingNewLine]", 
+     RowBox[{"distnameU", "=", 
+      RowBox[{"{", 
+       RowBox[{
+       "ChiDistribution", ",", "ChiDistribution", ",", "NormalDistribution", 
+        ",", "GumbelDistribution", ",", "NormalDistribution", ",", 
+        "NormalDistribution", ",", "NormalDistribution", ",", 
+        "NormalDistribution", ",", "NormalDistribution", ",", 
+        "NormalDistribution"}], "}"}]}], ",", 
+     RowBox[{"distparsU", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", "1.5", "}"}], ",", 
+        RowBox[{"{", "2", "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"10", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}]}], "}"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"distlinU", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}]}], "}"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"distnameD", "=", 
+      RowBox[{"{", 
+       RowBox[{
+       "NormalDistribution", ",", "LogNormalDistribution", ",", 
+        "LogNormalDistribution", ",", "GumbelDistribution", ",", 
+        "NormalDistribution", ",", "NormalDistribution", ",", 
+        "NormalDistribution", ",", "NormalDistribution", ",", 
+        "NormalDistribution", ",", "NormalDistribution"}], "}"}]}], ",", 
+     RowBox[{"distparsD", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"10", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", ".5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1.5"}], "}"}]}], "}"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"distlinD", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0"}], "}"}]}], "}"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"exportdatafilename", "=", "\"\<randomdata\>\""}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"quotaU", "=", "3"}], ",", 
+     RowBox[{"quotaD", "=", "2"}], ",", 
+     RowBox[{"b", "=", 
+      RowBox[{"{", 
+       RowBox[{
+       "1", ",", "3", ",", "5", ",", "1", ",", "1", ",", "1", ",", "1", ",", 
+        "1", ",", "1", ",", "1"}], "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"noisedists", "=", 
+      RowBox[{"{", 
+       RowBox[{"NormalDistribution", ",", "GumbelDistribution"}], "}"}]}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"noisepars", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"noisedist", "=", "GumbelDistribution"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"noisepar", "=", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1"}], "}"}]}], ",", 
+     RowBox[{"noiseflag", "=", "False"}], ",", "\[IndentingNewLine]", 
+     "matchPayoff", ",", 
+     RowBox[{"payoffMatrices", "=", 
+      RowBox[{"{", "}"}]}], " ", ",", 
+     RowBox[{"matchMatrices", "=", 
+      RowBox[{"{", "}"}]}], ",", 
+     RowBox[{"match", "=", 
+      RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"tmp", "=", 
+      RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"exportmatchedfilename", "=", "\"\<matched\>\""}], ",", 
+     RowBox[{"factual", "=", 
+      RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"output", "=", "\"\<\>\""}]}], "\[IndentingNewLine]", "}"}], ",",
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"distributions", "=", 
+     RowBox[{"ToExpression", "@", 
+      RowBox[{"Names", "[", "\"\<*Distribution*\>\"", "]"}]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"xu", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", 
+       RowBox[{"{", "maxm", "}"}], ",", 
+       RowBox[{"{", "maxnoattr", "}"}]}], "]"}]}], ";", 
+    RowBox[{"xd", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", 
+       RowBox[{"{", "maxm", "}"}], ",", 
+       RowBox[{"{", "maxnoattr", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"payoffMatrices", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", 
+       RowBox[{"{", "maxm", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"matchMatrices", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", 
+       RowBox[{"{", "maxm", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"match", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", 
+       RowBox[{"{", "maxm", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"tmp", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{"0", ",", 
+       RowBox[{"{", "maxm", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"factual", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", 
+       RowBox[{"{", "maxm", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Style", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Column", "[", 
+       RowBox[{"{", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{
+          "\"\<Creating data using Random Distributions\>\"", ",", "Bold", 
+           ",", "Larger"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Number of Markets  \>\"", ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "m", "]"}], ",", 
+              RowBox[{"FieldSize", "\[Rule]", "3"}]}], "]"}]}], "}"}], "]"}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Number of Attributes \>\"", ",", 
+            RowBox[{"Slider", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", 
+               RowBox[{"noattr", ",", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"noattr", "=", "#"}], ")"}], "&"}]}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", "maxnoattr", ",", "1"}], "}"}]}], "]"}], 
+            ",", "\"\<  \>\"", ",", 
+            RowBox[{"Dynamic", "[", "noattr", "]"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Number of Upstreams   \>\"", ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "noU", "]"}], ",", 
+              RowBox[{"ContinuousAction", "\[Rule]", "True"}], ",", 
+              RowBox[{"FieldSize", "\[Rule]", "30"}]}], "]"}]}], "}"}], "]"}],
+          ",", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Number of Downstreams \>\"", ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "noD", "]"}], ",", 
+              RowBox[{"FieldSize", "\[Rule]", "30"}], ",", 
+              RowBox[{"ContinuousAction", "\[Rule]", "True"}]}], "]"}]}], 
+           "}"}], "]"}], ",", "\[IndentingNewLine]", "\"\<\>\"", ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Dynamic", "[", 
+          RowBox[{"Grid", "@", 
+           RowBox[{"Prepend", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"With", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"i", "=", "i"}], "}"}], ",", 
+                 RowBox[{"{", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"distnameU", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                    "distributions"}], 
+                    RowBox[{"(*", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "NormalDistribution", ",", "LogNormalDistribution", ",", 
+                    "ChiDistribution", ",", "GumbelDistribution"}], "}"}], 
+                    "*)"}], "]"}], ",", "\[IndentingNewLine]", 
+                   RowBox[{"Tooltip", "[", 
+                    RowBox[{
+                    RowBox[{"InputField", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"distparsU", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"FieldSize", "\[Rule]", "6"}]}], "]"}], ",", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"With", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"t", "=", 
+                    RowBox[{"distnameU", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"MessageName", "[", 
+                    RowBox[{"t", ",", "\"\<usage\>\""}], "]"}]}], "]"}], 
+                    "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+                   RowBox[{"InputField", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"distlinU", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"FieldSize", "\[Rule]", "6"}]}], "]"}], ",", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"distnameD", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                    "distributions"}], 
+                    RowBox[{"(*", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "NormalDistribution", ",", "LogNormalDistribution", ",", 
+                    "ChiDistribution", ",", "GumbelDistribution"}], "}"}], 
+                    "*)"}], "]"}], ",", "\[IndentingNewLine]", 
+                   RowBox[{"Tooltip", "[", 
+                    RowBox[{
+                    RowBox[{"InputField", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"distparsD", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"FieldSize", "\[Rule]", "6"}]}], "]"}], ",", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"With", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"t", "=", 
+                    RowBox[{"distnameD", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"MessageName", "[", 
+                    RowBox[{"t", ",", "\"\<usage\>\""}], "]"}]}], "]"}], 
+                    "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+                   RowBox[{"InputField", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"distlinD", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"FieldSize", "\[Rule]", "6"}]}], "]"}]}], 
+                  "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", 
+                "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"i", ",", "1", ",", "noattr"}], "}"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+              "\"\<U Distributions\>\"", ",", "\"\<Parameters\>\"", ",", 
+               "\"\<a X + b\>\"", ",", "\"\<D Distributions\>\"", ",", 
+               "\"\<Parameters\>\"", ",", "\"\<a X + b\>\""}], "}"}]}], 
+            "]"}]}], "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", ",",
+          "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{"\"\<Filename to save the data  \>\"", ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "exportdatafilename", "]"}], ",", 
+              "String", ",", 
+              RowBox[{"FieldSize", "\[Rule]", "15"}]}], "]"}], ",", 
+            "\"\<   \>\"", ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            RowBox[{"Button", "[", 
+             RowBox[{
+             "\"\<   Create data  (Step 1)   \>\"", ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"m", "\[Equal]", 
+                  RowBox[{"Length", "[", "noU", "]"}], "\[Equal]", 
+                  RowBox[{"Length", "[", "noD", "]"}]}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"Do", "[", "\[IndentingNewLine]", 
+                   RowBox[{"(*", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"xu", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"noU", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "}"}], ",", 
+                    RowBox[{"{", "noattr", "}"}]}], "]"}]}], ";", 
+                    RowBox[{"xd", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"noD", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "}"}], ",", 
+                    RowBox[{"{", "noattr", "}"}]}], "]"}]}], ";"}], "*)"}], 
+                   "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"Do", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"xu", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"distlinU", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], 
+                    RowBox[{"Random", "[", 
+                    RowBox[{
+                    RowBox[{"distnameU", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "@@", 
+                    RowBox[{"distparsU", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "+", 
+                    RowBox[{
+                    RowBox[{"distlinU", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"noU", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "}"}]}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"xd", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"distlinD", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], 
+                    RowBox[{"Random", "[", 
+                    RowBox[{
+                    RowBox[{"distnameD", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "@@", 
+                    RowBox[{"distparsD", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "+", 
+                    RowBox[{
+                    RowBox[{"distlinD", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"noD", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "}"}]}], "]"}]}], ";"}], 
+                    "\[IndentingNewLine]", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", "noattr"}], "}"}]}], "]"}], 
+                    "\[IndentingNewLine]", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"k", ",", "1", ",", "m"}], "}"}]}], "]"}], ";", 
+                  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                  RowBox[{"(*", "PLOTS", "*)"}], "\[IndentingNewLine]", 
+                  RowBox[{"CreateWindow", "[", 
+                   RowBox[{"DocumentNotebook", "[", "\[IndentingNewLine]", 
+                    RowBox[{"Table", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Grid", "@", 
+                    RowBox[{"Prepend", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Transpose", "@", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ListPlot", "[", 
+                    RowBox[{
+                    RowBox[{"xu", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"ListPlot", "[", 
+                    RowBox[{
+                    RowBox[{"xd", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", "noattr"}], "}"}]}], "]"}]}], 
+                    "\[IndentingNewLine]", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"\"\<MARKET \>\"", "<>", 
+                    RowBox[{"ToString", "[", "k", "]"}]}], ",", "Large", ",", 
+                    "Bold"}], "]"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"k", ",", "1", ",", "m"}], "}"}]}], "]"}], 
+                    "\[IndentingNewLine]", "]"}], "]"}], ";", 
+                  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                  RowBox[{"Do", "[", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"Export", "[", 
+                    RowBox[{
+                    RowBox[{"exportdatafilename", "<>", 
+                    RowBox[{"ToString", "[", "k", "]"}], "<>", 
+                    "\"\<.xls\>\""}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    "\"\<Upstream\>\"", "\[Rule]", "\[IndentingNewLine]", 
+                    RowBox[{"Prepend", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Transpose", "@", 
+                    RowBox[{"Join", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{"k", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"noU", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "}"}]}], "]"}], "}"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Range", "[", 
+                    RowBox[{"noU", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "]"}], "}"}], ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"xu", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", "noattr"}], "}"}]}], "]"}]}], 
+                    RowBox[{"(*", 
+                    RowBox[{",", 
+                    RowBox[{"{", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{"quotaU", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"noU", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "}"}]}], "]"}], "}"}]}], 
+                    "*)"}], "]"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Join", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Market Id\>\"", ",", "\"\<Upstream Id\>\""}],
+                     "}"}], ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"\"\<Attr \>\"", "<>", 
+                    RowBox[{"ToString", "[", "i", "]"}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", "noattr"}], "}"}]}], "]"}]}], 
+                    RowBox[{"(*", 
+                    RowBox[{",", 
+                    RowBox[{"{", "\"\<quotaU\>\"", "}"}]}], "*)"}], "]"}]}], 
+                    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                    ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    "\"\<Downstream\>\"", "\[Rule]", "\[IndentingNewLine]", 
+                    RowBox[{"Prepend", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Transpose", "@", 
+                    RowBox[{"Join", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{"k", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"noD", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "}"}]}], "]"}], "}"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Range", "[", 
+                    RowBox[{"noD", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "]"}], "}"}], ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"xd", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", "noattr"}], "}"}]}], "]"}]}], 
+                    RowBox[{"(*", 
+                    RowBox[{",", 
+                    RowBox[{"{", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{"quotaD", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"noD", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "}"}]}], "]"}], "}"}]}], 
+                    "*)"}], "]"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Join", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    "\"\<Market Id\>\"", ",", "\"\<Downstream Id\>\""}], 
+                    "}"}], ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"\"\<Attr \>\"", "<>", 
+                    RowBox[{"ToString", "[", "i", "]"}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", "noattr"}], "}"}]}], "]"}]}], 
+                    RowBox[{"(*", 
+                    RowBox[{",", 
+                    RowBox[{"{", "\"\<quotaD\>\"", "}"}]}], "*)"}], "]"}]}], 
+                    "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+                    "}"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+                    RowBox[{"(*", 
+                    RowBox[{"SystemOpen", "[", "exportdatafilename", "]"}], 
+                    "*)"}], "\[IndentingNewLine]", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"k", ",", "1", ",", "m"}], "}"}]}], "]"}]}], 
+                 "\[IndentingNewLine]", "\[IndentingNewLine]", ",", 
+                 RowBox[{"CreateDialog", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{
+                    "TextCell", "[", 
+                    "\"\<Number of markets must agree with the length of \
+upstreams and downstreams - please correct\>\"", "]"}], ",", 
+                    RowBox[{"DefaultButton", "[", "]"}]}], "}"}], "]"}]}], 
+                "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+              "\[IndentingNewLine]", ",", 
+              RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+              RowBox[{"Background", "\[Rule]", "Orange"}]}], "]"}], 
+            "\[IndentingNewLine]", "\[IndentingNewLine]", ",", 
+            "\"\<  All data will be saved - one file per market\>\"", ",", 
+            "\[IndentingNewLine]", "\[IndentingNewLine]", "\"\<  \>\"", ",", 
+            "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            RowBox[{"Button", "[", 
+             RowBox[{"\"\<   Import Data   \>\"", ",", "\[IndentingNewLine]", 
+              RowBox[{"Module", "[", 
+               RowBox[{
+                RowBox[{"{", "data", "}"}], ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"noU", "=", 
+                  RowBox[{"Table", "[", 
+                   RowBox[{"1", ",", 
+                    RowBox[{"{", "m", "}"}]}], "]"}]}], ";", 
+                 RowBox[{"noD", "=", 
+                  RowBox[{"Table", "[", 
+                   RowBox[{"1", ",", 
+                    RowBox[{"{", "m", "}"}]}], "]"}]}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"Do", "[", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"data", " ", "=", " ", 
+                    RowBox[{
+                    RowBox[{"Import", "[", 
+                    RowBox[{"exportdatafilename", "<>", 
+                    RowBox[{"ToString", "[", "k", "]"}], "<>", 
+                    "\"\<.xls\>\""}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", " ", 
+                    RowBox[{"2", " ", ";;", " ", "All"}]}], "]"}], "]"}]}], 
+                    ";", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"xu", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "=", " ", 
+                    RowBox[{
+                    RowBox[{"Transpose", "[", 
+                    RowBox[{"data", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"3", " ", ";;", " ", "All"}], "]"}], "]"}]}], ";",
+                     "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"xd", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "=", " ", 
+                    RowBox[{
+                    RowBox[{"Transpose", "[", 
+                    RowBox[{"data", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"3", " ", ";;", "All"}], "]"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"noattr", " ", "=", " ", 
+                    RowBox[{
+                    RowBox[{"Dimensions", "[", 
+                    RowBox[{"xu", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"noU", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], " ", "=", " ", 
+                    RowBox[{
+                    RowBox[{"Dimensions", "[", 
+                    RowBox[{"xu", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"noD", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], " ", "=", " ", 
+                    RowBox[{
+                    RowBox[{"Dimensions", "[", 
+                    RowBox[{"xd", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], ";"}], 
+                   "\[IndentingNewLine]", ",", 
+                   RowBox[{"{", 
+                    RowBox[{"k", ",", "1", ",", "m"}], "}"}]}], "]"}], ";", 
+                 "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                 RowBox[{"(*", "PLOTS", "*)"}], "\[IndentingNewLine]", 
+                 RowBox[{"CreateWindow", "[", 
+                  RowBox[{"DocumentNotebook", "[", "\[IndentingNewLine]", 
+                   RowBox[{"Table", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Grid", "@", 
+                    RowBox[{"Prepend", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Transpose", "@", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ListPlot", "[", 
+                    RowBox[{
+                    RowBox[{"xu", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"ListPlot", "[", 
+                    RowBox[{
+                    RowBox[{"xd", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", "noattr"}], "}"}]}], "]"}]}], 
+                    "\[IndentingNewLine]", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"\"\<MARKET \>\"", "<>", 
+                    RowBox[{"ToString", "[", "k", "]"}]}], ",", "Large", ",", 
+                    "Bold"}], "]"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"k", ",", "1", ",", "m"}], "}"}]}], "]"}], 
+                   "\[IndentingNewLine]", "]"}], "]"}], ";"}]}], 
+               "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], ",", " ", 
+              RowBox[{"Method", " ", "->", " ", "\"\<Queued\>\""}], ",", " ", 
+              RowBox[{"Background", " ", "->", " ", "Orange"}]}], "]"}]}], 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", "}"}], "]"}], 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", ",", 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+             "\"\<Setting quota --> \>\"", ",", "Bold", ",", "Larger"}], 
+             "]"}], ",", "\[IndentingNewLine]", "\"\<quotaU = \>\"", ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "quotaU", "]"}], ",", 
+              RowBox[{"ContinuousAction", "\[Rule]", "True"}], ",", 
+              RowBox[{"FieldSize", "\[Rule]", "3"}]}], "]"}], ",", 
+            "\"\<  \>\"", ",", "\[IndentingNewLine]", "\"\<quotaD = \>\"", 
+            ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "quotaD", "]"}], ",", 
+              RowBox[{"ContinuousAction", "\[Rule]", "True"}], ",", 
+              RowBox[{"FieldSize", "\[Rule]", "3"}]}], "]"}], ",", 
+            "\"\<  \>\"", ","}], "\[IndentingNewLine]", 
+           RowBox[{"(*", "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<noU/noD must be less or equal to quotaD/quotaU for each \
+market \>\"", " ", ",", "\[IndentingNewLine]", 
+             RowBox[{"Style", "[", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"Dynamic", "[", 
+                RowBox[{"Tooltip", "[", 
+                 RowBox[{
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{"m", "\[Equal]", 
+                    RowBox[{"Length", "[", "noU", "]"}], "\[Equal]", 
+                    RowBox[{"Length", "[", "noD", "]"}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Thread", "[", 
+                    RowBox[{
+                    RowBox[{"noU", "/", "noD"}], "\[LessEqual]", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"quotaD", "/", "quotaU"}], ",", 
+                    RowBox[{"{", "m", "}"}]}], "]"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", "\"\<----------\>\""}], "]"}], 
+                  ",", "\"\< make sure all are True\>\""}], "]"}], "]"}], 
+               "\[IndentingNewLine]", ",", "Bold", ",", "Red"}], "]"}]}], 
+            "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", "}"}], 
+          "]"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+             "\"\<Setting Pay Function --> \>\"", ",", "Bold", ",", 
+              "Larger"}], "]"}], ",", 
+            "\"\<Fill in the b's parameter values below\>\""}], "}"}], "]"}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"b", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "*", 
+              RowBox[{
+               RowBox[{"xu", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "*", 
+              RowBox[{"xd", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", "j"}], "]"}], "]"}]}], "+"}], "..."}], "+", 
+           RowBox[{
+            RowBox[{"b", "[", 
+             RowBox[{"[", "noattr", "]"}], "]"}], "*", 
+            RowBox[{"xu", "[", 
+             RowBox[{"[", 
+              RowBox[{"noattr", ",", "i"}], "]"}], "]"}], "*", 
+            RowBox[{"xd", "[", 
+             RowBox[{"[", 
+              RowBox[{"noattr", ",", "j"}], "]"}], "]"}]}]}], "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{"Dynamic", "[", 
+          RowBox[{"Row", "@", 
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"i", "=", "i"}], "}"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"InputField", "[", 
+                RowBox[{
+                 RowBox[{"Dynamic", "[", 
+                  RowBox[{"b", "[", 
+                   RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                 RowBox[{"FieldSize", "\[Rule]", "4"}]}], "]"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", "noattr"}], "}"}]}], "]"}]}], "]"}],
+          ",", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<Setting matchPayoff noise \>\"", ",", "\[IndentingNewLine]", 
+            RowBox[{"PopupMenu", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "noisedist", "]"}], ",", "noisedists"}],
+              "]"}], ",", "\[IndentingNewLine]", "\"\<  \>\"", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"Tooltip", "[", 
+             RowBox[{
+              RowBox[{"InputField", "[", 
+               RowBox[{
+                RowBox[{"Dynamic", "[", "noisepar", "]"}], ",", 
+                RowBox[{"FieldSize", "\[Rule]", "6"}]}], "]"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Dynamic", "[", 
+               RowBox[{"With", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"t", "=", "noisedist"}], "}"}], ",", 
+                 RowBox[{"MessageName", "[", 
+                  RowBox[{"t", ",", "\"\<usage\>\""}], "]"}]}], "]"}], 
+               "]"}]}], "]"}], ",", "\[IndentingNewLine]", "\"\<  \>\"", ",", 
+            RowBox[{"Checkbox", "[", 
+             RowBox[{"Dynamic", "[", "noiseflag", "]"}], "]"}], ",", 
+            "\"\< Check to enable noise (uncheck to disable)\>\""}], 
+           "\[IndentingNewLine]", "}"}], "]"}], "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Button", "[", 
+          RowBox[{
+          "\"\<Calculate Best Match (Jeremy's routine)  (Step 2)\>\"", ",", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Do", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"payoffMatrices", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}], " ", "=", " ", 
+                RowBox[{"Table", "[", 
+                 RowBox[{
+                  RowBox[{"matchPayoff", "[", 
+                   RowBox[{"k", ",", "i", ",", "j"}], "]"}], " ", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", " ", "1", ",", 
+                    RowBox[{"noU", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}], "}"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"j", ",", " ", "1", ",", 
+                    RowBox[{"noD", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}], "}"}]}], "]"}]}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"matchMatrices", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}], " ", "=", " ", 
+                RowBox[{"generateAssignmentMatrix", "[", 
+                 RowBox[{
+                  RowBox[{"payoffMatrices", "[", 
+                   RowBox[{"[", "k", "]"}], "]"}], ",", "quotaU", ",", 
+                  "quotaD"}], "]"}]}], ";", 
+               RowBox[{"(*", 
+                RowBox[{"For", " ", "one", " ", "market", " ", "only"}], 
+                "*)"}], "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"match", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}], "=", 
+                RowBox[{
+                 RowBox[{"matchIndexMatrix", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"matchMatrices", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "}"}], ",", " ", 
+                   "quotaU"}], "]"}], "[", 
+                 RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"match", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}], "=", 
+                RowBox[{"Module", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"u", ",", "d"}], "}"}], ",", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"u", "=", 
+                    RowBox[{"Flatten", "@", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"match", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ")"}]}]}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"d", "=", 
+                    RowBox[{
+                    RowBox[{"match", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"u", "[", 
+                    RowBox[{"[", "#", "]"}], "]"}], ",", 
+                    RowBox[{"d", "[", 
+                    RowBox[{"[", "#", "]"}], "]"}]}], "}"}], "&"}], "/@", 
+                    RowBox[{"Range", "[", 
+                    RowBox[{"Length", "[", "u", "]"}], "]"}]}]}]}], 
+                 "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"(*", 
+                RowBox[{
+                "The", " ", "following", " ", "small", " ", "code", " ", 
+                 "portion", " ", "is", " ", "for", " ", "removing", " ", 
+                 RowBox[{"0", "'"}], "s"}], "*)"}], "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"match", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}], "=", 
+                RowBox[{"Select", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", "Positive"}], 
+                    "]"}]}], "}"}], "&"}], "/@", 
+                   RowBox[{"match", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}], "\[IndentingNewLine]", 
+                  ",", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "\[NotEqual]", 
+                    RowBox[{"{", "}"}]}], "&"}]}], "]"}]}], ";"}], 
+              RowBox[{"(*", 
+               RowBox[{
+               "End", " ", "of", " ", "small", " ", "code", " ", "portion"}], 
+               "*)"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+              RowBox[{"{", 
+               RowBox[{"k", ",", "1", ",", "m"}], "}"}]}], "]"}], ";", 
+            "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            RowBox[{"output", "=", 
+             RowBox[{"Column", "[", 
+              RowBox[{"Join", "[", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"Table", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"Column", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"\"\<\>\"", ",", "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"\"\<Market \>\"", "<>", 
+                    RowBox[{"ToString", "[", "k", "]"}], "<>", "\"\<  \>\""}],
+                     ",", 
+                    RowBox[{"match", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}], "}"}], "]"}], ",", 
+                    "\"\<\>\"", ",", "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "\"\<Multiplicities of matched downstream members \
+{downstream , multiplicity} :\>\"", ",", "\[IndentingNewLine]", 
+                    RowBox[{"SortBy", "[", 
+                    RowBox[{
+                    RowBox[{"Tally", "@", 
+                    RowBox[{"Flatten", "[", 
+                    RowBox[{
+                    RowBox[{"match", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ",", 
+                    "First"}], "]"}]}], "}"}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "\"\<Downstream members left out from matching : \>\"", 
+                    ",", "\[IndentingNewLine]", 
+                    RowBox[{"Complement", "[", 
+                    RowBox[{
+                    RowBox[{"Range", "[", 
+                    RowBox[{"noD", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Union", "@", 
+                    RowBox[{"Flatten", "[", 
+                    RowBox[{
+                    RowBox[{"match", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}]}], 
+                    "\[IndentingNewLine]", "]"}]}], "}"}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "\"\<Market matchpayoff  =  \>\"", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"tmp", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "=", 
+                    RowBox[{"Plus", "@@", 
+                    RowBox[{"Apply", "[", 
+                    RowBox[{"Plus", ",", "\[IndentingNewLine]", 
+                    RowBox[{"Apply", "[", "\[IndentingNewLine]", 
+                    RowBox[{"matchPayoff", ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Thread", "[", 
+                    RowBox[{"List", "[", 
+                    RowBox[{"k", ",", 
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], "&"}], "/@", 
+                    RowBox[{"match", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}], "\[IndentingNewLine]", 
+                    ",", 
+                    RowBox[{"{", "2", "}"}]}], "]"}], "\[IndentingNewLine]", 
+                    ",", 
+                    RowBox[{"{", "1", "}"}]}], "]"}]}]}]}], 
+                    "\[IndentingNewLine]", "}"}], "]"}]}], 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", "}"}], 
+                   "]"}], 
+                  RowBox[{"(*", 
+                   RowBox[{"Inner", " ", "column", " ", "ends", " ", "here"}],
+                    "*)"}], "\[IndentingNewLine]", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"k", ",", "1", ",", "m"}], "}"}]}], "]"}], 
+                RowBox[{"(*", 
+                 RowBox[{"Table", " ", "ends", " ", "here"}], "*)"}], 
+                "\[IndentingNewLine]", ",", 
+                RowBox[{"{", "\"\< \>\"", "}"}], "\[IndentingNewLine]", ",", 
+                RowBox[{"{", 
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Total matchpayoff = \>\"", ",", "Bold"}], 
+                    "]"}], ",", 
+                    RowBox[{"Sum", "[", 
+                    RowBox[{
+                    RowBox[{"tmp", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"k", ",", "1", ",", "m"}], "}"}]}], "]"}]}], 
+                   "}"}], "]"}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+              "\[IndentingNewLine]", "]"}]}]}], 
+           RowBox[{"(*", 
+            RowBox[{"Column", " ", "ends", " ", "here"}], "*)"}], 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", ",", 
+           RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+           RowBox[{"Background", "\[Rule]", "Orange"}]}], "]"}], ",", 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"OpenerView", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+            "\"\<Matches list\>\"", ",", "\[IndentingNewLine]", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Dynamic", "[", "output", "]"}]}], "\[IndentingNewLine]",
+             "\[IndentingNewLine]", "}"}], 
+           RowBox[{"(*", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Opener", "'"}], "s", " ", "view", " ", "close"}], " ", 
+             "}"}], " ", "*)"}], "\[IndentingNewLine]", ",", "True"}], "]"}], 
+         ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Row", "[", 
+             RowBox[{"{", "\[IndentingNewLine]", 
+              RowBox[{"\"\<Filename to save matched data  \>\"", ",", 
+               RowBox[{"InputField", "[", 
+                RowBox[{
+                 RowBox[{"Dynamic", "[", "exportmatchedfilename", "]"}], ",", 
+                 "String", ",", 
+                 RowBox[{"FieldSize", "\[Rule]", "15"}]}], "]"}]}], "}"}], 
+             "]"}], "\[IndentingNewLine]", ",", "\"\<  \>\"", ",", 
+            "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            RowBox[{"Button", "[", 
+             RowBox[{
+             "\"\<   Export matched to files (Step 3)   \>\"", ",", 
+              "\[IndentingNewLine]", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"Export", "[", 
+                RowBox[{
+                 RowBox[{"exportmatchedfilename", "<>", "\"\<.xls\>\""}], ",",
+                  "\[IndentingNewLine]", 
+                 RowBox[{
+                 "Table", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\"\<Market \>\"", "<>", 
+                    RowBox[{"ToString", "[", "k", "]"}]}], ")"}], "\[Rule]", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"factual", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "=", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"SortBy", "[", 
+                    RowBox[{
+                    RowBox[{"Flatten", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Thread", "[", 
+                    RowBox[{"List", "[", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], "&"}], "/@", 
+                    RowBox[{"match", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}], "\[IndentingNewLine]", 
+                    ",", "1"}], "]"}], ",", "First"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Prepend", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Flatten", "[", 
+                    RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Flatten", "@", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "k", ",", "i", ",", "j", ",", "\[IndentingNewLine]", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"xu", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "n", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"xd", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "n", "]"}], "]"}], "[", 
+                    RowBox[{"[", "j", "]"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"n", ",", "1", ",", "noattr"}], "}"}]}], "]"}], 
+                    ",", "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{
+                    RowBox[{"factual", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "j"}], "}"}]}], "]"}], ",", "1", ",", 
+                    "0"}], "]"}]}], "}"}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", 
+                    RowBox[{"noU", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"j", ",", "1", ",", 
+                    RowBox[{"noD", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}], "}"}]}], "]"}], ",", 
+                    "1"}], "]"}], "\[IndentingNewLine]", ",", 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                    RowBox[{"Flatten", "@", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "\"\<Market ID\>\"", ",", "\"\<Upstream ID\>\"", ",", 
+                    "\"\<Downstream ID\>\"", ",", "\[IndentingNewLine]", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"\"\<Uattr \>\"", "<>", 
+                    RowBox[{"ToString", "[", "i", "]"}]}], ",", 
+                    RowBox[{"\"\<Dattr \>\"", "<>", 
+                    RowBox[{"ToString", "[", "i", "]"}]}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", "noattr"}], "}"}]}], "]"}], 
+                    "\[IndentingNewLine]", ",", "\"\<Match if 1\>\""}], 
+                    "}"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+                    RowBox[{"(*", 
+                    RowBox[{"Prepend", " ", "ends", " ", "here"}], "*)"}], 
+                    "\[IndentingNewLine]", ")"}]}], "\[IndentingNewLine]", 
+                   ",", 
+                   RowBox[{"{", 
+                    RowBox[{"k", ",", "1", ",", "m"}], "}"}]}], "]"}], 
+                 "\[IndentingNewLine]", "\[IndentingNewLine]", ",", 
+                 "\"\<XLS\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
+              "\[IndentingNewLine]", ",", 
+              RowBox[{"Method", "\[Rule]", "\"\<Queued\>\""}], ",", 
+              RowBox[{"Background", "\[Rule]", "Orange"}]}], "]"}]}], 
+           "\[IndentingNewLine]", "}"}], "]"}]}], "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", "}"}], "]"}], 
+      RowBox[{"(*", "Column", "*)"}], " ", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", ",", 
+      RowBox[{"FontFamily", "\[Rule]", "\"\<Times\>\""}], ",", 
+      RowBox[{"Background", "\[Rule]", "LightYellow"}]}], "]"}]}], 
+   RowBox[{"(*", 
+    RowBox[{"Here", " ", "Style", " ", "ends"}], "*)"}], ",", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"http", ":"}], "//", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"mathematica", ".", "stackexchange", ".", "com"}], "/", 
+           "questions"}], "/", "3836"}], "/", "importing"}], "-", "a", "-", 
+        "large", "-", "excel", "-", "file", "+"}]}], "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"<<", "JLink`"}], ";", 
+      RowBox[{"InstallJava", "[", "]"}], ";", 
+      RowBox[{"ReinstallJava", "[", 
+       RowBox[{"JVMArguments", "\[Rule]", "\"\<-Xmx512m\>\""}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"SetDirectory", "[", 
+       RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+      RowBox[{"Quiet", "[", 
+       RowBox[{"<<", "MatchEstimation.m"}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"matchPayoff", "[", 
+        RowBox[{"k_", ",", "i_", ",", "j_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{"Plus", "@@", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"b", "[", 
+            RowBox[{"[", 
+             RowBox[{"1", ";;", "noattr"}], "]"}], "]"}], "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"xu", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}], "[", 
+                RowBox[{"[", "#", "]"}], "]"}], "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "&"}], "/@", 
+             RowBox[{"Range", "[", "noattr", "]"}]}], ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"xd", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}], "[", 
+                RowBox[{"[", "#", "]"}], "]"}], "[", 
+               RowBox[{"[", "j", "]"}], "]"}], "&"}], "/@", 
+             RowBox[{"Range", "[", "noattr", "]"}]}], ")"}]}], ")"}]}], "+", 
+        RowBox[{"If", "[", 
+         RowBox[{"noiseflag", ",", 
+          RowBox[{"Random", "[", 
+           RowBox[{"noisedist", "@@", "noisepar"}], "]"}], ",", "0"}], 
+         "]"}]}]}]}], ")"}]}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.606399473981759*^9, 3.6063996335569825`*^9}, {
+   3.6063996639810276`*^9, 3.6063997762531857`*^9}, {3.606399810008233*^9, 
+   3.6063998410982766`*^9}, {3.6063999318634033`*^9, 
+   3.6063999639184484`*^9}, {3.606400017783524*^9, 3.6064000297385406`*^9}, {
+   3.6064000827586145`*^9, 3.6064001975337753`*^9}, {3.6064002514788513`*^9, 
+   3.606400447254125*^9}, {3.60640052215923*^9, 3.606400552089272*^9}, {
+   3.606400611189355*^9, 3.606400613529358*^9}, {3.6064008432896795`*^9, 
+   3.606400845154682*^9}, {3.6064009603148437`*^9, 3.6064010029449034`*^9}, {
+   3.606401067484994*^9, 3.6064010799250107`*^9}, {3.6064011128850574`*^9, 
+   3.6064011233850718`*^9}, {3.6064012547302556`*^9, 
+   3.6064012583802605`*^9}, {3.6064015023206024`*^9, 
+   3.6064015052706065`*^9}, {3.6064015672706933`*^9, 
+   3.6064016070807486`*^9}, {3.6064023330017653`*^9, 3.606402353091793*^9}, {
+   3.6064024586969414`*^9, 3.606402548432067*^9}, {3.606402685097258*^9, 
+   3.6064027188673058`*^9}, {3.606402753467354*^9, 3.606402790487406*^9}, {
+   3.6064028446924815`*^9, 3.6064028838975363`*^9}, {3.6064055644212894`*^9, 
+   3.6064056005263395`*^9}, {3.6064056375313916`*^9, 3.606405665856431*^9}, {
+   3.6064056984314766`*^9, 3.606405833561666*^9}, {3.6064058703217173`*^9, 
+   3.60640587204672*^9}, {3.6064059173717833`*^9, 3.6064059292268*^9}, {
+   3.6064060050419064`*^9, 3.6064060203219275`*^9}, {3.6064060548019753`*^9, 
+   3.6064060696419964`*^9}, 3.606406101392041*^9, 3.6064061504021096`*^9, {
+   3.6064061903271656`*^9, 3.6064061949271717`*^9}, {3.6064062338522263`*^9, 
+   3.606406237352231*^9}, 3.606406274167283*^9, {3.606406306042328*^9, 
+   3.6064064603675437`*^9}, {3.606408332832199*^9, 3.606408340002209*^9}, {
+   3.6064083761272593`*^9, 3.606408380582266*^9}, {3.6064084118473096`*^9, 
+   3.606408456342372*^9}, {3.606408601332575*^9, 3.606408601432575*^9}, {
+   3.6064086630526876`*^9, 3.6064086636826887`*^9}, {3.606408713547758*^9, 
+   3.606408724077773*^9}, {3.606408786868869*^9, 3.6064088550159655`*^9}, {
+   3.6064089038210335`*^9, 3.6064089080860395`*^9}, {3.606408953095105*^9, 
+   3.606408960510115*^9}, {3.6064090348602195`*^9, 3.606409060070255*^9}, {
+   3.606409094615303*^9, 3.606409184560429*^9}, {3.606409216545474*^9, 
+   3.6064092763555574`*^9}, {3.6064093406256475`*^9, 3.606409423870764*^9}, {
+   3.6064094540908065`*^9, 3.606409529535912*^9}, {3.606409580240983*^9, 
+   3.6064096354510603`*^9}, {3.606409675644121*^9, 3.6064097296091967`*^9}, {
+   3.6064097607642403`*^9, 3.6064098850094147`*^9}, {3.606409924201472*^9, 
+   3.606409930706481*^9}, {3.60641000162658*^9, 3.6064100510716496`*^9}, {
+   3.6064100866987004`*^9, 3.6064101175187435`*^9}, {3.6064101580088005`*^9, 
+   3.606410262925951*^9}, {3.6064102962079983`*^9, 3.6064103299780455`*^9}, {
+   3.6064105176143227`*^9, 3.606410591879427*^9}, {3.6064106584145203`*^9, 
+   3.6064107316846223`*^9}, {3.6064107753772893`*^9, 3.606410823721774*^9}, {
+   3.6064108598514376`*^9, 3.6064108621602416`*^9}, {3.6064109130943313`*^9, 
+   3.6064109911256685`*^9}, {3.606411042621359*^9, 3.606411085443434*^9}, {
+   3.606411203426441*^9, 3.606411268852956*^9}, {3.606411299085809*^9, 
+   3.6064113619539194`*^9}, {3.6064114044483943`*^9, 3.606411503820569*^9}, {
+   3.606411577983099*^9, 3.6064118197679234`*^9}, {3.6064123305440207`*^9, 
+   3.6064123554572644`*^9}, {3.606412420072578*^9, 3.6064125112859383`*^9}, {
+   3.6064125576180196`*^9, 3.606412682402639*^9}, {3.606412743929147*^9, 
+   3.6064127475015535`*^9}, {3.606441765570464*^9, 3.6064417880957527`*^9}, {
+   3.606441820377599*^9, 3.6064418571217003`*^9}, {3.6064424709528093`*^9, 
+   3.6064424767221394`*^9}, {3.6064427698869076`*^9, 
+   3.6064427976454954`*^9}, {3.6064428479093704`*^9, 3.6064428504885178`*^9}, 
+   3.606454026096403*^9, {3.606454639909511*^9, 3.606454752448948*^9}, {
+   3.6064549078818383`*^9, 3.606454949780235*^9}, {3.6064550109107313`*^9, 
+   3.606455013440876*^9}, {3.606455072729267*^9, 3.606455103776043*^9}, {
+   3.606455416415925*^9, 3.6064554494868164`*^9}, {3.606455673651638*^9, 
+   3.6064557034513426`*^9}, {3.6064557509520593`*^9, 
+   3.6064557623387103`*^9}, {3.6064558126395874`*^9, 
+   3.6064558557640543`*^9}, {3.606455925673053*^9, 3.6064560591186852`*^9}, {
+   3.6064561429514804`*^9, 3.606456143435508*^9}, {3.6064563434119463`*^9, 
+   3.6064563518194265`*^9}, {3.6064564491489935`*^9, 3.606456575104198*^9}, {
+   3.6064566071130285`*^9, 3.6064566089551344`*^9}, {3.6064567415967207`*^9, 
+   3.606456786135268*^9}, {3.606481640511857*^9, 3.6064817437887645`*^9}, {
+   3.6064818426414185`*^9, 3.6064818797085385`*^9}, {3.6064821728783073`*^9, 
+   3.6064822026860123`*^9}, 3.6064822447244167`*^9, {3.6064823314303756`*^9, 
+   3.606482333802511*^9}, {3.606482391275799*^9, 3.6064824720404177`*^9}, {
+   3.6064826845145707`*^9, 3.6064827456860695`*^9}, {3.6064829684918137`*^9, 
+   3.6064829701199064`*^9}, 3.60648300724303*^9, {3.6064830389028406`*^9, 
+   3.606483061518134*^9}, {3.6064831407386656`*^9, 3.606483180753954*^9}, {
+   3.60648322386842*^9, 3.6064832366411505`*^9}, {3.606483352155758*^9, 
+   3.606483388062812*^9}, {3.6064834353085136`*^9, 3.606483447920235*^9}, {
+   3.6064835037374277`*^9, 3.606483517537217*^9}, {3.6064835550453625`*^9, 
+   3.606483556540448*^9}, {3.6064836054852476`*^9, 3.6064836411832895`*^9}, {
+   3.6064837031878357`*^9, 3.606483755993856*^9}, {3.6064838033355637`*^9, 
+   3.606483807362794*^9}, {3.6064843253134193`*^9, 3.6064844532657375`*^9}, {
+   3.606484490562871*^9, 3.60648450628277*^9}, {3.6064846133848963`*^9, 
+   3.606484617100108*^9}, {3.606486503127983*^9, 3.606486535470833*^9}, {
+   3.606622034376854*^9, 3.6066220680537806`*^9}, {3.607313943896203*^9, 
+   3.6073139459533205`*^9}, {3.6088777016862993`*^9, 3.608877763250821*^9}, {
+   3.608877821323142*^9, 3.608877877444352*^9}, {3.608877991448873*^9, 
+   3.6088780567906103`*^9}, {3.608878123253412*^9, 3.6088781235074263`*^9}, {
+   3.6088784120239286`*^9, 3.6088784133180027`*^9}, {3.6088787454319983`*^9, 
+   3.60887874563701*^9}, 3.6088790588909273`*^9, {3.608879380413317*^9, 
+   3.60887938150638*^9}, {3.6088824326685333`*^9, 3.608882434828536*^9}, {
+   3.608882484723606*^9, 3.608882509823641*^9}, {3.6088826331068373`*^9, 
+   3.608882635556841*^9}, {3.608882879911292*^9, 3.608882887676303*^9}, {
+   3.608883004405486*^9, 
+   3.6088830483925486`*^9}},ExpressionUUID->"2d8470dd-83a9-4023-a629-\
+a8899d89c4bb"],
+
+Cell[BoxData[
+ DynamicModuleBox[{$CellContext`maxm$$ = 20, MatchEstimation`m$$ = 
+  2, $CellContext`maxnoattr$$ = 10, $CellContext`noattr$$ = 
+  3, $CellContext`noU$$ = {12, 15}, $CellContext`noD$$ = {35, 
+  45}, $CellContext`distributions$$ = {
+  ArcSinDistribution, BarabasiAlbertGraphDistribution, BatesDistribution, 
+   BeckmannDistribution, BenfordDistribution, BeniniDistribution, 
+   BenktanderGibratDistribution, BenktanderWeibullDistribution, 
+   BernoulliDistribution, BernoulliGraphDistribution, 
+   BetaBinomialDistribution, BetaDistribution, 
+   BetaNegativeBinomialDistribution, BetaPrimeDistribution, 
+   BinomialDistribution, BinormalDistribution, BirnbaumSaundersDistribution, 
+   BorelTannerDistribution, CauchyDistribution, CensoredDistribution, 
+   ChiDistribution, ChiSquareDistribution, 
+   CircularOrthogonalMatrixDistribution, CircularQuaternionMatrixDistribution,
+    CircularRealMatrixDistribution, CircularSymplecticMatrixDistribution, 
+   CircularUnitaryMatrixDistribution, CompoundPoissonDistribution, 
+   CopulaDistribution, CoxianDistribution, DagumDistribution, 
+   DataDistribution, DavisDistribution, DegreeGraphDistribution, 
+   DirichletDistribution, DiscreteUniformDistribution, 
+   Combinatorica`Distribution, DistributionChart, DistributionDomain, 
+   MultivariateStatistics`DistributionDomainQ, DistributionFitTest, 
+   DistributionParameterAssumptions, DistributionParameterQ, 
+   EmpiricalDistribution, ErlangDistribution, EstimatedDistribution, 
+   ExpGammaDistribution, ExponentialDistribution, 
+   ExponentialPowerDistribution, ExtremeValueDistribution, 
+   FailureDistribution, FindDistribution, FindDistributionParameters, 
+   FirstPassageTimeDistribution, FisherHypergeometricDistribution, 
+   FisherZDistribution, FRatioDistribution, FrechetDistribution, 
+   GammaDistribution, GaussianOrthogonalMatrixDistribution, 
+   GaussianSymplecticMatrixDistribution, GaussianUnitaryMatrixDistribution, 
+   GeometricDistribution, GompertzMakehamDistribution, 
+   GraphPropertyDistribution, GumbelDistribution, HalfNormalDistribution, 
+   HistogramDistribution, HjorthDistribution, HotellingTSquareDistribution, 
+   HoytDistribution, HyperbolicDistribution, HyperexponentialDistribution, 
+   HypergeometricDistribution, HypoexponentialDistribution, 
+   InverseChiSquareDistribution, InverseGammaDistribution, 
+   InverseGaussianDistribution, InverseWishartMatrixDistribution, 
+   JohnsonDistribution, KDistribution, KernelMixtureDistribution, 
+   KumaraswamyDistribution, LandauDistribution, LaplaceDistribution, 
+   LevyDistribution, LindleyDistribution, LogGammaDistribution, 
+   LogisticDistribution, LogLogisticDistribution, LogMultinormalDistribution, 
+   LogNormalDistribution, LogSeriesDistribution, MarchenkoPasturDistribution, 
+   MarginalDistribution, MatrixNormalDistribution, MatrixPropertyDistribution,
+    MatrixTDistribution, MaxStableDistribution, MaxwellDistribution, 
+   MeixnerDistribution, MinStableDistribution, MixtureDistribution, 
+   MoyalDistribution, MultinomialDistribution, MultinormalDistribution, 
+   MultivariateStatistics`MultiPoissonDistribution, 
+   MultivariateHypergeometricDistribution, MultivariatePoissonDistribution, 
+   MultivariateTDistribution, NakagamiDistribution, 
+   NegativeBinomialDistribution, NegativeMultinomialDistribution, 
+   NoncentralBetaDistribution, NoncentralChiSquareDistribution, 
+   NoncentralFRatioDistribution, NoncentralStudentTDistribution, 
+   NormalDistribution, OrderDistribution, ParameterMixtureDistribution, 
+   ParetoDistribution, PascalDistribution, PearsonDistribution, 
+   PERTDistribution, PoissonConsulDistribution, PoissonDistribution, 
+   PolyaAeppliDistribution, PowerDistribution, PriceGraphDistribution, 
+   ProbabilityDistribution, ProductDistribution, 
+   MultivariateStatistics`QuadraticFormDistribution, QuantityDistribution, 
+   RayleighDistribution, ReliabilityDistribution, RiceDistribution, 
+   SechDistribution, ShiftedGompertzDistribution, SinghMaddalaDistribution, 
+   SkellamDistribution, SkewNormalDistribution, SliceDistribution, 
+   SmoothKernelDistribution, SpatialGraphDistribution, SplicedDistribution, 
+   StableDistribution, StandbyDistribution, StationaryDistribution, 
+   StudentTDistribution, SurvivalDistribution, SuzukiDistribution, 
+   TracyWidomDistribution, TransformedDistribution, TriangularDistribution, 
+   TruncatedDistribution, TsallisQExponentialDistribution, 
+   TsallisQGaussianDistribution, TukeyLambdaDistribution, UniformDistribution,
+    UniformGraphDistribution, UniformSumDistribution, 
+   VarianceGammaDistribution, VoigtDistribution, VonMisesDistribution, 
+   WakebyDistribution, WalleniusHypergeometricDistribution, 
+   WaringYuleDistribution, WattsStrogatzGraphDistribution, 
+   WeibullDistribution, WignerSemicircleDistribution, 
+   MultivariateStatistics`WishartDistribution, WishartMatrixDistribution, 
+   ZipfDistribution}, $CellContext`xu$$ = {{{}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+{{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+{{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}}, $CellContext`xd$$ = {{{}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}}}, $CellContext`distnameU$$ = {
+  ChiDistribution, ChiDistribution, NormalDistribution, GumbelDistribution, 
+   NormalDistribution, NormalDistribution, NormalDistribution, 
+   NormalDistribution, NormalDistribution, 
+   NormalDistribution}, $CellContext`distparsU$$ = {{1.5}, {2}, {10, 1}, {0, 
+   1}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {
+   1, 1.5}}, $CellContext`distlinU$$ = {{1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 
+  0}, {1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 0}}, $CellContext`distnameD$$ = {
+  NormalDistribution, LogNormalDistribution, LogNormalDistribution, 
+   GumbelDistribution, NormalDistribution, NormalDistribution, 
+   NormalDistribution, NormalDistribution, NormalDistribution, 
+   NormalDistribution}, $CellContext`distparsD$$ = {{10, 1}, {1, 0.5}, {
+   1, 1.5}, {0, 1}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {
+   1, 1.5}}, $CellContext`distlinD$$ = {{1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 
+  0}, {1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 
+  0}}, $CellContext`exportdatafilename$$ = "randomdata", 
+  MatchEstimation`quotaU$$ = 3, MatchEstimation`quotaD$$ = 2, 
+  MatchEstimation`b$$ = {1, 3, 5, 1, 1, 1, 1, 1, 1, 
+  1}, $CellContext`noisedists$$ = {
+  NormalDistribution, GumbelDistribution}, $CellContext`noisepars$$ = {{0, 
+  1}, {0, 1}}, $CellContext`noisedist$$ = 
+  NormalDistribution, $CellContext`noisepar$$ = {0, 
+  1}, $CellContext`noiseflag$$ = 
+  False, $CellContext`matchPayoff$$, $CellContext`payoffMatrices$$ = {{}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+$CellContext`matchMatrices$$ = {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, $CellContext`match$$ = {{}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+$CellContext`tmp$$ = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+   0}, $CellContext`exportmatchedfilename$$ = 
+  "matched", $CellContext`factual$$ = {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, $CellContext`output$$ = ""}, 
+  StyleBox[
+   TagBox[GridBox[{
+      {
+       StyleBox["\<\"Creating data using Random Distributions\"\>",
+        StripOnInput->False,
+        FontSize->Larger,
+        FontWeight->Bold]},
+      {
+       TemplateBox[{"\"Number of Markets  \"",InputFieldBox[
+          Dynamic[MatchEstimation`m$$], FieldSize -> 3]},
+        "RowDefault"]},
+      {
+       TemplateBox[{"\"Number of Attributes \"",SliderBox[
+          Dynamic[$CellContext`noattr$$, ($CellContext`noattr$$ = #)& ], {1, 
+          10, 1}],"\"  \"",DynamicBox[
+          ToBoxes[$CellContext`noattr$$, StandardForm]]},
+        "RowDefault"]},
+      {
+       TemplateBox[{"\"Number of Upstreams   \"",InputFieldBox[
+          Dynamic[$CellContext`noU$$], ContinuousAction -> True, FieldSize -> 
+          30]},
+        "RowDefault"]},
+      {
+       TemplateBox[{"\"Number of Downstreams \"",InputFieldBox[
+          Dynamic[$CellContext`noD$$], FieldSize -> 30, ContinuousAction -> 
+          True]},
+        "RowDefault"]},
+      {"\<\"\"\>"},
+      {
+       DynamicBox[ToBoxes[
+         Grid[
+          Prepend[
+           Table[
+            With[{MatchEstimation`i$ = MatchEstimation`i}, {
+              PopupMenu[
+               Dynamic[
+                
+                Part[$CellContext`distnameU$$, 
+                 MatchEstimation`i$]], $CellContext`distributions$$], 
+              Tooltip[
+               InputField[
+                Dynamic[
+                 Part[$CellContext`distparsU$$, MatchEstimation`i$]], 
+                FieldSize -> 6], 
+               Dynamic[
+                
+                With[{$CellContext`t = 
+                  Part[$CellContext`distnameU$$, MatchEstimation`i$]}, 
+                 MessageName[$CellContext`t, "usage"]]]], 
+              InputField[
+               Dynamic[
+                Part[$CellContext`distlinU$$, MatchEstimation`i$]], FieldSize -> 
+               6], 
+              PopupMenu[
+               Dynamic[
+                
+                Part[$CellContext`distnameD$$, 
+                 MatchEstimation`i$]], $CellContext`distributions$$], 
+              Tooltip[
+               InputField[
+                Dynamic[
+                 Part[$CellContext`distparsD$$, MatchEstimation`i$]], 
+                FieldSize -> 6], 
+               Dynamic[
+                
+                With[{$CellContext`t = 
+                  Part[$CellContext`distnameD$$, MatchEstimation`i$]}, 
+                 MessageName[$CellContext`t, "usage"]]]], 
+              InputField[
+               Dynamic[
+                Part[$CellContext`distlinD$$, MatchEstimation`i$]], FieldSize -> 
+               6]}], {MatchEstimation`i, 1, $CellContext`noattr$$}], {
+           "U Distributions", "Parameters", "a X + b", "D Distributions", 
+            "Parameters", "a X + b"}]], StandardForm],
+        ImageSizeCache->{976., {54., 61.}}]},
+      {
+       TemplateBox[{"\"Filename to save the data  \"",InputFieldBox[
+          Dynamic[$CellContext`exportdatafilename$$], String, FieldSize -> 
+          15],"\"   \"",ButtonBox[
+         "\"   Create data  (Step 1)   \"", 
+          ButtonFunction :> (
+           If[MatchEstimation`m$$ == Length[$CellContext`noU$$] == 
+             Length[$CellContext`noD$$], Do[
+               Do[Part[
+                   Part[$CellContext`xu$$, $CellContext`k], 
+                   MatchEstimation`i] = Table[Part[
+                    Part[$CellContext`distlinU$$, MatchEstimation`i], 1] 
+                    Random[
+                    Apply[
+                    Part[$CellContext`distnameU$$, MatchEstimation`i], 
+                    Part[$CellContext`distparsU$$, MatchEstimation`i]]] + Part[
+                    Part[$CellContext`distlinU$$, MatchEstimation`i], 2], {
+                    Part[$CellContext`noU$$, $CellContext`k]}]; Part[
+                   Part[$CellContext`xd$$, $CellContext`k], 
+                   MatchEstimation`i] = Table[Part[
+                    Part[$CellContext`distlinD$$, MatchEstimation`i], 1] 
+                    Random[
+                    Apply[
+                    Part[$CellContext`distnameD$$, MatchEstimation`i], 
+                    Part[$CellContext`distparsD$$, MatchEstimation`i]]] + Part[
+                    Part[$CellContext`distlinD$$, MatchEstimation`i], 2], {
+                    Part[$CellContext`noD$$, $CellContext`k]}]; Null, {
+                MatchEstimation`i, 
+                 1, $CellContext`noattr$$}], {$CellContext`k, 1, 
+                MatchEstimation`m$$}]; CreateWindow[
+               DocumentNotebook[
+                Table[
+                 Grid[
+                  Prepend[
+                   Transpose[
+                    Table[{
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`i]], 
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`i]]}, {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]], {
+                    Style[
+                    StringJoin["MARKET ", 
+                    ToString[$CellContext`k]], Large, 
+                    Bold]}]], {$CellContext`k, 1, MatchEstimation`m$$}]]]; 
+             Do[Export[
+                 StringJoin[$CellContext`exportdatafilename$$, 
+                  ToString[$CellContext`k], ".xls"], {"Upstream" -> Prepend[
+                    Transpose[
+                    Join[{
+                    Table[$CellContext`k, {
+                    Part[$CellContext`noU$$, $CellContext`k]}]}, {
+                    Range[
+                    Part[$CellContext`noU$$, $CellContext`k]]}, 
+                    Table[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`i], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]], 
+                    Join[{"Market Id", "Upstream Id"}, 
+                    Table[
+                    StringJoin["Attr ", 
+                    ToString[MatchEstimation`i]], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]], 
+                  "Downstream" -> Prepend[
+                    Transpose[
+                    Join[{
+                    Table[$CellContext`k, {
+                    Part[$CellContext`noD$$, $CellContext`k]}]}, {
+                    Range[
+                    Part[$CellContext`noD$$, $CellContext`k]]}, 
+                    Table[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`i], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]], 
+                    Join[{"Market Id", "Downstream Id"}, 
+                    Table[
+                    StringJoin["Attr ", 
+                    ToString[MatchEstimation`i]], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]]}]; 
+               Null, {$CellContext`k, 1, MatchEstimation`m$$}], 
+             CreateDialog[{
+               TextCell[
+               "Number of markets must agree with the length of upstreams and \
+downstreams - please correct"], 
+               DefaultButton[]}]]; Null), Method -> "Queued", Background -> 
+          RGBColor[1, 0.5, 0], Appearance -> Automatic, Evaluator -> 
+          Automatic],"\"  All data will be saved - one file per market\"",
+         "\"  \"",ButtonBox[
+         "\"   Import Data   \"", ButtonFunction :> 
+          Module[{$CellContext`data$}, $CellContext`noU$$ = 
+             Table[1, {MatchEstimation`m$$}]; $CellContext`noD$$ = 
+             Table[1, {MatchEstimation`m$$}]; Do[$CellContext`data$ = Part[
+                 Import[
+                  StringJoin[$CellContext`exportdatafilename$$, 
+                   ToString[$CellContext`k], ".xls"]], All, 
+                 Span[2, All]]; Part[$CellContext`xu$$, $CellContext`k] = Part[
+                 Transpose[
+                  Part[$CellContext`data$, 1]], 
+                 Span[3, All]]; Part[$CellContext`xd$$, $CellContext`k] = Part[
+                 Transpose[
+                  Part[$CellContext`data$, 2]], 
+                 Span[3, All]]; $CellContext`noattr$$ = Part[
+                 Dimensions[
+                  Part[$CellContext`xu$$, $CellContext`k]], 1]; 
+              Part[$CellContext`noU$$, $CellContext`k] = Part[
+                 Dimensions[
+                  Part[$CellContext`xu$$, $CellContext`k]], 2]; 
+              Part[$CellContext`noD$$, $CellContext`k] = Part[
+                 Dimensions[
+                  Part[$CellContext`xd$$, $CellContext`k]], 2]; 
+              Null, {$CellContext`k, 1, MatchEstimation`m$$}]; CreateWindow[
+              DocumentNotebook[
+               Table[
+                Grid[
+                 Prepend[
+                  Transpose[
+                   Table[{
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`i]], 
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`i]]}, {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]], {
+                   Style[
+                    StringJoin["MARKET ", 
+                    ToString[$CellContext`k]], Large, 
+                    Bold]}]], {$CellContext`k, 1, MatchEstimation`m$$}]]]; 
+            Null], Method -> "Queued", Background -> RGBColor[1, 0.5, 0], 
+          Appearance -> Automatic, Evaluator -> Automatic]},
+        "RowDefault"]},
+      {
+       TemplateBox[{
+        StyleBox[
+         "\"Setting quota --> \"", Bold, Larger, StripOnInput -> False],
+         "\"quotaU = \"",InputFieldBox[
+          Dynamic[MatchEstimation`quotaU$$], ContinuousAction -> True, 
+          FieldSize -> 3],"\"  \"","\"quotaD = \"",InputFieldBox[
+          Dynamic[MatchEstimation`quotaD$$], ContinuousAction -> True, 
+          FieldSize -> 3],"\"  \"",""},
+        "RowDefault"]},
+      {
+       TemplateBox[{
+        StyleBox[
+         "\"Setting Pay Function --> \"", Bold, Larger, StripOnInput -> 
+          False],"\"Fill in the b's parameter values below\""},
+        "RowDefault"]},
+      {
+       DynamicBox[ToBoxes[
+         Row[
+          Table[
+           With[{MatchEstimation`i$ = MatchEstimation`i}, 
+            InputField[
+             Dynamic[
+              Part[MatchEstimation`b$$, MatchEstimation`i$]], FieldSize -> 
+             4]], {MatchEstimation`i, 1, $CellContext`noattr$$}]], 
+         StandardForm],
+        ImageSizeCache->{198., {7., 17.}}]},
+      {
+       TemplateBox[{"\"Setting matchPayoff noise \"",PopupMenuBox[
+          Dynamic[$CellContext`noisedist$$], {
+          NormalDistribution -> "NormalDistribution", GumbelDistribution -> 
+           "GumbelDistribution"}],"\"  \"",TagBox[
+          TooltipBox[
+           InputFieldBox[
+            Dynamic[$CellContext`noisepar$$], FieldSize -> 6], 
+           DynamicBox[
+            ToBoxes[
+             With[{$CellContext`t = $CellContext`noisedist$$}, 
+              MessageName[$CellContext`t, "usage"]], StandardForm]]], 
+          Annotation[#, 
+           Dynamic[
+            With[{$CellContext`t = $CellContext`noisedist$$}, 
+             MessageName[$CellContext`t, "usage"]]], "Tooltip"]& ],"\"  \"",
+         CheckboxBox[
+          Dynamic[$CellContext`noiseflag$$]],
+         "\" Check to enable noise (uncheck to disable)\""},
+        "RowDefault"]},
+      {
+       ButtonBox["\<\"Calculate Best Match (Jeremy's routine)  (Step 2)\"\>",
+        Appearance->Automatic,
+        Background->RGBColor[1, 0.5, 0],
+        ButtonFunction:>(
+         Do[Part[$CellContext`payoffMatrices$$, $CellContext`k] = Table[
+              $CellContext`matchPayoff$$[$CellContext`k, MatchEstimation`i, 
+               MatchEstimation`j], {MatchEstimation`i, 1, 
+               Part[$CellContext`noU$$, $CellContext`k]}, {
+              MatchEstimation`j, 1, 
+               Part[$CellContext`noD$$, $CellContext`k]}]; 
+           Part[$CellContext`matchMatrices$$, $CellContext`k] = 
+            MatchEstimation`generateAssignmentMatrix[
+              Part[$CellContext`payoffMatrices$$, $CellContext`k], 
+              MatchEstimation`quotaU$$, MatchEstimation`quotaD$$]; 
+           Part[$CellContext`match$$, $CellContext`k] = Part[
+              MatchEstimation`matchIndexMatrix[{
+                Part[$CellContext`matchMatrices$$, $CellContext`k]}, 
+               MatchEstimation`quotaU$$], 1]; 
+           Part[$CellContext`match$$, $CellContext`k] = 
+            Module[{$CellContext`u$, $CellContext`d$}, $CellContext`u$ = 
+               Flatten[
+                 Part[
+                  Part[$CellContext`match$$, $CellContext`k], 
+                  1]]; $CellContext`d$ = Part[
+                 Part[$CellContext`match$$, $CellContext`k], 2]; Map[{
+                 Part[$CellContext`u$, #], 
+                 Part[$CellContext`d$, #]}& , 
+                Range[
+                 Length[$CellContext`u$]]]]; 
+           Part[$CellContext`match$$, $CellContext`k] = Select[
+              Map[{
+                Part[#, 1], 
+                Select[
+                 Part[#, 2], Positive]}& , 
+               Part[$CellContext`match$$, $CellContext`k]], 
+              Part[#, 2] != {}& ]; 
+           Null, {$CellContext`k, 1, 
+            MatchEstimation`m$$}]; $CellContext`output$$ = Column[
+            Join[
+             Table[
+              Column[{"", 
+                Row[{
+                  StringJoin["Market ", 
+                   ToString[$CellContext`k], "  "], 
+                  Part[$CellContext`match$$, $CellContext`k]}], "", 
+                
+                Row[{"Multiplicities of matched downstream members \
+{downstream , multiplicity} :", 
+                  SortBy[
+                   Tally[
+                    Flatten[
+                    Part[
+                    Part[$CellContext`match$$, $CellContext`k], All, 2]]], 
+                   First]}], 
+                Row[{"Downstream members left out from matching : ", 
+                  Complement[
+                   Range[
+                    Part[$CellContext`noD$$, $CellContext`k]], 
+                   Union[
+                    Flatten[
+                    Part[
+                    Part[$CellContext`match$$, $CellContext`k], All, 2]]]]}], 
+                
+                Row[{"Market matchpayoff  =  ", 
+                  Part[$CellContext`tmp$$, $CellContext`k] = Apply[Plus, 
+                    Apply[Plus, 
+                    Apply[$CellContext`matchPayoff$$, 
+                    Map[Thread[{$CellContext`k, 
+                    Part[#, 1], 
+                    Part[#, 2]}]& , 
+                    Part[$CellContext`match$$, $CellContext`k]], {2}], {
+                    1}]]}]}], {$CellContext`k, 1, MatchEstimation`m$$}], {
+             " "}, {
+              Row[{
+                Style["Total matchpayoff = ", Bold], 
+                Sum[
+                 
+                 Part[$CellContext`tmp$$, $CellContext`k], {$CellContext`k, 1,
+                   MatchEstimation`m$$}]}]}]]),
+        Evaluator->Automatic,
+        Method->"Queued"]},
+      {
+       TagBox[
+        DynamicModuleBox[{Typeset`var$$ = True}, 
+         InterpretationBox[
+          StyleBox[
+           PaneSelectorBox[{False->GridBox[{
+              {
+               OpenerBox[Dynamic[Typeset`var$$],
+                Appearance->Automatic,
+                AutoAction->False,
+                ContinuousAction->False,
+                Enabled->Automatic], "\<\"Matches list\"\>"}
+             },
+             AutoDelete->False,
+             BaselinePosition->{1, 1},
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             GridBoxBackground->{"Columns" -> {{Automatic}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+             GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], 
+            True->GridBox[{
+              {
+               OpenerBox[Dynamic[Typeset`var$$],
+                Appearance->Automatic,
+                AutoAction->False,
+                ContinuousAction->False,
+                Enabled->Automatic], "\<\"Matches list\"\>"},
+              {"", 
+               PaneBox[
+                DynamicBox[ToBoxes[$CellContext`output$$, StandardForm],
+                 ImageSizeCache->{0., {0., 8.}}],
+                ImageMargins->0]}
+             },
+             AutoDelete->False,
+             BaselinePosition->{1, 1},
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             GridBoxBackground->{"Columns" -> {{Automatic}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+             GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, 
+            Dynamic[Typeset`var$$],
+            Alignment->Automatic,
+            BaselinePosition->Baseline,
+            DefaultBaseStyle->"OpenerView",
+            ImageMargins->0,
+            ImageSize->Automatic],
+           Deployed->False,
+           StripOnInput->False],
+          OpenerView[{"Matches list", 
+            Dynamic[$CellContext`output$$]}, True]],
+         DynamicModuleValues:>{}],
+        Setting[#, {0}]& ]},
+      {
+       TemplateBox[{TemplateBox[{"\"Filename to save matched data  \"", 
+           InputFieldBox[
+            Dynamic[$CellContext`exportmatchedfilename$$], String, FieldSize -> 
+            15]}, "RowDefault"],"\"  \"",ButtonBox[
+         "\"   Export matched to files (Step 3)   \"", 
+          ButtonFunction :> (Export[
+             StringJoin[$CellContext`exportmatchedfilename$$, ".xls"], 
+             Table[StringJoin["Market ", 
+                ToString[$CellContext`k]] -> (
+               Part[$CellContext`factual$$, $CellContext`k] = SortBy[
+                  Flatten[
+                   Map[Thread[{
+                    Part[#, 1], 
+                    Part[#, 2]}]& , 
+                    Part[$CellContext`match$$, $CellContext`k]], 1], First]; 
+               Prepend[
+                 Flatten[
+                  Table[
+                   
+                   Flatten[{$CellContext`k, MatchEstimation`i, 
+                    MatchEstimation`j, 
+                    Table[{
+                    Part[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`n], MatchEstimation`i], 
+                    Part[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`n], MatchEstimation`j]}, {
+                    MatchEstimation`n, 1, $CellContext`noattr$$}], 
+                    If[
+                    MemberQ[
+                    Part[$CellContext`factual$$, $CellContext`k], {
+                    MatchEstimation`i, MatchEstimation`j}], 1, 0]}], {
+                   MatchEstimation`i, 1, 
+                    Part[$CellContext`noU$$, $CellContext`k]}, {
+                   MatchEstimation`j, 1, 
+                    Part[$CellContext`noD$$, $CellContext`k]}], 1], 
+                 Flatten[{"Market ID", "Upstream ID", "Downstream ID", 
+                   Table[{
+                    StringJoin["Uattr ", 
+                    ToString[MatchEstimation`i]], 
+                    StringJoin["Dattr ", 
+                    ToString[MatchEstimation`i]]}, {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}], 
+                   "Match if 1"}]]), {$CellContext`k, 1, 
+               MatchEstimation`m$$}], "XLS"]; Null), Method -> "Queued", 
+          Background -> RGBColor[1, 0.5, 0], Appearance -> Automatic, 
+          Evaluator -> Automatic]},
+        "RowDefault"]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"],
+   StripOnInput->False,
+   FontFamily->"Times",
+   Background->RGBColor[1, 1, 0.85]],
+  DynamicModuleValues:>{{DownValues[$CellContext`matchPayoff$$] = {HoldPattern[
+         $CellContext`matchPayoff$$[
+          Pattern[$CellContext`k$, 
+           Blank[]], 
+          Pattern[MatchEstimation`i$, 
+           Blank[]], 
+          Pattern[MatchEstimation`j$, 
+           Blank[]]]] :> Apply[Plus, (Part[MatchEstimation`b$$, 
+             Span[1, $CellContext`noattr$$]] Map[Part[
+              Part[
+               Part[$CellContext`xu$$, $CellContext`k$], #], 
+              MatchEstimation`i$]& , 
+             Range[$CellContext`noattr$$]]) Map[Part[
+             Part[
+              Part[$CellContext`xd$$, $CellContext`k$], #], 
+             MatchEstimation`j$]& , 
+            Range[$CellContext`noattr$$]]] + If[$CellContext`noiseflag$$, 
+          Random[
+           Apply[$CellContext`noisedist$$, $CellContext`noisepar$$]], 0]}}},
+  Initialization:>(Get["JLink`"]; JLink`InstallJava[]; 
+   JLink`ReinstallJava[JLink`JVMArguments -> "-Xmx512m"]; SetDirectory[
+     NotebookDirectory[]]; Quiet[
+     Get["MatchEstimation.m"]]; $CellContext`matchPayoff$$[
+      Pattern[$CellContext`k$, 
+       Blank[]], 
+      Pattern[MatchEstimation`i$, 
+       Blank[]], 
+      Pattern[MatchEstimation`j$, 
+       Blank[]]] := Apply[Plus, (Part[MatchEstimation`b$$, 
+          Span[1, $CellContext`noattr$$]] Map[Part[
+           Part[
+            Part[$CellContext`xu$$, $CellContext`k$], #], 
+           MatchEstimation`i$]& , 
+          Range[$CellContext`noattr$$]]) Map[Part[
+          Part[
+           Part[$CellContext`xd$$, $CellContext`k$], #], 
+          MatchEstimation`j$]& , 
+         Range[$CellContext`noattr$$]]] + If[$CellContext`noiseflag$$, 
+       Random[
+        Apply[$CellContext`noisedist$$, $CellContext`noisepar$$]], 
+       0])]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{{3.608883035952532*^9, 3.60888304927255*^9}, 
+   3.703598543069721*^9, {3.703598573177136*^9, 3.703598591096871*^9}, 
+   3.7035986799424677`*^9, {3.7035992473347692`*^9, 
+   3.703599248092733*^9}},ExpressionUUID->"a9d37168-70f0-407d-aeaa-\
+dfe9c7ceb141"],
+
+Cell[BoxData[
+ DynamicModuleBox[{$CellContext`maxm$$ = 20, MatchEstimation`m$$ = 
+  2, $CellContext`maxnoattr$$ = 10, $CellContext`noattr$$ = 
+  3, $CellContext`noU$$ = {12, 15}, $CellContext`noD$$ = {35, 
+  45}, $CellContext`distributions$$ = {
+  ArcSinDistribution, BarabasiAlbertGraphDistribution, BatesDistribution, 
+   BeckmannDistribution, BenfordDistribution, BeniniDistribution, 
+   BenktanderGibratDistribution, BenktanderWeibullDistribution, 
+   BernoulliDistribution, BernoulliGraphDistribution, 
+   BetaBinomialDistribution, BetaDistribution, 
+   BetaNegativeBinomialDistribution, BetaPrimeDistribution, 
+   BinomialDistribution, BinormalDistribution, BirnbaumSaundersDistribution, 
+   BorelTannerDistribution, CauchyDistribution, CensoredDistribution, 
+   ChiDistribution, ChiSquareDistribution, 
+   CircularOrthogonalMatrixDistribution, CircularQuaternionMatrixDistribution,
+    CircularRealMatrixDistribution, CircularSymplecticMatrixDistribution, 
+   CircularUnitaryMatrixDistribution, CompoundPoissonDistribution, 
+   CopulaDistribution, CoxianDistribution, DagumDistribution, 
+   DataDistribution, DavisDistribution, DegreeGraphDistribution, 
+   DirichletDistribution, DiscreteUniformDistribution, 
+   Combinatorica`Distribution, DistributionChart, DistributionDomain, 
+   MultivariateStatistics`DistributionDomainQ, DistributionFitTest, 
+   DistributionParameterAssumptions, DistributionParameterQ, 
+   EmpiricalDistribution, ErlangDistribution, EstimatedDistribution, 
+   ExpGammaDistribution, ExponentialDistribution, 
+   ExponentialPowerDistribution, ExtremeValueDistribution, 
+   FailureDistribution, FindDistribution, FindDistributionParameters, 
+   FirstPassageTimeDistribution, FisherHypergeometricDistribution, 
+   FisherZDistribution, FRatioDistribution, FrechetDistribution, 
+   GammaDistribution, GaussianOrthogonalMatrixDistribution, 
+   GaussianSymplecticMatrixDistribution, GaussianUnitaryMatrixDistribution, 
+   GeometricDistribution, GompertzMakehamDistribution, 
+   GraphPropertyDistribution, GumbelDistribution, HalfNormalDistribution, 
+   HistogramDistribution, HjorthDistribution, HotellingTSquareDistribution, 
+   HoytDistribution, HyperbolicDistribution, HyperexponentialDistribution, 
+   HypergeometricDistribution, HypoexponentialDistribution, 
+   InverseChiSquareDistribution, InverseGammaDistribution, 
+   InverseGaussianDistribution, InverseWishartMatrixDistribution, 
+   JohnsonDistribution, KDistribution, KernelMixtureDistribution, 
+   KumaraswamyDistribution, LandauDistribution, LaplaceDistribution, 
+   LevyDistribution, LindleyDistribution, LogGammaDistribution, 
+   LogisticDistribution, LogLogisticDistribution, LogMultinormalDistribution, 
+   LogNormalDistribution, LogSeriesDistribution, MarchenkoPasturDistribution, 
+   MarginalDistribution, MatrixNormalDistribution, MatrixPropertyDistribution,
+    MatrixTDistribution, MaxStableDistribution, MaxwellDistribution, 
+   MeixnerDistribution, MinStableDistribution, MixtureDistribution, 
+   MoyalDistribution, MultinomialDistribution, MultinormalDistribution, 
+   MultivariateStatistics`MultiPoissonDistribution, 
+   MultivariateHypergeometricDistribution, MultivariatePoissonDistribution, 
+   MultivariateTDistribution, NakagamiDistribution, 
+   NegativeBinomialDistribution, NegativeMultinomialDistribution, 
+   NoncentralBetaDistribution, NoncentralChiSquareDistribution, 
+   NoncentralFRatioDistribution, NoncentralStudentTDistribution, 
+   NormalDistribution, OrderDistribution, ParameterMixtureDistribution, 
+   ParetoDistribution, PascalDistribution, PearsonDistribution, 
+   PERTDistribution, PoissonConsulDistribution, PoissonDistribution, 
+   PolyaAeppliDistribution, PowerDistribution, PriceGraphDistribution, 
+   ProbabilityDistribution, ProductDistribution, 
+   MultivariateStatistics`QuadraticFormDistribution, QuantityDistribution, 
+   RayleighDistribution, ReliabilityDistribution, RiceDistribution, 
+   SechDistribution, ShiftedGompertzDistribution, SinghMaddalaDistribution, 
+   SkellamDistribution, SkewNormalDistribution, SliceDistribution, 
+   SmoothKernelDistribution, SpatialGraphDistribution, SplicedDistribution, 
+   StableDistribution, StandbyDistribution, StationaryDistribution, 
+   StudentTDistribution, SurvivalDistribution, SuzukiDistribution, 
+   TracyWidomDistribution, TransformedDistribution, TriangularDistribution, 
+   TruncatedDistribution, TsallisQExponentialDistribution, 
+   TsallisQGaussianDistribution, TukeyLambdaDistribution, UniformDistribution,
+    UniformGraphDistribution, UniformSumDistribution, 
+   VarianceGammaDistribution, VoigtDistribution, VonMisesDistribution, 
+   WakebyDistribution, WalleniusHypergeometricDistribution, 
+   WaringYuleDistribution, WattsStrogatzGraphDistribution, 
+   WeibullDistribution, WignerSemicircleDistribution, 
+   MultivariateStatistics`WishartDistribution, WishartMatrixDistribution, 
+   ZipfDistribution}, $CellContext`xu$$ = {{{}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+{{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+{{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}}, $CellContext`xd$$ = {{{}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}}}, $CellContext`distnameU$$ = {
+  ChiDistribution, ChiDistribution, NormalDistribution, GumbelDistribution, 
+   NormalDistribution, NormalDistribution, NormalDistribution, 
+   NormalDistribution, NormalDistribution, 
+   NormalDistribution}, $CellContext`distparsU$$ = {{1.5}, {2}, {10, 1}, {0, 
+   1}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {
+   1, 1.5}}, $CellContext`distlinU$$ = {{1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 
+  0}, {1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 0}}, $CellContext`distnameD$$ = {
+  NormalDistribution, LogNormalDistribution, LogNormalDistribution, 
+   GumbelDistribution, NormalDistribution, NormalDistribution, 
+   NormalDistribution, NormalDistribution, NormalDistribution, 
+   NormalDistribution}, $CellContext`distparsD$$ = {{10, 1}, {1, 0.5}, {
+   1, 1.5}, {0, 1}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {
+   1, 1.5}}, $CellContext`distlinD$$ = {{1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 
+  0}, {1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 
+  0}}, $CellContext`exportdatafilename$$ = "randomdata", 
+  MatchEstimation`quotaU$$ = 3, MatchEstimation`quotaD$$ = 2, 
+  MatchEstimation`b$$ = {1, 3, 5, 1, 1, 1, 1, 1, 1, 
+  1}, $CellContext`noisedists$$ = {
+  NormalDistribution, GumbelDistribution}, $CellContext`noisepars$$ = {{0, 
+  1}, {0, 1}}, $CellContext`noisedist$$ = 
+  GumbelDistribution, $CellContext`noisepar$$ = {0, 
+  1}, $CellContext`noiseflag$$ = 
+  False, $CellContext`matchPayoff$$, $CellContext`payoffMatrices$$ = {{}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+$CellContext`matchMatrices$$ = {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, $CellContext`match$$ = {{}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+$CellContext`tmp$$ = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+   0}, $CellContext`exportmatchedfilename$$ = 
+  "matched", $CellContext`factual$$ = {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, $CellContext`output$$ = ""}, 
+  StyleBox[
+   TagBox[GridBox[{
+      {
+       StyleBox["\<\"Creating data using Random Distributions\"\>",
+        StripOnInput->False,
+        FontSize->Larger,
+        FontWeight->Bold]},
+      {
+       TemplateBox[{"\"Number of Markets  \"",InputFieldBox[
+          Dynamic[MatchEstimation`m$$], FieldSize -> 3]},
+        "RowDefault"]},
+      {
+       TemplateBox[{"\"Number of Attributes \"",SliderBox[
+          Dynamic[$CellContext`noattr$$, ($CellContext`noattr$$ = #)& ], {1, 
+          10, 1}],"\"  \"",DynamicBox[
+          ToBoxes[$CellContext`noattr$$, StandardForm]]},
+        "RowDefault"]},
+      {
+       TemplateBox[{"\"Number of Upstreams   \"",InputFieldBox[
+          Dynamic[$CellContext`noU$$], ContinuousAction -> True, FieldSize -> 
+          30]},
+        "RowDefault"]},
+      {
+       TemplateBox[{"\"Number of Downstreams \"",InputFieldBox[
+          Dynamic[$CellContext`noD$$], FieldSize -> 30, ContinuousAction -> 
+          True]},
+        "RowDefault"]},
+      {"\<\"\"\>"},
+      {
+       DynamicBox[ToBoxes[
+         Grid[
+          Prepend[
+           Table[
+            With[{MatchEstimation`i$ = MatchEstimation`i}, {
+              PopupMenu[
+               Dynamic[
+                
+                Part[$CellContext`distnameU$$, 
+                 MatchEstimation`i$]], $CellContext`distributions$$], 
+              Tooltip[
+               InputField[
+                Dynamic[
+                 Part[$CellContext`distparsU$$, MatchEstimation`i$]], 
+                FieldSize -> 6], 
+               Dynamic[
+                
+                With[{$CellContext`t = 
+                  Part[$CellContext`distnameU$$, MatchEstimation`i$]}, 
+                 MessageName[$CellContext`t, "usage"]]]], 
+              InputField[
+               Dynamic[
+                Part[$CellContext`distlinU$$, MatchEstimation`i$]], FieldSize -> 
+               6], 
+              PopupMenu[
+               Dynamic[
+                
+                Part[$CellContext`distnameD$$, 
+                 MatchEstimation`i$]], $CellContext`distributions$$], 
+              Tooltip[
+               InputField[
+                Dynamic[
+                 Part[$CellContext`distparsD$$, MatchEstimation`i$]], 
+                FieldSize -> 6], 
+               Dynamic[
+                
+                With[{$CellContext`t = 
+                  Part[$CellContext`distnameD$$, MatchEstimation`i$]}, 
+                 MessageName[$CellContext`t, "usage"]]]], 
+              InputField[
+               Dynamic[
+                Part[$CellContext`distlinD$$, MatchEstimation`i$]], FieldSize -> 
+               6]}], {MatchEstimation`i, 1, $CellContext`noattr$$}], {
+           "U Distributions", "Parameters", "a X + b", "D Distributions", 
+            "Parameters", "a X + b"}]], StandardForm],
+        ImageSizeCache->{976., {54., 61.}}]},
+      {
+       TemplateBox[{"\"Filename to save the data  \"",InputFieldBox[
+          Dynamic[$CellContext`exportdatafilename$$], String, FieldSize -> 
+          15],"\"   \"",ButtonBox[
+         "\"   Create data  (Step 1)   \"", 
+          ButtonFunction :> (
+           If[MatchEstimation`m$$ == Length[$CellContext`noU$$] == 
+             Length[$CellContext`noD$$], Do[
+               Do[Part[
+                   Part[$CellContext`xu$$, $CellContext`k], 
+                   MatchEstimation`i] = Table[Part[
+                    Part[$CellContext`distlinU$$, MatchEstimation`i], 1] 
+                    Random[
+                    Apply[
+                    Part[$CellContext`distnameU$$, MatchEstimation`i], 
+                    Part[$CellContext`distparsU$$, MatchEstimation`i]]] + Part[
+                    Part[$CellContext`distlinU$$, MatchEstimation`i], 2], {
+                    Part[$CellContext`noU$$, $CellContext`k]}]; Part[
+                   Part[$CellContext`xd$$, $CellContext`k], 
+                   MatchEstimation`i] = Table[Part[
+                    Part[$CellContext`distlinD$$, MatchEstimation`i], 1] 
+                    Random[
+                    Apply[
+                    Part[$CellContext`distnameD$$, MatchEstimation`i], 
+                    Part[$CellContext`distparsD$$, MatchEstimation`i]]] + Part[
+                    Part[$CellContext`distlinD$$, MatchEstimation`i], 2], {
+                    Part[$CellContext`noD$$, $CellContext`k]}]; Null, {
+                MatchEstimation`i, 
+                 1, $CellContext`noattr$$}], {$CellContext`k, 1, 
+                MatchEstimation`m$$}]; CreateWindow[
+               DocumentNotebook[
+                Table[
+                 Grid[
+                  Prepend[
+                   Transpose[
+                    Table[{
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`i]], 
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`i]]}, {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]], {
+                    Style[
+                    StringJoin["MARKET ", 
+                    ToString[$CellContext`k]], Large, 
+                    Bold]}]], {$CellContext`k, 1, MatchEstimation`m$$}]]]; 
+             Do[Export[
+                 StringJoin[$CellContext`exportdatafilename$$, 
+                  ToString[$CellContext`k], ".xls"], {"Upstream" -> Prepend[
+                    Transpose[
+                    Join[{
+                    Table[$CellContext`k, {
+                    Part[$CellContext`noU$$, $CellContext`k]}]}, {
+                    Range[
+                    Part[$CellContext`noU$$, $CellContext`k]]}, 
+                    Table[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`i], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]], 
+                    Join[{"Market Id", "Upstream Id"}, 
+                    Table[
+                    StringJoin["Attr ", 
+                    ToString[MatchEstimation`i]], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]], 
+                  "Downstream" -> Prepend[
+                    Transpose[
+                    Join[{
+                    Table[$CellContext`k, {
+                    Part[$CellContext`noD$$, $CellContext`k]}]}, {
+                    Range[
+                    Part[$CellContext`noD$$, $CellContext`k]]}, 
+                    Table[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`i], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]], 
+                    Join[{"Market Id", "Downstream Id"}, 
+                    Table[
+                    StringJoin["Attr ", 
+                    ToString[MatchEstimation`i]], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]]}]; 
+               Null, {$CellContext`k, 1, MatchEstimation`m$$}], 
+             CreateDialog[{
+               TextCell[
+               "Number of markets must agree with the length of upstreams and \
+downstreams - please correct"], 
+               DefaultButton[]}]]; Null), Method -> "Queued", Background -> 
+          RGBColor[1, 0.5, 0], Appearance -> Automatic, Evaluator -> 
+          Automatic],"\"  All data will be saved - one file per market\"",
+         "\"  \"",ButtonBox[
+         "\"   Import Data   \"", ButtonFunction :> 
+          Module[{$CellContext`data$}, $CellContext`noU$$ = 
+             Table[1, {MatchEstimation`m$$}]; $CellContext`noD$$ = 
+             Table[1, {MatchEstimation`m$$}]; Do[$CellContext`data$ = Part[
+                 Import[
+                  StringJoin[$CellContext`exportdatafilename$$, 
+                   ToString[$CellContext`k], ".xls"]], All, 
+                 Span[2, All]]; Part[$CellContext`xu$$, $CellContext`k] = Part[
+                 Transpose[
+                  Part[$CellContext`data$, 1]], 
+                 Span[3, All]]; Part[$CellContext`xd$$, $CellContext`k] = Part[
+                 Transpose[
+                  Part[$CellContext`data$, 2]], 
+                 Span[3, All]]; $CellContext`noattr$$ = Part[
+                 Dimensions[
+                  Part[$CellContext`xu$$, $CellContext`k]], 1]; 
+              Part[$CellContext`noU$$, $CellContext`k] = Part[
+                 Dimensions[
+                  Part[$CellContext`xu$$, $CellContext`k]], 2]; 
+              Part[$CellContext`noD$$, $CellContext`k] = Part[
+                 Dimensions[
+                  Part[$CellContext`xd$$, $CellContext`k]], 2]; 
+              Null, {$CellContext`k, 1, MatchEstimation`m$$}]; CreateWindow[
+              DocumentNotebook[
+               Table[
+                Grid[
+                 Prepend[
+                  Transpose[
+                   Table[{
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`i]], 
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`i]]}, {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]], {
+                   Style[
+                    StringJoin["MARKET ", 
+                    ToString[$CellContext`k]], Large, 
+                    Bold]}]], {$CellContext`k, 1, MatchEstimation`m$$}]]]; 
+            Null], Method -> "Queued", Background -> RGBColor[1, 0.5, 0], 
+          Appearance -> Automatic, Evaluator -> Automatic]},
+        "RowDefault"]},
+      {
+       TemplateBox[{
+        StyleBox[
+         "\"Setting quota --> \"", Bold, Larger, StripOnInput -> False],
+         "\"quotaU = \"",InputFieldBox[
+          Dynamic[MatchEstimation`quotaU$$], ContinuousAction -> True, 
+          FieldSize -> 3],"\"  \"","\"quotaD = \"",InputFieldBox[
+          Dynamic[MatchEstimation`quotaD$$], ContinuousAction -> True, 
+          FieldSize -> 3],"\"  \"",""},
+        "RowDefault"]},
+      {
+       TemplateBox[{
+        StyleBox[
+         "\"Setting Pay Function --> \"", Bold, Larger, StripOnInput -> 
+          False],"\"Fill in the b's parameter values below\""},
+        "RowDefault"]},
+      {
+       DynamicBox[ToBoxes[
+         Row[
+          Table[
+           With[{MatchEstimation`i$ = MatchEstimation`i}, 
+            InputField[
+             Dynamic[
+              Part[MatchEstimation`b$$, MatchEstimation`i$]], FieldSize -> 
+             4]], {MatchEstimation`i, 1, $CellContext`noattr$$}]], 
+         StandardForm],
+        ImageSizeCache->{198., {7., 17.}}]},
+      {
+       TemplateBox[{"\"Setting matchPayoff noise \"",PopupMenuBox[
+          Dynamic[$CellContext`noisedist$$], {
+          NormalDistribution -> "NormalDistribution", GumbelDistribution -> 
+           "GumbelDistribution"}],"\"  \"",TagBox[
+          TooltipBox[
+           InputFieldBox[
+            Dynamic[$CellContext`noisepar$$], FieldSize -> 6], 
+           DynamicBox[
+            ToBoxes[
+             With[{$CellContext`t = $CellContext`noisedist$$}, 
+              MessageName[$CellContext`t, "usage"]], StandardForm]]], 
+          Annotation[#, 
+           Dynamic[
+            With[{$CellContext`t = $CellContext`noisedist$$}, 
+             MessageName[$CellContext`t, "usage"]]], "Tooltip"]& ],"\"  \"",
+         CheckboxBox[
+          Dynamic[$CellContext`noiseflag$$]],
+         "\" Check to enable noise (uncheck to disable)\""},
+        "RowDefault"]},
+      {
+       ButtonBox["\<\"Calculate Best Match (Jeremy's routine)  (Step 2)\"\>",
+        Appearance->Automatic,
+        Background->RGBColor[1, 0.5, 0],
+        ButtonFunction:>(
+         Do[Part[$CellContext`payoffMatrices$$, $CellContext`k] = Table[
+              $CellContext`matchPayoff$$[$CellContext`k, MatchEstimation`i, 
+               MatchEstimation`j], {MatchEstimation`i, 1, 
+               Part[$CellContext`noU$$, $CellContext`k]}, {
+              MatchEstimation`j, 1, 
+               Part[$CellContext`noD$$, $CellContext`k]}]; 
+           Part[$CellContext`matchMatrices$$, $CellContext`k] = 
+            MatchEstimation`generateAssignmentMatrix[
+              Part[$CellContext`payoffMatrices$$, $CellContext`k], 
+              MatchEstimation`quotaU$$, MatchEstimation`quotaD$$]; 
+           Part[$CellContext`match$$, $CellContext`k] = Part[
+              MatchEstimation`matchIndexMatrix[{
+                Part[$CellContext`matchMatrices$$, $CellContext`k]}, 
+               MatchEstimation`quotaU$$], 1]; 
+           Part[$CellContext`match$$, $CellContext`k] = 
+            Module[{$CellContext`u$, $CellContext`d$}, $CellContext`u$ = 
+               Flatten[
+                 Part[
+                  Part[$CellContext`match$$, $CellContext`k], 
+                  1]]; $CellContext`d$ = Part[
+                 Part[$CellContext`match$$, $CellContext`k], 2]; Map[{
+                 Part[$CellContext`u$, #], 
+                 Part[$CellContext`d$, #]}& , 
+                Range[
+                 Length[$CellContext`u$]]]]; 
+           Part[$CellContext`match$$, $CellContext`k] = Select[
+              Map[{
+                Part[#, 1], 
+                Select[
+                 Part[#, 2], Positive]}& , 
+               Part[$CellContext`match$$, $CellContext`k]], 
+              Part[#, 2] != {}& ]; 
+           Null, {$CellContext`k, 1, 
+            MatchEstimation`m$$}]; $CellContext`output$$ = Column[
+            Join[
+             Table[
+              Column[{"", 
+                Row[{
+                  StringJoin["Market ", 
+                   ToString[$CellContext`k], "  "], 
+                  Part[$CellContext`match$$, $CellContext`k]}], "", 
+                
+                Row[{"Multiplicities of matched downstream members \
+{downstream , multiplicity} :", 
+                  SortBy[
+                   Tally[
+                    Flatten[
+                    Part[
+                    Part[$CellContext`match$$, $CellContext`k], All, 2]]], 
+                   First]}], 
+                Row[{"Downstream members left out from matching : ", 
+                  Complement[
+                   Range[
+                    Part[$CellContext`noD$$, $CellContext`k]], 
+                   Union[
+                    Flatten[
+                    Part[
+                    Part[$CellContext`match$$, $CellContext`k], All, 2]]]]}], 
+                
+                Row[{"Market matchpayoff  =  ", 
+                  Part[$CellContext`tmp$$, $CellContext`k] = Apply[Plus, 
+                    Apply[Plus, 
+                    Apply[$CellContext`matchPayoff$$, 
+                    Map[Thread[{$CellContext`k, 
+                    Part[#, 1], 
+                    Part[#, 2]}]& , 
+                    Part[$CellContext`match$$, $CellContext`k]], {2}], {
+                    1}]]}]}], {$CellContext`k, 1, MatchEstimation`m$$}], {
+             " "}, {
+              Row[{
+                Style["Total matchpayoff = ", Bold], 
+                Sum[
+                 
+                 Part[$CellContext`tmp$$, $CellContext`k], {$CellContext`k, 1,
+                   MatchEstimation`m$$}]}]}]]),
+        Evaluator->Automatic,
+        Method->"Queued"]},
+      {
+       TagBox[
+        DynamicModuleBox[{Typeset`var$$ = True}, 
+         InterpretationBox[
+          StyleBox[
+           PaneSelectorBox[{False->GridBox[{
+              {
+               OpenerBox[Dynamic[Typeset`var$$],
+                Appearance->Automatic,
+                AutoAction->False,
+                ContinuousAction->False,
+                Enabled->Automatic], "\<\"Matches list\"\>"}
+             },
+             AutoDelete->False,
+             BaselinePosition->{1, 1},
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             GridBoxBackground->{"Columns" -> {{Automatic}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+             GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], 
+            True->GridBox[{
+              {
+               OpenerBox[Dynamic[Typeset`var$$],
+                Appearance->Automatic,
+                AutoAction->False,
+                ContinuousAction->False,
+                Enabled->Automatic], "\<\"Matches list\"\>"},
+              {"", 
+               PaneBox[
+                DynamicBox[ToBoxes[$CellContext`output$$, StandardForm],
+                 ImageSizeCache->{0., {0., 8.}}],
+                ImageMargins->0]}
+             },
+             AutoDelete->False,
+             BaselinePosition->{1, 1},
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             GridBoxBackground->{"Columns" -> {{Automatic}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+             GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, 
+            Dynamic[Typeset`var$$],
+            Alignment->Automatic,
+            BaselinePosition->Baseline,
+            DefaultBaseStyle->"OpenerView",
+            ImageMargins->0,
+            ImageSize->Automatic],
+           Deployed->False,
+           StripOnInput->False],
+          OpenerView[{"Matches list", 
+            Dynamic[$CellContext`output$$]}, True]],
+         DynamicModuleValues:>{}],
+        Setting[#, {0}]& ]},
+      {
+       TemplateBox[{TemplateBox[{"\"Filename to save matched data  \"", 
+           InputFieldBox[
+            Dynamic[$CellContext`exportmatchedfilename$$], String, FieldSize -> 
+            15]}, "RowDefault"],"\"  \"",ButtonBox[
+         "\"   Export matched to files (Step 3)   \"", 
+          ButtonFunction :> (Export[
+             StringJoin[$CellContext`exportmatchedfilename$$, ".xls"], 
+             Table[StringJoin["Market ", 
+                ToString[$CellContext`k]] -> (
+               Part[$CellContext`factual$$, $CellContext`k] = SortBy[
+                  Flatten[
+                   Map[Thread[{
+                    Part[#, 1], 
+                    Part[#, 2]}]& , 
+                    Part[$CellContext`match$$, $CellContext`k]], 1], First]; 
+               Prepend[
+                 Flatten[
+                  Table[
+                   
+                   Flatten[{$CellContext`k, MatchEstimation`i, 
+                    MatchEstimation`j, 
+                    Table[{
+                    Part[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`n], MatchEstimation`i], 
+                    Part[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`n], MatchEstimation`j]}, {
+                    MatchEstimation`n, 1, $CellContext`noattr$$}], 
+                    If[
+                    MemberQ[
+                    Part[$CellContext`factual$$, $CellContext`k], {
+                    MatchEstimation`i, MatchEstimation`j}], 1, 0]}], {
+                   MatchEstimation`i, 1, 
+                    Part[$CellContext`noU$$, $CellContext`k]}, {
+                   MatchEstimation`j, 1, 
+                    Part[$CellContext`noD$$, $CellContext`k]}], 1], 
+                 Flatten[{"Market ID", "Upstream ID", "Downstream ID", 
+                   Table[{
+                    StringJoin["Uattr ", 
+                    ToString[MatchEstimation`i]], 
+                    StringJoin["Dattr ", 
+                    ToString[MatchEstimation`i]]}, {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}], 
+                   "Match if 1"}]]), {$CellContext`k, 1, 
+               MatchEstimation`m$$}], "XLS"]; Null), Method -> "Queued", 
+          Background -> RGBColor[1, 0.5, 0], Appearance -> Automatic, 
+          Evaluator -> Automatic]},
+        "RowDefault"]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"],
+   StripOnInput->False,
+   FontFamily->"Times",
+   Background->RGBColor[1, 1, 0.85]],
+  DynamicModuleValues:>{{DownValues[$CellContext`matchPayoff$$] = {HoldPattern[
+         $CellContext`matchPayoff$$[
+          Pattern[$CellContext`k$, 
+           Blank[]], 
+          Pattern[MatchEstimation`i$, 
+           Blank[]], 
+          Pattern[MatchEstimation`j$, 
+           Blank[]]]] :> Apply[Plus, (Part[MatchEstimation`b$$, 
+             Span[1, $CellContext`noattr$$]] Map[Part[
+              Part[
+               Part[$CellContext`xu$$, $CellContext`k$], #], 
+              MatchEstimation`i$]& , 
+             Range[$CellContext`noattr$$]]) Map[Part[
+             Part[
+              Part[$CellContext`xd$$, $CellContext`k$], #], 
+             MatchEstimation`j$]& , 
+            Range[$CellContext`noattr$$]]] + If[$CellContext`noiseflag$$, 
+          Random[
+           Apply[$CellContext`noisedist$$, $CellContext`noisepar$$]], 0]}}},
+  Initialization:>(Get["JLink`"]; JLink`InstallJava[]; 
+   JLink`ReinstallJava[JLink`JVMArguments -> "-Xmx512m"]; SetDirectory[
+     NotebookDirectory[]]; Quiet[
+     Get["MatchEstimation.m"]]; $CellContext`matchPayoff$$[
+      Pattern[$CellContext`k$, 
+       Blank[]], 
+      Pattern[MatchEstimation`i$, 
+       Blank[]], 
+      Pattern[MatchEstimation`j$, 
+       Blank[]]] := Apply[Plus, (Part[MatchEstimation`b$$, 
+          Span[1, $CellContext`noattr$$]] Map[Part[
+           Part[
+            Part[$CellContext`xu$$, $CellContext`k$], #], 
+           MatchEstimation`i$]& , 
+          Range[$CellContext`noattr$$]]) Map[Part[
+          Part[
+           Part[$CellContext`xd$$, $CellContext`k$], #], 
+          MatchEstimation`j$]& , 
+         Range[$CellContext`noattr$$]]] + If[$CellContext`noiseflag$$, 
+       Random[
+        Apply[$CellContext`noisedist$$, $CellContext`noisepar$$]], 
+       0])]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{{3.608883035952532*^9, 3.60888304927255*^9}, 
+   3.703598543069721*^9, {3.703598573177136*^9, 3.703598591096871*^9}, 
+   3.7035986799424677`*^9, 
+   3.7035992473347692`*^9},ExpressionUUID->"a0cd8990-4feb-4f6b-a0b7-\
+f3c830256728"],
+
+Cell[BoxData[
+ DynamicModuleBox[{$CellContext`maxm$$ = 20, MatchEstimation`m$$ = 
+  2, $CellContext`maxnoattr$$ = 10, $CellContext`noattr$$ = 
+  3, $CellContext`noU$$ = {12, 15}, $CellContext`noD$$ = {35, 
+  45}, $CellContext`distributions$$ = {
+  ArcSinDistribution, BarabasiAlbertGraphDistribution, BatesDistribution, 
+   BeckmannDistribution, BenfordDistribution, BeniniDistribution, 
+   BenktanderGibratDistribution, BenktanderWeibullDistribution, 
+   BernoulliDistribution, BernoulliGraphDistribution, 
+   BetaBinomialDistribution, BetaDistribution, 
+   BetaNegativeBinomialDistribution, BetaPrimeDistribution, 
+   BinomialDistribution, BinormalDistribution, BirnbaumSaundersDistribution, 
+   BorelTannerDistribution, CauchyDistribution, CensoredDistribution, 
+   ChiDistribution, ChiSquareDistribution, 
+   CircularOrthogonalMatrixDistribution, CircularQuaternionMatrixDistribution,
+    CircularRealMatrixDistribution, CircularSymplecticMatrixDistribution, 
+   CircularUnitaryMatrixDistribution, CompoundPoissonDistribution, 
+   CopulaDistribution, CoxianDistribution, DagumDistribution, 
+   DataDistribution, DavisDistribution, DegreeGraphDistribution, 
+   DirichletDistribution, DiscreteUniformDistribution, 
+   Combinatorica`Distribution, DistributionChart, DistributionDomain, 
+   MultivariateStatistics`DistributionDomainQ, DistributionFitTest, 
+   DistributionParameterAssumptions, DistributionParameterQ, 
+   EmpiricalDistribution, ErlangDistribution, EstimatedDistribution, 
+   ExpGammaDistribution, ExponentialDistribution, 
+   ExponentialPowerDistribution, ExtremeValueDistribution, 
+   FailureDistribution, FindDistribution, FindDistributionParameters, 
+   FirstPassageTimeDistribution, FisherHypergeometricDistribution, 
+   FisherZDistribution, FRatioDistribution, FrechetDistribution, 
+   GammaDistribution, GaussianOrthogonalMatrixDistribution, 
+   GaussianSymplecticMatrixDistribution, GaussianUnitaryMatrixDistribution, 
+   GeometricDistribution, GompertzMakehamDistribution, 
+   GraphPropertyDistribution, GumbelDistribution, HalfNormalDistribution, 
+   HistogramDistribution, HjorthDistribution, HotellingTSquareDistribution, 
+   HoytDistribution, HyperbolicDistribution, HyperexponentialDistribution, 
+   HypergeometricDistribution, HypoexponentialDistribution, 
+   InverseChiSquareDistribution, InverseGammaDistribution, 
+   InverseGaussianDistribution, InverseWishartMatrixDistribution, 
+   JohnsonDistribution, KDistribution, KernelMixtureDistribution, 
+   KumaraswamyDistribution, LandauDistribution, LaplaceDistribution, 
+   LevyDistribution, LindleyDistribution, LogGammaDistribution, 
+   LogisticDistribution, LogLogisticDistribution, LogMultinormalDistribution, 
+   LogNormalDistribution, LogSeriesDistribution, MarchenkoPasturDistribution, 
+   MarginalDistribution, MatrixNormalDistribution, MatrixPropertyDistribution,
+    MatrixTDistribution, MaxStableDistribution, MaxwellDistribution, 
+   MeixnerDistribution, MinStableDistribution, MixtureDistribution, 
+   MoyalDistribution, MultinomialDistribution, MultinormalDistribution, 
+   MultivariateStatistics`MultiPoissonDistribution, 
+   MultivariateHypergeometricDistribution, MultivariatePoissonDistribution, 
+   MultivariateTDistribution, NakagamiDistribution, 
+   NegativeBinomialDistribution, NegativeMultinomialDistribution, 
+   NoncentralBetaDistribution, NoncentralChiSquareDistribution, 
+   NoncentralFRatioDistribution, NoncentralStudentTDistribution, 
+   NormalDistribution, OrderDistribution, ParameterMixtureDistribution, 
+   ParetoDistribution, PascalDistribution, PearsonDistribution, 
+   PERTDistribution, PoissonConsulDistribution, PoissonDistribution, 
+   PolyaAeppliDistribution, PowerDistribution, PriceGraphDistribution, 
+   ProbabilityDistribution, ProductDistribution, 
+   MultivariateStatistics`QuadraticFormDistribution, QuantityDistribution, 
+   RayleighDistribution, ReliabilityDistribution, RiceDistribution, 
+   SechDistribution, ShiftedGompertzDistribution, SinghMaddalaDistribution, 
+   SkellamDistribution, SkewNormalDistribution, SliceDistribution, 
+   SmoothKernelDistribution, SpatialGraphDistribution, SplicedDistribution, 
+   StableDistribution, StandbyDistribution, StationaryDistribution, 
+   StudentTDistribution, SurvivalDistribution, SuzukiDistribution, 
+   TracyWidomDistribution, TransformedDistribution, TriangularDistribution, 
+   TruncatedDistribution, TsallisQExponentialDistribution, 
+   TsallisQGaussianDistribution, TukeyLambdaDistribution, UniformDistribution,
+    UniformGraphDistribution, UniformSumDistribution, 
+   VarianceGammaDistribution, VoigtDistribution, VonMisesDistribution, 
+   WakebyDistribution, WalleniusHypergeometricDistribution, 
+   WaringYuleDistribution, WattsStrogatzGraphDistribution, 
+   WeibullDistribution, WignerSemicircleDistribution, 
+   MultivariateStatistics`WishartDistribution, WishartMatrixDistribution, 
+   ZipfDistribution}, $CellContext`xu$$ = {{{}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+{{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+{{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}}, $CellContext`xd$$ = {{{}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}}}, $CellContext`distnameU$$ = {
+  ChiDistribution, ChiDistribution, NormalDistribution, GumbelDistribution, 
+   NormalDistribution, NormalDistribution, NormalDistribution, 
+   NormalDistribution, NormalDistribution, 
+   NormalDistribution}, $CellContext`distparsU$$ = {{1.5}, {2}, {10, 1}, {0, 
+   1}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {
+   1, 1.5}}, $CellContext`distlinU$$ = {{1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 
+  0}, {1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 0}}, $CellContext`distnameD$$ = {
+  NormalDistribution, LogNormalDistribution, LogNormalDistribution, 
+   GumbelDistribution, NormalDistribution, NormalDistribution, 
+   NormalDistribution, NormalDistribution, NormalDistribution, 
+   NormalDistribution}, $CellContext`distparsD$$ = {{10, 1}, {1, 0.5}, {
+   1, 1.5}, {0, 1}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {1, 1.5}, {
+   1, 1.5}}, $CellContext`distlinD$$ = {{1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 
+  0}, {1, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 
+  0}}, $CellContext`exportdatafilename$$ = "randomdata", 
+  MatchEstimation`quotaU$$ = 3, MatchEstimation`quotaD$$ = 2, 
+  MatchEstimation`b$$ = {1, 3, 5, 1, 1, 1, 1, 1, 1, 
+  1}, $CellContext`noisedists$$ = {
+  NormalDistribution, GumbelDistribution}, $CellContext`noisepars$$ = {{0, 
+  1}, {0, 1}}, $CellContext`noisedist$$ = 
+  NormalDistribution, $CellContext`noisepar$$ = {0, 
+  1}, $CellContext`noiseflag$$ = 
+  False, $CellContext`matchPayoff$$, $CellContext`payoffMatrices$$ = {{}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+$CellContext`matchMatrices$$ = {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}}, $CellContext`match$$ = {{}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+$CellContext`tmp$$ = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+   0}, $CellContext`exportmatchedfilename$$ = 
+  "matched", $CellContext`factual$$ = {{}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, $CellContext`output$$ = ""}, 
+  StyleBox[
+   TagBox[GridBox[{
+      {
+       StyleBox["\<\"Creating data using Random Distributions\"\>",
+        StripOnInput->False,
+        FontSize->Larger,
+        FontWeight->Bold]},
+      {
+       TemplateBox[{"\"Number of Markets  \"",InputFieldBox[
+          Dynamic[MatchEstimation`m$$], FieldSize -> 3]},
+        "RowDefault"]},
+      {
+       TemplateBox[{"\"Number of Attributes \"",SliderBox[
+          Dynamic[$CellContext`noattr$$, ($CellContext`noattr$$ = #)& ], {1, 
+          10, 1}],"\"  \"",DynamicBox[
+          ToBoxes[$CellContext`noattr$$, StandardForm]]},
+        "RowDefault"]},
+      {
+       TemplateBox[{"\"Number of Upstreams   \"",InputFieldBox[
+          Dynamic[$CellContext`noU$$], ContinuousAction -> True, FieldSize -> 
+          30]},
+        "RowDefault"]},
+      {
+       TemplateBox[{"\"Number of Downstreams \"",InputFieldBox[
+          Dynamic[$CellContext`noD$$], FieldSize -> 30, ContinuousAction -> 
+          True]},
+        "RowDefault"]},
+      {"\<\"\"\>"},
+      {
+       DynamicBox[ToBoxes[
+         Grid[
+          Prepend[
+           Table[
+            With[{MatchEstimation`i$ = MatchEstimation`i}, {
+              PopupMenu[
+               Dynamic[
+                
+                Part[$CellContext`distnameU$$, 
+                 MatchEstimation`i$]], $CellContext`distributions$$], 
+              Tooltip[
+               InputField[
+                Dynamic[
+                 Part[$CellContext`distparsU$$, MatchEstimation`i$]], 
+                FieldSize -> 6], 
+               Dynamic[
+                
+                With[{$CellContext`t = 
+                  Part[$CellContext`distnameU$$, MatchEstimation`i$]}, 
+                 MessageName[$CellContext`t, "usage"]]]], 
+              InputField[
+               Dynamic[
+                Part[$CellContext`distlinU$$, MatchEstimation`i$]], FieldSize -> 
+               6], 
+              PopupMenu[
+               Dynamic[
+                
+                Part[$CellContext`distnameD$$, 
+                 MatchEstimation`i$]], $CellContext`distributions$$], 
+              Tooltip[
+               InputField[
+                Dynamic[
+                 Part[$CellContext`distparsD$$, MatchEstimation`i$]], 
+                FieldSize -> 6], 
+               Dynamic[
+                
+                With[{$CellContext`t = 
+                  Part[$CellContext`distnameD$$, MatchEstimation`i$]}, 
+                 MessageName[$CellContext`t, "usage"]]]], 
+              InputField[
+               Dynamic[
+                Part[$CellContext`distlinD$$, MatchEstimation`i$]], FieldSize -> 
+               6]}], {MatchEstimation`i, 1, $CellContext`noattr$$}], {
+           "U Distributions", "Parameters", "a X + b", "D Distributions", 
+            "Parameters", "a X + b"}]], StandardForm],
+        ImageSizeCache->{976., {54., 61.}}]},
+      {
+       TemplateBox[{"\"Filename to save the data  \"",InputFieldBox[
+          Dynamic[$CellContext`exportdatafilename$$], String, FieldSize -> 
+          15],"\"   \"",ButtonBox[
+         "\"   Create data  (Step 1)   \"", 
+          ButtonFunction :> (
+           If[MatchEstimation`m$$ == Length[$CellContext`noU$$] == 
+             Length[$CellContext`noD$$], Do[
+               Do[Part[
+                   Part[$CellContext`xu$$, $CellContext`k], 
+                   MatchEstimation`i] = Table[Part[
+                    Part[$CellContext`distlinU$$, MatchEstimation`i], 1] 
+                    Random[
+                    Apply[
+                    Part[$CellContext`distnameU$$, MatchEstimation`i], 
+                    Part[$CellContext`distparsU$$, MatchEstimation`i]]] + Part[
+                    Part[$CellContext`distlinU$$, MatchEstimation`i], 2], {
+                    Part[$CellContext`noU$$, $CellContext`k]}]; Part[
+                   Part[$CellContext`xd$$, $CellContext`k], 
+                   MatchEstimation`i] = Table[Part[
+                    Part[$CellContext`distlinD$$, MatchEstimation`i], 1] 
+                    Random[
+                    Apply[
+                    Part[$CellContext`distnameD$$, MatchEstimation`i], 
+                    Part[$CellContext`distparsD$$, MatchEstimation`i]]] + Part[
+                    Part[$CellContext`distlinD$$, MatchEstimation`i], 2], {
+                    Part[$CellContext`noD$$, $CellContext`k]}]; Null, {
+                MatchEstimation`i, 
+                 1, $CellContext`noattr$$}], {$CellContext`k, 1, 
+                MatchEstimation`m$$}]; CreateWindow[
+               DocumentNotebook[
+                Table[
+                 Grid[
+                  Prepend[
+                   Transpose[
+                    Table[{
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`i]], 
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`i]]}, {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]], {
+                    Style[
+                    StringJoin["MARKET ", 
+                    ToString[$CellContext`k]], Large, 
+                    Bold]}]], {$CellContext`k, 1, MatchEstimation`m$$}]]]; 
+             Do[Export[
+                 StringJoin[$CellContext`exportdatafilename$$, 
+                  ToString[$CellContext`k], ".xls"], {"Upstream" -> Prepend[
+                    Transpose[
+                    Join[{
+                    Table[$CellContext`k, {
+                    Part[$CellContext`noU$$, $CellContext`k]}]}, {
+                    Range[
+                    Part[$CellContext`noU$$, $CellContext`k]]}, 
+                    Table[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`i], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]], 
+                    Join[{"Market Id", "Upstream Id"}, 
+                    Table[
+                    StringJoin["Attr ", 
+                    ToString[MatchEstimation`i]], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]], 
+                  "Downstream" -> Prepend[
+                    Transpose[
+                    Join[{
+                    Table[$CellContext`k, {
+                    Part[$CellContext`noD$$, $CellContext`k]}]}, {
+                    Range[
+                    Part[$CellContext`noD$$, $CellContext`k]]}, 
+                    Table[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`i], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]], 
+                    Join[{"Market Id", "Downstream Id"}, 
+                    Table[
+                    StringJoin["Attr ", 
+                    ToString[MatchEstimation`i]], {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]]]}]; 
+               Null, {$CellContext`k, 1, MatchEstimation`m$$}], 
+             CreateDialog[{
+               TextCell[
+               "Number of markets must agree with the length of upstreams and \
+downstreams - please correct"], 
+               DefaultButton[]}]]; Null), Method -> "Queued", Background -> 
+          RGBColor[1, 0.5, 0], Appearance -> Automatic, Evaluator -> 
+          Automatic],"\"  All data will be saved - one file per market\"",
+         "\"  \"",ButtonBox[
+         "\"   Import Data   \"", ButtonFunction :> 
+          Module[{$CellContext`data$}, $CellContext`noU$$ = 
+             Table[1, {MatchEstimation`m$$}]; $CellContext`noD$$ = 
+             Table[1, {MatchEstimation`m$$}]; Do[$CellContext`data$ = Part[
+                 Import[
+                  StringJoin[$CellContext`exportdatafilename$$, 
+                   ToString[$CellContext`k], ".xls"]], All, 
+                 Span[2, All]]; Part[$CellContext`xu$$, $CellContext`k] = Part[
+                 Transpose[
+                  Part[$CellContext`data$, 1]], 
+                 Span[3, All]]; Part[$CellContext`xd$$, $CellContext`k] = Part[
+                 Transpose[
+                  Part[$CellContext`data$, 2]], 
+                 Span[3, All]]; $CellContext`noattr$$ = Part[
+                 Dimensions[
+                  Part[$CellContext`xu$$, $CellContext`k]], 1]; 
+              Part[$CellContext`noU$$, $CellContext`k] = Part[
+                 Dimensions[
+                  Part[$CellContext`xu$$, $CellContext`k]], 2]; 
+              Part[$CellContext`noD$$, $CellContext`k] = Part[
+                 Dimensions[
+                  Part[$CellContext`xd$$, $CellContext`k]], 2]; 
+              Null, {$CellContext`k, 1, MatchEstimation`m$$}]; CreateWindow[
+              DocumentNotebook[
+               Table[
+                Grid[
+                 Prepend[
+                  Transpose[
+                   Table[{
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`i]], 
+                    ListPlot[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`i]]}, {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}]], {
+                   Style[
+                    StringJoin["MARKET ", 
+                    ToString[$CellContext`k]], Large, 
+                    Bold]}]], {$CellContext`k, 1, MatchEstimation`m$$}]]]; 
+            Null], Method -> "Queued", Background -> RGBColor[1, 0.5, 0], 
+          Appearance -> Automatic, Evaluator -> Automatic]},
+        "RowDefault"]},
+      {
+       TemplateBox[{
+        StyleBox[
+         "\"Setting quota --> \"", Bold, Larger, StripOnInput -> False],
+         "\"quotaU = \"",InputFieldBox[
+          Dynamic[MatchEstimation`quotaU$$], ContinuousAction -> True, 
+          FieldSize -> 3],"\"  \"","\"quotaD = \"",InputFieldBox[
+          Dynamic[MatchEstimation`quotaD$$], ContinuousAction -> True, 
+          FieldSize -> 3],"\"  \"",""},
+        "RowDefault"]},
+      {
+       TemplateBox[{
+        StyleBox[
+         "\"Setting Pay Function --> \"", Bold, Larger, StripOnInput -> 
+          False],"\"Fill in the b's parameter values below\""},
+        "RowDefault"]},
+      {
+       DynamicBox[ToBoxes[
+         Row[
+          Table[
+           With[{MatchEstimation`i$ = MatchEstimation`i}, 
+            InputField[
+             Dynamic[
+              Part[MatchEstimation`b$$, MatchEstimation`i$]], FieldSize -> 
+             4]], {MatchEstimation`i, 1, $CellContext`noattr$$}]], 
+         StandardForm],
+        ImageSizeCache->{198., {7., 17.}}]},
+      {
+       TemplateBox[{"\"Setting matchPayoff noise \"",PopupMenuBox[
+          Dynamic[$CellContext`noisedist$$], {
+          NormalDistribution -> "NormalDistribution", GumbelDistribution -> 
+           "GumbelDistribution"}],"\"  \"",TagBox[
+          TooltipBox[
+           InputFieldBox[
+            Dynamic[$CellContext`noisepar$$], FieldSize -> 6], 
+           DynamicBox[
+            ToBoxes[
+             With[{$CellContext`t = $CellContext`noisedist$$}, 
+              MessageName[$CellContext`t, "usage"]], StandardForm]]], 
+          Annotation[#, 
+           Dynamic[
+            With[{$CellContext`t = $CellContext`noisedist$$}, 
+             MessageName[$CellContext`t, "usage"]]], "Tooltip"]& ],"\"  \"",
+         CheckboxBox[
+          Dynamic[$CellContext`noiseflag$$]],
+         "\" Check to enable noise (uncheck to disable)\""},
+        "RowDefault"]},
+      {
+       ButtonBox["\<\"Calculate Best Match (Jeremy's routine)  (Step 2)\"\>",
+        Appearance->Automatic,
+        Background->RGBColor[1, 0.5, 0],
+        ButtonFunction:>(
+         Do[Part[$CellContext`payoffMatrices$$, $CellContext`k] = Table[
+              $CellContext`matchPayoff$$[$CellContext`k, MatchEstimation`i, 
+               MatchEstimation`j], {MatchEstimation`i, 1, 
+               Part[$CellContext`noU$$, $CellContext`k]}, {
+              MatchEstimation`j, 1, 
+               Part[$CellContext`noD$$, $CellContext`k]}]; 
+           Part[$CellContext`matchMatrices$$, $CellContext`k] = 
+            MatchEstimation`generateAssignmentMatrix[
+              Part[$CellContext`payoffMatrices$$, $CellContext`k], 
+              MatchEstimation`quotaU$$, MatchEstimation`quotaD$$]; 
+           Part[$CellContext`match$$, $CellContext`k] = Part[
+              MatchEstimation`matchIndexMatrix[{
+                Part[$CellContext`matchMatrices$$, $CellContext`k]}, 
+               MatchEstimation`quotaU$$], 1]; 
+           Part[$CellContext`match$$, $CellContext`k] = 
+            Module[{$CellContext`u$, $CellContext`d$}, $CellContext`u$ = 
+               Flatten[
+                 Part[
+                  Part[$CellContext`match$$, $CellContext`k], 
+                  1]]; $CellContext`d$ = Part[
+                 Part[$CellContext`match$$, $CellContext`k], 2]; Map[{
+                 Part[$CellContext`u$, #], 
+                 Part[$CellContext`d$, #]}& , 
+                Range[
+                 Length[$CellContext`u$]]]]; 
+           Part[$CellContext`match$$, $CellContext`k] = Select[
+              Map[{
+                Part[#, 1], 
+                Select[
+                 Part[#, 2], Positive]}& , 
+               Part[$CellContext`match$$, $CellContext`k]], 
+              Part[#, 2] != {}& ]; 
+           Null, {$CellContext`k, 1, 
+            MatchEstimation`m$$}]; $CellContext`output$$ = Column[
+            Join[
+             Table[
+              Column[{"", 
+                Row[{
+                  StringJoin["Market ", 
+                   ToString[$CellContext`k], "  "], 
+                  Part[$CellContext`match$$, $CellContext`k]}], "", 
+                
+                Row[{"Multiplicities of matched downstream members \
+{downstream , multiplicity} :", 
+                  SortBy[
+                   Tally[
+                    Flatten[
+                    Part[
+                    Part[$CellContext`match$$, $CellContext`k], All, 2]]], 
+                   First]}], 
+                Row[{"Downstream members left out from matching : ", 
+                  Complement[
+                   Range[
+                    Part[$CellContext`noD$$, $CellContext`k]], 
+                   Union[
+                    Flatten[
+                    Part[
+                    Part[$CellContext`match$$, $CellContext`k], All, 2]]]]}], 
+                
+                Row[{"Market matchpayoff  =  ", 
+                  Part[$CellContext`tmp$$, $CellContext`k] = Apply[Plus, 
+                    Apply[Plus, 
+                    Apply[$CellContext`matchPayoff$$, 
+                    Map[Thread[{$CellContext`k, 
+                    Part[#, 1], 
+                    Part[#, 2]}]& , 
+                    Part[$CellContext`match$$, $CellContext`k]], {2}], {
+                    1}]]}]}], {$CellContext`k, 1, MatchEstimation`m$$}], {
+             " "}, {
+              Row[{
+                Style["Total matchpayoff = ", Bold], 
+                Sum[
+                 
+                 Part[$CellContext`tmp$$, $CellContext`k], {$CellContext`k, 1,
+                   MatchEstimation`m$$}]}]}]]),
+        Evaluator->Automatic,
+        Method->"Queued"]},
+      {
+       TagBox[
+        DynamicModuleBox[{Typeset`var$$ = True}, 
+         InterpretationBox[
+          StyleBox[
+           PaneSelectorBox[{False->GridBox[{
+              {
+               OpenerBox[Dynamic[Typeset`var$$],
+                Appearance->Automatic,
+                AutoAction->False,
+                ContinuousAction->False,
+                Enabled->Automatic], "\<\"Matches list\"\>"}
+             },
+             AutoDelete->False,
+             BaselinePosition->{1, 1},
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             GridBoxBackground->{"Columns" -> {{Automatic}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+             GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], 
+            True->GridBox[{
+              {
+               OpenerBox[Dynamic[Typeset`var$$],
+                Appearance->Automatic,
+                AutoAction->False,
+                ContinuousAction->False,
+                Enabled->Automatic], "\<\"Matches list\"\>"},
+              {"", 
+               PaneBox[
+                DynamicBox[ToBoxes[$CellContext`output$$, StandardForm],
+                 ImageSizeCache->{0., {0., 8.}}],
+                ImageMargins->0]}
+             },
+             AutoDelete->False,
+             BaselinePosition->{1, 1},
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             GridBoxBackground->{"Columns" -> {{Automatic}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+             GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, 
+            Dynamic[Typeset`var$$],
+            Alignment->Automatic,
+            BaselinePosition->Baseline,
+            DefaultBaseStyle->"OpenerView",
+            ImageMargins->0,
+            ImageSize->Automatic],
+           Deployed->False,
+           StripOnInput->False],
+          OpenerView[{"Matches list", 
+            Dynamic[$CellContext`output$$]}, True]],
+         DynamicModuleValues:>{}],
+        Setting[#, {0}]& ]},
+      {
+       TemplateBox[{TemplateBox[{"\"Filename to save matched data  \"", 
+           InputFieldBox[
+            Dynamic[$CellContext`exportmatchedfilename$$], String, FieldSize -> 
+            15]}, "RowDefault"],"\"  \"",ButtonBox[
+         "\"   Export matched to files (Step 3)   \"", 
+          ButtonFunction :> (Export[
+             StringJoin[$CellContext`exportmatchedfilename$$, ".xls"], 
+             Table[StringJoin["Market ", 
+                ToString[$CellContext`k]] -> (
+               Part[$CellContext`factual$$, $CellContext`k] = SortBy[
+                  Flatten[
+                   Map[Thread[{
+                    Part[#, 1], 
+                    Part[#, 2]}]& , 
+                    Part[$CellContext`match$$, $CellContext`k]], 1], First]; 
+               Prepend[
+                 Flatten[
+                  Table[
+                   
+                   Flatten[{$CellContext`k, MatchEstimation`i, 
+                    MatchEstimation`j, 
+                    Table[{
+                    Part[
+                    Part[
+                    Part[$CellContext`xu$$, $CellContext`k], 
+                    MatchEstimation`n], MatchEstimation`i], 
+                    Part[
+                    Part[
+                    Part[$CellContext`xd$$, $CellContext`k], 
+                    MatchEstimation`n], MatchEstimation`j]}, {
+                    MatchEstimation`n, 1, $CellContext`noattr$$}], 
+                    If[
+                    MemberQ[
+                    Part[$CellContext`factual$$, $CellContext`k], {
+                    MatchEstimation`i, MatchEstimation`j}], 1, 0]}], {
+                   MatchEstimation`i, 1, 
+                    Part[$CellContext`noU$$, $CellContext`k]}, {
+                   MatchEstimation`j, 1, 
+                    Part[$CellContext`noD$$, $CellContext`k]}], 1], 
+                 Flatten[{"Market ID", "Upstream ID", "Downstream ID", 
+                   Table[{
+                    StringJoin["Uattr ", 
+                    ToString[MatchEstimation`i]], 
+                    StringJoin["Dattr ", 
+                    ToString[MatchEstimation`i]]}, {
+                    MatchEstimation`i, 1, $CellContext`noattr$$}], 
+                   "Match if 1"}]]), {$CellContext`k, 1, 
+               MatchEstimation`m$$}], "XLS"]; Null), Method -> "Queued", 
+          Background -> RGBColor[1, 0.5, 0], Appearance -> Automatic, 
+          Evaluator -> Automatic]},
+        "RowDefault"]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"],
+   StripOnInput->False,
+   FontFamily->"Times",
+   Background->RGBColor[1, 1, 0.85]],
+  DynamicModuleValues:>{},
+  Initialization:>(Get["JLink`"]; JLink`InstallJava[]; 
+   JLink`ReinstallJava[JLink`JVMArguments -> "-Xmx512m"]; SetDirectory[
+     NotebookDirectory[]]; Quiet[
+     Get["MatchEstimation.m"]]; $CellContext`matchPayoff$$[
+      Pattern[$CellContext`k$, 
+       Blank[]], 
+      Pattern[MatchEstimation`i$, 
+       Blank[]], 
+      Pattern[MatchEstimation`j$, 
+       Blank[]]] := Apply[Plus, (Part[MatchEstimation`b$$, 
+          Span[1, $CellContext`noattr$$]] Map[Part[
+           Part[
+            Part[$CellContext`xu$$, $CellContext`k$], #], 
+           MatchEstimation`i$]& , 
+          Range[$CellContext`noattr$$]]) Map[Part[
+          Part[
+           Part[$CellContext`xd$$, $CellContext`k$], #], 
+          MatchEstimation`j$]& , 
+         Range[$CellContext`noattr$$]]] + If[$CellContext`noiseflag$$, 
+       Random[
+        Apply[$CellContext`noisedist$$, $CellContext`noisepar$$]], 
+       0])]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{{3.608883035952532*^9, 3.60888304927255*^9}, 
+   3.703598543069721*^9, {3.703598573177136*^9, 3.703598591096871*^9}, 
+   3.7035986799424677`*^9},ExpressionUUID->"02e66e21-e48b-46fd-8b80-\
+1ee62f45aa0e"]
+}, Open  ]]
+},
+WindowSize->{1068, 594},
+WindowMargins->{{Automatic, 283}, {232, Automatic}},
+ShowSelection->True,
+Magnification->1.100000023841858,
+FrontEndVersion->"11.1 for Linux x86 (64-bit) (April 18, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 65972, 1406, 7172, "Input", "ExpressionUUID" -> \
+"2d8470dd-83a9-4023-a629-a8899d89c4bb",
+ InitializationCell->True],
+Cell[66554, 1430, 30786, 633, 578, "Output", "ExpressionUUID" -> \
+"a9d37168-70f0-407d-aeaa-dfe9c7ceb141"],
+Cell[97343, 2065, 30762, 633, 578, "Output", "ExpressionUUID" -> \
+"a0cd8990-4feb-4f6b-a0b7-f3c830256728"],
+Cell[128108, 2700, 29905, 614, 635, "Output", "ExpressionUUID" -> \
+"02e66e21-e48b-46fd-8b80-1ee62f45aa0e"]
+}, Open  ]]
+}
+]
+*)
+

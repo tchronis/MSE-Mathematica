@@ -43,6 +43,7 @@ For a more complete
  | doc/          | Documentation Files |
  | import/       | Data files used in examples |
  | examples/     | Various flows examples |
+ | simulate_data/| Includes a standalone notebook based on Jeremy's original Library to create simulated data and test matching by defining the coefficients of the usual payoff function.|
  | testing/      | Testing routines |
  | .gitignore    | Exclude certain files and directories in your working directory |
  | LICENSE       | A short and simple permissive license with conditions only requiring preservation of copyright and license notices. |
