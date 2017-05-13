@@ -72,3 +72,7 @@ David Santiago and Fox, Jeremy. “A Toolkit for Matching Maximum Score Estimati
 Fox, Jeremy, “Estimating Matching Games with Transfers,” 2016. Last accessed from http://fox.web.rice.edu/working-papers/fox-matching-maximum-score.pdf
 
 Fox J. 2010. Identification in matching games. Quantitative Economics 1: 203–254
+
+## The R version of this Library
+
+https://github.com/tatlchri/MSE-R
