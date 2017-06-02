@@ -67,11 +67,11 @@ For a more complete
 
 ## References
 
-David Santiago and Fox, Jeremy. “A Toolkit for Matching Maximum Score Estimation and Point and Set Identified Subsampling Inference”. 2009. Last accessed from http://fox.web.rice.edu/computer-code/matchestimation-452-documen.pdf
+David Santiago and Fox, Jeremy (2009). “A Toolkit for Matching Maximum Score Estimation and Point and Set Identified Subsampling Inference”. Last accessed from http://fox.web.rice.edu/computer-code/matchestimation-452-documen.pdf
 
-Fox, Jeremy, “Estimating Matching Games with Transfers,” 2016. Last accessed from http://fox.web.rice.edu/working-papers/fox-matching-maximum-score.pdf
+Fox, J (2017) “Estimating Matching Games with Transfers,” Last accessed from http://fox.web.rice.edu/working-papers/fox-matching-maximum-score.pdf
 
-Fox J. 2010. Identification in matching games. Quantitative Economics 1: 203–254
+Fox J. (2010). Identification in matching games. Quantitative Economics 1: 203–254
 
 ## The R version of this Library
 
