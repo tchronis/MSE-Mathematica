@@ -36,6 +36,8 @@ currentquotas=quotas@matchMatrix;
 If[printflag,Print[" payoffMatrix and matchMatrix have been restored!"]];
 ];
 
+compare2original:={};
+
 
 (* ::Input::Initialization:: *)
 ClearAll[removeU];

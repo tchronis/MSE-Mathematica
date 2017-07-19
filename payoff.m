@@ -42,13 +42,13 @@ payoffDM[m_,i_,j_]:=Prepend[Cx[noAttr-1],1].distanceMatrices[[m,i,j]];
 (* ::Input::Initialization:: *)
 (*C in front of the name means create*)
 ClearAll[CpayoffMatrix];
-CpayoffMatrix::usage="CpayoffMatrix[payoff(or payoffDM),noM_,noU_:noU,noD_:noD,parallel_:False] calculates and assigns the payoffMatrix.\r 
+CpayoffMatrix::usage="CpayoffMatrix[payoff(or payoffDM),noM_:noM,noU_:noU,noD_:noD,parallel_:False] calculates and assigns the payoffMatrix.\r 
 payoff is used when input data consist of separate u and d streams.\r
 payoffDM is used for precomputed data.\r
 
-CpayoffMatrix[solution_] substitutes the solution to all payoffMatrix's entries.
+CpayoffMatrix[solution_?VectorQ] substitutes the solution to all payoffMatrix's entries.
 ";
-CpayoffMatrix[payoff_,noM_,noU_:noU,noD_:noD,p_:False]:=
+CpayoffMatrix[payoff_,noM_:noM,noU_:noU,noD_:noD,p_:False]:=
 payoffMatrix=
 If[p==False,
 Table[payoff[m,i,j]
@@ -57,8 +57,8 @@ ParallelTable[payoff[m,i,j]
 ,{m,1,noM},{i,noU[[m]]},{j,noD[[m]]}]
 ]
 
-CpayoffMatrix[solution_]:=
-If[ListQ@solution && (Length@solution)===noAttr-1,
+CpayoffMatrix[solution_?VectorQ]:=
+If[(Length@solution)===noAttr-1,
 payoffMatrix=(payoffMatrix/.Thread[Cx[noAttr-1]->solution])
 ,
 Print["There is some problem with your input. Couldn't calculate anything meaningful."]

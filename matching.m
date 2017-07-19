@@ -85,12 +85,12 @@ If[ListQ@quotaD,quotaD[[First[#2]]],quotaD]
 
 
 (* ::Input::Initialization:: *)
-ClearAll[quotas];
-quotas::usage="quotas[matchMatrix] returns the list {quotaU,quotaD}. Quota is defined for each stream u and d.";
-quotas[matchMatrix_]:={
-(Total/@#)&/@matchMatrix,
-(Total/@(Transpose@#))&/@matchMatrix
-}
+ClearAll[Cquota,quota];
+Cquota::usage="Calculates and creates/updates the global variable 'quota'. Cquota[matchMatrix] returns the association list quota = <|\"upstream\"->quotaU,\"downstream\"->quotaD|>. Quota is defined for each stream u and d.";
+Cquota[matchMatrix_]:=quota=<|
+"upstream"->((Total/@#)&/@matchMatrix),
+"downstream"->((Total/@(Transpose@#))&/@matchMatrix)
+|>
 
 
 (* ::Input::Initialization:: *)
