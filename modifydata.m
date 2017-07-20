@@ -20,23 +20,34 @@
 
 
 (* ::Input::Initialization:: *)
-ClearAll[store,restore];
-store::usage="store[] is used for storing the lists payoffMatrix and matchMatrix before they are modified. In that case they can restored later (with the restore[] command).";
-store[printflag_:True]:=Module[{},
-storedpayoffMatrix=payoffMatrix;
-storedmatchMatrix=matchMatrix;
-currentquotas=quotas@matchMatrix;
-Print[" storedpayoffMatrix=payoffMatrix\n storedmatchMatrix=matchMatrix\n currentquotas=quotas@matchMatrix"];
-];
-restore::usage="restore[] is used to restore the lists payoffMatrix and matchMatrix mate to their original (when the last store[] command was used)";
-restore[printflag_:False]:=Module[{},
-payoffMatrix=storedpayoffMatrix;
-matchMatrix=storedmatchMatrix;
-currentquotas=quotas@matchMatrix;
-If[printflag,Print[" payoffMatrix and matchMatrix have been restored!"]];
+(*
+ClearAll[assign];
+SetAttributes[assign,HoldFirst];
+assign::usage="Programmatically Assign a Value to an Association List Key. ";
+assign[association_?AssociationQ,key_,val_]:=Hold[association[key]]/._[x_]\[RuleDelayed](x=val;);
+*)
+
+
+(* ::Input::Initialization:: *)
+ClearAll[store];
+store::usage="store[] is used for storing all global variables to \"stored\" global variable before they are modified.  In that case they can restored later (with the restore[] command).";
+stored=<| |>;
+store[printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","dataArray"}},
+(*assign[stored,#,Symbol[#]]&/@keys;*)
+(stored[#]=Symbol[#])&/@ keys;
+If[printflag,Print["Stored ",ByteCount[stored]," bytes to \"stored\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
+]
 ];
 
-compare2original:={};
+
+(* ::Input::Initialization:: *)
+ClearAll[restore];
+restore::usage="restore[] is used to restore all global variables from \"stored\" global variable (when the last store[] command was used)";
+restore[printflag_:True]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","dataArray"}},
+(MakeExpression@#/._[s_]:>(s=stored[#]))&/@keys;
+If[printflag,Print["Restored ",ByteCount[stored]," bytes from \"stored\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
+]
+];
 
 
 (* ::Input::Initialization:: *)
@@ -45,7 +56,7 @@ removeU::usage="removeU[m_,u_List,match_:False] removes from the payoffMatrix's 
 removeU[m_,u_List,match_:False]:=Block[{keep},
 keep=Complement[Range[Dimensions[payoffMatrix[[m]]][[1]]],u];
 payoffMatrix[[m]]=payoffMatrix[[m,keep]];
-currentquotas[[1,m]]=currentquotas[[1,m,keep]];
+quota[[1,m]]=quota[[1,m,keep]];
 If[match,matchMatrix[[m]]=matchMatrix[[m,keep]]];
 ];
 
@@ -56,7 +67,7 @@ removeD::usage="removeD[m_,d_List,match_:False] removes from the payoffMatrix's 
 removeD[m_,d_List,match_:False]:=Block[{keep},
 keep=Complement[Range[Dimensions[payoffMatrix[[m]]][[2]]],d];
 payoffMatrix[[m]]=payoffMatrix[[m,All,keep]];
-currentquotas[[2,m]]=currentquotas[[2,m,keep]];
+quota[[2,m]]=quota[[2,m,keep]];
 If[match,matchMatrix[[m]]=matchMatrix[[m,All,keep]]];
 ];
 
