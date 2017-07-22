@@ -43,10 +43,35 @@ If[printflag,Print["Stored ",ByteCount[stored]," bytes to \"stored\" Association
 (* ::Input::Initialization:: *)
 ClearAll[restore];
 restore::usage="restore[] is used to restore all global variables from \"stored\" global variable (when the last store[] command was used)";
-restore[printflag_:True]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","dataArray"}},
+restore[printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","dataArray"}},
 (MakeExpression@#/._[s_]:>(s=stored[#]))&/@keys;
 If[printflag,Print["Restored ",ByteCount[stored]," bytes from \"stored\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
 ]
+];
+
+
+(* ::Input::Initialization:: *)
+ClearAll[modify];
+modify::usage="modify[stream_,m_,u_List,d_List,function_?AssociationQ:<|\"remove\"\[Rule]True|>] modifies m's market upstream and/or downstream members. As a consequece payoffMatrix, matchMatrix, quota are modified.";
+modify[m_,u_List,d_List,function_:<|"remove"->True|>]:=Block[{keep,temp},
+If[function["remove"],
+If[u!={},
+keep=Complement[Range[Dimensions[payoffMatrix[[m]]][[1]]],u];
+payoffMatrix[[m]]=payoffMatrix[[m,keep]];
+matchMatrix[[m]]=matchMatrix[[m,keep]];
+(*temp=quota["upstream"];temp[[m]]=quota["upstream"][[m,keep]];quota["upstream"]=temp;*)
+quota[[1,m]]=quota[[1,m,keep]];
+noU[[m]]=noU[[m]]-Length[u];
+];
+If[d!={},
+keep=Complement[Range[Dimensions[payoffMatrix[[m]]][[2]]],d];
+payoffMatrix[[m]]=payoffMatrix[[m,All,keep]];
+matchMatrix[[m]]=matchMatrix[[m,All,keep]];
+(*temp=quota["downstream"];temp[[m]]=quota["downstream"][[m,keep]];quota["downstream"]=temp;*)
+quota[[2,m]]=quota[[2,m,keep]];
+noD[[m]]=noD[[m]]-Length[d];
+];
+];
 ];
 
 
