@@ -52,8 +52,8 @@ If[printflag,Print["Restored ",ByteCount[stored]," bytes from \"stored\" Associa
 
 (* ::Input::Initialization:: *)
 ClearAll[modify];
-modify::usage="modify[stream_,m_,u_List,d_List,function_?AssociationQ:<|\"remove\"\[Rule]True|>] modifies m's market upstream and/or downstream members. As a consequece payoffMatrix, matchMatrix, quota are modified.";
-modify[m_,u_List,d_List,function_:<|"remove"->True|>]:=Block[{keep,temp},
+modify::usage="modify[m_,u_List,d_List,function_?AssociationQ:<|\"remove\"\[Rule]True,\"quota_update\"\[Rule]False|>] modifies m's market upstream and/or downstream members. As a consequece payoffMatrix, matchMatrix, quota are modified.";
+modify[m_,u_List,d_List,function_:<|"remove"->True,"quota_update"->False|>]:=Block[{keep,temp},
 If[function["remove"],
 If[u!={},
 keep=Complement[Range[Dimensions[payoffMatrix[[m]]][[1]]],u];
