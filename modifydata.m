@@ -29,23 +29,31 @@ assign[association_?AssociationQ,key_,val_]:=Hold[association[key]]/._[x_]\[Rule
 
 
 (* ::Input::Initialization:: *)
+ClearAll[current];
+current::usage="current is an Association List that returns current calculated data";
+current[var_]:=var=<|"header"->header,"noM"->noM,"noU"->noU,"noD"->noD,"noAttr"->noAttr,"distanceMatrices"->distanceMatrices,"matchMatrix"->matchMatrix,"mate"->mate,"quota"->quota,"payoffMatrix"->payoffMatrix,"dataArray"->dataArray|>;
+
+
+(* ::Input::Initialization:: *)
 ClearAll[store];
-store::usage="store[] is used for storing all global variables to \"stored\" global variable before they are modified.  In that case they can restored later (with the restore[] command).";
-stored=<| |>;
-store[printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","dataArray"}},
+store::usage="store[var,printflag] is used for storing all global variables to \"var\" global variable before they are modified.  In that case they can restored later (with the restore[var] command).";
+SetAttributes[store,HoldFirst];
+store[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","dataArray"}},
 (*assign[stored,#,Symbol[#]]&/@keys;*)
-(stored[#]=Symbol[#])&/@ keys;
-If[printflag,Print["Stored ",ByteCount[stored]," bytes to \"stored\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
-]
+var=<||>;
+(var[#]=Symbol[#])&/@ keys;
+If[printflag,Print["Stored ",ByteCount[var]," bytes to \""<>SymbolName[Unevaluated[var]]<>"\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
+];
 ];
 
 
 (* ::Input::Initialization:: *)
 ClearAll[restore];
-restore::usage="restore[] is used to restore all global variables from \"stored\" global variable (when the last store[] command was used)";
-restore[printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","dataArray"}},
-(MakeExpression@#/._[s_]:>(s=stored[#]))&/@keys;
-If[printflag,Print["Restored ",ByteCount[stored]," bytes from \"stored\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
+restore::usage="restore[var,printflag] is used to restore all global variables from \"stored\" global variable (when the last store[] command was used)";
+SetAttributes[restore,HoldFirst];
+restore[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","dataArray"}},
+(MakeExpression@#/._[s_]:>(s=var[#]))&/@keys;
+If[printflag,Print["Restored ",ByteCount[stored]," bytes from \""<>SymbolName[Unevaluated[var]]<>"\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
 ]
 ];
 
