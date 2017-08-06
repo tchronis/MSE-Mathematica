@@ -1,11 +1,11 @@
-(*http://mathematica.stackexchange.com/questions/6144/looking-for-longest-common-substring-solution/6376#6376*)
+(* ::Package:: *)
 
 BeginPackage["SimpleJavaReloader`", {"JLink`"}];
 
 JCompileLoad::usage = 
 "JCompileLoad[javacode_,addToClassPath_] attempts to compile a Java \
 class defined by  a string javacode, optionally adding to Java compiler classpath \
-files and folders from addToClassPath, and load the resulting class into 
+files and folders from addToClassPath, and load the resulting class into \
 Mathematica";
 
 Begin["`Private`"]
@@ -14,12 +14,23 @@ JCompileLoad::dirmakeerr = "Can not create directory `1`";
 
 $stateValid = True;
 
+Print["Loading the reloader"];
+
 $tempJavaDirectory =  FileNameJoin[{$UserBaseDirectory, "Temp", "Java"}];
     $tempClassDirectory = FileNameJoin[{$tempJavaDirectory, "Classes"}];
     $tempJavaLogDirectory = FileNameJoin[{$tempJavaDirectory, "Logs"}];
     $tempCompileLogFile =   FileNameJoin[{$tempJavaLogDirectory, "javac.log"}];
     $jrePath =   
-     FileNameJoin[{$InstallationDirectory, "SystemFiles", "Java", $SystemID}];
+		Switch[$SystemID,
+			s_/;StringMatchQ[s,"Win"|"Lin"~~__],
+				FileNameJoin[{$InstallationDirectory, "SystemFiles", "Java", $SystemID}],
+			s_/;StringMatchQ[s,"Mac"|"Lin"~~__],
+				"/Library/Java/Home"
+		];
+
+
+
+     (* FileNameJoin[{$InstallationDirectory, "SystemFiles", "Java", $SystemID}];*)
 $javaPath = FileNameJoin[{$jrePath, "bin"}];
     $jlibPath = FileNameJoin[{$jrePath, "lib"}];
     $classPath = {$tempClassDirectory, $jlibPath};
@@ -43,7 +54,7 @@ Clear[getClass];
 getClass[classCode_String] :=
   With[{cl =
      StringCases[classCode, 
-       "public" ~~ Whitespace ~~ "class"|"interface" ~~ Whitespace ~~ 
+       "public" ~~ Whitespace ~~ "class" ~~ Whitespace ~~ 
          name : (WordCharacter ..) :> name
      ]},
     First@cl /; cl =!= {}];
@@ -71,21 +82,38 @@ getFullClass[classCode_String] :=
 
 (* Note: So far, tested on Windows only. Some specifics of quoting are 
    tuned to work around some bugs in Windows command line processor *)
+
+ClearAll[stringify];
+stringify[s__String]/;StringMatchQ[$SystemID,"Win"~~__]:="\""<>s<>"\""; 
+stringify[s__String]/;StringMatchQ[$SystemID,("Mac"|"Lin")~~__]:=s;
+
+
+$classPathSeparator = 
+	Switch[$SystemID,
+		s_/;StringMatchQ[s,"Win"~~__],
+			";",
+		s_/;StringMatchQ[s,"Mac"|"Lin"~~__],
+			":"
+	];
+
+
 Clear[makeCompileScript];
 makeCompileScript[sourceFile_String] :=
   StringJoin[
-    "\"",
-    "\"", FileNameJoin[{$javaPath, "javac"}] , "\"",
-        " -g ", sourceFile,
-        " -d ", $tempClassDirectory,
-    " -classpath ", "\"", Sequence @@ Riffle[$classPath, ";"], "\"",
-        " 2> ", $tempCompileLogFile,
-    "\""
+    stringify[
+        stringify@FileNameJoin[{$javaPath, "javac"}],
+        " -g ", stringify@sourceFile,
+        " -d ", stringify@$tempClassDirectory,
+        " -classpath ", stringify[ Sequence @@ Riffle[$classPath, $classPathSeparator]],
+        " 2> ", stringify@$tempCompileLogFile
+    ]
   ];
 
 Clear[getSourceFile];
 getSourceFile[javacode_String] :=
    FileNameJoin[{$tempClassDirectory, getClass[javacode] <> ".java"}];
+
+showIt[x__]:=(Print[x];x)
 
 Clear[JCompileLoad];
 
@@ -110,7 +138,7 @@ JCompileLoad[javacode_String, addToClassPath_: {}]/; $stateValid :=
          $Failed,
              (*else*)
              ReinstallJava[];
-             AddToClassPath @@ Join[$classPath, addToClassPath];
+             AddToClassPath[$tempClassDirectory];
          LoadJavaClass[fullClassName]
        ]
      ]
@@ -125,3 +153,5 @@ JCompileLoad[_String, addToClassPath_: {}] :=
 End[]
 
 EndPackage[]
+
+
