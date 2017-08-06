@@ -62,11 +62,12 @@ Join@@result]
 
 (* ::Input::Initialization:: *)
 (*http://mathematica.stackexchange.com/questions/6144/looking-for-longest-common-substring-solution/6376#6376*)
-Get[directory<>"SimpleJavaReloader.m"]
+(*Get[directory<>"SimpleJavaReloader.m"]*)
 
 
 (* ::Input::Initialization:: *)
-If[$OperatingSystem=="Windows",
+(*
+If[$OperatingSystem\[Equal]"Windows",
 JCompileLoad["public class DoubleParser{
    public static double[] parseDouble(String[] strdub){
       double[] res = new double[strdub.length];
@@ -82,13 +83,16 @@ JCompileLoad["public class DoubleParser{
    }
 }"]
 ]
+*)
 
 
 (* ::Input::Initialization:: *)
+(*
 ClearAll[importDoubleCSV];
-Options[importDoubleCSV]={"Headers"->True};
+Options[importDoubleCSV]={"Headers"\[Rule]True};
 importDoubleCSV::usage="importDoubleCSV[file] is a Java-based solution for efficient importing, pretty fast but valid only when all your columns are numerical (double) values. Note that Java parsing code adopts a convention to replace all non-parsable strings with zeros. It is possible to improve on this, by returning also the positions of non-parsable strings, separately. Note also that the UTF-8 encoding is implicitly assumed";
 importDoubleCSV[file_String?FileExistsQ,opts:OptionsPattern[]]:=With[{fn=If[TrueQ[OptionValue["Headers"]],Rest,Identity]},Transpose[DoubleParser`parseDouble/@Transpose[DeleteCases[StringSplit[fn[StringSplit[FromCharacterCode[BinaryReadList[file]],"\n"]],{"\t",","}],{s_String/;StringMatchQ[s,Whitespace]}]]]]
+*)
 
 
 (* ::Input::Initialization:: *)
