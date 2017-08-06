@@ -52,9 +52,10 @@ If[printflag,Print["Restored ",ByteCount[stored]," bytes from \"stored\" Associa
 
 (* ::Input::Initialization:: *)
 ClearAll[modify];
-modify::usage="modify[m_,u_List,d_List,function_?AssociationQ:<|\"remove\"\[Rule]True,\"quota_update\"\[Rule]False,\"rematch\"\[Rule]False|>] 
+modify::usage="modify[m_,u_List,d_List,function_?AssociationQ:<|\"remove\"\[Rule]True,\"quota_reset\"\[Rule]False,\"quota_update\"\[Rule]False,\"rematch\"\[Rule]False|>] 
 modifies m's market upstream and/or downstream members. As a consequence payoffMatrix, matchMatrix, quota are modified.
-If \"remove\"\[Rule]True and \"quota_update\"\[Rule]False then the quota of the matched opposite stream are reduced because of the sream removal
+If \"remove\"\[Rule]True and \"quota_reset\"\[Rule]True then the quota of the selected for remove streams becomes equal to 0.
+If \"remove\"\[Rule]True and \"quota_update\"\[Rule]True then the quota of the matched opposite stream are reduced because of the sream removal.
 If \"rematch\"\[Rule]True then the matchMatrix of the m'th market is re-calculated using the set quota.";
 modify[m_,u_List,d_List,function_:<|"remove"->True,"quota_update"->False,"rematch"->False|>]:=Block[{keep,theirdownstream,theirupstream},
 If[function["remove"],
@@ -63,22 +64,33 @@ If[function["quota_update"],
 theirdownstream=mate[[m]][[2,u]];
 quota[[2,m,#]]--&/@Flatten[theirdownstream]
 ];
+
+If[function["quota_reset"],
+quota[[1,m,u]]=Table[0,{Length@u}];
+matchMatrix[[m,u]]=Table[0,{Length[u]},{noD[[m]]}];Cmate[matchMatrix];
+,
 keep=Complement[Range[Dimensions[payoffMatrix[[m]]][[1]]],u];
 payoffMatrix[[m]]=payoffMatrix[[m,keep]];
 matchMatrix[[m]]=matchMatrix[[m,keep]];Cmate[matchMatrix];
 quota[[1,m]]=quota[[1,m,keep]];
 noU[[m]]=noU[[m]]-Length[u];
+]
 ];
 If[d!={},
 If[function["quota_update"],
 theirupstream=Position[matchMatrix[[m,All,#]],1]&/@d;
 quota[[1,m,#]]--&/@Flatten[theirupstream]
 ];
+If[function["quota_reset"],
+quota[[2,m,d]]=Table[0,{Length@d}];
+matchMatrix[[m,All,d]]=Table[0,{noU[[m]]},{Length[d]}];Cmate[matchMatrix];
+,
 keep=Complement[Range[Dimensions[payoffMatrix[[m]]][[2]]],d];
 payoffMatrix[[m]]=payoffMatrix[[m,All,keep]];
 matchMatrix[[m]]=matchMatrix[[m,All,keep]];Cmate[matchMatrix];
 quota[[2,m]]=quota[[2,m,keep]];
 noD[[m]]=noD[[m]]-Length[d];
+]
 ];
 ];
 If[function["rematch"],
