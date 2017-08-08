@@ -19,7 +19,7 @@
 
 
 
-(* ::Input:: *)
+(* ::Input::Initialization:: *)
 (*10x times faster than Export*)
 ClearAll[writeYourTSV];
 writeYourTSV[file_String,list_List?MatrixQ]:=With[{str=OpenWrite[file,PageWidth->Infinity],len=Length[list[[1]]]},Scan[Write[str,Sequence@@(Flatten[Table[{(*FortranForm[*)#[[i]](*]*),OutputForm["\t"]},{i,len-1}]])~Join~{(*FortranForm[*)#[[len]](*]*)}]&,list];Close[str];](*150211 removed FortranForm because it induced e's*)(*150219 re enabled the fortran form -- Importing seems to work just fine*)
