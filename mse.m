@@ -47,7 +47,7 @@ notebookslist={"import.nb","export.nb","payoff.nb","modifydata.nb","matching.nb"
 
 
 (* ::Input::Initialization:: *)
-Get[#,Path->directory]&/@{"import.m","export.m","payoff.m","modifydata.m","matching.m","inequalities.m","dataArray.m","objective.m","PSO.m","maximize.m","confidence.m"};
+Get[directory<>#(*,Path\[Rule]directory*)]&/@{"import.m","export.m","payoff.m","modifydata.m","matching.m","inequalities.m","dataArray.m","objective.m","PSO.m","maximize.m","confidence.m"};
 
 
 (* ::Input::Initialization:: *)
