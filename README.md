@@ -6,6 +6,14 @@ The code builds upon Jeremy Fox’s theoretical work on the “pairwise maximum 
 
 To understand the present code the user needs to be familiar with the maximum score estimator and formal matching games. To ease the exposition, this documentation and the code itself follow closely the terminology used by Jeremy Fox. Unless stated otherwise, please refer back to the original sources for definitions and technical details accessible via the links at the bottom of this document.  
 
+## Load the Library straight from github
+
+Open your notebook and run: 
+
+directory = "https://raw.githubusercontent.com/tchronis/MSE-Mathematica/master/";
+
+Get[directory <> "mse.m"]
+
 ## Installation Instructions
 
 1. Download the zip file (https://github.com/tchronis/MSE-Mathematica/archive/master.zip)
