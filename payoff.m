@@ -72,7 +72,7 @@ Ctotalpayoff::usage="
 Ctotalpayoff[payoffobject,mates] calculates the total payoff (i.e. the sum of payoffs) across all markets for the specific mates arrangement. This function accepts as a first argument the \[OpenCurlyDoubleQuote]payffobject\[CloseCurlyDoubleQuote], which can either be the name of the payoff function or the payoffMatrix (in case we have already calculated all pair payoffs).";
 Ctotalpayoff[payoffobject_,mates_]:=
 totalpayoff=
-Switch[Head@payoffobject,
+Total/@Switch[Head@payoffobject,
 (*payoff function*)Symbol,Map[payoffobject@@#&,mates,{2}],
 (*payoffMatrix*)List,Map[Part@@Join[{payoffobject},#]&,mates,{2}]
 ]
