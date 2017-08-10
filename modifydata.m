@@ -30,9 +30,11 @@ assign[association_?AssociationQ,key_,val_]:=Hold[association[key]]/._[x_]\[Rule
 
 (* ::Input::Initialization:: *)
 ClearAll[store];
-store::usage="store[var,printflag] is used for storing all global variables to \"var\" global variable before they are modified.  In that case they can restored later (with the restore[var] command).";
+store::usage="store[var,printflag] is used for storing all global variables to \"var\" global variable before they are modified.  In that case they can restored later (with the restore[var] command).
+Variables: {\"header\",\"noM\",\"noU\",\"noD\",\"noAttr\",\"distanceMatrices\",\"matchMatrix\",\"mate\",\"quota\",\"payoffMatrix\",\"totalpayoff\",\"dataArray\"}}
+";
 SetAttributes[store,HoldFirst];
-store[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","dataArray"}},
+store[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","totalpayoff","dataArray"}},
 (*assign[stored,#,Symbol[#]]&/@keys;*)
 var=<||>;
 (var[#]=Symbol[#])&/@ keys;
@@ -43,9 +45,11 @@ If[printflag,Print["Stored ",ByteCount[var]," bytes to \""<>SymbolName[Unevaluat
 
 (* ::Input::Initialization:: *)
 ClearAll[restore];
-restore::usage="restore[var,printflag] is used to restore all global variables from \"stored\" global variable (when the last store[] command was used)";
+restore::usage="restore[var,printflag] is used to restore all global variables from \"var\" global variable (when the last store[] command was used).
+Variables: {\"header\",\"noM\",\"noU\",\"noD\",\"noAttr\",\"distanceMatrices\",\"matchMatrix\",\"mate\",\"quota\",\"payoffMatrix\",\"totalpayoff\",\"dataArray\"}}
+";
 SetAttributes[restore,HoldFirst];
-restore[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","dataArray"}},
+restore[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","totalpayoff","dataArray"}},
 (MakeExpression@#/._[s_]:>(s=var[#]))&/@keys;
 If[printflag,Print["Restored ",ByteCount[var]," bytes from \""<>SymbolName[Unevaluated[var]]<>"\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
 ]
