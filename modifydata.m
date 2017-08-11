@@ -20,19 +20,13 @@
 
 
 (* ::Input::Initialization:: *)
-(*
-ClearAll[assign];
-SetAttributes[assign,HoldFirst];
-assign::usage="Programmatically Assign a Value to an Association List Key. ";
-assign[association_?AssociationQ,key_,val_]:=Hold[association[key]]/._[x_]\[RuleDelayed](x=val;);
-*)
+Echo["Loaded modifydata.m"];
 
 
 (* ::Input::Initialization:: *)
 ClearAll[store];
 store::usage="store[var,printflag] is used for storing all global variables to \"var\" global variable before they are modified.  In that case they can restored later (with the restore[var] command).
-Variables: {\"header\",\"noM\",\"noU\",\"noD\",\"noAttr\",\"distanceMatrices\",\"matchMatrix\",\"mate\",\"quota\",\"payoffMatrix\",\"totalpayoff\",\"dataArray\"}}
-";
+Variables: {\"header\",\"noM\",\"noU\",\"noD\",\"noAttr\",\"distanceMatrices\",\"matchMatrix\",\"mate\",\"quota\",\"payoffMatrix\",\"totalpayoff\",\"dataArray\"}}";
 SetAttributes[store,HoldFirst];
 store[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","totalpayoff","dataArray"}},
 (*assign[stored,#,Symbol[#]]&/@keys;*)
@@ -41,6 +35,7 @@ var=<||>;
 If[printflag,Print["Stored ",ByteCount[var]," bytes to \""<>SymbolName[Unevaluated[var]]<>"\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
 ];
 ];
+Information[store,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
@@ -54,6 +49,7 @@ restore[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD",
 If[printflag,Print["Restored ",ByteCount[var]," bytes from \""<>SymbolName[Unevaluated[var]]<>"\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
 ]
 ];
+Information[restore,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
@@ -105,6 +101,8 @@ Cmate[matchMatrix];
 ];
 ];
 
+Information[modify,LongForm->False]
+
 
 (* ::Input::Initialization:: *)
 ClearAll[removeU];
@@ -146,6 +144,7 @@ offset=Min/@payoffMatrix;
 If[sameoffset,min=Min@offset;offset=Table[min,{Length@payoffMatrix}]];
 payoffMatrix-offset+epsilon
 ];
+Information[payoffMatrix2Positive,LongForm->False]
 
 
 

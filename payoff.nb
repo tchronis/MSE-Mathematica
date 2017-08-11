@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     18841,        488]
-NotebookOptionsPosition[     16181,        412]
-NotebookOutlinePosition[     16594,        430]
-CellTagsIndexPosition[     16551,        427]
+NotebookDataLength[     27332,        701]
+NotebookOptionsPosition[     22210,        560]
+NotebookOutlinePosition[     23721,        605]
+CellTagsIndexPosition[     23464,        596]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -50,8 +50,62 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"ClearSystemCache", "[", "]"}]], "Input",
- CellChangeTimes->{{3.581669726757145*^9, 3.5816697379287844`*^9}}]
-}, Closed]],
+ CellChangeTimes->{{3.581669726757145*^9, 3.5816697379287844`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"directory", "=", 
+  RowBox[{"NotebookDirectory", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Get", "[", 
+  RowBox[{"\"\<mse.m\>\"", ",", 
+   RowBox[{"Path", "\[Rule]", "directory"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6392064512024283`*^9, 3.6392064555015736`*^9}, {
+  3.6392064862997465`*^9, 3.6392065233606443`*^9}, {3.6392250169707823`*^9, 
+  3.6392250177207823`*^9}, {3.6535358489289207`*^9, 3.653535855296494*^9}, {
+  3.709482620021003*^9, 3.70948262065952*^9}},
+ Background->GrayLevel[
+  0.85],ExpressionUUID->"6f7079eb-e682-4709-bad8-0c8ec965b184"],
+
+Cell[BoxData["\<\"/home/tchr/Projects/Mathematica/MSE-Mathematica/\"\>"], \
+"Output",
+ CellChangeTimes->{
+  3.6535358608398933`*^9, 3.686929203726038*^9, 3.686930821364958*^9, 
+   3.686931006815919*^9, 3.686936864604438*^9, {3.707557808810499*^9, 
+   3.707557811296351*^9}, {3.707661327359004*^9, 3.707661337708104*^9}, 
+   3.707665182708693*^9, 3.707666082756846*^9, 3.70766635134763*^9, 
+   3.709202016739093*^9, 3.709205445549831*^9, 3.7094452158126497`*^9, 
+   3.709445751825338*^9, 3.70945581006676*^9, 3.709469152678699*^9, 
+   3.709476927501616*^9, 3.709480111970817*^9, 3.709480148860219*^9, 
+   3.7094822539197073`*^9, 3.709482624398921*^9, 3.7095244490014563`*^9, 
+   3.70952480292412*^9, 3.7095253825368156`*^9, 3.709530703718384*^9, 
+   3.709542599786195*^9, 3.709697323426976*^9, 3.7096994803573112`*^9, 
+   3.710165445179934*^9, 3.7110041224933977`*^9, 3.7110210387619066`*^9, {
+   3.7110408474209776`*^9, 3.7110408481240177`*^9}, 3.7110446100438614`*^9, 
+   3.7112129795239935`*^9, 3.711248736394968*^9, 3.711363650709928*^9, 
+   3.711432605925584*^9, 
+   3.711432919561407*^9},ExpressionUUID->"d0a515b0-5f6b-4d91-a1fe-\
+09cb007c1238"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Echo", "[", "\"\<Loaded payoff.m\>\"", "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.711434116821677*^9, 3.711434132168717*^9}, {
+  3.711434316073223*^9, 3.711434320192101*^9}, {3.711434530547905*^9, 
+  3.7114345317911777`*^9}},
+ Background->RGBColor[
+  0.88, 1, 0.88],ExpressionUUID->"66592182-477e-4ee9-b13b-940e06f71689"],
+
+Cell[BoxData["\<\"Loaded payoff.m\"\>"], "Echo",
+ CellChangeTimes->{
+  3.711434537528976*^9},ExpressionUUID->"f8716ad5-7792-45f0-ac22-\
+bb2aac3de188"]
+}, Open  ]]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -70,6 +124,8 @@ Cell[CellGroupData[{
 Cell["Cx", "Subsection",
  CellChangeTimes->{{3.626169503603243*^9, 3.62616950426756*^9}}],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[{
  RowBox[{
   RowBox[{"ClearAll", "[", "Cx", "]"}], ";"}], "\[IndentingNewLine]", 
@@ -87,18 +143,33 @@ Cell[BoxData[{
       RowBox[{"\"\<x\>\"", "<>", 
        RowBox[{"ToString", "[", "i", "]"}]}], "]"}], ",", 
      RowBox[{"{", 
-      RowBox[{"i", ",", "n"}], "}"}]}], "]"}]}], ";"}]}], "Input",
+      RowBox[{"i", ",", "n"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Information", "[", 
+  RowBox[{"Cx", ",", 
+   RowBox[{"LongForm", "\[Rule]", "False"}]}], "]"}]}], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.6260970725552883`*^9, 3.6260972022973456`*^9}, {
   3.6261692693125653`*^9, 3.626169274830132*^9}, {3.6263451577501373`*^9, 
-  3.6263451994688873`*^9}},
- Background->RGBColor[0.88, 1, 0.88]]
+  3.6263451994688873`*^9}, {3.711434541147997*^9, 3.7114345647219687`*^9}},
+ Background->RGBColor[
+  0.88, 1, 0.88],ExpressionUUID->"5d0b68bf-0c4c-484f-a8ea-7601cc14e879"],
+
+Cell[BoxData[
+ StyleBox["\<\"Cx[n] creates a list of n variables named x1,x2,...,xn.\"\>", 
+  "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.71143458012475*^9},
+ CellTags->
+  "Info53711445379-5830608",ExpressionUUID->"0f58b9eb-f16a-4cfe-9a4e-\
+ca5a641bea98"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["payoff", "Subsection",
  CellChangeTimes->{{3.62616950983075*^9, 3.6261695125817266`*^9}}],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
@@ -133,7 +204,10 @@ and noAttr have been already assigned.\>\""}], ";"}], "\[IndentingNewLine]",
      StyleBox["d",
       Background->RGBColor[1, 1, 0]], "[", 
      RowBox[{"[", 
-      RowBox[{"m", ",", "j"}], "]"}], "]"}]}]}], ";"}]}], "Input",
+      RowBox[{"m", ",", "j"}], "]"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Information", "[", 
+  RowBox[{"payoff", ",", 
+   RowBox[{"LongForm", "\[Rule]", "False"}]}], "]"}]}], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.6260969688470917`*^9, 3.626096978734878*^9}, {
    3.626097218817205*^9, 3.6260972527523394`*^9}, {3.6260972966312456`*^9, 
@@ -142,8 +216,24 @@ and noAttr have been already assigned.\>\""}], ";"}], "\[IndentingNewLine]",
    3.6261696027442513`*^9, 3.62616962853998*^9}, {3.6263456135001373`*^9, 
    3.6263457717657623`*^9}, {3.6263458174220123`*^9, 
    3.6263458350470123`*^9}, {3.632739732008258*^9, 3.6327397398325505`*^9}, {
-   3.697047429993506*^9, 3.6970474433085537`*^9}},
- Background->RGBColor[0.88, 1, 0.88]],
+   3.697047429993506*^9, 3.6970474433085537`*^9}, {3.711434569181081*^9, 
+   3.7114345770630703`*^9}},
+ Background->RGBColor[
+  0.88, 1, 0.88],ExpressionUUID->"e47fc6e3-a265-494f-97c8-7d2caee133d8"],
+
+Cell[BoxData[
+ StyleBox["\<\"payoff[m,i,j] returns the payoff of i-upstream and j-upstream \
+in the m-market. \\nIt is used when the streams of u and d agents are \
+imported separately (i.e. not in the precomputed format). It is assumed that \
+u , d , and noAttr have been already assigned.\"\>", "MSG"]], "Print", \
+"PrintUsage",
+ CellChangeTimes->{3.711434582119796*^9},
+ CellTags->
+  "Info93711445382-5830608",ExpressionUUID->"02be2bed-7823-4474-8654-\
+916a044620c5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
@@ -175,14 +265,30 @@ that noAttr and distanceMatrices have been already assigned.\>\""}],
      StyleBox["distanceMatrices",
       Background->RGBColor[1, 1, 0]], "[", 
      RowBox[{"[", 
-      RowBox[{"m", ",", "i", ",", "j"}], "]"}], "]"}]}]}], ";"}]}], "Input",
+      RowBox[{"m", ",", "i", ",", "j"}], "]"}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Information", "[", 
+  RowBox[{"payoffDM", ",", 
+   RowBox[{"LongForm", "\[Rule]", "False"}]}], "]"}]}], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.612012388803448*^9, 3.612012423100323*^9}, 
    3.626169883844104*^9, 3.626171560119195*^9, {3.6261727802254305`*^9, 
    3.6261727846650887`*^9}, {3.626172896174202*^9, 3.6261729336334953`*^9}, {
    3.6263458504220123`*^9, 3.6263459143438873`*^9}, {3.6327397695123205`*^9, 
-   3.6327397767115393`*^9}},
- Background->RGBColor[0.88, 1, 0.88]]
+   3.6327397767115393`*^9}, {3.711434584856642*^9, 3.711434595300276*^9}},
+ Background->RGBColor[
+  0.88, 1, 0.88],ExpressionUUID->"e1eef433-418b-45b7-869c-0b66f68e5440"],
+
+Cell[BoxData[
+ StyleBox["\<\"payoffDM[m,i,j] returns the payoff of i-upstream and \
+j-upstream in the m-market. \\nIt is used in the case of precomputed data. It \
+is assumed that noAttr and distanceMatrices have been already assigned.\"\>", 
+  "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.7114345960994253`*^9},
+ CellTags->
+  "Info133711445396-5830608",ExpressionUUID->"f1004424-fc4a-4bce-a375-\
+629ffa265013"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -193,6 +299,8 @@ Cell["CpayoffMatrix[payoff,noM,noU,noD]", "Subsection",
    3.6117412916970325`*^9}, {3.611912880528715*^9, 3.611912891202575*^9}, {
    3.6119140905750036`*^9, 3.611914092263646*^9}, {3.611918058468073*^9, 
    3.611918059112929*^9}, 3.6119214516902895`*^9}],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
@@ -210,9 +318,9 @@ Cell[BoxData[
      "\"\<CpayoffMatrix[payoff(or \
 payoffDM),noM_:noM,noU_:noU,noD_:noD,parallel_:False] calculates and assigns \
 the payoffMatrix.\\r \npayoff is used when input data consist of separate u \
-and d streams.\\r\npayoffDM is used for precomputed data.\\r\n\n\
+and d streams.\\r\npayoffDM is used for precomputed data.\\r\n\
 CpayoffMatrix[solution_?VectorQ] substitutes the solution to all \
-payoffMatrix's entries.\n\>\""}], ";"}], "\n", 
+payoffMatrix's entries.\>\""}], ";"}], "\n", 
    RowBox[{
     RowBox[{"CpayoffMatrix", "[", 
      RowBox[{"payoff_", ",", 
@@ -264,28 +372,33 @@ payoffMatrix's entries.\n\>\""}], ";"}], "\n",
       "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
    "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"CpayoffMatrix", "[", 
-     RowBox[{"solution_", "?", "VectorQ"}], "]"}], ":=", 
-    "\[IndentingNewLine]", 
-    RowBox[{"If", "[", 
-     RowBox[{
+    RowBox[{
+     RowBox[{"CpayoffMatrix", "[", 
+      RowBox[{"solution_", "?", "VectorQ"}], "]"}], ":=", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
       RowBox[{
-       RowBox[{"(", 
-        RowBox[{"Length", "@", "solution"}], ")"}], "===", 
-       RowBox[{"noAttr", "-", "1"}]}], ",", "\[IndentingNewLine]", 
-      RowBox[{"payoffMatrix", "=", 
-       RowBox[{"(", 
-        RowBox[{"payoffMatrix", "/.", 
-         RowBox[{"Thread", "[", 
-          RowBox[{
-           RowBox[{"Cx", "[", 
-            RowBox[{"noAttr", "-", "1"}], "]"}], "\[Rule]", "solution"}], 
-          "]"}]}], ")"}]}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-      RowBox[{
-      "Print", "[", 
-       "\"\<There is some problem with your input. Couldn't calculate \
-anything meaningful.\>\"", "]"}]}], "\[IndentingNewLine]", 
-     "]"}]}]}]}]], "Input",
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"Length", "@", "solution"}], ")"}], "===", 
+        RowBox[{"noAttr", "-", "1"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"payoffMatrix", "=", 
+        RowBox[{"(", 
+         RowBox[{"payoffMatrix", "/.", 
+          RowBox[{"Thread", "[", 
+           RowBox[{
+            RowBox[{"Cx", "[", 
+             RowBox[{"noAttr", "-", "1"}], "]"}], "\[Rule]", "solution"}], 
+           "]"}]}], ")"}]}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+       "Print", "[", 
+        "\"\<There is some problem with your input. Couldn't calculate \
+anything meaningful.\>\"", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Information", "[", 
+    RowBox[{"CpayoffMatrix", ",", 
+     RowBox[{"LongForm", "\[Rule]", "False"}]}], "]"}]}]}]], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.611654102177257*^9, 3.6116542218406477`*^9}, 
    3.611654420939027*^9, {3.6116544925174885`*^9, 3.6116545056894417`*^9}, {
@@ -311,9 +424,24 @@ anything meaningful.\>\"", "]"}]}], "\[IndentingNewLine]",
    3.6970475347792053`*^9}, {3.707665162057847*^9, 3.707665167046235*^9}, {
    3.707665221505415*^9, 3.707665240181658*^9}, {3.707665290783296*^9, 
    3.707665293541404*^9}, {3.707665462423126*^9, 3.7076654856855297`*^9}, {
-   3.707666269956071*^9, 3.70766632470221*^9}},
+   3.707666269956071*^9, 3.70766632470221*^9}, {3.711434602134906*^9, 
+   3.711434646759029*^9}},
  Background->RGBColor[
-  0.88, 1, 0.88],ExpressionUUID->"66736c1b-531e-466b-9284-0585d5565759"]
+  0.88, 1, 0.88],ExpressionUUID->"66736c1b-531e-466b-9284-0585d5565759"],
+
+Cell[BoxData[
+ StyleBox["\<\"CpayoffMatrix[payoff(or \
+payoffDM),noM_:noM,noU_:noU,noD_:noD,parallel_:False] calculates and assigns \
+the payoffMatrix.
+ \\npayoff is used when input data consist of separate u and d streams.
+\\npayoffDM is used for precomputed data.
+\\nCpayoffMatrix[solution_?VectorQ] substitutes the solution to all \
+payoffMatrix's entries.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.7114346475947657`*^9},
+ CellTags->
+  "Info313711445447-5830608",ExpressionUUID->"2fcbf05e-de26-4dd8-bdf2-\
+c463cc942cdd"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -335,6 +463,8 @@ corresponding routine is used.\
  CellChangeTimes->{{3.6263346577397165`*^9, 3.6263346977709665`*^9}},
  CellID->1964608544],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{
   RowBox[{"(*", 
@@ -348,39 +478,43 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      RowBox[{"Ctotalpayoff", "::", "usage"}], "=", 
-     "\"\<\nCtotalpayoff[payoffobject,mates] calculates the total payoff \
-(i.e. the sum of payoffs) across all markets for the specific mates \
-arrangement. This function accepts as a first argument the \
+     "\"\<Ctotalpayoff[payoffobject,mates] calculates the total payoff (i.e. \
+the sum of payoffs) across all markets for the specific mates arrangement. \
+This function accepts as a first argument the \
 \[OpenCurlyDoubleQuote]payffobject\[CloseCurlyDoubleQuote], which can either \
 be the name of the payoff function or the payoffMatrix (in case we have \
 already calculated all pair payoffs).\>\""}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"Ctotalpayoff", "[", 
-     RowBox[{"payoffobject_", ",", "mates_"}], "]"}], ":=", 
-    "\[IndentingNewLine]", 
-    RowBox[{"totalpayoff", "=", "\[IndentingNewLine]", 
-     RowBox[{"Total", "/@", 
-      RowBox[{"Switch", "[", 
-       RowBox[{
-        RowBox[{"Head", "@", "payoffobject"}], ",", "\[IndentingNewLine]", 
-        RowBox[{"(*", 
-         RowBox[{"payoff", " ", "function"}], "*)"}], "Symbol", ",", 
-        RowBox[{"Map", "[", 
-         RowBox[{
+    RowBox[{
+     RowBox[{"Ctotalpayoff", "[", 
+      RowBox[{"payoffobject_", ",", "mates_"}], "]"}], ":=", 
+     "\[IndentingNewLine]", 
+     RowBox[{"totalpayoff", "=", "\[IndentingNewLine]", 
+      RowBox[{"Total", "/@", 
+       RowBox[{"Switch", "[", 
+        RowBox[{
+         RowBox[{"Head", "@", "payoffobject"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"payoff", " ", "function"}], "*)"}], "Symbol", ",", 
+         RowBox[{"Map", "[", 
           RowBox[{
-           RowBox[{"payoffobject", "@@", "#"}], "&"}], ",", "mates", ",", 
-          RowBox[{"{", "2", "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
-        RowBox[{"(*", "payoffMatrix", "*)"}], "List", ",", 
-        RowBox[{"Map", "[", 
-         RowBox[{
+           RowBox[{
+            RowBox[{"payoffobject", "@@", "#"}], "&"}], ",", "mates", ",", 
+           RowBox[{"{", "2", "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", "payoffMatrix", "*)"}], "List", ",", 
+         RowBox[{"Map", "[", 
           RowBox[{
-           RowBox[{"Part", "@@", 
-            RowBox[{"Join", "[", 
-             RowBox[{
-              RowBox[{"{", "payoffobject", "}"}], ",", "#"}], "]"}]}], "&"}], 
-          ",", "mates", ",", 
-          RowBox[{"{", "2", "}"}]}], "]"}]}], "\[IndentingNewLine]", 
-       "]"}]}]}]}]}]}]], "Input",
+           RowBox[{
+            RowBox[{"Part", "@@", 
+             RowBox[{"Join", "[", 
+              RowBox[{
+               RowBox[{"{", "payoffobject", "}"}], ",", "#"}], "]"}]}], "&"}],
+            ",", "mates", ",", 
+           RowBox[{"{", "2", "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+        "]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Information", "[", 
+    RowBox[{"Ctotalpayoff", ",", 
+     RowBox[{"LongForm", "\[Rule]", "False"}]}], "]"}]}]}]], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.611654102177257*^9, 3.6116542218406477`*^9}, 
    3.611654420939027*^9, {3.6116544925174885`*^9, 3.6116545056894417`*^9}, {
@@ -397,9 +531,23 @@ already calculated all pair payoffs).\>\""}], ";"}], "\[IndentingNewLine]",
    3.6327454266618457`*^9}, {3.6327454824266925`*^9, 3.632745499274597*^9}, {
    3.6880084344367313`*^9, 3.688008439923318*^9}, {3.6970475837469788`*^9, 
    3.697047585930585*^9}, {3.697047648304394*^9, 3.697047649017954*^9}, {
-   3.7113477381816683`*^9, 3.711347743219247*^9}},
+   3.7113477381816683`*^9, 3.711347743219247*^9}, {3.711434621911147*^9, 
+   3.711434634637506*^9}},
  Background->RGBColor[0.88, 1, 0.88],
  CellID->1747771955,ExpressionUUID->"50178ce3-17a6-44b1-9332-ef1785e26fbb"],
+
+Cell[BoxData[
+ StyleBox["\<\"Ctotalpayoff[payoffobject,mates] calculates the total payoff \
+(i.e. the sum of payoffs) across all markets for the specific mates \
+arrangement. This function accepts as a first argument the \
+\[OpenCurlyDoubleQuote]payffobject\[CloseCurlyDoubleQuote], which can either \
+be the name of the payoff function or the payoffMatrix (in case we have \
+already calculated all pair payoffs).\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.711434636613043*^9},
+ CellTags->
+  "Info263711445436-5830608",ExpressionUUID->"ce2e61e8-dba1-4b06-b184-\
+cf08ba5d05bd"]
+}, Open  ]],
 
 Cell["\<\
 Note: Calculations may be differ by 10^(-9) or smaller but some times they \
@@ -412,7 +560,7 @@ are not the same...\
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1182, 1007},
-WindowMargins->{{Automatic, 68}, {Automatic, 126}},
+WindowMargins->{{693, Automatic}, {Automatic, 309}},
 ShowSelection->True,
 Magnification->1.25,
 FrontEndVersion->"11.1 for Linux x86 (64-bit) (April 18, 2017)",
@@ -422,10 +570,37 @@ StyleDefinitions->"Default.nb"
 
 (* Internal cache information *)
 (*CellTagsOutline
-CellTagsIndex->{}
+CellTagsIndex->{
+ "Info53711445379-5830608"->{
+  Cell[5595, 156, 264, 6, 
+  51, "Print", "ExpressionUUID" -> "0f58b9eb-f16a-4cfe-9a4e-ca5a641bea98",
+   CellTags->"Info53711445379-5830608"]},
+ "Info93711445382-5830608"->{
+  Cell[8058, 223, 470, 9, 
+  98, "Print", "ExpressionUUID" -> "02be2bed-7823-4474-8654-916a044620c5",
+   CellTags->"Info93711445382-5830608"]},
+ "Info133711445396-5830608"->{
+  Cell[10241, 281, 419, 8, 
+  74, "Print", "ExpressionUUID" -> "f1004424-fc4a-4bce-a375-629ffa265013",
+   CellTags->"Info133711445396-5830608"]},
+ "Info313711445447-5830608"->{
+  Cell[16728, 431, 540, 11, 
+  119, "Print", "ExpressionUUID" -> "2fcbf05e-de26-4dd8-bdf2-c463cc942cdd",
+   CellTags->"Info313711445447-5830608"]},
+ "Info263711445436-5830608"->{
+  Cell[21364, 538, 592, 10, 
+  98, "Print", "ExpressionUUID" -> "ce2e61e8-dba1-4b06-b184-cf08ba5d05bd",
+   CellTags->"Info263711445436-5830608"]}
+ }
 *)
 (*CellTagsIndex
-CellTagsIndex->{}
+CellTagsIndex->{
+ {"Info53711445379-5830608", 22589, 573},
+ {"Info93711445382-5830608", 22763, 577},
+ {"Info133711445396-5830608", 22938, 581},
+ {"Info313711445447-5830608", 23115, 585},
+ {"Info263711445436-5830608", 23294, 589}
+ }
 *)
 (*NotebookFileOutline
 Notebook[{
@@ -435,57 +610,95 @@ Cell[579, 22, 197, 3, 82, "Section", "ExpressionUUID" -> \
 Cell[CellGroupData[{
 Cell[801, 29, 110, 1, 45, "Subsubsection", "ExpressionUUID" -> \
 "d419221b-66e8-42d6-96ab-261a7326bff7"],
-Cell[914, 32, 272, 5, 128, "Text", "ExpressionUUID" -> \
+Cell[914, 32, 272, 5, 66, "Text", "ExpressionUUID" -> \
 "24bc6e36-46bc-4ece-aa64-d99078d05446"],
-Cell[1189, 39, 179, 4, 77, "Input", "ExpressionUUID" -> \
+Cell[1189, 39, 179, 4, 46, "Input", "ExpressionUUID" -> \
 "f84f06a0-113b-4e17-acd3-5c6ddf53fd8b"],
-Cell[1371, 45, 148, 3, 77, "Input", "ExpressionUUID" -> \
+Cell[1371, 45, 148, 3, 41, "Input", "ExpressionUUID" -> \
 "090428d4-9e2a-438e-81fa-459a51cf850e"],
-Cell[1522, 50, 132, 2, 77, "Input", "ExpressionUUID" -> \
-"d78b7814-7c90-486d-a02d-6c8422c2825e"]
-}, Closed]],
+Cell[1522, 50, 132, 2, 41, "Input", "ExpressionUUID" -> \
+"d78b7814-7c90-486d-a02d-6c8422c2825e"],
 Cell[CellGroupData[{
-Cell[1691, 57, 134, 2, 36, "Subsubsection", "ExpressionUUID" -> \
+Cell[1679, 56, 591, 11, 94, "Input", "ExpressionUUID" -> \
+"6f7079eb-e682-4709-bad8-0c8ec965b184"],
+Cell[2273, 69, 1150, 18, 41, "Output", "ExpressionUUID" -> \
+"d0a515b0-5f6b-4d91-a1fe-09cb007c1238"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3460, 92, 386, 8, 61, "Input", "ExpressionUUID" -> \
+"66592182-477e-4ee9-b13b-940e06f71689",
+ InitializationCell->True],
+Cell[3849, 102, 150, 3, 32, "Echo", "ExpressionUUID" -> \
+"f8716ad5-7792-45f0-ac22-bb2aac3de188"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4048, 111, 134, 2, 45, "Subsubsection", "ExpressionUUID" -> \
 "ef140710-60b4-42cf-b4f2-7cce32b2aeb0"],
-Cell[1828, 61, 209, 3, 59, "Text", "ExpressionUUID" -> \
+Cell[4185, 115, 209, 3, 59, "Text", "ExpressionUUID" -> \
 "c4d9d7d9-1f86-4ec3-b2bb-400278960b59"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2074, 69, 89, 1, 56, "Subsection", "ExpressionUUID" -> \
+Cell[4431, 123, 89, 1, 56, "Subsection", "ExpressionUUID" -> \
 "d3872fc1-87bd-445f-b12c-360ba653edea"],
-Cell[2166, 72, 811, 22, 122, "Input", "ExpressionUUID" -> \
+Cell[CellGroupData[{
+Cell[4545, 128, 1047, 26, 150, "Input", "ExpressionUUID" -> \
 "5d0b68bf-0c4c-484f-a8ea-7601cc14e879",
- InitializationCell->True]
+ InitializationCell->True],
+Cell[5595, 156, 264, 6, 51, "Print", "ExpressionUUID" -> \
+"0f58b9eb-f16a-4cfe-9a4e-ca5a641bea98",
+ CellTags->"Info53711445379-5830608"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3014, 99, 95, 1, 56, "Subsection", "ExpressionUUID" -> \
+Cell[5908, 168, 95, 1, 56, "Subsection", "ExpressionUUID" -> \
 "09d0a645-6123-4a37-9318-1bce5d43d298"],
-Cell[3112, 102, 1783, 43, 178, "Input", "ExpressionUUID" -> \
+Cell[CellGroupData[{
+Cell[6028, 173, 2027, 48, 262, "Input", "ExpressionUUID" -> \
 "e47fc6e3-a265-494f-97c8-7d2caee133d8",
  InitializationCell->True],
-Cell[4898, 147, 1430, 37, 150, "Input", "ExpressionUUID" -> \
+Cell[8058, 223, 470, 9, 98, "Print", "ExpressionUUID" -> \
+"02be2bed-7823-4474-8654-916a044620c5",
+ CellTags->"Info93711445382-5830608"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8565, 237, 1673, 42, 234, "Input", "ExpressionUUID" -> \
 "e1eef433-418b-45b7-869c-0b66f68e5440",
- InitializationCell->True]
+ InitializationCell->True],
+Cell[10241, 281, 419, 8, 74, "Print", "ExpressionUUID" -> \
+"f1004424-fc4a-4bce-a375-629ffa265013",
+ CellTags->"Info133711445396-5830608"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6365, 189, 348, 5, 56, "Subsection", "ExpressionUUID" -> \
+Cell[10709, 295, 348, 5, 56, "Subsection", "ExpressionUUID" -> \
 "ab2824b7-3569-467d-9d40-61e9aed37566"],
-Cell[6716, 196, 5404, 119, 765, "Input", "ExpressionUUID" -> \
+Cell[CellGroupData[{
+Cell[11082, 304, 5643, 125, 831, "Input", "ExpressionUUID" -> \
 "66736c1b-531e-466b-9284-0585d5565759",
- InitializationCell->True]
+ InitializationCell->True],
+Cell[16728, 431, 540, 11, 119, "Print", "ExpressionUUID" -> \
+"2fcbf05e-de26-4dd8-bdf2-c463cc942cdd",
+ CellTags->"Info313711445447-5830608"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[12157, 320, 341, 6, 56, "Subsection", "ExpressionUUID" -> \
+Cell[17317, 448, 341, 6, 56, "Subsection", "ExpressionUUID" -> \
 "474613c3-62b3-41b8-920e-f555b759a84c",
  CellID->925377420],
-Cell[12501, 328, 333, 7, 66, "Text", "ExpressionUUID" -> \
+Cell[17661, 456, 333, 7, 66, "Text", "ExpressionUUID" -> \
 "fff7dfdb-18c7-4bc5-9736-57e3850f3640",
  CellID->1964608544],
-Cell[12837, 337, 3102, 64, 393, "Input", "ExpressionUUID" -> \
+Cell[CellGroupData[{
+Cell[18019, 467, 3342, 69, 477, "Input", "ExpressionUUID" -> \
 "50178ce3-17a6-44b1-9332-ef1785e26fbb",
  InitializationCell->True,
  CellID->1747771955],
-Cell[15942, 403, 211, 5, 40, "Text", "ExpressionUUID" -> \
+Cell[21364, 538, 592, 10, 98, "Print", "ExpressionUUID" -> \
+"ce2e61e8-dba1-4b06-b184-cf08ba5d05bd",
+ CellTags->"Info263711445436-5830608"]
+}, Open  ]],
+Cell[21971, 551, 211, 5, 40, "Text", "ExpressionUUID" -> \
 "654d9723-0438-4c1f-8884-37e1802cf8a2",
  CellID->1688422668]
 }, Open  ]]

@@ -20,6 +20,10 @@
 
 
 (* ::Input::Initialization:: *)
+Echo["Loaded maximize.m"];
+
+
+(* ::Input::Initialization:: *)
 maxIterations=Automatic;
 
 
@@ -35,8 +39,7 @@ example1:
 optimize[\"parameters\"] = { {\"ParticleSwarmOptimization\", 32, 0, 10, 100, 8}};
 
 example2:
-method -> {\"DifferentialEvolution\", \"CrossProbability\" -> 0.5,  \"ScalingFactor\" -> 0.6, \"RandomSeed\" -> 0, \"SearchPoints\" -> 200}
-";
+method -> {\"DifferentialEvolution\", \"CrossProbability\" -> 0.5,  \"ScalingFactor\" -> 0.6, \"RandomSeed\" -> 0, \"SearchPoints\" -> 200}";
 optimize[f_,x_,method_:"DifferentialEvolution"]:=Module[{f1,sol,m},
 
 objectivecounter=0; (*Initialize calls to 0*)
@@ -66,7 +69,8 @@ sol[[1]]=-sol[[1]];sol[[2]]=Thread[x->sol[[2]]],
 _,Message[optimize::method,method];sol=0];
 
 sol
-]
+];
+(*Information[optimize,LongForm\[Rule]False]*)
 
 
 (* ::Input::Initialization:: *)
@@ -110,5 +114,5 @@ Grid[objectiveV[dataArray,Sequence@@(sol[[2]])],Frame->All]
 ]
 ];
 sol
-]
-
+];
+Information[maximize,LongForm->False]

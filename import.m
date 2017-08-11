@@ -20,6 +20,10 @@
 
 
 (* ::Input::Initialization:: *)
+Echo["Loaded import.m"];
+
+
+(* ::Input::Initialization:: *)
 ClearAll[readHeader];
 readHeader::usage="readHeader[file] opens the file and reads the first line. A list of string records is returned.\nIt is assumed that the file containes only test and the first line involves tabs or commas to separate records"; 
 readHeader[file_String?FileExistsQ]:=Module[{str=OpenRead[file],header},
@@ -107,6 +111,7 @@ ________________________________________________________________________________
 imports a file .xls or .xlsx or a tab delimited file .dat that includes precomputed matched data (distances between same attributes are already computed).\r
 Datafiles consists of rows in the form {m,u,d,u1,d1,u2,d2,...,un,dn,matched (0 or 1)}.\r
 In the case of .xls or .xlsx files multiple sheets are joined - for example if each market resides in its own excel sheet.\r";
+Information[import,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
@@ -160,7 +165,7 @@ BUG --> When no matches axist for some upstreams  - FIXED below calling Cmate
 data=GatherBy[#,#[[2]]&]&/@GatherBy[data,First];
 (*Calculating Match Matrix*)
 matchMatrix=IntegerPart@data[[All,All,All,-1]];
-mate=Cmate[matchMatrix]; (*Substite withe the Cmate expression ? *)
+mate=Cmate[matchMatrix]; (*Substitute with the Cmate expression ? *)
 (*Calculating number of markets*)
 noM=Length[data];
 (*Calculating number of upstreams and down streams in each market*)
@@ -171,7 +176,7 @@ data[[m,u,d]][[4;;-2]]
 ,{m,noM},{u,noU[[m]]},{d,noD[[m]]}];
 If[printflag,Print["header = ",header,"\ndata = ",data,"\nNumber of upstreams per market = ",noU,"\nNumber of downstreams per market = ",noD,"\nNumber of attributes = ",noAttr,"\nDistance Matrices = ",distanceMatrices,"\nmatchMatrix = ",matchMatrix,"\nmate = ",mate]];
 {header,noM,noU,noD,noAttr,distanceMatrices,matchMatrix,mate}
-]
+];
 
 
 
