@@ -20,6 +20,10 @@
 
 
 (* ::Input::Initialization:: *)
+Echo["Loaded matching.m"];
+
+
+(* ::Input::Initialization:: *)
 ClearAll[generateAssignmentMatrix];
 Options[generateAssignmentMatrix]={linearProgrammingOptions->Null,rationalizeResult->True,domain->Integers};
 generateAssignmentMatrix::usage="generateAssignmentMatrix[payoffs,quotaU,quotaD], generates the optimal assignment of matches from the given matrix of payoffs for each match. The optimal assignment is the one that maximizes the total payoff (i.e. the sum of all payoffs) in a market. In an assignment matrix, each entry (i,j) is 1 if i and j are matched and 0 otherwise. The quota can be a number (the same for all streams) or a list that sets a specific quota per agent.
@@ -55,6 +59,7 @@ matchMatrix=LinearProgramming[-Flatten[payoffs],-m,-b,0,realorint]];
 result=Partition[matchMatrix,numD];
 If[rationalize,Map[Rationalize[#,.01]&,result,{2}],result]
 ];
+Information[generateAssignmentMatrix,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
@@ -81,26 +86,28 @@ MapIndexed[generateAssignmentMatrix[#1,
 If[ListQ@quotaU,quotaU[[First[#2]]],quotaU],
 If[ListQ@quotaD,quotaD[[First[#2]]],quotaD]
 ]&,payoffMatrix]
-]
+];
+Information[CmatchMatrix,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
 ClearAll[Cquota,quota];
-Cquota::usage="Calculates and creates/updates the global variable 'quota'. Cquota[matchMatrix] returns the association list quota = <|\"upstream\"->quotaU,\"downstream\"->quotaD|>. Quota is defined for each stream u and d.";
+Cquota::usage="Cquota[matchMatrix] Calculates and creates/updates the global variable 'quota'. It returns the association list quota = <|\"upstream\"->quotaU,\"downstream\"->quotaD|>. Quota is defined for each stream u and d.";
 Cquota[matchMatrix_]:=quota=<|
 "upstream"->((Total/@#)&/@matchMatrix),
 "downstream"->((Total/@(Transpose@#))&/@matchMatrix)
-|>
+|>;
+Information[Cquota,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
 (*C in front of the name means create*)
 ClearAll[Cmates];
-Cmates::usage="
-Cmates[matchMatrix] simplifies the matchMatrix to a list of triples that define matches across all markets. It provides another way to express all the matching information that is, which upstream is matched with which downstream and in which market. The output consists of a list of lists of triples each of which has the following structure: {market_index,upstream_index,downstream_index}.
+Cmates::usage="Cmates[matchMatrix] simplifies the matchMatrix to a list of triples that define matches across all markets. It provides another way to express all the matching information that is, which upstream is matched with which downstream and in which market. The output consists of a list of lists of triples each of which has the following structure: {market_index,upstream_index,downstream_index}.
 Output example:{{{1,1,3},{1,3,1},{1,3,2}},{{2,1,1},{2,2,1},{2,2,3},{2,3,2}}}. In this example we have 2 lists, one per market and each inner list contains the triples. Note that in market 1, upstream agent 2 is not contributing which is fine. 
 This function is mainly used for the calculation of the total payoff - see Ctotalpayoff routine.";
 Cmates[matchMatrix_]:=mates=GatherBy[Position[matchMatrix,1,{3}],First];
+Information[Cmates,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
@@ -109,7 +116,8 @@ ClearAll[Cmate];
 Cmate::usage="Cmate[matchMatrix] simplifies the matchMatrix from the original code by Santiago & Fox, to a matrix format which consists of lists of pairs, one pair per market. Here, each pair has the following structure: {{{1},{2},...,{noU within this market}},{{downstreams that are matched with upstream1},{downstreams that are matched with upstream2},...,{downstreams that are matched with upstream noU}}.
 Example : {{{{1},{2},{3}},{{3},{},{1,2}}},{{{1},{2},{3}},{{1},{1,3},{2}}}}.  In this example, there are three upstream and three downstream agents in each market, indexed 1, 2, 3. In the first market, upstream 1 is matched with downstream 3, upstream 2 is not matched, and upstream 3 is matched with downstream 1 and  2. In the second market, upstream 1 is matched with downstream 1, upstream 2 with downstream 1 and 3, and upstream 3 with downstream 2.  
 The mate=Cmate[matchMatrix] is later fed into the Cineqmembers routine.";
-Cmate[matchMatrix_]:=mate=((Transpose@MapIndexed[{{First@#2},Flatten@Position[#1,1]}&,#])&/@matchMatrix)
+Cmate[matchMatrix_]:=mate=((Transpose@MapIndexed[{{First@#2},Flatten@Position[#1,1]}&,#])&/@matchMatrix);
+Information[Cmate,LongForm->False]
 
 
 

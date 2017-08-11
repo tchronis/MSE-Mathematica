@@ -20,6 +20,10 @@
 
 
 (* ::Input::Initialization:: *)
+Echo["Loaded objective.m"];
+
+
+(* ::Input::Initialization:: *)
 ClearAll[coefficient1];
 coefficient1::usage="To normalize the payoff function, we set the first coefficient to either 1 or -1 coefficient1=1 (default) or coefficient=-1";
 coefficient1=1;
@@ -34,7 +38,7 @@ objective::usage="objective[dataArray,x1,x2,...,xn] defines the objective functi
 objective[dataArray_,b__?NumericQ]:=(*Defining as a pure function may speed this up*)
 (++objectivecounter;Total@UnitStep@(*http://mathematica.stackexchange.com/a/9673/7966*)
 (dataArray.Prepend[{b},N[coefficient1]]));
-
+Information[objective,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
@@ -53,3 +57,4 @@ stats=MapThread[Insert,{
 {Range@Length@satisfiedineqs,satisfiedineqs,totalineqs,Chop@Round[100. satisfiedineqs/totalineqs,1]},{"Market no","Satisfied","Total","Percentage %"},Table[1,{4}]}]
 
 ];
+Information[objectiveV,LongForm->False]
