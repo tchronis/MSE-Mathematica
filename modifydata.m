@@ -41,8 +41,7 @@ Information[store,LongForm->False]
 (* ::Input::Initialization:: *)
 ClearAll[restore];
 restore::usage="restore[var,printflag] is used to restore all global variables from \"var\" global variable (when the last store[] command was used).
-Variables: {\"header\",\"noM\",\"noU\",\"noD\",\"noAttr\",\"distanceMatrices\",\"matchMatrix\",\"mate\",\"quota\",\"payoffMatrix\",\"totalpayoff\",\"dataArray\"}}
-";
+Variables: {\"header\",\"noM\",\"noU\",\"noD\",\"noAttr\",\"distanceMatrices\",\"matchMatrix\",\"mate\",\"quota\",\"payoffMatrix\",\"totalpayoff\",\"dataArray\"}}";
 SetAttributes[restore,HoldFirst];
 restore[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","totalpayoff","dataArray"}},
 (MakeExpression@#/._[s_]:>(s=var[#]))&/@keys;
@@ -56,10 +55,15 @@ Information[restore,LongForm->False]
 ClearAll[modify];
 modify::usage="modify[m_,u_List,d_List,function_?AssociationQ:<|\"remove\"\[Rule]True,\"quota_reset\"\[Rule]False,\"quota_update\"\[Rule]False,\"rematch\"\[Rule]False|>] 
 modifies m's market upstream and/or downstream members. As a consequence payoffMatrix, matchMatrix, quota are modified.
+If \"unmatch\"->True then it is supposed that the u - d 
 If \"remove\"\[Rule]True and \"quota_reset\"\[Rule]True then the quota of the selected for remove streams becomes equal to 0.
 If \"remove\"\[Rule]True and \"quota_update\"\[Rule]True then the quota of the matched opposite stream are reduced because of the sream removal.
 If \"rematch\"\[Rule]True then the matchMatrix of the m'th market is re-calculated using the set quota.";
-modify[m_,u_List,d_List,function_:<|"remove"->True,"quota_update"->False,"rematch"->False|>]:=Block[{keep,theirdownstream,theirupstream},
+modify[m_,u_List,d_List,function_:<|"unmatch"->False,"remove"->True,"quota_reset"->False,"quota_update"->False,"rematch"->False|>]:=Block[{keep,theirdownstream,theirupstream},
+If[function["unmatch"],
+Null
+];
+
 If[function["remove"],
 If[u!={},
 If[function["quota_update"],
@@ -100,7 +104,6 @@ CmatchMatrix[payoffMatrix,quota["upstream"],quota["downstream"],m];
 Cmate[matchMatrix];
 ];
 ];
-
 Information[modify,LongForm->False]
 
 
