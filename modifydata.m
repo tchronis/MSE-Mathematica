@@ -20,19 +20,13 @@
 
 
 (* ::Input::Initialization:: *)
-(*
-ClearAll[assign];
-SetAttributes[assign,HoldFirst];
-assign::usage="Programmatically Assign a Value to an Association List Key. ";
-assign[association_?AssociationQ,key_,val_]:=Hold[association[key]]/._[x_]\[RuleDelayed](x=val;);
-*)
+Echo["Loaded modifydata.m"];
 
 
 (* ::Input::Initialization:: *)
 ClearAll[store];
 store::usage="store[var,printflag] is used for storing all global variables to \"var\" global variable before they are modified.  In that case they can restored later (with the restore[var] command).
-Variables: {\"header\",\"noM\",\"noU\",\"noD\",\"noAttr\",\"distanceMatrices\",\"matchMatrix\",\"mate\",\"quota\",\"payoffMatrix\",\"totalpayoff\",\"dataArray\"}}
-";
+Variables: {\"header\",\"noM\",\"noU\",\"noD\",\"noAttr\",\"distanceMatrices\",\"matchMatrix\",\"mate\",\"quota\",\"payoffMatrix\",\"totalpayoff\",\"dataArray\"}}";
 SetAttributes[store,HoldFirst];
 store[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","totalpayoff","dataArray"}},
 (*assign[stored,#,Symbol[#]]&/@keys;*)
@@ -41,29 +35,43 @@ var=<||>;
 If[printflag,Print["Stored ",ByteCount[var]," bytes to \""<>SymbolName[Unevaluated[var]]<>"\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
 ];
 ];
+Information[store,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
 ClearAll[restore];
 restore::usage="restore[var,printflag] is used to restore all global variables from \"var\" global variable (when the last store[] command was used).
-Variables: {\"header\",\"noM\",\"noU\",\"noD\",\"noAttr\",\"distanceMatrices\",\"matchMatrix\",\"mate\",\"quota\",\"payoffMatrix\",\"totalpayoff\",\"dataArray\"}}
-";
+Variables: {\"header\",\"noM\",\"noU\",\"noD\",\"noAttr\",\"distanceMatrices\",\"matchMatrix\",\"mate\",\"quota\",\"payoffMatrix\",\"totalpayoff\",\"dataArray\"}}";
 SetAttributes[restore,HoldFirst];
 restore[var_:stored,printflag_:False]:=Module[{keys={"header","noM","noU","noD","noAttr","distanceMatrices","matchMatrix","mate","quota","payoffMatrix","totalpayoff","dataArray"}},
 (MakeExpression@#/._[s_]:>(s=var[#]))&/@keys;
 If[printflag,Print["Restored ",ByteCount[var]," bytes from \""<>SymbolName[Unevaluated[var]]<>"\" Association List: \n header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate, quota, payoffMatrix, dataArray"];
 ]
 ];
+Information[restore,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
 ClearAll[modify];
 modify::usage="modify[m_,u_List,d_List,function_?AssociationQ:<|\"remove\"\[Rule]True,\"quota_reset\"\[Rule]False,\"quota_update\"\[Rule]False,\"rematch\"\[Rule]False|>] 
 modifies m's market upstream and/or downstream members. As a consequence payoffMatrix, matchMatrix, quota are modified.
+If \"unmatch\"\[Rule]True then it is supposed that the Transpose[u,d] are the matches we need to unmatch.
+If \"unmatch\"\[Rule]True and \"quota_update\"\[Rule]True then the quota of each stream is reduced by one.
 If \"remove\"\[Rule]True and \"quota_reset\"\[Rule]True then the quota of the selected for remove streams becomes equal to 0.
 If \"remove\"\[Rule]True and \"quota_update\"\[Rule]True then the quota of the matched opposite stream are reduced because of the sream removal.
 If \"rematch\"\[Rule]True then the matchMatrix of the m'th market is re-calculated using the set quota.";
-modify[m_,u_List,d_List,function_:<|"remove"->True,"quota_update"->False,"rematch"->False|>]:=Block[{keep,theirdownstream,theirupstream},
+modify[m_,u_List,d_List,function_:<|"unmatch"->False,"remove"->True,"quota_reset"->False,"quota_update"->False,"rematch"->False|>]:=Block[{keep,theirdownstream,theirupstream},
+If[
+function["unmatch"],
+If[Length[u]!=Length[d],Print["Error in data. u list and d list must have the same Length."," u = ",u," d = ",d];Return[]];
+If[matchMatrix[[m,u[[#]],d[[#]]]]!=1,Print["Warning: "," In Market ",m," upstream ",u[[#]], " does not match with downstream  ",d[[#]]];]&/@Range[Length[u]];
+(matchMatrix[[m,u[[#]],d[[#]]]]=0)&/@Range[Length[u]];
+Cmate[matchMatrix];
+If[
+function["quota_update"],Cquota[matchMatrix];
+]
+,
+
 If[function["remove"],
 If[u!={},
 If[function["quota_update"],
@@ -97,13 +105,16 @@ matchMatrix[[m]]=matchMatrix[[m,All,keep]];Cmate[matchMatrix];
 quota[[2,m]]=quota[[2,m,keep]];
 noD[[m]]=noD[[m]]-Length[d];
 ]
+]
+]
 ];
-];
+
 If[function["rematch"],
 CmatchMatrix[payoffMatrix,quota["upstream"],quota["downstream"],m];
 Cmate[matchMatrix];
 ];
 ];
+Information[modify,LongForm->False]
 
 
 (* ::Input::Initialization:: *)
@@ -146,6 +157,7 @@ offset=Min/@payoffMatrix;
 If[sameoffset,min=Min@offset;offset=Table[min,{Length@payoffMatrix}]];
 payoffMatrix-offset+epsilon
 ];
+Information[payoffMatrix2Positive,LongForm->False]
 
 
 

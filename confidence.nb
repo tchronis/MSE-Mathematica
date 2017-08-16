@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     35908,        858]
-NotebookOptionsPosition[     34350,        799]
-NotebookOutlinePosition[     34912,        823]
-CellTagsIndexPosition[     34827,        818]
+NotebookDataLength[     41324,        965]
+NotebookOptionsPosition[     37704,        866]
+NotebookOutlinePosition[     38552,        896]
+CellTagsIndexPosition[     38424,        890]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -56,7 +56,38 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"ClearSystemCache", "[", "]"}]], "Input",
- CellChangeTimes->{{3.581669726757145*^9, 3.5816697379287844`*^9}}]
+ CellChangeTimes->{{3.581669726757145*^9, 3.5816697379287844`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"directory", "=", 
+  RowBox[{"NotebookDirectory", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Get", "[", 
+  RowBox[{"\"\<mse.m\>\"", ",", 
+   RowBox[{"Path", "\[Rule]", "directory"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6392064512024283`*^9, 3.6392064555015736`*^9}, {
+  3.6392064862997465`*^9, 3.6392065233606443`*^9}, {3.6392250169707823`*^9, 
+  3.6392250177207823`*^9}, {3.6535358489289207`*^9, 3.653535855296494*^9}, {
+  3.709482620021003*^9, 3.70948262065952*^9}},
+ Background->GrayLevel[
+  0.85],ExpressionUUID->"7fb7270f-c8a9-4c20-b2c3-ae4a6bbc3fae"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Echo", "[", "\"\<Loaded confidence.m\>\"", "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.711434116821677*^9, 3.711434132168717*^9}, {
+  3.711434316073223*^9, 3.711434320192101*^9}, {3.711435500363462*^9, 
+  3.7114355030438347`*^9}},
+ Background->RGBColor[
+  0.88, 1, 0.88],ExpressionUUID->"b7e8f5f9-5dd5-4f8a-9b07-2cb1082f41a3"],
+
+Cell[BoxData["\<\"Loaded confidence.m\"\>"], "Echo",
+ CellChangeTimes->{
+  3.711435510553473*^9},ExpressionUUID->"c0779401-fab0-4daa-8234-\
+cdf85f981e8e"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]],
 
@@ -293,7 +324,8 @@ subsample of a given size from a data array.\>\""}],
  CellChangeTimes->{{3.621762624383645*^9, 3.62176263843052*^9}, {
   3.6217637177596216`*^9, 3.6217637417752466`*^9}, {3.6218520478289895`*^9, 
   3.621852052501769*^9}, {3.6327448994778166`*^9, 3.6327449463949757`*^9}},
- Background->RGBColor[0.88, 1, 0.88]],
+ Background->RGBColor[
+  0.88, 1, 0.88],ExpressionUUID->"64fa441c-52a2-48d3-b448-b6749dd14501"],
 
 Cell[CellGroupData[{
 
@@ -303,6 +335,8 @@ Cell["pontIdentifiedCR", "Subsubsection",
 Cell["CHECK OUT THE GLOBAL VARIABLES", "Text",
  CellChangeTimes->{{3.6217637832752466`*^9, 3.6217637910096216`*^9}},
  Background->RGBColor[1, 0.85, 0.85]],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
@@ -339,248 +373,251 @@ asymptotics - Type of asymptotics to use (nests or coalitions).Default=nests.\
 \n\tsubsampleMonitor - An expression to evaluate for each \
 subsample.Default=Null.\n\tsymmetric - True or False.If True,the confidence \
 region will be symmetric.Default=False.\>\""}], ";"}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
-  RowBox[{"pointIdentifiedCR", "[", 
-   RowBox[{
-   "ssSize_", ",", "numSubsamples_", ",", "pointEstimate_", ",", "args_", ",",
-     "groupIDs_", ",", "dataArray_", ",", "method_", ",", "permuteinvariant_",
-     ",", 
-    RowBox[{"options___", "?", "OptionQ"}]}], "]"}], ":=", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-     "progress", ",", "confLevel", ",", "asymp", ",", "ssDataArray", ",", 
-      "estimates", ",", "estimate", ",", "alpha", ",", "cr", ",", "sym"}], 
-     "}"}], ",", 
+  RowBox[{
+   RowBox[{"pointIdentifiedCR", "[", 
     RowBox[{
+    "ssSize_", ",", "numSubsamples_", ",", "pointEstimate_", ",", "args_", 
+     ",", "groupIDs_", ",", "dataArray_", ",", "method_", ",", 
+     "permuteinvariant_", ",", 
+     RowBox[{"options___", "?", "OptionQ"}]}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "progress", ",", "confLevel", ",", "asymp", ",", "ssDataArray", ",", 
+       "estimates", ",", "estimate", ",", "alpha", ",", "cr", ",", "sym"}], 
+      "}"}], ",", 
      RowBox[{
-      RowBox[{"{", 
-       RowBox[{"progress", ",", "confLevel", ",", "asymp", ",", "sym"}], 
-       "}"}], "=", 
       RowBox[{
        RowBox[{"{", 
-        RowBox[{
-        "progressUpdate", ",", "confidenceLevel", ",", "asymptotics", ",", 
-         "symmetric"}], "}"}], "/.", 
-       RowBox[{"Flatten", "[", 
+        RowBox[{"progress", ",", "confLevel", ",", "asymp", ",", "sym"}], 
+        "}"}], "=", 
+       RowBox[{
         RowBox[{"{", 
-         RowBox[{"options", ",", 
-          RowBox[{"Options", "[", "pointIdentifiedCR", "]"}]}], "}"}], 
-        "]"}]}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{
-       RowBox[{
-       "This", " ", "block", " ", "sets", " ", "variables", " ", "that", " ", 
-        "are", " ", "slightly", " ", "different", " ", "for", " ", "each", 
-        " ", "of", " ", "the", " ", "two", " ", 
-        RowBox[{"asymptotics", ".", "subNormalization"}], " ", "is", " ", 
-        "the", " ", "standardization", " ", "multiplier", " ", "for", " ", 
-        "the", " ", "subsamples"}], ",", 
-       RowBox[{
-       "fullNormalization", " ", "is", " ", "the", " ", "multiplier", " ", 
-        "for", " ", "the", " ", "construction", " ", "of", " ", "the", " ", 
-        "final", " ", "confidence", " ", "interval", " ", "from", " ", "all", 
-        " ", "of", " ", "the", " ", 
-        RowBox[{"subsamples", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
-     "\[IndentingNewLine]", 
-     RowBox[{"Switch", "[", 
-      RowBox[{
-      "asymp", ",", "\[IndentingNewLine]", "nests", ",", 
-       "\[IndentingNewLine]", "\t", 
-       RowBox[{
-        RowBox[{"subNormalization", "=", 
          RowBox[{
-          RowBox[{"(", "ssSize", ")"}], "^", 
-          RowBox[{"(", 
-           RowBox[{"1", "/", "3"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
-        "\t", 
-        RowBox[{"fullNormalization", "=", 
-         RowBox[{
-          RowBox[{"(", 
-           RowBox[{"Length", "[", 
-            RowBox[{"Union", "[", 
-             RowBox[{"Flatten", "[", 
-              RowBox[{"groupIDs", ",", "1"}], "]"}], "]"}], "]"}], ")"}], "^", 
-          RowBox[{"(", 
-           RowBox[{"1", "/", "3"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
-        "\t", 
-        RowBox[{"nextRandomSubsample", ":=", 
-         RowBox[{"generateRandomSubsample", "[", 
-          RowBox[{"ssSize", ",", "groupIDs", ",", "dataArray"}], "]"}]}], 
-        ";"}], ",", "\[IndentingNewLine]", "coalitions", ",", 
-       "\[IndentingNewLine]", "\t", 
-       RowBox[{
-        RowBox[{"subNormalization", "=", 
-         RowBox[{
-          RowBox[{"(", "ssSize", ")"}], "^", 
-          RowBox[{"(", 
-           RowBox[{"1", "/", "2"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
-        "\t", 
-        RowBox[{"fullNormalization", "=", 
-         RowBox[{
-          RowBox[{"(", 
-           RowBox[{"Length", "[", 
-            RowBox[{"Union", "[", 
-             RowBox[{"Flatten", "[", 
-              RowBox[{"groupIDs", ",", "1"}], "]"}], "]"}], "]"}], ")"}], "^", 
-          RowBox[{"(", 
-           RowBox[{"1", "/", "2"}], ")"}]}]}], ";", 
-        RowBox[{"(*", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"(", 
-            RowBox[{"numCoalitions", "[", "matchIdxMtx", "]"}], ")"}], "^", 
-           RowBox[{"(", 
-            RowBox[{"1", "/", "2"}], ")"}]}], ";"}], "*)"}], 
-        "\[IndentingNewLine]", "\t", 
-        RowBox[{"nextRandomSubsample", ":=", 
-         RowBox[{"generateRandomSubsample", "[", 
-          RowBox[{"ssSize", ",", "groupIDs", ",", "dataArray"}], "]"}]}], 
-        ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
-     "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{"TCHRONIS", " ", "for", " ", "precomputed"}], "*)"}], 
-     "\[IndentingNewLine]", "\[IndentingNewLine]", 
-     RowBox[{"estimates", "=", 
-      RowBox[{"Table", "[", 
-       RowBox[{"0", ",", 
-        RowBox[{"{", "numSubsamples", "}"}]}], "]"}]}], ";", 
-     RowBox[{"(*", 
-      RowBox[{"List", " ", "of", " ", "standardized", " ", "subsample", " ", 
-       RowBox[{"estimates", "."}]}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"ssEstimates", "=", 
-      RowBox[{"Table", "[", 
-       RowBox[{"0", ",", 
-        RowBox[{"{", "numSubsamples", "}"}]}], "]"}]}], ";", 
-     RowBox[{"(*", 
-      RowBox[{"List", " ", "of", " ", "raw", " ", "subsample", " ", 
-       RowBox[{"estimates", "."}]}], "*)"}], "\[IndentingNewLine]", 
-     "\[IndentingNewLine]", 
-     RowBox[{"Do", "[", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"ssDataArray", "=", 
-         RowBox[{"Transpose", "@", "nextRandomSubsample"}]}], ";", 
-        "\[IndentingNewLine]", 
-        StyleBox[
-         RowBox[{"ssEstimate", "=", 
-          RowBox[{
-           RowBox[{"maximize", "[", 
-            RowBox[{"ssDataArray", ",", 
-             RowBox[{"Length", "[", 
-              RowBox[{"ssDataArray", "[", 
-               RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", "method", ",", 
-             "permuteinvariant", ",", "False"}], "]"}], "[", 
-           RowBox[{"[", "2", "]"}], "]"}]}],
-         Background->RGBColor[1, 1, 0]], 
-        StyleBox[";",
-         Background->RGBColor[1, 1, 0]], "\[IndentingNewLine]", "\t", 
-        RowBox[{
-         RowBox[{"ssEstimates", "[", 
-          RowBox[{"[", "i", "]"}], "]"}], "=", "ssEstimate"}], ";", 
-        "\[IndentingNewLine]", "\t", 
-        RowBox[{
-         RowBox[{"estimates", "[", 
-          RowBox[{"[", "i", "]"}], "]"}], "=", 
-         RowBox[{"subNormalization", " ", 
-          RowBox[{"(", 
-           RowBox[{"ssEstimate", "-", "pointEstimate"}], ")"}]}]}], ";", 
-        "\[IndentingNewLine]", 
-        RowBox[{"If", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"progress", ">", "0"}], "&&", 
-           RowBox[{
-            RowBox[{"Mod", "[", 
-             RowBox[{"i", ",", "progress"}], "]"}], "\[Equal]", "0"}]}], ",", 
-          RowBox[{"WriteString", "[", 
-           RowBox[{
-           "\"\<stdout\>\"", ",", "\"\<\\n\>\"", ",", 
-            "\"\<Iterations completed:\>\"", ",", 
-            RowBox[{"ToString", "[", "i", "]"}], ",", "\"\<\\n\>\""}], 
-           "]"}]}], 
-         RowBox[{"(*", "TCHRONIS", "*)"}], 
-         RowBox[{"(*", 
-          RowBox[{"Print", "[", 
-           RowBox[{"\"\<Iterations completed: \>\"", "<>", 
-            RowBox[{"ToString", "[", "i", "]"}]}], "]"}], "*)"}], "]"}], ";", 
-        "\[IndentingNewLine]", 
-        RowBox[{"Block", "[", 
-         RowBox[{
-          RowBox[{"{", "}"}], ",", 
-          RowBox[{"subsampleMonitor", "/.", 
-           RowBox[{"Flatten", "[", 
-            RowBox[{"{", 
-             RowBox[{"options", ",", 
-              RowBox[{"Options", "[", "pointIdentifiedCR", "]"}]}], "}"}], 
-            "]"}]}]}], "]"}], ";"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"{", 
-        RowBox[{"i", ",", "1", ",", "numSubsamples"}], "}"}]}], "]"}], ";", 
-     "\[IndentingNewLine]", "\[IndentingNewLine]", 
-     RowBox[{"For", "[", 
-      RowBox[{
-       RowBox[{"i", "=", "1"}], ",", 
-       RowBox[{"i", "\[LessEqual]", 
-        RowBox[{"Length", "[", "args", "]"}]}], ",", 
-       RowBox[{"i", "=", 
-        RowBox[{"i", "+", "1"}]}], ",", 
-       RowBox[{"Histogram", "[", 
-        RowBox[{"estimates", "[", 
-         RowBox[{"[", 
-          RowBox[{"All", ",", "i"}], "]"}], "]"}], "]"}]}], "]"}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"alpha", "=", 
-      RowBox[{"1", "-", "confLevel"}]}], ";", "\[IndentingNewLine]", 
-     "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{
-      "TCHRONIS", " ", "both", " ", "symmetric", " ", "and", " ", 
-       "assymetric", " ", "to", " ", "appear", " ", "in", " ", "the", " ", 
-       "results"}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"{", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
+         "progressUpdate", ",", "confidenceLevel", ",", "asymptotics", ",", 
+          "symmetric"}], "}"}], "/.", 
+        RowBox[{"Flatten", "[", 
          RowBox[{"{", 
-          RowBox[{"\"\<Symmetric case\>\"", ",", 
-           RowBox[{"(*", 
-            RowBox[{
-             RowBox[{"For", " ", "the", " ", "symmetric", " ", "case"}], ",", 
-             RowBox[{
-              RowBox[{
-              "we", " ", "want", " ", "to", " ", "add", " ", "and", " ", 
-               "subtract", " ", "the", " ", "1"}], "-", 
-              RowBox[{
-               RowBox[{"alpha", "'"}], "th", " ", "quantile", " ", "from", 
-               " ", "the", " ", "point", " ", 
-               RowBox[{"estimate", ".", "We"}], " ", "take", " ", "the", " ", 
-               "Abs", " ", "here", " ", "for", " ", 
-               RowBox[{"simplicity", ":", 
-                RowBox[{
-                 RowBox[{"tn", "*", 
-                  RowBox[{"Abs", "[", 
-                   RowBox[{"x", "-", "y"}], "]"}]}], "\[Equal]", 
-                 RowBox[{"Abs", "[", 
-                  RowBox[{"tn", "*", 
-                   RowBox[{"(", 
-                    RowBox[{"x", "-", "y"}], ")"}]}], "]"}]}]}]}]}]}], "*)"}],
-            "\[IndentingNewLine]", 
+          RowBox[{"options", ",", 
+           RowBox[{"Options", "[", "pointIdentifiedCR", "]"}]}], "}"}], 
+         "]"}]}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+        "This", " ", "block", " ", "sets", " ", "variables", " ", "that", " ",
+          "are", " ", "slightly", " ", "different", " ", "for", " ", "each", 
+         " ", "of", " ", "the", " ", "two", " ", 
+         RowBox[{"asymptotics", ".", "subNormalization"}], " ", "is", " ", 
+         "the", " ", "standardization", " ", "multiplier", " ", "for", " ", 
+         "the", " ", "subsamples"}], ",", 
+        RowBox[{
+        "fullNormalization", " ", "is", " ", "the", " ", "multiplier", " ", 
+         "for", " ", "the", " ", "construction", " ", "of", " ", "the", " ", 
+         "final", " ", "confidence", " ", "interval", " ", "from", " ", "all",
+          " ", "of", " ", "the", " ", 
+         RowBox[{"subsamples", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Switch", "[", 
+       RowBox[{
+       "asymp", ",", "\[IndentingNewLine]", "nests", ",", 
+        "\[IndentingNewLine]", "\t", 
+        RowBox[{
+         RowBox[{"subNormalization", "=", 
+          RowBox[{
+           RowBox[{"(", "ssSize", ")"}], "^", 
+           RowBox[{"(", 
+            RowBox[{"1", "/", "3"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+         "\t", 
+         RowBox[{"fullNormalization", "=", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"Length", "[", 
+             RowBox[{"Union", "[", 
+              RowBox[{"Flatten", "[", 
+               RowBox[{"groupIDs", ",", "1"}], "]"}], "]"}], "]"}], ")"}], 
+           "^", 
+           RowBox[{"(", 
+            RowBox[{"1", "/", "3"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+         "\t", 
+         RowBox[{"nextRandomSubsample", ":=", 
+          RowBox[{"generateRandomSubsample", "[", 
+           RowBox[{"ssSize", ",", "groupIDs", ",", "dataArray"}], "]"}]}], 
+         ";"}], ",", "\[IndentingNewLine]", "coalitions", ",", 
+        "\[IndentingNewLine]", "\t", 
+        RowBox[{
+         RowBox[{"subNormalization", "=", 
+          RowBox[{
+           RowBox[{"(", "ssSize", ")"}], "^", 
+           RowBox[{"(", 
+            RowBox[{"1", "/", "2"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+         "\t", 
+         RowBox[{"fullNormalization", "=", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"Length", "[", 
+             RowBox[{"Union", "[", 
+              RowBox[{"Flatten", "[", 
+               RowBox[{"groupIDs", ",", "1"}], "]"}], "]"}], "]"}], ")"}], 
+           "^", 
+           RowBox[{"(", 
+            RowBox[{"1", "/", "2"}], ")"}]}]}], ";", 
+         RowBox[{"(*", 
+          RowBox[{
            RowBox[{
-            RowBox[{"cr", "=", 
-             RowBox[{"Table", "[", 
+            RowBox[{"(", 
+             RowBox[{"numCoalitions", "[", "matchIdxMtx", "]"}], ")"}], "^", 
+            RowBox[{"(", 
+             RowBox[{"1", "/", "2"}], ")"}]}], ";"}], "*)"}], 
+         "\[IndentingNewLine]", "\t", 
+         RowBox[{"nextRandomSubsample", ":=", 
+          RowBox[{"generateRandomSubsample", "[", 
+           RowBox[{"ssSize", ",", "groupIDs", ",", "dataArray"}], "]"}]}], 
+         ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"TCHRONIS", " ", "for", " ", "precomputed"}], "*)"}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"estimates", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "numSubsamples", "}"}]}], "]"}]}], ";", 
+      RowBox[{"(*", 
+       RowBox[{"List", " ", "of", " ", "standardized", " ", "subsample", " ", 
+        RowBox[{"estimates", "."}]}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"ssEstimates", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "numSubsamples", "}"}]}], "]"}]}], ";", 
+      RowBox[{"(*", 
+       RowBox[{"List", " ", "of", " ", "raw", " ", "subsample", " ", 
+        RowBox[{"estimates", "."}]}], "*)"}], "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Do", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"ssDataArray", "=", 
+          RowBox[{"Transpose", "@", "nextRandomSubsample"}]}], ";", 
+         "\[IndentingNewLine]", 
+         StyleBox[
+          RowBox[{"ssEstimate", "=", 
+           RowBox[{
+            RowBox[{"maximize", "[", 
+             RowBox[{"ssDataArray", ",", 
+              RowBox[{"Length", "[", 
+               RowBox[{"ssDataArray", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", "method", ",", 
+              "permuteinvariant", ",", "False"}], "]"}], "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}],
+          Background->RGBColor[1, 1, 0]], 
+         StyleBox[";",
+          Background->RGBColor[1, 1, 0]], "\[IndentingNewLine]", "\t", 
+         RowBox[{
+          RowBox[{"ssEstimates", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "=", "ssEstimate"}], ";", 
+         "\[IndentingNewLine]", "\t", 
+         RowBox[{
+          RowBox[{"estimates", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "=", 
+          RowBox[{"subNormalization", " ", 
+           RowBox[{"(", 
+            RowBox[{"ssEstimate", "-", "pointEstimate"}], ")"}]}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"progress", ">", "0"}], "&&", 
+            RowBox[{
+             RowBox[{"Mod", "[", 
+              RowBox[{"i", ",", "progress"}], "]"}], "\[Equal]", "0"}]}], ",", 
+           RowBox[{"WriteString", "[", 
+            RowBox[{
+            "\"\<stdout\>\"", ",", "\"\<\\n\>\"", ",", 
+             "\"\<Iterations completed:\>\"", ",", 
+             RowBox[{"ToString", "[", "i", "]"}], ",", "\"\<\\n\>\""}], 
+            "]"}]}], 
+          RowBox[{"(*", "TCHRONIS", "*)"}], 
+          RowBox[{"(*", 
+           RowBox[{"Print", "[", 
+            RowBox[{"\"\<Iterations completed: \>\"", "<>", 
+             RowBox[{"ToString", "[", "i", "]"}]}], "]"}], "*)"}], "]"}], ";",
+          "\[IndentingNewLine]", 
+         RowBox[{"Block", "[", 
+          RowBox[{
+           RowBox[{"{", "}"}], ",", 
+           RowBox[{"subsampleMonitor", "/.", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{"{", 
+              RowBox[{"options", ",", 
+               RowBox[{"Options", "[", "pointIdentifiedCR", "]"}]}], "}"}], 
+             "]"}]}]}], "]"}], ";"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "numSubsamples"}], "}"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{"Length", "[", "args", "]"}]}], ",", 
+        RowBox[{"i", "=", 
+         RowBox[{"i", "+", "1"}]}], ",", 
+        RowBox[{"Histogram", "[", 
+         RowBox[{"estimates", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "i"}], "]"}], "]"}], "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"alpha", "=", 
+       RowBox[{"1", "-", "confLevel"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "TCHRONIS", " ", "both", " ", "symmetric", " ", "and", " ", 
+        "assymetric", " ", "to", " ", "appear", " ", "in", " ", "the", " ", 
+        "results"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"\"\<Symmetric case\>\"", ",", 
+            RowBox[{"(*", 
+             RowBox[{
+              RowBox[{"For", " ", "the", " ", "symmetric", " ", "case"}], ",", 
               RowBox[{
                RowBox[{
-                RowBox[{"pointEstimate", "[", 
-                 RowBox[{"[", "i", "]"}], "]"}], "-", 
+               "we", " ", "want", " ", "to", " ", "add", " ", "and", " ", 
+                "subtract", " ", "the", " ", "1"}], "-", 
+               RowBox[{
+                RowBox[{"alpha", "'"}], "th", " ", "quantile", " ", "from", 
+                " ", "the", " ", "point", " ", 
+                RowBox[{"estimate", ".", "We"}], " ", "take", " ", "the", " ",
+                 "Abs", " ", "here", " ", "for", " ", 
+                RowBox[{"simplicity", ":", 
+                 RowBox[{
+                  RowBox[{"tn", "*", 
+                   RowBox[{"Abs", "[", 
+                    RowBox[{"x", "-", "y"}], "]"}]}], "\[Equal]", 
+                  RowBox[{"Abs", "[", 
+                   RowBox[{"tn", "*", 
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "y"}], ")"}]}], "]"}]}]}]}]}]}], "*)"}],
+             "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"cr", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
                 RowBox[{
-                 RowBox[{"Reverse", "[", 
-                  RowBox[{
-                   RowBox[{"{", 
+                 RowBox[{"pointEstimate", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "-", 
+                 RowBox[{
+                  RowBox[{"Reverse", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
                     RowBox[{
                     RowBox[{"-", "1"}], ",", "1"}], "}"}], "*", 
-                   RowBox[{"Quantile", "[", 
+                    RowBox[{"Quantile", "[", 
                     RowBox[{
                     RowBox[{"Abs", "[", 
                     RowBox[{"estimates", "[", 
@@ -590,53 +627,53 @@ region will be symmetric.Default=False.\>\""}], ";"}],
                     RowBox[{
                     RowBox[{"1", "-", "alpha"}], ",", 
                     RowBox[{"1", "-", "alpha"}]}], "}"}]}], "]"}]}], "]"}], 
-                 "/", "fullNormalization"}]}], ",", 
-               RowBox[{"{", 
-                RowBox[{"i", ",", "1", ",", 
-                 RowBox[{"Length", "[", "args", "]"}]}], "}"}]}], "]"}]}], 
-            ";", "\[IndentingNewLine]", 
-            RowBox[{"Thread", "[", 
-             RowBox[{
-              RowBox[{"header", "[", 
-               RowBox[{"[", 
-                RowBox[{
-                 RowBox[{"4", "+", "1"}], ";;", 
-                 RowBox[{"-", "2"}]}], "]"}], "]"}], "\[Rule]", "cr"}], 
-             "]"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{"{", 
-          RowBox[{"\"\<Asymmetric case\>\"", ",", "\[IndentingNewLine]", 
-           RowBox[{"(*", 
-            RowBox[{
-             RowBox[{
+                  "/", "fullNormalization"}]}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "1", ",", 
+                  RowBox[{"Length", "[", "args", "]"}]}], "}"}]}], "]"}]}], 
+             ";", "\[IndentingNewLine]", 
+             RowBox[{"Thread", "[", 
               RowBox[{
-              "For", " ", "the", " ", "asymmetric", " ", "case", " ", "we", 
-               " ", "separately", " ", "take", " ", "the", " ", 
-               RowBox[{"alpha", "/", "2"}], " ", "and", " ", "1"}], "-", 
-              RowBox[{
-               RowBox[{"alpha", "/", "2"}], " ", "quantiles", " ", "and", " ",
-                "subtract", " ", 
-               RowBox[{"them", ".", "Keep"}], " ", "in", " ", "mind", " ", 
-               "that", " ", "since", " ", "estimates", " ", "has", " ", "its",
-                " ", "mean", " ", "subtracted"}]}], ",", 
+               RowBox[{"header", "[", 
+                RowBox[{"[", 
+                 RowBox[{
+                  RowBox[{"4", "+", "1"}], ";;", 
+                  RowBox[{"-", "2"}]}], "]"}], "]"}], "\[Rule]", "cr"}], 
+              "]"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Asymmetric case\>\"", ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", 
              RowBox[{
-             "only", " ", "in", " ", "freakishly", " ", "unlikely", " ", 
-              "cases", " ", "will", " ", "these", " ", "two", " ", "have", 
-              " ", "the", " ", "same", " ", 
-              RowBox[{"sign", ".", "This"}], " ", "is", " ", "not", " ", 
-              "true", " ", "for", " ", "the", " ", "symmetric", " ", 
-              RowBox[{"case", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
-           RowBox[{
-            RowBox[{"cr", "=", 
-             RowBox[{"Table", "[", 
               RowBox[{
                RowBox[{
-                RowBox[{"pointEstimate", "[", 
-                 RowBox[{"[", "i", "]"}], "]"}], "-", 
+               "For", " ", "the", " ", "asymmetric", " ", "case", " ", "we", 
+                " ", "separately", " ", "take", " ", "the", " ", 
+                RowBox[{"alpha", "/", "2"}], " ", "and", " ", "1"}], "-", 
+               RowBox[{
+                RowBox[{"alpha", "/", "2"}], " ", "quantiles", " ", "and", 
+                " ", "subtract", " ", 
+                RowBox[{"them", ".", "Keep"}], " ", "in", " ", "mind", " ", 
+                "that", " ", "since", " ", "estimates", " ", "has", " ", 
+                "its", " ", "mean", " ", "subtracted"}]}], ",", 
+              RowBox[{
+              "only", " ", "in", " ", "freakishly", " ", "unlikely", " ", 
+               "cases", " ", "will", " ", "these", " ", "two", " ", "have", 
+               " ", "the", " ", "same", " ", 
+               RowBox[{"sign", ".", "This"}], " ", "is", " ", "not", " ", 
+               "true", " ", "for", " ", "the", " ", "symmetric", " ", 
+               RowBox[{"case", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"cr", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
                 RowBox[{
-                 RowBox[{"Reverse", "[", 
-                  RowBox[{"Quantile", "[", 
-                   RowBox[{
+                 RowBox[{"pointEstimate", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "-", 
+                 RowBox[{
+                  RowBox[{"Reverse", "[", 
+                   RowBox[{"Quantile", "[", 
+                    RowBox[{
                     RowBox[{"estimates", "[", 
                     RowBox[{"[", 
                     RowBox[{"All", ",", "i"}], "]"}], "]"}], ",", 
@@ -645,120 +682,124 @@ region will be symmetric.Default=False.\>\""}], ";"}],
                     RowBox[{"alpha", "/", "2"}], ",", 
                     RowBox[{"1", "-", 
                     RowBox[{"alpha", "/", "2"}]}]}], "}"}]}], "]"}], "]"}], 
-                 "/", "fullNormalization"}]}], ",", 
-               RowBox[{"{", 
-                RowBox[{"i", ",", "1", ",", 
-                 RowBox[{"Length", "[", "args", "]"}]}], "}"}]}], "]"}]}], 
-            ";", "\[IndentingNewLine]", 
-            RowBox[{"Thread", "[", 
-             RowBox[{
-              RowBox[{"header", "[", 
-               RowBox[{"[", 
-                RowBox[{
-                 RowBox[{"4", "+", "1"}], ";;", 
-                 RowBox[{"-", "2"}]}], "]"}], "]"}], "\[Rule]", "cr"}], 
-             "]"}]}]}], "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]",
-         "}"}], ",", "estimates"}], "}"}]}]}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
-   RowBox[{"(*", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"If", "[", 
-      RowBox[{
-       RowBox[{"sym", "\[Equal]", "True"}], ",", 
-       RowBox[{"(*", 
-        RowBox[{
-         RowBox[{"For", " ", "the", " ", "symmetric", " ", "case"}], ",", 
+                  "/", "fullNormalization"}]}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "1", ",", 
+                  RowBox[{"Length", "[", "args", "]"}]}], "}"}]}], "]"}]}], 
+             ";", "\[IndentingNewLine]", 
+             RowBox[{"Thread", "[", 
+              RowBox[{
+               RowBox[{"header", "[", 
+                RowBox[{"[", 
+                 RowBox[{
+                  RowBox[{"4", "+", "1"}], ";;", 
+                  RowBox[{"-", "2"}]}], "]"}], "]"}], "\[Rule]", "cr"}], 
+              "]"}]}]}], "\[IndentingNewLine]", "}"}]}], 
+         "\[IndentingNewLine]", "}"}], ",", "estimates"}], "}"}]}]}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"sym", "\[Equal]", "True"}], ",", 
+        RowBox[{"(*", 
          RowBox[{
+          RowBox[{"For", " ", "the", " ", "symmetric", " ", "case"}], ",", 
           RowBox[{
-          "we", " ", "want", " ", "to", " ", "add", " ", "and", " ", 
-           "subtract", " ", "the", " ", "1"}], "-", 
-          RowBox[{
-           RowBox[{"alpha", "'"}], "th", " ", "quantile", " ", "from", " ", 
-           "the", " ", "point", " ", 
-           RowBox[{"estimate", ".", "We"}], " ", "take", " ", "the", " ", 
-           "Abs", " ", "here", " ", "for", " ", 
-           RowBox[{"simplicity", ":", 
-            RowBox[{
-             RowBox[{"tn", "*", 
-              RowBox[{"Abs", "[", 
-               RowBox[{"x", "-", "y"}], "]"}]}], "\[Equal]", 
-             RowBox[{"Abs", "[", 
-              RowBox[{"tn", "*", 
-               RowBox[{"(", 
-                RowBox[{"x", "-", "y"}], ")"}]}], "]"}]}]}]}]}]}], "*)"}], 
-       RowBox[{"cr", "=", 
-        RowBox[{"Table", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"pointEstimate", "[", 
-            RowBox[{"[", "i", "]"}], "]"}], "-", 
            RowBox[{
-            RowBox[{"Reverse", "[", 
+           "we", " ", "want", " ", "to", " ", "add", " ", "and", " ", 
+            "subtract", " ", "the", " ", "1"}], "-", 
+           RowBox[{
+            RowBox[{"alpha", "'"}], "th", " ", "quantile", " ", "from", " ", 
+            "the", " ", "point", " ", 
+            RowBox[{"estimate", ".", "We"}], " ", "take", " ", "the", " ", 
+            "Abs", " ", "here", " ", "for", " ", 
+            RowBox[{"simplicity", ":", 
              RowBox[{
-              RowBox[{"{", 
-               RowBox[{
-                RowBox[{"-", "1"}], ",", "1"}], "}"}], "*", 
+              RowBox[{"tn", "*", 
+               RowBox[{"Abs", "[", 
+                RowBox[{"x", "-", "y"}], "]"}]}], "\[Equal]", 
+              RowBox[{"Abs", "[", 
+               RowBox[{"tn", "*", 
+                RowBox[{"(", 
+                 RowBox[{"x", "-", "y"}], ")"}]}], "]"}]}]}]}]}]}], "*)"}], 
+        RowBox[{"cr", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"pointEstimate", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "-", 
+            RowBox[{
+             RowBox[{"Reverse", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "1"}], ",", "1"}], "}"}], "*", 
+               RowBox[{"Quantile", "[", 
+                RowBox[{
+                 RowBox[{"Abs", "[", 
+                  RowBox[{"estimates", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"All", ",", "i"}], "]"}], "]"}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"1", "-", "alpha"}], ",", 
+                   RowBox[{"1", "-", "alpha"}]}], "}"}]}], "]"}]}], "]"}], 
+             "/", "fullNormalization"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{"Length", "[", "args", "]"}]}], "}"}]}], "]"}]}], ",", 
+        RowBox[{"(*", "Else", "*)"}], 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+           "For", " ", "the", " ", "asymmetric", " ", "case", " ", "we", " ", 
+            "separately", " ", "take", " ", "the", " ", 
+            RowBox[{"alpha", "/", "2"}], " ", "and", " ", "1"}], "-", 
+           RowBox[{
+            RowBox[{"alpha", "/", "2"}], " ", "quantiles", " ", "and", " ", 
+            "subtract", " ", 
+            RowBox[{"them", ".", "Keep"}], " ", "in", " ", "mind", " ", 
+            "that", " ", "since", " ", "estimates", " ", "has", " ", "its", 
+            " ", "mean", " ", "subtracted"}]}], ",", 
+          RowBox[{
+          "only", " ", "in", " ", "freakishly", " ", "unlikely", " ", "cases",
+            " ", "will", " ", "these", " ", "two", " ", "have", " ", "the", 
+           " ", "same", " ", 
+           RowBox[{"sign", ".", "This"}], " ", "is", " ", "not", " ", "true", 
+           " ", "for", " ", "the", " ", "symmetric", " ", 
+           RowBox[{"case", "."}]}]}], "*)"}], 
+        RowBox[{"cr", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"pointEstimate", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "-", 
+            RowBox[{
+             RowBox[{"Reverse", "[", 
               RowBox[{"Quantile", "[", 
                RowBox[{
-                RowBox[{"Abs", "[", 
-                 RowBox[{"estimates", "[", 
-                  RowBox[{"[", 
-                   RowBox[{"All", ",", "i"}], "]"}], "]"}], "]"}], ",", 
+                RowBox[{"estimates", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"All", ",", "i"}], "]"}], "]"}], ",", 
                 RowBox[{"{", 
                  RowBox[{
-                  RowBox[{"1", "-", "alpha"}], ",", 
-                  RowBox[{"1", "-", "alpha"}]}], "}"}]}], "]"}]}], "]"}], "/",
-             "fullNormalization"}]}], ",", 
-          RowBox[{"{", 
-           RowBox[{"i", ",", "1", ",", 
-            RowBox[{"Length", "[", "args", "]"}]}], "}"}]}], "]"}]}], ",", 
-       RowBox[{"(*", "Else", "*)"}], 
-       RowBox[{"(*", 
-        RowBox[{
-         RowBox[{
-          RowBox[{
-          "For", " ", "the", " ", "asymmetric", " ", "case", " ", "we", " ", 
-           "separately", " ", "take", " ", "the", " ", 
-           RowBox[{"alpha", "/", "2"}], " ", "and", " ", "1"}], "-", 
-          RowBox[{
-           RowBox[{"alpha", "/", "2"}], " ", "quantiles", " ", "and", " ", 
-           "subtract", " ", 
-           RowBox[{"them", ".", "Keep"}], " ", "in", " ", "mind", " ", "that",
-            " ", "since", " ", "estimates", " ", "has", " ", "its", " ", 
-           "mean", " ", "subtracted"}]}], ",", 
-         RowBox[{
-         "only", " ", "in", " ", "freakishly", " ", "unlikely", " ", "cases", 
-          " ", "will", " ", "these", " ", "two", " ", "have", " ", "the", " ",
-           "same", " ", 
-          RowBox[{"sign", ".", "This"}], " ", "is", " ", "not", " ", "true", 
-          " ", "for", " ", "the", " ", "symmetric", " ", 
-          RowBox[{"case", "."}]}]}], "*)"}], 
-       RowBox[{"cr", "=", 
-        RowBox[{"Table", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"pointEstimate", "[", 
-            RowBox[{"[", "i", "]"}], "]"}], "-", 
-           RowBox[{
-            RowBox[{"Reverse", "[", 
-             RowBox[{"Quantile", "[", 
-              RowBox[{
-               RowBox[{"estimates", "[", 
-                RowBox[{"[", 
-                 RowBox[{"All", ",", "i"}], "]"}], "]"}], ",", 
-               RowBox[{"{", 
-                RowBox[{
-                 RowBox[{"alpha", "/", "2"}], ",", 
-                 RowBox[{"1", "-", 
-                  RowBox[{"alpha", "/", "2"}]}]}], "}"}]}], "]"}], "]"}], "/",
-             "fullNormalization"}]}], ",", 
-          RowBox[{"{", 
-           RowBox[{"i", ",", "1", ",", 
-            RowBox[{"Length", "[", "args", "]"}]}], "}"}]}], "]"}]}]}], "]"}],
-      ";", "\[IndentingNewLine]", 
-     RowBox[{"{", 
-      RowBox[{"cr", ",", "estimates"}], "}"}]}], "\[IndentingNewLine]", 
-    "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}]}], "Input",
+                  RowBox[{"alpha", "/", "2"}], ",", 
+                  RowBox[{"1", "-", 
+                   RowBox[{"alpha", "/", "2"}]}]}], "}"}]}], "]"}], "]"}], 
+             "/", "fullNormalization"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{"Length", "[", "args", "]"}]}], "}"}]}], "]"}]}]}], 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"cr", ",", "estimates"}], "}"}]}], "\[IndentingNewLine]", 
+     "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Information", "[", 
+  RowBox[{"pointIdentifiedCR", ",", 
+   RowBox[{"LongForm", "\[Rule]", "False"}]}], "]"}]}], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.621762034285989*^9, 3.621762034285989*^9}, {
    3.621762074879739*^9, 3.621762112035989*^9}, {3.621762244910989*^9, 
@@ -792,17 +833,43 @@ region will be symmetric.Default=False.\>\""}], ";"}],
    3.653133784829921*^9}, {3.65313383473069*^9, 3.653133840717516*^9}, {
    3.67117043501856*^9, 3.6711705191520557`*^9}, 3.671170589183537*^9, {
    3.671170676304144*^9, 3.671170678191689*^9}, {3.671170727477832*^9, 
-   3.671170733787592*^9}, {3.6711725380449657`*^9, 3.671172538701803*^9}},
- Background->RGBColor[0.88, 1, 0.88]]
+   3.671170733787592*^9}, {3.6711725380449657`*^9, 3.671172538701803*^9}, {
+   3.711435528822253*^9, 3.711435543772931*^9}},
+ Background->RGBColor[
+  0.88, 1, 0.88],ExpressionUUID->"1e14f21b-afe4-4017-bb36-aaad3aa30e56"],
+
+Cell[BoxData[
+ StyleBox["\<\"pointIdentifiedCR[ssSize,numSubsamples,pointEstimate,args,\
+groupIDs,dataArray,method,permuteinvariant,options] generates a confidence \
+region estimate using subsampling.
+\\nParameters:\\nssSize - The size of each subsample to be \
+estimated.\\nnumSubsamples -The number of subsamples to use in estimating the \
+confidence region.\\npointEstimate - The point estimate to build the \
+confidence region around (typically the output of pairwiseMSE).\\nobjFunc - \
+The objective function used in pairwiseMSE.\\nargs - A list of unique symbols \
+used in pairwiseMSE.\\ngroupIDs - A data map used to generate the subsamples.\
+\\ndataArray - The dataArray parameter used in pairwiseMSE.\\noptions - An \
+optional parameter specifying options. Available options are:\\n\t\
+progressUpdate - How often to print progress (0 to disable).Default=0. \\n\t\
+confidenceLevel - The confidence level of the region.Default=.95.\\n\t\
+asymptotics - Type of asymptotics to use (nests or coalitions).Default=nests.\
+\\n\tsubsampleMonitor - An expression to evaluate for each \
+subsample.Default=Null.\\n\tsymmetric - True or False.If True,the confidence \
+region will be symmetric.Default=False.\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.7114355447760687`*^9},
+ CellTags->
+  "Info113711446344-2897554",ExpressionUUID->"77c66b82-4d08-438f-9352-\
+438dd514fc29"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 },
 AutoGeneratedPackage->Automatic,
 WindowSize->{1366, 702},
-WindowMargins->{{1, Automatic}, {0, Automatic}},
+WindowMargins->{{623, Automatic}, {Automatic, 567}},
 Visible->True,
 ShowSelection->True,
-FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
+FrontEndVersion->"11.1 for Linux x86 (64-bit) (April 18, 2017)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -811,53 +878,93 @@ StyleDefinitions->"Default.nb"
 (*CellTagsOutline
 CellTagsIndex->{
  "Info3621774458-2672526"->{
-  Cell[4667, 145, 3520, 54, 144, "Print",
-   CellTags->"Info3621774458-2672526"]}
+  Cell[5845, 176, 3520, 54, 
+  144, "Print", "ExpressionUUID" -> "e9d9ce4a-e31e-4dc9-bd15-c1c26613d305",
+   CellTags->"Info3621774458-2672526"]},
+ "Info113711446344-2897554"->{
+  Cell[36280, 840, 1384, 21, 
+  293, "Print", "ExpressionUUID" -> "77c66b82-4d08-438f-9352-438dd514fc29",
+   CellTags->"Info113711446344-2897554"]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Info3621774458-2672526", 34721, 812}
+ {"Info3621774458-2672526", 38075, 879},
+ {"Info113711446344-2897554", 38252, 883}
  }
 *)
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[579, 22, 662, 9, 65, "Section"],
+Cell[579, 22, 662, 9, 65, "Section", "ExpressionUUID" -> \
+"01697b37-5b0f-4890-ab86-2d4151e941b2"],
 Cell[CellGroupData[{
-Cell[1266, 35, 110, 1, 35, "Subsubsection"],
-Cell[1379, 38, 272, 5, 33, "Text"],
-Cell[1654, 45, 179, 4, 34, "Input"],
-Cell[1836, 51, 148, 3, 34, "Input"],
-Cell[1987, 56, 132, 2, 32, "Input"]
+Cell[1266, 35, 110, 1, 35, "Subsubsection", "ExpressionUUID" -> \
+"a017412f-7c71-420c-b01c-b51cbfa01ac4"],
+Cell[1379, 38, 272, 5, 51, "Text", "ExpressionUUID" -> \
+"a487b8aa-f27d-4e05-8f1c-3091cbe04cb1"],
+Cell[1654, 45, 179, 4, 34, "Input", "ExpressionUUID" -> \
+"9e683b0a-ff55-443c-9f69-b17d9be82c2c"],
+Cell[1836, 51, 148, 3, 34, "Input", "ExpressionUUID" -> \
+"569aa1f8-d37f-4649-a5fd-701492a8cf55"],
+Cell[1987, 56, 132, 2, 32, "Input", "ExpressionUUID" -> \
+"31957726-e74f-419b-be60-c706d41319fa"],
+Cell[2122, 60, 591, 11, 72, "Input", "ExpressionUUID" -> \
+"7fb7270f-c8a9-4c20-b2c3-ae4a6bbc3fae"],
+Cell[CellGroupData[{
+Cell[2738, 75, 390, 8, 50, "Input", "ExpressionUUID" -> \
+"b7e8f5f9-5dd5-4f8a-9b07-2cb1082f41a3",
+ InitializationCell->True],
+Cell[3131, 85, 154, 3, 25, "Echo", "ExpressionUUID" -> \
+"c0779401-fab0-4daa-8234-cdf85f981e8e"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2168, 64, 162, 2, 65, "Section"],
+Cell[3346, 95, 162, 2, 65, "Section", "ExpressionUUID" -> \
+"65bfa258-1e4e-4d7a-89c8-72a1cea45e81"],
 Cell[CellGroupData[{
-Cell[2355, 70, 314, 8, 50, "Input"],
-Cell[2672, 80, 163, 3, 34, "Output"]
+Cell[3533, 101, 314, 8, 50, "Input", "ExpressionUUID" -> \
+"fb3d2e47-3e3e-414e-a6fe-be7689425ff4"],
+Cell[3850, 111, 163, 3, 34, "Output", "ExpressionUUID" -> \
+"82a4978e-7f4c-486c-a0f7-9011cb85a37d"]
 }, Open  ]],
-Cell[2850, 86, 560, 12, 72, "Input",
+Cell[4028, 117, 560, 12, 72, "Input", "ExpressionUUID" -> \
+"7f52696b-9a12-46c0-92c0-456b5222d087",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[3435, 102, 279, 7, 34, "Input"],
-Cell[3717, 111, 186, 4, 34, "Output"]
+Cell[4613, 133, 279, 7, 34, "Input", "ExpressionUUID" -> \
+"bf75697a-4b9c-421c-9fc6-c2757f9202ef"],
+Cell[4895, 142, 186, 4, 34, "Output", "ExpressionUUID" -> \
+"4ceb0d74-3063-46ea-bd38-594ae08279f0"]
 }, Open  ]],
-Cell[3918, 118, 596, 19, 55, "Usage"],
+Cell[5096, 149, 596, 19, 58, "Usage", "ExpressionUUID" -> \
+"11295b05-c28f-47f2-85f7-6587e1cb8b11"],
 Cell[CellGroupData[{
-Cell[4539, 141, 125, 2, 32, "Input"],
-Cell[4667, 145, 3520, 54, 144, "Print",
+Cell[5717, 172, 125, 2, 32, "Input", "ExpressionUUID" -> \
+"fcf0441f-04e0-402f-9a40-0a38be26ca73"],
+Cell[5845, 176, 3520, 54, 144, "Print", "ExpressionUUID" -> \
+"e9d9ce4a-e31e-4dc9-bd15-c1c26613d305",
  CellTags->"Info3621774458-2672526"]
 }, Open  ]],
-Cell[8202, 202, 554, 12, 143, "Text"],
-Cell[8759, 216, 3296, 79, 323, "Input",
+Cell[9380, 233, 554, 12, 131, "Text", "ExpressionUUID" -> \
+"42eb9948-4a61-44bc-a5e4-3b75c183ae3a"],
+Cell[9937, 247, 3354, 80, 323, "Input", "ExpressionUUID" -> \
+"64fa441c-52a2-48d3-b448-b6749dd14501",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[12080, 299, 109, 1, 35, "Subsubsection"],
-Cell[12192, 302, 154, 2, 49, "Text"],
-Cell[12349, 306, 21973, 489, 1919, "Input",
- InitializationCell->True]
+Cell[13316, 331, 109, 1, 35, "Subsubsection", "ExpressionUUID" -> \
+"48617247-14f1-4584-bc5c-d41e4c689bee"],
+Cell[13428, 334, 154, 2, 47, "Text", "ExpressionUUID" -> \
+"edd14674-653b-4a8f-aac1-334bb609b4ea"],
+Cell[CellGroupData[{
+Cell[13607, 340, 22670, 498, 1966, "Input", "ExpressionUUID" -> \
+"1e14f21b-afe4-4017-bb36-aaad3aa30e56",
+ InitializationCell->True],
+Cell[36280, 840, 1384, 21, 293, "Print", "ExpressionUUID" -> \
+"77c66b82-4d08-438f-9352-438dd514fc29",
+ CellTags->"Info113711446344-2897554"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }

@@ -43,11 +43,11 @@ objectivecounter=0;
 (* ::Input::Initialization:: *)
 ClearAll[notebookslist];
 notebookslist::usage="List of files that are loaded when mse.m is loaded";
-notebookslist={"import.nb","export.nb","payoff.nb","modifydata.nb","matching.nb","inequalities.nb","dataArray.nb","objective.nb","PSO.nb","maximize.nb","confidence.nb"};
+notebookslist={"import.nb","export.nb","payoff.nb","matching.nb","inequalities.nb","dataArray.nb","objective.nb","PSO.nb","maximize.nb","confidence.nb","modifydata.nb"};
 
 
 (* ::Input::Initialization:: *)
-Get[directory<>#(*,Path\[Rule]directory*)]&/@{"import.m","export.m","payoff.m","modifydata.m","matching.m","inequalities.m","dataArray.m","objective.m","PSO.m","maximize.m","confidence.m"};
+Get[directory<>#(*,Path\[Rule]directory*)]&/@{"import.m","export.m","payoff.m","matching.m","inequalities.m","dataArray.m","objective.m","PSO.m","maximize.m","confidence.m","modifydata.m"};
 
 
 (* ::Input::Initialization:: *)

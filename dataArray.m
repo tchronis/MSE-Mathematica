@@ -19,7 +19,11 @@
 
 
 
-(* ::Input:: *)
+(* ::Input::Initialization:: *)
+Echo["Loaded dataArray.m"];
+
+
+(* ::Input::Initialization:: *)
 ClearAll[CdataArray];
 CdataArray::usage="CdataArray[payoffMatrix,xlist,printflag] creates the dataArray. It works either using the \"Speed\" model or the \"Memory\" model. It uses ineqmembers and Cinequalities internally and for the memory model it erases ineqmembers after use.";
 CdataArray[payoffMatrix_,xlist_,printflag_:False]:=Module[{dataarray,head},
@@ -44,4 +48,5 @@ dataarray=Flatten@Normal@CoefficientArrays[#,xlist]&/@dataarray;If[printflag,Pri
 Scan[If[Length[dataarray[[#]]]==1,dataarray[[#]]=PadRight[dataarray[[#]],Length[xlist]+1,0]]&,Range@Length@dataarray];If[printflag,Print[6,"  ",{ByteCount@dataarray,MemoryInUse[],MaxMemoryUsed[]}]];
 
 dataArray=Developer`ToPackedArray[dataarray,Real]
-]
+];
+Information[CdataArray,LongForm->False]

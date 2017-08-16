@@ -20,6 +20,10 @@
 
 
 (* ::Input::Initialization:: *)
+Echo["Loaded confidence.m"];
+
+
+(* ::Input::Initialization:: *)
 Off[General::compat];
 Needs["Combinatorica`"](*For RandomKSubset*)
 
@@ -107,4 +111,5 @@ If[sym\[Equal]True,(*For the symmetric case,we want to add and subtract the 1-al
 {cr,estimates}
 *)
 
-]
+];
+Information[pointIdentifiedCR,LongForm->False]
