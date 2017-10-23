@@ -53,7 +53,7 @@ Information[restore,LongForm->False]
 
 (* ::Input::Initialization:: *)
 ClearAll[modify];
-modify::usage="modify[m_,u_List,d_List,function_?AssociationQ:<|\"remove\"\[Rule]True,\"quota_reset\"\[Rule]False,\"quota_update\"\[Rule]False,\"rematch\"\[Rule]False|>] 
+modify::usage="modify[m_,u_List,d_List,function_?AssociationQ:<|\"unmatch\"\[Rule]False,\"remove\"\[Rule]True,\"quota_reset\"\[Rule]False,\"quota_update\"\[Rule]False,\"rematch\"\[Rule]False|>] 
 modifies m's market upstream and/or downstream members. As a consequence payoffMatrix, matchMatrix, quota are modified.
 If \"unmatch\"\[Rule]True then it is supposed that the Transpose[u,d] are the matches we need to unmatch.
 If \"unmatch\"\[Rule]True and \"quota_update\"\[Rule]True then the quota of each stream is reduced by one.

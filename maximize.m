@@ -25,12 +25,13 @@ Echo["Loaded maximize.m"];
 
 (* ::Input::Initialization:: *)
 maxIterations=Automatic;
+seedrandom=0;
 
 
 (* ::Input::Initialization:: *)
 ClearAll[optimize];
 optimize::method="I cannot recognize an optimization method named \"`1`\".";
-optimize["methods"]={"Automatic",{"DifferentialEvolution","CrossProbability"->0.5,"InitialPoints"->Automatic,"PenaltyFunction"->Automatic,"PostProcess"->Automatic,"RandomSeed"->0,"ScalingFactor"->0.6,"SearchPoints"->Automatic,"Tolerance"->0.001},"NelderMead","SimulatedAnnealing","RandomSearch",{"ParticleSwarmOptimization","nparts"->32,"bndLo"->-10,"bndUp"->10,"niter"->100,"r"->1,"RandomSeed"->0}};
+optimize["methods"]={"Automatic",{"DifferentialEvolution","CrossProbability"->0.5,"InitialPoints"->Automatic,"PenaltyFunction"->Automatic,"PostProcess"->Automatic,"RandomSeed"->0,"ScalingFactor"->0.6,"SearchPoints"->Automatic,"Tolerance"->0.001},"NelderMead","SimulatedAnnealing","RandomSearch",{"ParticleSwarmOptimization","nparts"->32,"bndLo"->-10,"bndUp"->10,"niter"->100,"r"->1,"RandomSeed"->seedrandom}};
 optimize::usage="optimize[f,x,method] is a wrapper that involves several separated optimization methods. f must be defined as a pure function in the sense f=func[Sequence@@#]&. x is a list of uknowns {x1,x2,...,xn}. Implemented methods for now include Mathematica's DifferentialEvolution, SimulatedAnnealing, RandomSearch, NelderMead. ParticleSwarmOptimization is an external method (PSO).\r
 
 Each method carries its own parameters. Default parameters can be changed as in the following examples:
@@ -97,7 +98,7 @@ reverseorder=SortBy[Transpose[{sol[[2]],order}],Last][[All,1]];
 
 sol={sol[[1]],reverseorder};
 
-If[printflag,Print["order=",order,"  reverse order=",reverseorder]]
+If[printflag,Print[" The new ordering of attributes used for calculating the solutio order=",order(*,"  reverse order=",reverseorder*)]]
 ,
 
 sol=optimize[objective[dataArray,Sequence@@#]&,x,method];

@@ -133,7 +133,7 @@ noAttr=(Dimensions@attributes[[1,2]])[[1]];
 
 (* ::Input::Initialization:: *)
 (*Header assumed inside the file*)
-import[filename_,"precomp",printflag_:False,numeric_:True]:=Module[{data,header,noAttr,matchMatrix,mate,noM,noU,noD,distanceMatrices},
+import[filename_,"precomp",printflag_:False,numeric_:True]:={header,noM,noU,noD,noAttr,distanceMatrices,matchMatrix,mate}=Module[{data,header,noAttr,matchMatrix,mate,noM,noU,noD,distanceMatrices},
 (*Importing data - header is excluded*)
 If[
 MemberQ[{"xls","xlsx"},FileExtension[filename]],
