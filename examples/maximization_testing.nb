@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     61151,       1504]
-NotebookOptionsPosition[     58295,       1430]
-NotebookOutlinePosition[     58635,       1445]
-CellTagsIndexPosition[     58592,       1442]
+NotebookDataLength[     62839,       1531]
+NotebookOptionsPosition[     59981,       1457]
+NotebookOutlinePosition[     60321,       1472]
+CellTagsIndexPosition[     60278,       1469]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -84,7 +84,9 @@ e065bfea20bd"]
 Cell[CellGroupData[{
 
 Cell["Workspace", "Section",
- CellChangeTimes->{{3.630312113309617*^9, 3.630312115762742*^9}}],
+ CellChangeTimes->{{3.630312113309617*^9, 
+  3.630312115762742*^9}},ExpressionUUID->"7ae68716-5a42-49fe-9742-\
+45f0f4e058dc"],
 
 Cell[BoxData[
  RowBox[{
@@ -313,26 +315,24 @@ Cell[BoxData[{
    RowBox[{"filename", ",", "\"\<precomp\>\""}], "]"}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"payoffMatrix", "=", 
-   RowBox[{"CpayoffMatrix", "[", 
-    RowBox[{"payoffDM", ",", "noM", ",", "noU", ",", "noD"}], "]"}]}], 
+  RowBox[{"CpayoffMatrix", "[", 
+   RowBox[{"payoffDM", ",", "noM", ",", "noU", ",", "noD"}], "]"}], 
   ";"}], "\[IndentingNewLine]", 
  StyleBox[
   RowBox[{
-   RowBox[{"ineqmembers", "=", 
-    RowBox[{"Cineqmembers", "[", "mate", 
-     RowBox[{"(*", 
-      RowBox[{",", "\"\<2\>\""}], "*)"}], "]"}]}], ";"}],
+   RowBox[{"Cineqmembers", "[", "mate", 
+    RowBox[{"(*", 
+     RowBox[{",", "\"\<2\>\""}], "*)"}], "]"}], ";"}],
   Background->RGBColor[1, 1, 0]], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"dataArray", "=", 
-   RowBox[{"CdataArray", "[", 
-    RowBox[{"payoffMatrix", ",", 
-     RowBox[{"Cx", "[", 
-      RowBox[{"noAttr", "-", "1"}], "]"}], ",", "False"}], "]"}]}], 
+  RowBox[{"CdataArray", "[", 
+   RowBox[{"payoffMatrix", ",", 
+    RowBox[{"Cx", "[", 
+     RowBox[{"noAttr", "-", "1"}], "]"}], ",", "False"}], "]"}], 
   ";"}]}], "Input",
  CellChangeTimes->{{3.636183572763342*^9, 3.6361836107130346`*^9}, {
-   3.697032359469563*^9, 3.697032361322783*^9}, 3.717729946500698*^9},
+   3.697032359469563*^9, 3.697032361322783*^9}, 3.717729946500698*^9, {
+   3.718006511562584*^9, 3.718006518113482*^9}},
  Background->RGBColor[
   1, 0.925, 0.925],ExpressionUUID->"f097bc12-a928-4b7c-9820-ac00f6c48b3a"],
 
@@ -340,7 +340,9 @@ Cell["\<\
 The following routine takes a lot of time to complete. Please use this \
 cautiously.\
 \>", "Text",
- CellChangeTimes->{{3.6970326489501247`*^9, 3.69703270081835*^9}}],
+ CellChangeTimes->{{3.6970326489501247`*^9, 
+  3.69703270081835*^9}},ExpressionUUID->"77986db3-6186-4459-a943-\
+760383d6e5c0"],
 
 Cell[CellGroupData[{
 
@@ -386,16 +388,18 @@ Cell[BoxData[
      RowBox[{"\<\"r\"\>", "\[Rule]", "2"}], ",", 
      RowBox[{"\<\"RandomSeed\"\>", "\[Rule]", "0"}]}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"390.58033`", ",", 
+    RowBox[{"446.246442`", ",", 
      RowBox[{"{", 
       RowBox[{"29965", ",", 
        RowBox[{"{", 
-        RowBox[{"3.9397343484390954`", ",", "3.015516928743067`"}], "}"}]}], 
-      "}"}]}], "}"}], ",", "1535489"}], "}"}]], "Output",
+        RowBox[{"3.9397343484390954`", ",", "3.015516928743067`"}], "}"}], 
+       ",", "30625"}], "}"}]}], "}"}], ",", "1535489"}], "}"}]], "Output",
  CellChangeTimes->{{3.6361837714969482`*^9, 3.6361838625416746`*^9}, 
    3.636183915978232*^9, 3.6361845447880244`*^9, 3.636185122602355*^9, 
    3.636186006094611*^9, 3.656682401423051*^9, 3.697032388995316*^9, 
-   3.697032741816476*^9, 3.69703365358702*^9}]
+   3.697032741816476*^9, 3.69703365358702*^9, 
+   3.718006999933392*^9},ExpressionUUID->"59bc76b9-e35e-44c1-95c2-\
+c4fa29cabf5e"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -432,7 +436,8 @@ Cell[BoxData[
    3.6333617214324846`*^9, 3.633361721654625*^9}, {3.6333628174522552`*^9, 
    3.633362835191482*^9}, {3.6342353648311343`*^9, 3.6342353695804243`*^9}, {
    3.656682002632646*^9, 3.656682008032539*^9}, {3.697033841915543*^9, 
-   3.6970338441550407`*^9}}],
+   3.6970338441550407`*^9}},ExpressionUUID->"28c4184d-755b-4458-988e-\
+032449ec9475"],
 
 Cell[CellGroupData[{
 
@@ -442,39 +447,49 @@ dat\"\>"], "Print",
  CellChangeTimes->{
   3.6342347280251474`*^9, 3.6342350360958157`*^9, 3.6342354029075456`*^9, 
    3.634298296928087*^9, 3.63618265158999*^9, 3.6361836237798686`*^9, 
-   3.656682842313191*^9, {3.697033833964466*^9, 3.6970338526184053`*^9}}],
+   3.656682842313191*^9, {3.697033833964466*^9, 3.6970338526184053`*^9}, 
+   3.7180072039351597`*^9},ExpressionUUID->"d0d66a74-21c0-48f3-880d-\
+b482e7a68091"],
 
 Cell[BoxData["\<\" \
 /home/tchr/Projects/Mathematica/MSE-Mathematica//import/round1m2-1.xls.pre.\
 dat\"\>"], "Print",
- CellChangeTimes->{3.6342347280251474`*^9, 3.6342350360958157`*^9, 
-  3.6342354029075456`*^9, 3.634298296928087*^9, 3.63618265158999*^9, 
-  3.6361836237798686`*^9, 3.656682842313191*^9, 3.697033833964466*^9, 
-  3.697033878601301*^9}],
+ CellChangeTimes->{
+  3.6342347280251474`*^9, 3.6342350360958157`*^9, 3.6342354029075456`*^9, 
+   3.634298296928087*^9, 3.63618265158999*^9, 3.6361836237798686`*^9, 
+   3.656682842313191*^9, {3.697033833964466*^9, 3.6970338526184053`*^9}, 
+   3.7180072210027447`*^9},ExpressionUUID->"acc8826d-1cd8-43af-9b6f-\
+d9e1c27a49d8"],
 
 Cell[BoxData["\<\" \
 /home/tchr/Projects/Mathematica/MSE-Mathematica//import/round1m5-1.xls.pre.\
 dat\"\>"], "Print",
- CellChangeTimes->{3.6342347280251474`*^9, 3.6342350360958157`*^9, 
-  3.6342354029075456`*^9, 3.634298296928087*^9, 3.63618265158999*^9, 
-  3.6361836237798686`*^9, 3.656682842313191*^9, 3.697033833964466*^9, 
-  3.6970339050494137`*^9}],
+ CellChangeTimes->{
+  3.6342347280251474`*^9, 3.6342350360958157`*^9, 3.6342354029075456`*^9, 
+   3.634298296928087*^9, 3.63618265158999*^9, 3.6361836237798686`*^9, 
+   3.656682842313191*^9, {3.697033833964466*^9, 3.6970338526184053`*^9}, 
+   3.718007236141952*^9},ExpressionUUID->"10286ce1-1307-4f26-a9e9-\
+30927592bd09"],
 
 Cell[BoxData["\<\" \
 /home/tchr/Projects/Mathematica/MSE-Mathematica//import/round1m10-1.xls.pre.\
 dat\"\>"], "Print",
- CellChangeTimes->{3.6342347280251474`*^9, 3.6342350360958157`*^9, 
-  3.6342354029075456`*^9, 3.634298296928087*^9, 3.63618265158999*^9, 
-  3.6361836237798686`*^9, 3.656682842313191*^9, 3.697033833964466*^9, 
-  3.6970339284592857`*^9}],
+ CellChangeTimes->{
+  3.6342347280251474`*^9, 3.6342350360958157`*^9, 3.6342354029075456`*^9, 
+   3.634298296928087*^9, 3.63618265158999*^9, 3.6361836237798686`*^9, 
+   3.656682842313191*^9, {3.697033833964466*^9, 3.6970338526184053`*^9}, 
+   3.718007252585032*^9},ExpressionUUID->"71ebc3c3-64e3-4a09-9de3-\
+d3c96e2c4e21"],
 
 Cell[BoxData["\<\" \
 /home/tchr/Projects/Mathematica/MSE-Mathematica//import/round1m10-10.xls.pre.\
 dat\"\>"], "Print",
- CellChangeTimes->{3.6342347280251474`*^9, 3.6342350360958157`*^9, 
-  3.6342354029075456`*^9, 3.634298296928087*^9, 3.63618265158999*^9, 
-  3.6361836237798686`*^9, 3.656682842313191*^9, 3.697033833964466*^9, 
-  3.697033970246047*^9}]
+ CellChangeTimes->{
+  3.6342347280251474`*^9, 3.6342350360958157`*^9, 3.6342354029075456`*^9, 
+   3.634298296928087*^9, 3.63618265158999*^9, 3.6361836237798686`*^9, 
+   3.656682842313191*^9, {3.697033833964466*^9, 3.6970338526184053`*^9}, 
+   3.718007283654867*^9},ExpressionUUID->"1395f17b-5196-4b69-a658-\
+8c67d46e522c"]
 }, Open  ]]
 }, Open  ]],
 
@@ -501,7 +516,9 @@ Cell[BoxData[
    RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]], "Input",
  CellChangeTimes->{{3.633344627230769*^9, 3.633344657541952*^9}, {
   3.6333447831546717`*^9, 3.6333447966908045`*^9}, {3.63334494854798*^9, 
-  3.633345121415121*^9}, {3.6333451563786635`*^9, 3.6333451632875805`*^9}}],
+  3.633345121415121*^9}, {3.6333451563786635`*^9, 
+  3.6333451632875805`*^9}},ExpressionUUID->"1c36bbaf-d46a-4afd-9e26-\
+9a780445e086"],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -511,7 +528,7 @@ xls.pre.dat\"\>",
      InterpretationBox[GridBox[{
         {"\<\"No of inequalities = 30625\"\>", "\<\"\"\>", "\<\"\"\>"},
         {"\<\"DifferentialEvolution\"\>", GridBox[{
-           {"5.508873`", "\<\"\"\>"},
+           {"3.65972`", "\<\"\"\>", "\<\"\"\>"},
            {"29961.`", GridBox[{
               {"3.188029873560225`"},
               {"2.2237682582145535`"}
@@ -527,7 +544,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -541,7 +558,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "1261"},
         {"\<\"SimulatedAnnealing\"\>", GridBox[{
-           {"2.935782`", "\<\"\"\>"},
+           {"1.918401`", "\<\"\"\>", "\<\"\"\>"},
            {"29963.`", GridBox[{
               {"3.6968591949209753`"},
               {"2.6949792183358516`"}
@@ -557,7 +574,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -571,7 +588,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "344"},
         {"\<\"NelderMead\"\>", GridBox[{
-           {"1.99573`", "\<\"\"\>"},
+           {"1.1984`", "\<\"\"\>", "\<\"\"\>"},
            {"29962.`", GridBox[{
               {"3.7726716045549953`"},
               {"2.7084054184635336`"}
@@ -587,7 +604,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -601,7 +618,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "127"},
         {"\<\"RandomSearch\"\>", GridBox[{
-           {"2.913416`", "\<\"\"\>"},
+           {"1.798428`", "\<\"\"\>", "\<\"\"\>"},
            {"29457.`", GridBox[{
               {"0.7673406197846462`"},
               {"0.8659151619584017`"}
@@ -617,7 +634,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -631,7 +648,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "200"},
         {"\<\"ParticleSwarmOptimization\"\>", GridBox[{
-           {"4.915217`", "\<\"\"\>"},
+           {"3.660657`", "\<\"\"\>", "\<\"\"\>"},
            {"29965", GridBox[{
               {"3.646907071978631`"},
               {"2.683389373695026`"}
@@ -647,7 +664,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -674,22 +691,23 @@ xls.pre.dat\"\>",
       TableForm[{
        "No of inequalities = 30625", {
         "DifferentialEvolution", {
-         5.508873, {29961., {3.188029873560225, 2.2237682582145535`}}}, 
+         3.65972, {29961., {3.188029873560225, 2.2237682582145535`}, 30625}}, 
          1261}, {"SimulatedAnnealing", {
-         2.935782, {29963., {3.6968591949209753`, 2.6949792183358516`}}}, 
-         344}, {"NelderMead", {
-         1.99573, {29962., {3.7726716045549953`, 2.7084054184635336`}}}, 
-         127}, {"RandomSearch", {
-         2.913416, {29457., {0.7673406197846462, 0.8659151619584017}}}, 
-         200}, {"ParticleSwarmOptimization", {
-         4.915217, {29965, {3.646907071978631, 2.683389373695026}}}, 
+         1.918401, {
+          29963., {3.6968591949209753`, 2.6949792183358516`}, 30625}}, 344}, {
+        "NelderMead", {
+         1.1984, {29962., {3.7726716045549953`, 2.7084054184635336`}, 30625}},
+          127}, {"RandomSearch", {
+         1.798428, {29457., {0.7673406197846462, 0.8659151619584017}, 30625}},
+          200}, {"ParticleSwarmOptimization", {
+         3.660657, {29965, {3.646907071978631, 2.683389373695026}, 30625}}, 
          19137}}]]},
     {"\<\"/home/tchr/Projects/Mathematica/MSE-Mathematica//import/round1m2-1.\
 xls.pre.dat\"\>", 
      InterpretationBox[GridBox[{
         {"\<\"No of inequalities = 30625\"\>", "\<\"\"\>", "\<\"\"\>"},
         {"\<\"DifferentialEvolution\"\>", GridBox[{
-           {"7.124741`", "\<\"\"\>"},
+           {"2.765109`", "\<\"\"\>", "\<\"\"\>"},
            {"30550.`", GridBox[{
               {"4.390863395061582`"},
               {"2.46761138981219`"}
@@ -705,7 +723,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -719,7 +737,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "1061"},
         {"\<\"SimulatedAnnealing\"\>", GridBox[{
-           {"2.080463`", "\<\"\"\>"},
+           {"1.229198`", "\<\"\"\>", "\<\"\"\>"},
            {"30551.`", GridBox[{
               {"5.054884194553177`"},
               {"3.0698025463449734`"}
@@ -735,7 +753,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -749,7 +767,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "254"},
         {"\<\"NelderMead\"\>", GridBox[{
-           {"2.011999`", "\<\"\"\>"},
+           {"1.246726`", "\<\"\"\>", "\<\"\"\>"},
            {"30552.`", GridBox[{
               {"5.136796925644352`"},
               {"2.8807645865616327`"}
@@ -765,7 +783,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -779,7 +797,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "252"},
         {"\<\"RandomSearch\"\>", GridBox[{
-           {"2.867319`", "\<\"\"\>"},
+           {"1.590475`", "\<\"\"\>", "\<\"\"\>"},
            {"28981.`", GridBox[{
               {"0.7673406197846462`"},
               {"0.8659151619584017`"}
@@ -795,7 +813,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -809,7 +827,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "200"},
         {"\<\"ParticleSwarmOptimization\"\>", GridBox[{
-           {"5.13023`", "\<\"\"\>"},
+           {"3.376779`", "\<\"\"\>", "\<\"\"\>"},
            {"30552", GridBox[{
               {"5.618454514935576`"},
               {"3.1115695005909707`"}
@@ -825,7 +843,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -852,22 +870,22 @@ xls.pre.dat\"\>",
       TableForm[{
        "No of inequalities = 30625", {
         "DifferentialEvolution", {
-         7.124741, {30550., {4.390863395061582, 2.46761138981219}}}, 1061}, {
-        "SimulatedAnnealing", {
-         2.080463, {30551., {5.054884194553177, 3.0698025463449734`}}}, 
-         254}, {"NelderMead", {
-         2.011999, {30552., {5.136796925644352, 2.8807645865616327`}}}, 
-         252}, {"RandomSearch", {
-         2.867319, {28981., {0.7673406197846462, 0.8659151619584017}}}, 
-         200}, {"ParticleSwarmOptimization", {
-         5.13023, {30552, {5.618454514935576, 3.1115695005909707`}}}, 
+         2.765109, {30550., {4.390863395061582, 2.46761138981219}, 30625}}, 
+         1061}, {"SimulatedAnnealing", {
+         1.229198, {30551., {5.054884194553177, 3.0698025463449734`}, 30625}},
+          254}, {"NelderMead", {
+         1.246726, {30552., {5.136796925644352, 2.8807645865616327`}, 30625}},
+          252}, {"RandomSearch", {
+         1.590475, {28981., {0.7673406197846462, 0.8659151619584017}, 30625}},
+          200}, {"ParticleSwarmOptimization", {
+         3.376779, {30552, {5.618454514935576, 3.1115695005909707`}, 30625}}, 
          19137}}]]},
     {"\<\"/home/tchr/Projects/Mathematica/MSE-Mathematica//import/round1m5-1.\
 xls.pre.dat\"\>", 
      InterpretationBox[GridBox[{
         {"\<\"No of inequalities = 30625\"\>", "\<\"\"\>", "\<\"\"\>"},
         {"\<\"DifferentialEvolution\"\>", GridBox[{
-           {"6.149756`", "\<\"\"\>"},
+           {"4.577006`", "\<\"\"\>", "\<\"\"\>"},
            {"30621.`", GridBox[{
               {"6.942935997700074`"},
               {"3.799730074013799`"}
@@ -883,7 +901,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -897,7 +915,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "2061"},
         {"\<\"SimulatedAnnealing\"\>", GridBox[{
-           {"1.934721`", "\<\"\"\>"},
+           {"1.239544`", "\<\"\"\>", "\<\"\"\>"},
            {"30619.`", GridBox[{
               {"4.833851510111398`"},
               {"2.5254407755717536`"}
@@ -913,7 +931,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -927,7 +945,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "284"},
         {"\<\"NelderMead\"\>", GridBox[{
-           {"1.749839`", "\<\"\"\>"},
+           {"1.118794`", "\<\"\"\>", "\<\"\"\>"},
            {"30621.`", GridBox[{
               {"6.721742672246899`"},
               {"3.7970362583713193`"}
@@ -943,7 +961,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -957,7 +975,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "244"},
         {"\<\"RandomSearch\"\>", GridBox[{
-           {"2.255907`", "\<\"\"\>"},
+           {"1.444568`", "\<\"\"\>", "\<\"\"\>"},
            {"29651.`", GridBox[{
               {"0.7673406197846462`"},
               {"0.8659151619584017`"}
@@ -973,7 +991,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -987,7 +1005,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "200"},
         {"\<\"ParticleSwarmOptimization\"\>", GridBox[{
-           {"4.510059`", "\<\"\"\>"},
+           {"3.457048`", "\<\"\"\>", "\<\"\"\>"},
            {"30621", GridBox[{
               {"5.782164922248786`"},
               {"3.1403437961038794`"}
@@ -1003,7 +1021,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1030,22 +1048,22 @@ xls.pre.dat\"\>",
       TableForm[{
        "No of inequalities = 30625", {
         "DifferentialEvolution", {
-         6.149756, {30621., {6.942935997700074, 3.799730074013799}}}, 2061}, {
-        "SimulatedAnnealing", {
-         1.934721, {30619., {4.833851510111398, 2.5254407755717536`}}}, 
-         284}, {"NelderMead", {
-         1.749839, {30621., {6.721742672246899, 3.7970362583713193`}}}, 
-         244}, {"RandomSearch", {
-         2.255907, {29651., {0.7673406197846462, 0.8659151619584017}}}, 
-         200}, {"ParticleSwarmOptimization", {
-         4.510059, {30621, {5.782164922248786, 3.1403437961038794`}}}, 
+         4.577006, {30621., {6.942935997700074, 3.799730074013799}, 30625}}, 
+         2061}, {"SimulatedAnnealing", {
+         1.239544, {30619., {4.833851510111398, 2.5254407755717536`}, 30625}},
+          284}, {"NelderMead", {
+         1.118794, {30621., {6.721742672246899, 3.7970362583713193`}, 30625}},
+          244}, {"RandomSearch", {
+         1.444568, {29651., {0.7673406197846462, 0.8659151619584017}, 30625}},
+          200}, {"ParticleSwarmOptimization", {
+         3.457048, {30621, {5.782164922248786, 3.1403437961038794`}, 30625}}, 
          19137}}]]},
     {"\<\"/home/tchr/Projects/Mathematica/MSE-Mathematica//import/round1m10-1.\
 xls.pre.dat\"\>", 
      InterpretationBox[GridBox[{
         {"\<\"No of inequalities = 30625\"\>", "\<\"\"\>", "\<\"\"\>"},
         {"\<\"DifferentialEvolution\"\>", GridBox[{
-           {"6.976419`", "\<\"\"\>"},
+           {"4.438212`", "\<\"\"\>", "\<\"\"\>"},
            {"30624.`", GridBox[{
               {"4.7879963711999745`"},
               {"2.6744143339133535`"}
@@ -1061,7 +1079,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1075,7 +1093,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "2061"},
         {"\<\"SimulatedAnnealing\"\>", GridBox[{
-           {"1.69356`", "\<\"\"\>"},
+           {"1.156637`", "\<\"\"\>", "\<\"\"\>"},
            {"30623.`", GridBox[{
               {"4.143411343860247`"},
               {"2.2865661452657022`"}
@@ -1091,7 +1109,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1105,7 +1123,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "214"},
         {"\<\"NelderMead\"\>", GridBox[{
-           {"1.584403`", "\<\"\"\>"},
+           {"1.154855`", "\<\"\"\>", "\<\"\"\>"},
            {"30624.`", GridBox[{
               {"5.048246261957587`"},
               {"3.1539196212272778`"}
@@ -1121,7 +1139,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1135,7 +1153,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "247"},
         {"\<\"RandomSearch\"\>", GridBox[{
-           {"2.150078`", "\<\"\"\>"},
+           {"1.501799`", "\<\"\"\>", "\<\"\"\>"},
            {"30161.`", GridBox[{
               {"0.7673406197846462`"},
               {"0.8659151619584017`"}
@@ -1151,7 +1169,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1165,7 +1183,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "200"},
         {"\<\"ParticleSwarmOptimization\"\>", GridBox[{
-           {"4.284243`", "\<\"\"\>"},
+           {"4.495757`", "\<\"\"\>", "\<\"\"\>"},
            {"30624", GridBox[{
               {"4.838713582687417`"},
               {"2.3697672327079555`"}
@@ -1181,7 +1199,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1208,22 +1226,24 @@ xls.pre.dat\"\>",
       TableForm[{
        "No of inequalities = 30625", {
         "DifferentialEvolution", {
-         6.976419, {30624., {4.7879963711999745`, 2.6744143339133535`}}}, 
+         4.438212, {
+          30624., {4.7879963711999745`, 2.6744143339133535`}, 30625}}, 
          2061}, {"SimulatedAnnealing", {
-         1.69356, {30623., {4.143411343860247, 2.2865661452657022`}}}, 214}, {
-        "NelderMead", {
-         1.584403, {30624., {5.048246261957587, 3.1539196212272778`}}}, 
-         247}, {"RandomSearch", {
-         2.150078, {30161., {0.7673406197846462, 0.8659151619584017}}}, 
-         200}, {"ParticleSwarmOptimization", {
-         4.284243, {30624, {4.838713582687417, 2.3697672327079555`}}}, 
+         1.156637, {30623., {4.143411343860247, 2.2865661452657022`}, 30625}},
+          214}, {"NelderMead", {
+         1.154855, {30624., {5.048246261957587, 3.1539196212272778`}, 30625}},
+          247}, {"RandomSearch", {
+         1.501799, {30161., {0.7673406197846462, 0.8659151619584017}, 30625}},
+          200}, {
+        "ParticleSwarmOptimization", {
+         4.495757, {30624, {4.838713582687417, 2.3697672327079555`}, 30625}}, 
          19137}}]]},
     {"\<\"/home/tchr/Projects/Mathematica/MSE-Mathematica//import/round1m10-\
 10.xls.pre.dat\"\>", 
      InterpretationBox[GridBox[{
         {"\<\"No of inequalities = 30625\"\>", "\<\"\"\>", "\<\"\"\>"},
         {"\<\"DifferentialEvolution\"\>", GridBox[{
-           {"4.739274`", "\<\"\"\>"},
+           {"3.238791`", "\<\"\"\>", "\<\"\"\>"},
            {"30551.`", GridBox[{
               {"3.804961529705183`"},
               {"2.671235905088204`"}
@@ -1239,7 +1259,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1253,7 +1273,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "1061"},
         {"\<\"SimulatedAnnealing\"\>", GridBox[{
-           {"2.482053`", "\<\"\"\>"},
+           {"1.353197`", "\<\"\"\>", "\<\"\"\>"},
            {"30549.`", GridBox[{
               {"3.4793716848855523`"},
               {"2.523796897752092`"}
@@ -1269,7 +1289,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1283,7 +1303,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "194"},
         {"\<\"NelderMead\"\>", GridBox[{
-           {"1.826747`", "\<\"\"\>"},
+           {"1.015663`", "\<\"\"\>", "\<\"\"\>"},
            {"30550.`", GridBox[{
               {"3.7635590949919866`"},
               {"2.6221676624042485`"}
@@ -1299,7 +1319,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1313,7 +1333,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "82"},
         {"\<\"RandomSearch\"\>", GridBox[{
-           {"3.702502`", "\<\"\"\>"},
+           {"1.840975`", "\<\"\"\>", "\<\"\"\>"},
            {"30451.`", GridBox[{
               {"0.7673406197846462`"},
               {"0.8659151619584017`"}
@@ -1329,7 +1349,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1343,7 +1363,7 @@ xls.pre.dat\"\>",
                Offset[0.1]}, 
               Offset[0.2]}, "RowsIndexed" -> {}}], "200"},
         {"\<\"ParticleSwarmOptimization\"\>", GridBox[{
-           {"6.145037`", "\<\"\"\>"},
+           {"3.65853`", "\<\"\"\>", "\<\"\"\>"},
            {"30550", GridBox[{
               {"3.867216554749098`"},
               {"2.4333226752019397`"}
@@ -1359,7 +1379,7 @@ xls.pre.dat\"\>",
                "Rows" -> {
                  Offset[0.2], {
                   Offset[0.1]}, 
-                 Offset[0.2]}, "RowsIndexed" -> {}}]}
+                 Offset[0.2]}, "RowsIndexed" -> {}}], "30625"}
           },
           
           GridBoxAlignment->{
@@ -1386,15 +1406,16 @@ xls.pre.dat\"\>",
       TableForm[{
        "No of inequalities = 30625", {
         "DifferentialEvolution", {
-         4.739274, {30551., {3.804961529705183, 2.671235905088204}}}, 1061}, {
-        "SimulatedAnnealing", {
-         2.482053, {30549., {3.4793716848855523`, 2.523796897752092}}}, 
-         194}, {"NelderMead", {
-         1.826747, {30550., {3.7635590949919866`, 2.6221676624042485`}}}, 
-         82}, {"RandomSearch", {
-         3.702502, {30451., {0.7673406197846462, 0.8659151619584017}}}, 
-         200}, {"ParticleSwarmOptimization", {
-         6.145037, {30550, {3.867216554749098, 2.4333226752019397`}}}, 
+         3.238791, {30551., {3.804961529705183, 2.671235905088204}, 30625}}, 
+         1061}, {"SimulatedAnnealing", {
+         1.353197, {30549., {3.4793716848855523`, 2.523796897752092}, 30625}},
+          194}, {"NelderMead", {
+         1.015663, {
+          30550., {3.7635590949919866`, 2.6221676624042485`}, 30625}}, 82}, {
+        "RandomSearch", {
+         1.840975, {30451., {0.7673406197846462, 0.8659151619584017}, 30625}},
+          200}, {"ParticleSwarmOptimization", {
+         3.65853, {30550, {3.867216554749098, 2.4333226752019397`}, 30625}}, 
          19137}}]]}
    },
    AutoDelete->False,
@@ -1404,7 +1425,9 @@ xls.pre.dat\"\>",
  CellChangeTimes->{
   3.634235605125127*^9, 3.634298545115587*^9, 3.6361830783367662`*^9, {
    3.636183660020574*^9, 3.6361836869454765`*^9}, 3.656683097072567*^9, 
-   3.6970344379579144`*^9}]
+   3.6970344379579144`*^9, 
+   3.718007312805266*^9},ExpressionUUID->"eddf6ceb-bed5-458b-9356-\
+1e9ec07df2d0"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1414,22 +1437,26 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"MemoryInUse", "[", "]"}], ",", 
    RowBox[{"MaxMemoryUsed", "[", "]"}]}], "}"}]], "Input",
- CellChangeTimes->{{3.6311806435117693`*^9, 3.631180657746145*^9}}],
+ CellChangeTimes->{{3.6311806435117693`*^9, 
+  3.631180657746145*^9}},ExpressionUUID->"ec9a5de2-aeb7-421d-a7f5-\
+f5e983182e96"],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"133878824", ",", "631462616"}], "}"}]], "Output",
+  RowBox[{"112402552", ",", "200626072"}], "}"}]], "Output",
  CellChangeTimes->{3.633328326397873*^9, 3.6333389977544656`*^9, 
   3.633339081186084*^9, 3.6333392311192446`*^9, 3.6333409276244287`*^9, 
   3.6333409671909037`*^9, 3.6333451994526453`*^9, 3.6333457585074425`*^9, 
   3.6333459045955896`*^9, 3.633346146853894*^9, 3.633357008712515*^9, 
   3.633359813979054*^9, 3.6333618452285504`*^9, 3.633362714537108*^9, 
-  3.633363008507098*^9, 3.656683103355048*^9, 3.697034442547927*^9}]
+  3.633363008507098*^9, 3.656683103355048*^9, 3.697034442547927*^9, 
+  3.7180073191294327`*^9},ExpressionUUID->"a2b79271-f5a7-4e88-90f7-\
+d59ed7251ce1"]
 }, Open  ]]
 }, Open  ]]
 },
 WindowSize->{1087, 1085},
-WindowMargins->{{Automatic, 1144}, {Automatic, 499}},
+WindowMargins->{{Automatic, 1144}, {512, Automatic}},
 FrontEndVersion->"11.1 for Linux x86 (64-bit) (April 18, 2017)",
 StyleDefinitions->"Default.nb"
 ]
@@ -1455,55 +1482,55 @@ Cell[999, 34, 569, 14, 57, "Input", "ExpressionUUID" -> \
 "88eb54f8-1acf-428b-a709-e4219d8037e2"],
 Cell[1571, 50, 316, 6, 34, "Input", "ExpressionUUID" -> \
 "cec2f0fd-e943-413d-be3a-09cfa5114336"],
-Cell[1890, 58, 843, 17, 78, "Input", "ExpressionUUID" -> \
+Cell[1890, 58, 843, 17, 56, "Input", "ExpressionUUID" -> \
 "4943f847-99f0-4307-b4bd-9735779c5a35"],
 Cell[2736, 77, 167, 3, 32, "Input", "ExpressionUUID" -> \
 "2af6faa2-6442-4850-a392-e065bfea20bd"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2940, 85, 94, 1, 65, "Section", "ExpressionUUID" -> \
+Cell[2940, 85, 154, 3, 65, "Section", "ExpressionUUID" -> \
 "7ae68716-5a42-49fe-9742-45f0f4e058dc"],
-Cell[3037, 88, 204, 5, 34, "Input", "ExpressionUUID" -> \
+Cell[3097, 90, 204, 5, 34, "Input", "ExpressionUUID" -> \
 "1376dbf6-0368-40a7-93a6-7c3ab1a6ce63"],
-Cell[3244, 95, 9160, 205, 769, "Input", "ExpressionUUID" -> \
+Cell[3304, 97, 9160, 205, 677, "Input", "ExpressionUUID" -> \
 "397c5496-f98a-4760-bde8-4ea24cc2e3dd"],
-Cell[12407, 302, 1211, 34, 142, "Input", "ExpressionUUID" -> \
+Cell[12467, 304, 1153, 32, 142, "Input", "ExpressionUUID" -> \
 "f097bc12-a928-4b7c-9820-ac00f6c48b3a"],
-Cell[13621, 338, 175, 4, 31, "Text", "ExpressionUUID" -> \
+Cell[13623, 338, 235, 6, 31, "Text", "ExpressionUUID" -> \
 "77986db3-6186-4459-a943-760383d6e5c0"],
 Cell[CellGroupData[{
-Cell[13821, 346, 1316, 28, 119, "Input", "ExpressionUUID" -> \
+Cell[13883, 348, 1316, 28, 96, "Input", "ExpressionUUID" -> \
 "ffd64d25-d7eb-4e73-8d23-48eb3781c764"],
-Cell[15140, 376, 964, 21, 57, "Output", "ExpressionUUID" -> \
-"27781e03-2eea-448a-bc06-74a53a13979a"]
+Cell[15202, 378, 1063, 23, 34, "Output", "ExpressionUUID" -> \
+"59bc76b9-e35e-44c1-95c2-c4fa29cabf5e"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[16141, 402, 1415, 32, 80, "Input", "ExpressionUUID" -> \
+Cell[16302, 406, 1472, 33, 57, "Input", "ExpressionUUID" -> \
 "28c4184d-755b-4458-988e-032449ec9475"],
 Cell[CellGroupData[{
-Cell[17581, 438, 357, 6, 24, "Print", "ExpressionUUID" -> \
-"33e4e75e-8d0f-418b-a2fc-f37462be9312"],
-Cell[17941, 446, 351, 6, 24, "Print", "ExpressionUUID" -> \
-"0addaed1-beb7-42e6-85b9-c3b8e443ed52"],
-Cell[18295, 454, 353, 6, 24, "Print", "ExpressionUUID" -> \
-"72a6f2a7-2215-4c2c-8327-0c70e834bd7a"],
-Cell[18651, 462, 354, 6, 24, "Print", "ExpressionUUID" -> \
-"edea9af0-9e68-4000-b669-cd3cb6356511"],
-Cell[19008, 470, 353, 6, 24, "Print", "ExpressionUUID" -> \
-"f8a897f7-78a9-41ab-ba93-548d4ae7b44d"]
+Cell[17799, 443, 442, 8, 24, "Print", "ExpressionUUID" -> \
+"d0d66a74-21c0-48f3-880d-b482e7a68091"],
+Cell[18244, 453, 442, 8, 24, "Print", "ExpressionUUID" -> \
+"acc8826d-1cd8-43af-9b6f-d9e1c27a49d8"],
+Cell[18689, 463, 440, 8, 24, "Print", "ExpressionUUID" -> \
+"10286ce1-1307-4f26-a9e9-30927592bd09"],
+Cell[19132, 473, 441, 8, 24, "Print", "ExpressionUUID" -> \
+"71ebc3c3-64e3-4a09-9de3-d3c96e2c4e21"],
+Cell[19576, 483, 442, 8, 24, "Print", "ExpressionUUID" -> \
+"1395f17b-5196-4b69-a658-8c67d46e522c"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[19410, 482, 775, 21, 34, "Input", "ExpressionUUID" -> \
+Cell[20067, 497, 835, 23, 34, "Input", "ExpressionUUID" -> \
 "1c36bbaf-d46a-4afd-9e26-9a780445e086"],
-Cell[20188, 505, 37315, 901, 1284, "Output", "ExpressionUUID" -> \
-"ef241aba-f292-4e12-9a3a-4ce3def5693f"]
+Cell[20905, 522, 38140, 907, 1284, "Output", "ExpressionUUID" -> \
+"eddf6ceb-bed5-458b-9356-1e9ec07df2d0"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[57540, 1411, 210, 5, 34, "Input", "ExpressionUUID" -> \
+Cell[59082, 1434, 270, 7, 34, "Input", "ExpressionUUID" -> \
 "ec9a5de2-aeb7-421d-a7f5-f5e983182e96"],
-Cell[57753, 1418, 514, 8, 67, "Output", "ExpressionUUID" -> \
-"2e815a06-a219-4bd9-8ee1-73f7f5d50295"]
+Cell[59355, 1443, 598, 10, 67, "Output", "ExpressionUUID" -> \
+"a2b79271-f5a7-4e88-90f7-d59ed7251ce1"]
 }, Open  ]]
 }, Open  ]]
 }

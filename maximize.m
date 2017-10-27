@@ -76,7 +76,7 @@ sol
 
 (* ::Input::Initialization:: *)
 ClearAll[maximize];
-maximize::usage="maximize[dataArray_,noAttr_,method_:\"DifferentialEvolution\", permuteinvariant_:False, printflag_:False] is MSE specific and uses the optimize function. It uses the objective function (that counts the number of satisfied inequalities). It returns a list {max,{x1->value1, x2->value2, ...}} where max is the maximum number of satisfied inequalities found and the solution of the maximization method {value1,value2,...}";
+maximize::usage="maximize[dataArray_,noAttr_,method_:\"DifferentialEvolution\", permuteinvariant_:False, printflag_:False] is MSE specific and uses the optimize function. It uses the objective function (that counts the number of satisfied inequalities). It returns a list {max,{x1->value1, x2->value2, ...}, number of inequalities} where max is the maximum number of satisfied inequalities found and the solution of the maximization method {value1,value2,...}";
 maximize[dataArray_,noAttr_,method_:"DifferentialEvolution",permuteinvariant_:False,printflag_:False]:=Module[{sol,x,
 order,invariantdataArray,reverseorder},
 
@@ -96,20 +96,20 @@ sol={sol[[1]],x/.sol[[2]]};
 
 reverseorder=SortBy[Transpose[{sol[[2]],order}],Last][[All,1]];
 
-sol={sol[[1]],reverseorder};
+sol={sol[[1]],reverseorder,Length@dataArray};
 
 If[printflag,Print[" The new ordering of attributes used for calculating the solutio order=",order(*,"  reverse order=",reverseorder*)]]
 ,
 
 sol=optimize[objective[dataArray,Sequence@@#]&,x,method];
 
-sol={sol[[1]],x/.sol[[2]]}
+sol={sol[[1]],x/.sol[[2]],Length@dataArray}
 ];
 
 If[printflag,
 Print["Method "<>ToString[method]];
 Print["Completed : ",
-{sol[[1]],Thread[header[[5;;(5+noAttr-2)]]->sol[[2]]]},
+{"Number of satisfied inequalities"->sol[[1]],Thread[header[[5;;(5+noAttr-2)]]->sol[[2]]],"Number of inequalities"->Length@dataArray},
 "\nSatisfied Ineqs Analysis:\n ",
 Grid[objectiveV[dataArray,Sequence@@(sol[[2]])],Frame->All]
 ]
