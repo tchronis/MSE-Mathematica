@@ -53,25 +53,40 @@ Information[restore,LongForm->False]
 
 (* ::Input::Initialization:: *)
 ClearAll[modify];
-modify::usage="modify[m_,u_List,d_List,function_?AssociationQ:<|\"unmatch\"\[Rule]False,\"remove\"\[Rule]True,\"quota_reset\"\[Rule]False,\"quota_update\"\[Rule]False,\"rematch\"\[Rule]False|>] 
+modify::usage="modify[m_,u_List,d_List,function_?AssociationQ:<|\"unmatch\"\[Rule]True,\"stream\"->\"upstream\",\"remove\"\[Rule]True,\"quota_reset\"\[Rule]False,\"quota_update\"\[Rule]False,\"rematch\"\[Rule]False|>] 
 modifies m's market upstream and/or downstream members. As a consequence payoffMatrix, matchMatrix, quota are modified.
 If \"unmatch\"\[Rule]True then it is supposed that the Transpose[u,d] are the matches we need to unmatch.
 If \"unmatch\"\[Rule]True and \"quota_update\"\[Rule]True then the quota of each stream is reduced by one.
 If \"remove\"\[Rule]True and \"quota_reset\"\[Rule]True then the quota of the selected for remove streams becomes equal to 0.
 If \"remove\"\[Rule]True and \"quota_update\"\[Rule]True then the quota of the matched opposite stream are reduced because of the sream removal.
 If \"rematch\"\[Rule]True then the matchMatrix of the m'th market is re-calculated using the set quota.";
-modify[m_,u_List,d_List,function_:<|"unmatch"->False,"remove"->True,"quota_reset"->False,"quota_update"->False,"rematch"->False|>]:=Block[{keep,theirdownstream,theirupstream},
-If[
-function["unmatch"],
+modify[m_,u_List,d_List,function_:<|"unmatch"->False,"remove"->True,"quota_reset"->False,"quota_update"->False,"rematch"->False|>]:=Block[{tmp,keep,theirdownstream,theirupstream},
+
+(* ----------------- unmatch ---------------------*)
+If[function["unmatch"],
 If[Length[u]!=Length[d],Print["Error in data. u list and d list must have the same Length."," u = ",u," d = ",d];Return[]];
-If[matchMatrix[[m,u[[#]],d[[#]]]]!=1,Print["Warning: "," In Market ",m," upstream ",u[[#]], " does not match with downstream  ",d[[#]]];]&/@Range[Length[u]];
+
+(* For debugging reasons *)
+(* If[matchMatrix[[m,u[[#]],d[[#]]]]\[NotEqual]1,Print["Warning: "," In Market ",m," upstream ",u[[#]], " does not match with downstream  ",d[[#]]];]&/@Range[Length[u]]; *)
+
 (matchMatrix[[m,u[[#]],d[[#]]]]=0)&/@Range[Length[u]];
 Cmate[matchMatrix];
 If[
-function["quota_update"],Cquota[matchMatrix];
+function["quota_update"],
+Cquota[matchMatrix];
+Switch[
+function["stream"],
+"upstream",
+(tmp=quota["upstream"];tmp[[m,#]]++;
+quota["upstream"]=tmp)&/@u,
+"downstream",
+(tmp=quota["downstream"];tmp[[m,#]]++;
+quota["downstream"]=tmp)&/@d
 ]
-,
+]
+];
 
+(* ----------------- remove ---------------------*)
 If[function["remove"],
 If[u!={},
 If[function["quota_update"],
@@ -106,14 +121,15 @@ quota[[2,m]]=quota[[2,m,keep]];
 noD[[m]]=noD[[m]]-Length[d];
 ]
 ]
-]
 ];
 
+(* ----------------- rematch ---------------------*)
 If[function["rematch"],
 CmatchMatrix[payoffMatrix,quota["upstream"],quota["downstream"],m];
 Cmate[matchMatrix];
 ];
 ];
+
 Information[modify,LongForm->False]
 
 
