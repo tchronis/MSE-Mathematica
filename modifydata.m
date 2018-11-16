@@ -148,16 +148,4 @@ removeD[m,d,match];
 )
 
 
-(* ::Input::Initialization:: *)
-ClearAll[payoffMatrix2Positive];
-SetAttributes[payoffMatrix2Positive,HoldFirst];
-payoffMatrix2Positive::usage="payoffMatrix2Positive[offset,payoffMatrix,epsilon_:0,sameoffset_:False] returns a list of matrices of positive elements. The offset variable is set accordingly. If the sameoffset flag is set to True then the offset equals the minimum element in the entire payoffMatrix.";
-payoffMatrix2Positive[offset_,payoffMatrix_?(And@@(NumericQ/@Flatten@#)&),epsilon_:0,sameoffset_:False]:=Block[{min},
-offset=Min/@payoffMatrix;
-If[sameoffset,min=Min@offset;offset=Table[min,{Length@payoffMatrix}]];
-payoffMatrix-offset+epsilon
-];
-Information[payoffMatrix2Positive,LongForm->False]
-
-
 
