@@ -187,6 +187,30 @@ tests =
    0}, {0, 0, 0, 1, 0, 0, 0, 1, 0, 0}, {1, 1, 0, 0, 0, 0, 0, 0, 0, 
    0}, {0, 0, 0, 1, 0, 0, 0, 0, 0, 1}}},
   "MemoryConstraint" -> "Quantity[200, \"Kilobytes\"]"
+  |>,
+ <|"TestID" -> "Cquota proof upstream and downstream",
+  "function" -> "Cquota",
+  "Input" -> 
+   { {{{0, 0}, {0, 1}, {1, 1}}, {{0, 1, 0}, {0, 1, 0}}, {{1, 1, 0, 0}, {1, 
+   0, 1, 1}, {1, 0, 1, 0}, {1, 1, 1, 1}}} },
+  "ExpectedOutput" -> <|"upstream" -> {{0, 1, 2}, {1, 1}, {2, 3, 2, 4}}, "downstream" -> {{1, 2}, {0, 2, 0}, {4, 2, 3, 2}}|>,
+  "MemoryConstraint" -> "Quantity[200, \"Kilobytes\"]"
+  |>,
+ <|"TestID" -> "Cquota proof only upstream",
+  "function" -> "Cquota",
+  "Input" -> 
+   { {{{0, 0}, {0, 1}, {1, 1}}, {{0, 1, 0}, {0, 1, 0}}, {{0, 1, 0, 0}, {1, 
+   0, 1, 1}, {1, 0, 1, 0}, {1, 1, 1, 1}}}, <|"upstream" -> True, "downstream" -> False|> },
+  "ExpectedOutput" -> <|"upstream" -> {{0, 1, 2}, {1, 1}, {1, 3, 2, 4}}, "downstream" -> {{1, 2}, {0, 2, 0}, {4, 2, 3, 2}}|>,
+  "MemoryConstraint" -> "Quantity[200, \"Kilobytes\"]"
+  |>,
+ <|"TestID" -> "Cquota proof only downstream",
+  "function" -> "Cquota",
+  "Input" -> 
+   { {{{0, 0}, {0, 1}, {1, 1}}, {{0, 1, 0}, {0, 1, 0}}, {{0, 1, 0, 0}, {1, 
+   0, 1, 1}, {1, 0, 1, 0}, {1, 1, 1, 1}}}, <|"upstream" -> False, "downstream" -> True|>},
+  "ExpectedOutput" -> <|"upstream" -> {{0, 1, 2}, {1, 1}, {1, 3, 2, 4}}, "downstream" -> {{1, 2}, {0, 2, 0}, {3, 2, 3, 2}}|>,
+  "MemoryConstraint" -> "Quantity[200, \"Kilobytes\"]"
   |>
 }
 

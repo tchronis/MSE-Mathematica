@@ -92,11 +92,25 @@ Information[CmatchMatrix,LongForm->False]
 
 (* ::Input::Initialization:: *)
 ClearAll[Cquota,quota];
-Cquota::usage="Cquota[matchMatrix] Calculates and creates/updates the global variable 'quota'. It returns the association list quota = <|\"upstream\"->quotaU,\"downstream\"->quotaD|>. Quota is defined for each stream u and d.";
-Cquota[matchMatrix_]:=quota=<|
+Cquota::usage="Cquota[matchMatrix,function_:<|\"upstream\"\[Rule]True,\"downstream\"\[Rule]True|>] Calculates and creates/updates the global variable 'quota'.By default it calculates both streams quotas. It returns the association list quota = <|\"upstream\"->quotaU,\"downstream\"->quotaD|>. Quota is defined for each stream u and d.";
+Cquota[matchMatrix_,function_:<|"upstream"->True,"downstream"->True|>]:=
+Block[{},
+Switch[Head@quota,
+Symbol,
+Print["quota is calculated for the first time. Initializing..."];
+quota=<|
 "upstream"->((Total/@#)&/@matchMatrix),
 "downstream"->((Total/@(Transpose@#))&/@matchMatrix)
-|>;
+|>
+,
+Association,
+If[function["upstream"],
+quota["upstream"]=((Total/@#)&/@matchMatrix)];
+If[function["downstream"],
+quota["downstream"]=((Total/@(Transpose@#))&/@matchMatrix)];
+];
+quota
+];
 Information[Cquota,LongForm->False]
 
 
