@@ -1,0 +1,103 @@
+testDefault =
+  <|
+   "function" -> "modify",
+   "parameters" -> {},
+   "evaluate" -> "True",
+   "TestID" -> "Not set a TestID yet",
+   "MemoryConstraint" -> "Quantity[100, \"Kilobytes\"]",
+   "TimeConstraint" -> "Quantity[.1, \"Seconds\"]"
+   |>;
+
+tests =
+{
+
+ <|"TestID" -> "unmatch one pair and reduce quota for both streams",
+  "function" -> "Identity",
+  "Input" -> 
+   { {header, noM, noU, noD, noAttr, distanceMatrices, matchMatrix, mate} =
+   import[directory <> "import/" <> "precomp_proof.xlsx", "precomp"];
+   Cquota[matchMatrix];
+   store[];
+   
+   restore[]; modify[3, {1}, {1}, <|"unmatch" -> True, "quota_update_upstream" -> True, "quota_update_downstream" -> True|>];
+   {matchMatrix, mate, quota}
+   },
+  "ExpectedOutput" -> {
+   {{{0, 0}, {0, 1}, {1, 1}}, {{0, 1, 0}, {0, 1, 0}}, {{0, 1, 0, 0}, {1, 0, 1, 1}, {1, 0, 1, 0}, {1, 1, 1, 1}}}, 
+   {{{{1}, {2}, {3}}, {{}, {2}, {1, 2}}}, {{{1}, {2}}, {{2}, {2}}}, {{{1}, {2}, {3}, {4}}, {{2}, {1, 3, 4}, {1, 3}, {1, 2, 3, 4}}}},
+   <|"upstream" -> {{0, 1, 2}, {1, 1}, {1, 3, 2, 4}}, "downstream" -> {{1, 2}, {0, 2, 0}, {3, 2, 3, 2}}|>
+   }
+  |>,
+
+ <|"TestID" -> "unmatch one pair and reduce quota for upstream only",
+  "function" -> "Identity",
+  "Input" -> 
+   {   
+   restore[]; modify[3, {1}, {1},<|"unmatch" -> True, "quota_update_upstream" -> True, "quota_update_downstream" -> False|>];
+   {matchMatrix, mate, quota}
+   },
+  "ExpectedOutput" -> {
+   {{{0, 0}, {0, 1}, {1, 1}}, {{0, 1, 0}, {0, 1, 0}}, {{0, 1, 0, 0}, {1, 0, 1, 1}, {1, 0, 1, 0}, {1, 1, 1, 1}}}, 
+   {{{{1}, {2}, {3}}, {{}, {2}, {1, 2}}}, {{{1}, {2}}, {{2}, {2}}}, {{{1}, {2}, {3}, {4}}, {{2}, {1, 3, 4}, {1, 3}, {1, 2, 3, 4}}}},
+   <|"upstream" -> {{0, 1, 2}, {1, 1}, {1, 3, 2, 4}}, "downstream" -> {{1, 2}, {0, 2, 0}, {4, 2, 3, 2}}|>
+   }
+  |>,
+
+ <|"TestID" -> "unmatch one pair and reduce quota for downstream only",
+  "function" -> "Identity",
+  "Input" -> 
+   {   
+   restore[]; modify[3, {1}, {1},<|"unmatch" -> True, "quota_update_upstream" -> False, "quota_update_downstream" -> True|>];
+   {matchMatrix, mate, quota}
+   },
+  "ExpectedOutput" -> {
+   {{{0, 0}, {0, 1}, {1, 1}}, {{0, 1, 0}, {0, 1, 0}}, {{0, 1, 0, 0}, {1, 0, 1, 1}, {1, 0, 1, 0}, {1, 1, 1, 1}}}, 
+   {{{{1}, {2}, {3}}, {{}, {2}, {1, 2}}}, {{{1}, {2}}, {{2}, {2}}}, {{{1}, {2}, {3}, {4}}, {{2}, {1, 3, 4}, {1, 3}, {1, 2, 3, 4}}}},
+   <|"upstream" -> {{0, 1, 2}, {1, 1}, {2, 3, 2, 4}}, "downstream" -> {{1, 2}, {0, 2, 0}, {3, 2, 3, 2}}|>
+   }
+  |>,
+
+ <|"TestID" -> "unmatch one pair and reduce quota for upstream only (brief)",
+  "function" -> "Identity",
+  "Input" -> 
+   {   
+   restore[]; modify[3, {1}, {1},<|"unmatch" -> True, "quota_update_upstream" -> True|>];
+   {matchMatrix, mate, quota}
+   },
+  "ExpectedOutput" -> {
+   {{{0, 0}, {0, 1}, {1, 1}}, {{0, 1, 0}, {0, 1, 0}}, {{0, 1, 0, 0}, {1, 0, 1, 1}, {1, 0, 1, 0}, {1, 1, 1, 1}}}, 
+   {{{{1}, {2}, {3}}, {{}, {2}, {1, 2}}}, {{{1}, {2}}, {{2}, {2}}}, {{{1}, {2}, {3}, {4}}, {{2}, {1, 3, 4}, {1, 3}, {1, 2, 3, 4}}}},
+   <|"upstream" -> {{0, 1, 2}, {1, 1}, {1, 3, 2, 4}}, "downstream" -> {{1, 2}, {0, 2, 0}, {4, 2, 3, 2}}|>
+   }
+  |>,
+
+ <|"TestID" -> "unmatch one pair and reduce quota for downstream only (brief)",
+  "function" -> "Identity",
+  "Input" -> 
+   {   
+   restore[]; modify[3, {1}, {1},<|"unmatch" -> True, "quota_update_downstream" -> True|>];
+   {matchMatrix, mate, quota}
+   },
+  "ExpectedOutput" -> {
+   {{{0, 0}, {0, 1}, {1, 1}}, {{0, 1, 0}, {0, 1, 0}}, {{0, 1, 0, 0}, {1, 0, 1, 1}, {1, 0, 1, 0}, {1, 1, 1, 1}}}, 
+   {{{{1}, {2}, {3}}, {{}, {2}, {1, 2}}}, {{{1}, {2}}, {{2}, {2}}}, {{{1}, {2}, {3}, {4}}, {{2}, {1, 3, 4}, {1, 3}, {1, 2, 3, 4}}}},
+   <|"upstream" -> {{0, 1, 2}, {1, 1}, {2, 3, 2, 4}}, "downstream" -> {{1, 2}, {0, 2, 0}, {3, 2, 3, 2}}|>
+   }
+  |>,
+
+ <|"TestID" -> "unmatch one pair - without specifying quota_update_stream no quota change happens",
+  "function" -> "Identity",
+  "Input" -> 
+   {   
+   restore[]; modify[3, {1}, {1},<|"unmatch" -> True|>];
+   {matchMatrix, mate, quota}
+   },
+  "ExpectedOutput" -> {
+   {{{0, 0}, {0, 1}, {1, 1}}, {{0, 1, 0}, {0, 1, 0}}, {{0, 1, 0, 0}, {1, 0, 1, 1}, {1, 0, 1, 0}, {1, 1, 1, 1}}}, 
+   {{{{1}, {2}, {3}}, {{}, {2}, {1, 2}}}, {{{1}, {2}}, {{2}, {2}}}, {{{1}, {2}, {3}, {4}}, {{2}, {1, 3, 4}, {1, 3}, {1, 2, 3, 4}}}},
+   <|"upstream" -> {{0, 1, 2}, {1, 1}, {2, 3, 2, 4}}, "downstream" -> {{1, 2}, {0, 2, 0}, {4, 2, 3, 2}}|>
+   }
+  |>
+}
+
+
