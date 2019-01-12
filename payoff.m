@@ -80,8 +80,9 @@ If the sameoffset flag is set to False (which is the default value) then each ma
 If the sameoffset flag is set to True then the offset equals the minimum element in the entire payoffMatrix.";
 payoffMatrix2Positive[offset_,payoffMatrix_?(And@@(NumericQ/@Flatten@#)&),epsilon_:0,sameoffset_:False]:=Block[{min},
 If[sameoffset,
-min=Min@offset;
-offset=Table[min,{Length@payoffMatrix}],
+min=Min@Flatten@payoffMatrix;
+offset=Table[min,{Length@payoffMatrix}]
+,
 offset=Min/@payoffMatrix
 ];
 payoffMatrix-offset+epsilon

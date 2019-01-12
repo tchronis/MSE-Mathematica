@@ -64,8 +64,10 @@ If \"rematch\"\[Rule]True then the matchMatrix of the m'th market is re-calculat
 modify[m_,u_List,d_List,function_:<|"unmatch"->False,"remove"->True,"quota_reset"->False,"quota_update"->False,"quota_update_upstream"->False,"quota_update_downstream"->False,"rematch"->False|>]:=Block[{keep,theirdownstream,theirupstream},
 If[
 function["unmatch"],
+
 If[Length[u]!=Length[d],Print["Error in data. u list and d list must have the same Length."," u = ",u," d = ",d];Return[]];
 If[matchMatrix[[m,u[[#]],d[[#]]]]!=1,Print["Warning: "," In Market ",m," upstream ",u[[#]], " does not match with downstream  ",d[[#]]];]&/@Range[Length[u]];
+
 (matchMatrix[[m,u[[#]],d[[#]]]]=0)&/@Range[Length[u]];
 Cmate[matchMatrix];
 
@@ -74,6 +76,7 @@ If[function["quota_update_upstream"],
 Cquota[matchMatrix,<|"upstream"->True,"downstream"->False|>]];
 If[function["quota_update_downstream"],
 Cquota[matchMatrix,<|"upstream"->False,"downstream"->True|>]];
+
 ,
 
 If[function["remove"],
