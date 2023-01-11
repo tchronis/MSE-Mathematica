@@ -57,7 +57,7 @@ modify::usage="modify[m_,u_List,d_List,function_?AssociationQ:<|\"unmatch\"\[Rul
 modifies m's market upstream and/or downstream members. As a consequence payoffMatrix, matchMatrix, quota are modified.
 If \"unmatch\"\[Rule]True then it is supposed that the Transpose[u,d] are the matches we need to unmatch.
 If \"unmatch\"\[Rule]True and \"quota_update_upstream\"\[Rule]True then the quota of the unmatched upstreams are reduced by one.
-If \"unmatch\"\[Rule]True and \"quota_update_download\"\[Rule]True then the quota of the unmatched downstreams are reduced by one.
+If \"unmatch\"\[Rule]True and \"quota_update_downstream\"\[Rule]True then the quota of the unmatched downstreams are reduced by one.
 If \"remove\"\[Rule]True and \"quota_reset\"\[Rule]True then the quota of the selected for remove streams becomes equal to 0.
 If \"remove\"\[Rule]True and \"quota_update\"\[Rule]True then the quota of the matched opposite stream are reduced because of the stream removal.
 If \"rematch\"\[Rule]True then the matchMatrix of the m'th market is re-calculated using the set quota.";
@@ -114,6 +114,8 @@ noD[[m]]=noD[[m]]-Length[d];
 ]
 ]
 ]
+
+
 ];
 
 If[function["rematch"],
