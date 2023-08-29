@@ -76,8 +76,8 @@ sol
 
 (* ::Input::Initialization:: *)
 ClearAll[maximize];
-maximize::usage="maximize[dataArray_,noAttr_,method_:\"DifferentialEvolution\", permuteinvariant_:False, printflag_:False] is MSE specific and uses the optimize function. It uses the objective function (that counts the number of satisfied inequalities). It returns a list {max,{x1->value1, x2->value2, ...}, number of inequalities} where max is the maximum number of satisfied inequalities found and the solution of the maximization method {value1,value2,...}";
-maximize[dataArray_,noAttr_,method_:"DifferentialEvolution",permuteinvariant_:False,printflag_:False]:=Module[{sol,x,
+maximize::usage="maximize[dataArray_,noAttr_,method_:\"DifferentialEvolution\", permuteinvariant_:True, printflag_:True] is MSE specific and uses the optimize function. It uses the objective function (that counts the number of satisfied inequalities). It returns a list {max,{x1->value1, x2->value2, ...}, number of inequalities} where max is the maximum number of satisfied inequalities found and the solution of the maximization method {value1,value2,...}";
+maximize[dataArray_,noAttr_,method_:"DifferentialEvolution",permuteinvariant_:True,printflag_:True]:=Module[{sol,x,
 order,invariantdataArray,reverseorder},
 
 If[!(Developer`PackedArrayQ[dataArray]),Print["WARNING - The dataArray IS NOT a packed array. Calculations will be severely slowed down."]];
