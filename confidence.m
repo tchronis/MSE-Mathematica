@@ -29,23 +29,30 @@ Needs["Combinatorica`"](*For RandomKSubset*)
 
 
 (* ::Input::Initialization:: *)
-ClearAll[generateRandomSubsample];
-generateRandomSubsample::usage="generateRandomSubsample[ssSize,groupIDs,dataArray] generates a subsample of a given size from a data array.";
-generateRandomSubsample[ssSize_,groupIDs_,dataArray_]:=Module[{totalGroups,groups,qualifiedIndexes},
+ClearAll[generateRandomGroups];
+generateRandomGroups::usage="generateRandomGroups[ssSize,groupIDs] generates groups sample.";
+generateRandomGroups[ssSize_,groupIDs_]:=Module[{totalGroups,groups},
 totalGroups=Union[Flatten[groupIDs,1]];
 groups=RandomKSubset[totalGroups,ssSize];
-
 WriteString["stdout"," ",groups];(*TCHRONIS for verbose results*)
+groups
+]
 
+
+(* ::Input::Initialization:: *)
+ClearAll[generateRandomSubsample];
+generateRandomSubsample::usage="generateRandomSubsample[ssSize,groupIDs,dataArray] generates a subsample of a given size from a data array.";
+generateRandomSubsample[groups_,groupIDs_,dataArray_]:=Module[{totalGroups,qualifiedIndexes},
 (*Get the indexes of the dataArray rows that correspond to selected groups.*)
 qualifiedIndexes=Position[groupIDs,_?(Intersection[groups,#]!={}&),{1},Heads->False];
-(*We want to extract certain rows,so we need to transpose before and after extracting the rows we want,due to the matrix layout.*)Transpose[Extract[(*Transpose[*)dataArray(*]*),qualifiedIndexes]]
+(*We want to extract certain rows,so we need to transpose before and after extracting the rows we want,due to the matrix layout.*)
+Transpose[Extract[(*Transpose[*)dataArray(*]*),qualifiedIndexes]]
 (*TCHRONIS for precomputed*)];
 
 
 (* ::Input::Initialization:: *)
 ClearAll[pointIdentifiedCR];
-Options[pointIdentifiedCR]={progressUpdate->0,confidenceLevel->.95,asymptotics->nests,subsampleMonitor->Null,symmetric->False};
+Options[pointIdentifiedCR]={progressUpdate->0,confidenceLevel->.95,asymptotics->nests,subSampleMonitor->Null,symmetric->False,useSavedGroups->False};
 pointIdentifiedCR::usage="pointIdentifiedCR[ssSize,numSubsamples,pointEstimate,args,groupIDs,dataArray,method,permuteinvariant,options] generates a confidence region estimate using subsampling.\r
 Parameters:
 ssSize - The size of each subsample to be estimated.
@@ -62,7 +69,7 @@ options - An optional parameter specifying options. Available options are:
 	subsampleMonitor - An expression to evaluate for each subsample.Default=Null.
 	symmetric - True or False.If True,the confidence region will be symmetric.Default=False.";
 
-pointIdentifiedCR[ssSize_,numSubsamples_,pointEstimate_,args_,groupIDs_,dataArray_,method_,permuteinvariant_,options___?OptionQ]:=Module[{progress,confLevel,asymp,ssDataArray,estimates,estimate,alpha,cr,sym},{progress,confLevel,asymp,sym}={progressUpdate,confidenceLevel,asymptotics,symmetric}/.Flatten[{options,Options[pointIdentifiedCR]}];
+pointIdentifiedCR[ssSize_,numSubsamples_,pointEstimate_,args_,groupIDs_,dataArray_,method_,permuteinvariant_,options___?OptionQ]:=Module[{progress,confLevel,asymp,ssDataArray,estimates,estimate,alpha,cr,sym,useSavedG,nextRandomGroup,nextRandomSubsample},{progress,confLevel,asymp,sym,useSavedG}={progressUpdate,confidenceLevel,asymptotics,symmetric,useSavedGroups}/.Flatten[{options,Options[pointIdentifiedCR]}];
 
 (*This block sets variables that are slightly different for each of the two asymptotics.subNormalization is the standardization multiplier for the subsamples,fullNormalization is the multiplier for the construction of the final confidence interval from all of the subsamples.*)
 
@@ -70,11 +77,10 @@ Switch[asymp,
 nests,
 	subNormalization=(ssSize)^(1/3);
 	fullNormalization=(Length[Union[Flatten[groupIDs,1]]])^(1/3);
-	nextRandomSubsample:=generateRandomSubsample[ssSize,groupIDs,dataArray];,
+,
 coalitions,
 	subNormalization=(ssSize)^(1/2);
 	fullNormalization=(Length[Union[Flatten[groupIDs,1]]])^(1/2);(*(numCoalitions[matchIdxMtx])^(1/2);*)
-	nextRandomSubsample:=generateRandomSubsample[ssSize,groupIDs,dataArray];
 ];
 
 (*TCHRONIS for precomputed*)
@@ -82,12 +88,23 @@ coalitions,
 estimates=Table[0,{numSubsamples}];(*List of standardized subsample estimates.*)
 ssEstimates=Table[0,{numSubsamples}];(*List of raw subsample estimates.*)
 
-Do[ssDataArray=Transpose@nextRandomSubsample;
+(*randomGroups global variable*)
+If[useSavedG,
+randomGroups = savedGroups,
+randomGroups =Table[generateRandomGroups[ssSize,groupIDs],{numSubsamples}]
+];
+
+Do[
+nextRandomGroup=randomGroups[[i]];
+nextRandomSubsample =generateRandomSubsample[nextRandomGroup,groupIDs,dataArray];
+
+ssDataArray=Transpose@nextRandomSubsample;
+
 ssEstimate=maximize[ssDataArray,Length[ssDataArray[[1]]],method,permuteinvariant,False][[2]];
 	ssEstimates[[i]]=ssEstimate;
 	estimates[[i]]=subNormalization (ssEstimate-pointEstimate);
 If[progress>0&&Mod[i,progress]==0,WriteString["stdout","\n","Iterations completed:",ToString[i],"\n"](*TCHRONIS*)(*Print["Iterations completed: "<>ToString[i]]*)];
-Block[{},subsampleMonitor/.Flatten[{options,Options[pointIdentifiedCR]}]];,
+Block[{},subSampleMonitor/.Flatten[{options,Options[pointIdentifiedCR]}]];,
 {i,1,numSubsamples}];
 
 For[i=1,i<=Length[args],i=i+1,Histogram[estimates[[All,i]]]];
