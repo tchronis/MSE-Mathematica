@@ -69,7 +69,7 @@ options - An optional parameter specifying options. Available options are:
 	subsampleMonitor - An expression to evaluate for each subsample.Default=Null.
 	symmetric - True or False.If True,the confidence region will be symmetric.Default=False.";
 
-pointIdentifiedCR[ssSize_,numSubsamples_,pointEstimate_,args_,groupIDs_,dataArray_,method_,permuteinvariant_,options___?OptionQ]:=Module[{progress,confLevel,asymp,ssDataArray,estimates,estimate,alpha,cr,sym,useSavedG,nextRandomGroup,nextRandomSubsample},{progress,confLevel,asymp,sym,useSavedG}={progressUpdate,confidenceLevel,asymptotics,symmetric,useSavedGroups}/.Flatten[{options,Options[pointIdentifiedCR]}];
+pointIdentifiedCR[ssSize_,numSubsamples_,pointEstimate_,args_,groupIDs_,dataArray_,method_,permuteinvariant_:True,options___?OptionQ]:=Module[{progress,confLevel,asymp,ssDataArray,estimates,estimate,alpha,cr,sym,useSavedG,nextRandomGroup,nextRandomSubsample},{progress,confLevel,asymp,sym,useSavedG}={progressUpdate,confidenceLevel,asymptotics,symmetric,useSavedGroups}/.Flatten[{options,Options[pointIdentifiedCR]}];
 
 (*This block sets variables that are slightly different for each of the two asymptotics.subNormalization is the standardization multiplier for the subsamples,fullNormalization is the multiplier for the construction of the final confidence interval from all of the subsamples.*)
 

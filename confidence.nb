@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     44788,       1007]
-NotebookOptionsPosition[     41201,        931]
-NotebookOutlinePosition[     42053,        960]
-CellTagsIndexPosition[     41925,        954]
+NotebookDataLength[     44855,       1008]
+NotebookOptionsPosition[     41270,        932]
+NotebookOutlinePosition[     42121,        961]
+CellTagsIndexPosition[     41993,        955]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -405,14 +405,14 @@ asymptotics - Type of asymptotics to use (nests or coalitions).Default=nests.\
 \n\tsubsampleMonitor - An expression to evaluate for each \
 subsample.Default=Null.\n\tsymmetric - True or False.If True,the confidence \
 region will be symmetric.Default=False.\>\""}], ";"}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"pointIdentifiedCR", "[", 
     RowBox[{
     "ssSize_", ",", "numSubsamples_", ",", "pointEstimate_", ",", "args_", 
      ",", "groupIDs_", ",", "dataArray_", ",", "method_", ",", 
-     "permuteinvariant_", ",", 
+     RowBox[{"permuteinvariant_:", "True"}], ",", 
      RowBox[{"options___", "?", "OptionQ"}]}], "]"}], ":=", 
    RowBox[{"Module", "[", 
     RowBox[{
@@ -899,7 +899,8 @@ region will be symmetric.Default=False.\>\""}], ";"}],
    3.902284828471651*^9}, 3.902284972993298*^9, {3.902285013212707*^9, 
    3.902285051733698*^9}, {3.9022850919974117`*^9, 3.9022851095395403`*^9}, {
    3.902285144700716*^9, 3.902285279788742*^9}, {3.9022853430019836`*^9, 
-   3.9022853941627502`*^9}, {3.90228549468264*^9, 3.9022854953677673`*^9}},
+   3.9022853941627502`*^9}, {3.90228549468264*^9, 3.9022854953677673`*^9}, {
+   3.903055177085227*^9, 3.903055178430522*^9}},
  Background->RGBColor[
   0.88, 1, 0.88],ExpressionUUID->"1e14f21b-afe4-4017-bb36-aaad3aa30e56"],
 
@@ -944,7 +945,7 @@ StyleDefinitions->"Default.nb"
 (*CellTagsOutline
 CellTagsIndex->{
  "Info113711446344-2897554"->{
-  Cell[39777, 905, 1384, 21, 2468, "Print",ExpressionUUID->"77c66b82-4d08-438f-9352-438dd514fc29",
+  Cell[39846, 906, 1384, 21, 617, "Print",ExpressionUUID->"77c66b82-4d08-438f-9352-438dd514fc29",
    CellTags->"Info113711446344-2897554"]},
  "Info3621774458-2672526"->{
   Cell[5845, 176, 3520, 54, 345, "Print",ExpressionUUID->"e9d9ce4a-e31e-4dc9-bd15-c1c26613d305",
@@ -953,8 +954,8 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Info113711446344-2897554", 41593, 945},
- {"Info3621774458-2672526", 41764, 948}
+ {"Info113711446344-2897554", 41662, 946},
+ {"Info3621774458-2672526", 41832, 949}
  }
 *)
 (*NotebookFileOutline
@@ -1002,9 +1003,9 @@ Cell[CellGroupData[{
 Cell[14639, 362, 109, 1, 93, "Subsubsection",ExpressionUUID->"48617247-14f1-4584-bc5c-d41e4c689bee"],
 Cell[14751, 365, 154, 2, 105, "Text",ExpressionUUID->"edd14674-653b-4a8f-aac1-334bb609b4ea"],
 Cell[CellGroupData[{
-Cell[14930, 371, 24844, 532, 4138, "Input",ExpressionUUID->"1e14f21b-afe4-4017-bb36-aaad3aa30e56",
+Cell[14930, 371, 24913, 533, 4138, "Input",ExpressionUUID->"1e14f21b-afe4-4017-bb36-aaad3aa30e56",
  InitializationCell->True],
-Cell[39777, 905, 1384, 21, 2468, "Print",ExpressionUUID->"77c66b82-4d08-438f-9352-438dd514fc29",
+Cell[39846, 906, 1384, 21, 617, "Print",ExpressionUUID->"77c66b82-4d08-438f-9352-438dd514fc29",
  CellTags->"Info113711446344-2897554"]
 }, Open  ]]
 }, Open  ]]
